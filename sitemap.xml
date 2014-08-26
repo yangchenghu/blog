@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/about/index.html</loc>
+    <loc>http://blog.yangch.info/about/index.html</loc>
     <lastmod>2014-08-25T08:02:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://yoursite.com/2014/08/25/hello-world/</loc>
+    <loc>http://blog.yangch.info/2014/08/25/hello-world/</loc>
     <lastmod>2014-08-25T07:42:28.000Z</lastmod>
   </url>
   
