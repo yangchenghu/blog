@@ -1,160 +1,77 @@
-<!doctype html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>小虎的开发笔记 - Writing</title>
+        <link rel="stylesheet" href="http://blog.chenghu.me/theme/css/main.css" />
 
-		<title>小虎的开发笔记</title>
-		<meta name="description" content="">
-		<meta name="author" content="小虎">
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
 
-		<link rel="stylesheet" href="http://blog.chenghu.me/theme/css/foundation.css" />
-		<link rel="stylesheet" href="http://blog.chenghu.me/theme/css/pygment/monokai.css" />
-		<link rel="stylesheet" href="http://blog.chenghu.me/theme/css/custom.css" />
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://blog.chenghu.me/">小虎的开发笔记 </a></h1>
+                <nav><ul>
+                    <li><a href="http://blog.chenghu.me/category/life.html">Life</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
 
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="http://blog.chenghu.me/my-super-beginng.html">My Super Beginng</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2013-06-06T00:00:00">
+                Published: Thu 06 June 2013
+        </abbr>
 
-		<script src="http://blog.chenghu.me/theme/js/modernizr.js"></script>
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://blog.chenghu.me/author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="http://blog.chenghu.me/category/life.html">Life</a>. </p>
+<p>tags: <a href="http://blog.chenghu.me/tag/writing.html">Writing</a> <a href="http://blog.chenghu.me/tag/life.html">Life</a> </p>
+</footer><!-- /.post-info --><p>文章内容</p><p>There are <a href="http://blog.chenghu.me/my-super-beginng.html#disqus_thread">comments</a>.</p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
 
-		<!-- Feeds -->
+                            <li><a href="https://github.com/yangchenghu">github</a></li>
+                            <li><a href="http://weibo.com/ychv">weibo</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
 
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
-		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	</head>
-	<body>
-		<div class="off-canvas-wrap">
-			<div class="inner-wrap">
-				<!-- mobile top bar to activate nav -->
-				<nav class="tab-bar show-for-small">
-					<section class="left-small">
-						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-					</section>
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
 
-					<section class="middle tab-bar-section">
-						<h1 class="title">小虎的开发笔记</h1>
-					</section>
-				</nav>
-
-				<!-- mobile side bar nav -->
-				<aside class="left-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li><a href="http://blog.chenghu.me">Home</a></li>
-						<li><label>Categories</label></li>
-							<li ><a href="http://blog.chenghu.me/category/life.html">Life</a></li>
-
-						<li><label>Places</label></li>
-							<li><a href="http://getpelican.com/">Pelican</a></li>
-							<li><a href="http://python.org/">Python.org</a></li>
-							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-							<li><a href="#">You can modify those links in your config file</a></li>
-
-
-
-						<li><label>Links</label></li>
-							<li><a href="https://github.com/yangchenghu">github</a></li>
-							<li><a href="http://weibo.com/ychv">weibo</a></li>
-					</ul>	
-				</aside>
-
-				<!-- top bar nav -->
-				<nav class="top-bar hide-for-small-only" data-topbar>
-					<ul class="title-area">
-						<li class="name">
-							<h1><a href="http://blog.chenghu.me/">小虎的开发笔记</a></h1>
-						</li>
-					</ul>
-
-					<section class="top-bar-section">
-						<ul class="left">
-								<li ><a href="http://blog.chenghu.me/category/life.html">Life</a></li>
-						</ul>
-					</section>
-				</nav>
-
-				<!-- Main Page Content and Sidebar -->
-				<section class="main-section">
-					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>Posts Tagged With 'Writing'</h2>
-								</div>
-							</div>
-
-<article>
-	<h3><a href="http://blog.chenghu.me/my-super-beginng.html">My Super Beginng</a></h3>
-	<h6>Written by <a href="http://blog.chenghu.me/author/小虎.html">小虎</a> in <a href="http://blog.chenghu.me/category/life.html">Life</a> on Thu 06 June 2013. Tags: <a href="http://blog.chenghu.me/tag/writing.html">Writing</a>, <a href="http://blog.chenghu.me/tag/life.html">Life</a>, </h6>
-	<p>文章内容</p>
-		<p class="continue"><a href="http://blog.chenghu.me/my-super-beginng.html">Continue reading &raquo;</a></p>
-</article>
-<hr />
-
-
-						</div>
-						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Places</h5>
-								<ul class="side-nav">
-									<li><a href="http://getpelican.com/">Pelican</a></li>
-									<li><a href="http://python.org/">Python.org</a></li>
-									<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-									<li><a href="#">You can modify those links in your config file</a></li>
-								</ul>
-							</div>
-
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="tag-cloud">
-										<li class="tag-4"><a href="http://blog.chenghu.me/tag/writing.html">Writing</a></li>
-										<li class="tag-4"><a href="http://blog.chenghu.me/tag/life.html">Life</a></li>
-								</ul>
-							</div>
-
-
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									<li><a href="https://github.com/yangchenghu">github</a></li>
-									<li><a href="http://weibo.com/ychv">weibo</a></li>
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
-
-					<!-- Footer -->
-					<footer class="row">
-						<div class="medium-9 small-12">
-							<hr/>
-							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
-						</div>
-					</footer>
-					<!-- End Footer -->
-				</section>
-				<a class="exit-off-canvas"></a>
-			</div><!--off-canvas inner-->
-		</div><!--off-canvas wrap-->
-
-		<script src="http://blog.chenghu.me/theme/js/jquery.js"></script>
-		<script src="http://blog.chenghu.me/theme/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
-	</body>
+<script type="text/javascript">
+    var disqus_shortname = 'chenghu';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
 </html>
