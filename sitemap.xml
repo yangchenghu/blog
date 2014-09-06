@@ -5,30 +5,51 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2014-09-05T23:08:36-00:00</lastmod>
+<lastmod>2014-09-06T12:40:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2014-09-05T23:08:36-00:00</lastmod>
+<lastmod>2014-09-06T12:40:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2014-09-05T23:08:36-00:00</lastmod>
+<lastmod>2014-09-06T12:40:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2014-09-05T23:08:36-00:00</lastmod>
+<lastmod>2014-09-06T12:40:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/pages/about.html</loc>
+<lastmod>2013-06-06T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/pages/course.html</loc>
+<lastmod>2014-09-05T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/pages/favorites.html</loc>
+<lastmod>2013-06-06T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
 </url>
 
 <url>
@@ -39,7 +60,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/category/life.html</loc>
+<loc>http://blog.chenghu.me/category/tech.html</loc>
 <lastmod>2013-06-06T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
