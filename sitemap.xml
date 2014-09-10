@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2014-09-09T00:17:40-00:00</lastmod>
+<lastmod>2014-09-10T14:26:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2014-09-09T00:17:40-00:00</lastmod>
+<lastmod>2014-09-10T14:26:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2014-09-09T00:17:40-00:00</lastmod>
+<lastmod>2014-09-10T14:26:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2014-09-09T00:17:40-00:00</lastmod>
+<lastmod>2014-09-10T14:26:35-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -53,36 +53,43 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/my-super-beginng.html</loc>
-<lastmod>2013-06-06T00:00:00-00:00</lastmod>
+<loc>http://blog.chenghu.me/bo-ke-qian-yi-wp-pelican.html</loc>
+<lastmod>2014-09-09T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/category/tech.html</loc>
-<lastmod>2013-06-06T00:00:00:%s</lastmod>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/tag/life.html</loc>
-<lastmod>2013-06-06T00:00:00:%s</lastmod>
+<loc>http://blog.chenghu.me/tag/python.html</loc>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/tag/writing.html</loc>
-<lastmod>2013-06-06T00:00:00:%s</lastmod>
+<loc>http://blog.chenghu.me/tag/pelican.html</loc>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/wordpress.html</loc>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/author/xiao-hu.html</loc>
-<lastmod>2013-06-06T00:00:00:%s</lastmod>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

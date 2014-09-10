@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Tech</title>
-        <link rel="stylesheet" href="../theme/css/main.css" />
+        <title>博客迁移(WP->Pelican)</title>
+        <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,29 +12,34 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="../">小虎的博客 </a></h1>
+                <h1><a href="./">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">首页</a></li>
-                    <li><a href="../pages/about.html">About</a></li>
-                    <li><a href="../pages/course.html">Course</a></li>
-                    <li><a href="../pages/favorites.html">Favorites</a></li>
+                    <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/course.html">Course</a></li>
+                    <li><a href="./pages/favorites.html">Favorites</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./bo-ke-qian-yi-wp-pelican.html" rel="bookmark"
+           title="Permalink to 博客迁移(WP->Pelican)">博客迁移(WP->Pelican)</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="../bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-09-09T00:00:00">
                 Published: Tue 09 September 2014
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="../category/tech.html">Tech</a>. </p>
-<p>tags: <a href="../tag/python.html">Python</a> <a href="../tag/pelican.html">Pelican</a> <a href="../tag/wordpress.html">WordPress</a> </p>
-</footer><!-- /.post-info --><p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
+<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>tags: <a href="./tag/python.html">Python</a> <a href="./tag/pelican.html">Pelican</a> <a href="./tag/wordpress.html">WordPress</a> </p>
+</footer><!-- /.post-info -->      <p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
 <h2>将博客文章从wordpress导出xml文件</h2>
 <p>进入wordpress后台，选择<code>工具</code> -&gt; <code>导出</code>。</p>
 <p><em>这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。</em></p>
@@ -209,11 +214,26 @@
 <p>所用到的脚本可以在<a href="https://github.com/yangchenghu/convertWP2Pelican">这里</a>下载</p>
 <h2>参考：</h2>
 <p><a href="floss.zoomquiet.io/data/20121221103448/index.html">迁移SAE wordpress的图片到jekyll</a>  - 注：已经打不开了，参考的<a href="http://webcache.googleusercontent.com/search?q=cache:Cdd-FI1a50oJ:floss.zoomquiet.io/data/20121221103448/index.html+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=jp">google快照</a></p>
-<p><a href="http://xdays.info/Pelican%E5%92%8CGithub%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html">Pelican和Github构建静态博客</a></p><p>There are <a href="../bo-ke-qian-yi-wp-pelican.html#disqus_thread">comments</a>.</p>                </article>
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </aside><!-- /#featured -->
+<p><a href="http://xdays.info/Pelican%E5%92%8CGithub%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html">Pelican和Github构建静态博客</a></p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'bo-ke-qian-yi-wp-pelican.html';
+        var disqus_url = './bo-ke-qian-yi-wp-pelican.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
