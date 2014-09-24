@@ -49,7 +49,7 @@
 # 工作经历
 （工作经历按逆序排列，最新的在最前边，按公司做一级分组，公司内按二级分组）
 
-## ABC公司 （ 2012年9月 ~ 2014年9月 ）
+## Sina公司 （ 2013年5月 ~ 2014年今 ）
 
 ### DEF项目 
 我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。
@@ -64,7 +64,7 @@
 （每个公司写2~3个核心项目就好了，如果你有非常大量的项目，那么按分类进行合并，每一类选一个典型写出来。其他的一笔带过即可。）
 
  
-## JKL公司 （ 2010年3月 ~ 2012年8月 ）
+## 金山网络公司（现：移动猎豹） （ 2011年10月 ~ 2013年5月 ）
 
 ### MNO项目 
 我在此项目负责了哪些工作，分别在哪些地方做得出色/和别人不一样/成长快，这个项目中，我最困难的问题是什么，我采取了什么措施，最后结果如何。这个项目中，我最自豪的技术细节是什么，为什么，实施前和实施后的数据对比如何，同事和领导对此的反应如何。
@@ -102,101 +102,34 @@
  - 9月公司内部分享：[云计算的前生今世](http://jobdeer.com)
 
 # 技能清单
-（我一般主张将技能清单写入到工作经历里边去。不过很难完整，所以有这么一段也不错）
 
 以下均为我熟练使用的技能
 
-- Web开发：PHP/Hack/Node
-- Web框架：ThinkPHP/Yaf/Yii/Lavaral/LazyPHP
-- 前端框架：Bootstrap/AngularJS/EmberJS/HTML5/Cocos2dJS/ionic
-- 前端工具：Bower/Gulp/SaSS/LeSS/PhoneGap
-- 数据库相关：MySQL/PgSQL/PDO/SQLite
-- 版本管理、文档和自动化部署工具：Svn/Git/PHPDoc/Phing/Composer
-- 单元测试：PHPUnit/SimpleTest/Qunit
-- 云和开放平台：SAE/BAE/AWS/微博开放平台/微信应用开发
+- iOS开发：Xcode，Obj-C，Instruments
+- iOS框架：AFNetworking，SDWebImage，
+- iOS框架管理：CocoaPod
+- iOS构建：Jinkens
+- 版本管理：Svn/Git
+- 云和开放平台：SAE/AVOScloud/微博开放平台/微信应用开发
 
 ## 参考技能关键字
 
-本技能关键字列表是从最近招聘PHP的数百份JD中统计出来的，括号中是出现的词频。如果你的简历要投递给有机器（简历分选系统）和不如机器（不懂技术的HR）筛选简历环节的地方，请一定从下边高频关键词中选择5～10个适合你自己的。
+###熟练
 
-- ios(1383)
-- iphone(312)
-- objective c(286)
-- app(276)
-- sdk(205)
-- xcode(196)
-- ipad(155)
-- ui(153)
-- http(138)
-- mac(83)
-- tcp(83)
-- socket(81)
-- store(69)
-- xml(58)
-- cocoa(58)
-- json(51)
-- appstore(49)
-- os(47)
-- api(36)
-- android(36)
-- interface(31)
-- web(30)
-- builder(29)
-- java(27)
-- touch(25)
-- instruments(22)
-- github(22)
-- mvc(20)
-- oop(18)
-- html5(18)
-- im(18)
-- lbs(17)
-- ue(17)
-- bug(17)
-- cocos2d(16)
-- sqlite(16)
-- gui(16)
-- uikit(16)
-- ipod(15)
-- macos(15)
-- udp(15)
-- ood(13)
-- linux(12)
-- macosx(11)
-- gcd(11)
-- coredata(10)
-- code review(10)
-- shark(10)
-- runtime(9)
-- itunes(9)
-- storyboard(8)
-- opengl(8)
-- ndk(8)
-- unix(7)
-- js(7)
-- mysql(7)
-- html(7)
-- swift(7)
-- javascript(6)
-- stackoverflow(6)
-- design(6)
-- apns(6)
-- xmpp(6)
-- autolayout(5)
-- ib(5)
-- restful(5)
-- osx(5)
-- scrum(5)
-- gt(5)
-- sql(5)
-- j2ee(5)
-- wifi(5)
-- ux(5)
-- oracle(4)
-- 3g(4)
-- agent(4)
+- iOS
+- objective-c
+- xcode
+- runtime
+- instruments
+- builder
 
+###业余
 
+- Python
+- NodeJS
+- Shell
+- iOS 逆向
+- OpenWRT
 
 
 ---
