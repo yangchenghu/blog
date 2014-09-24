@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2014-09-19T19:21:54-00:00</lastmod>
+<lastmod>2014-09-24T17:23:50-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2014-09-19T19:21:54-00:00</lastmod>
+<lastmod>2014-09-24T17:23:50-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2014-09-19T19:21:54-00:00</lastmod>
+<lastmod>2014-09-24T17:23:50-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2014-09-19T19:21:54-00:00</lastmod>
+<lastmod>2014-09-24T17:23:50-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -60,10 +60,24 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/resume.html</loc>
+<lastmod>2014-09-24T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/bo-ke-qian-yi-wp-pelican.html</loc>
 <lastmod>2014-09-09T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/category/extra.html</loc>
+<lastmod>2014-09-24T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
 </url>
 
 <url>
@@ -96,7 +110,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/author/xiao-hu.html</loc>
-<lastmod>2014-09-09T00:00:00:%s</lastmod>
+<lastmod>2014-09-24T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
