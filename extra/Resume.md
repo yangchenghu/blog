@@ -110,7 +110,10 @@
 - iOS框架管理：CocoaPod
 - iOS构建：Jinkens
 - 版本管理：Svn/Git
-- 云和开放平台：SAE/AVOScloud/微博开放平台/微信应用开发
+- 云和开放平台：SAE/AVOScloud/Parse/微博开放平台/微信应用开发
+
+- 常去的网站：Code4App，CocoaChina，github
+- 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)
 
 ## 参考技能关键字
 
