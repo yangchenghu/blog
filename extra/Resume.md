@@ -12,7 +12,7 @@
 
  - 杨成虎/男/1986 
  - 本科：山东聊城大学 / 学士学位
- - 工作年限：4年
+ - 工作年限：4年iOS开发经验
  - 个人博客：[http://chenghu.me](http://chenghu.me)
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 

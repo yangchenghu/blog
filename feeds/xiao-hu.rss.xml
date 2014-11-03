@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 09 Sep 2014 00:00:00 +0800</lastBuildDate><item><title>博客迁移(WP-&gt;Pelican)</title><link>http://blog.chenghu.me/bo-ke-qian-yi-wp-pelican.html</link><description>&lt;p&gt;今天心血来潮，想把自己在wordpress上的&lt;a href="http://www.yangch.info"&gt;博客&lt;/a&gt;迁移到刚刚用pelican在github上搭建好&lt;a href="http://blog.chenghu.me"&gt;新博客&lt;/a&gt;，折腾了一下午，记录了一下过程。&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 21 Oct 2014 00:00:00 +0800</lastBuildDate><item><title>Hook Reveal Regiest Alert</title><link>http://blog.chenghu.me/hook-reveal-regiest-alert.html</link><description>&lt;p&gt;之前写了  &lt;a href="http://www.yangch.info/?p=1230"&gt;“破解Reveal购买提示框”&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;近期发现 Reveal 更新到了1.0.6版本&lt;/p&gt;
+&lt;p&gt;感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。&lt;/p&gt;
+&lt;p&gt;在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。&lt;/p&gt;
+&lt;p&gt;后来想起来，theos也是用&lt;code&gt;runtime&lt;/code&gt;来动态替换了方法。&lt;/p&gt;
+&lt;h2&gt;创建工程&lt;/h2&gt;
+&lt;p&gt;在Xcode创建工程，选择&lt;code&gt;Library&lt;/code&gt;。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Tue, 21 Oct 2014 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2014-10-21:hook-reveal-regiest-alert.html</guid><category>Hook</category><category>Mac</category><category>Reveal</category></item><item><title>博客迁移(WP-&gt;Pelican)</title><link>http://blog.chenghu.me/bo-ke-qian-yi-wp-pelican.html</link><description>&lt;p&gt;今天心血来潮，想把自己在wordpress上的&lt;a href="http://www.yangch.info"&gt;博客&lt;/a&gt;迁移到刚刚用pelican在github上搭建好&lt;a href="http://blog.chenghu.me"&gt;新博客&lt;/a&gt;，折腾了一下午，记录了一下过程。&lt;/p&gt;
 &lt;h2&gt;将博客文章从wordpress导出xml文件&lt;/h2&gt;
 &lt;p&gt;进入wordpress后台，选择&lt;code&gt;工具&lt;/code&gt; -&amp;gt; &lt;code&gt;导出&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。&lt;/em&gt;&lt;/p&gt;
