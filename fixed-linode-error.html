@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Tags</title>
+        <title>Fixed Linode Error</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,23 +22,87 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
 <section id="content" class="body">
-    <h1>Tags for 小虎的博客</h1>
-    <ul>
-        <li><a href="./tag/cocoapods.html">Cocoapods</a> (1)</li>
-        <li><a href="./tag/error.html">Error</a> (3)</li>
-        <li><a href="./tag/hook.html">Hook</a> (1)</li>
-        <li><a href="./tag/linode.html">Linode</a> (1)</li>
-        <li><a href="./tag/mac.html">Mac</a> (1)</li>
-        <li><a href="./tag/pelican.html">Pelican</a> (1)</li>
-        <li><a href="./tag/python.html">Python</a> (1)</li>
-        <li><a href="./tag/reveal.html">Reveal</a> (1)</li>
-        <li><a href="./tag/svn.html">SVN</a> (1)</li>
-        <li><a href="./tag/wordpress.html">WordPress</a> (1)</li>
-    </ul>
-</section>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./fixed-linode-error.html" rel="bookmark"
+           title="Permalink to Fixed Linode Error">Fixed Linode Error</a></h1>
+    </header>
 
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-13T00:00:00">
+                Published: Fri 13 March 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>tags: <a href="./tag/linode.html">Linode</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->      <h1>修复Linode error</h1>
+<p>今天ss老是报错误<code>ERROR: remote_recv_cb_recv: Connection reset by peer</code>，ssh上不去。</p>
+<p>就重启了一下Linode，结果就ssh过不去了，ss也没有好。悲剧了</p>
+<p>登录Linode后台，发现CPU老100%，不知道哪里的事情，关键ssh进不去，着急。</p>
+<p>没办法，只好写Ticket找技术人员帮忙。</p>
+<p>用蹩脚的英文描述了半天，对方实在不理解，总是几句标准客服回复，估计那边的技术还没上班，客服在扛着。</p>
+<p>看来只能自己动手了</p>
+<p>在<code>Dashboard</code>中查找有用的东西</p>
+<p>看到<code>Remote access</code>中发现了<code>Console Access</code>点击发现是一个web版的console</p>
+<p>看到我前两天搭建的<code>ocserv</code>在处理一个ca证书，然后就没有然后了，输入啥都不行</p>
+<p>看来是<code>ocserv</code>出了问题，没办法，再找找吧</p>
+<p>看到一个<code>Rescue</code>选项卡，进去还有一个<code>Reboot into Rescue Mode</code>的按钮，看来是进安全模式</p>
+<p>那就试试呗</p>
+<p>进去后还是一个linux系统，但进了<code>/etc</code>下查看<code>rc.local</code>发现是一个干净的rc，不是我系统里的那个文件</p>
+<p>google 一下这个linux系统了<code>Finnix</code></p>
+<p>刚好遇到一个10年的帖子，也是用<code>Finnix</code>这个系统再linode中恢复数据，<a href="http://www.chinaz.com/web/2010/1112/142756.shtml">帖子</a></p>
+<p>看了下，大体了解了，原来这个<code>Finnix</code>系统，就想Win下的PE系统，可以直接访问硬盘的文件，但是，需要先挂载硬盘</p>
+<p>那就好说了</p>
+<div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">linode</span>
+<span class="n">mount</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">xvda</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">linode</span>
+</pre></div>
+
+
+<p>然后去修改<code>rc.local</code>把，<code>ocserv</code>启动行注释掉，保存，重启。</p>
+<p>在web console 中看到登录框，但在本地还是ssh不上去</p>
+<p>好吧，先在web console中输出一下iptables <code>sudo iptables -nL</code></p>
+<p>＝。＝</p>
+<p>原来Input链全部<code>DROP</code>了</p>
+<p>改改改</p>
+<div class="highlight"><pre><span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+</pre></div>
+
+
+<p>然后再ssh就通了</p>
+<p>然后去修改了启动默认加载的iptables ruls文件</p>
+<p>附</p>
+<p>ubuntu 的启动默认iptables导入的文件在<code>/etc/network/if-pre-up.d/iptables</code>这个目录下，备忘。</p>
+<p>PS：</p>
+<p>后来还是启动了<code>ocserv</code>，原来不是操作卡住了，只是这个程序运行起来只在输出状态，不能做输入操作。</p>
+<p>附加几个iptable操作的教程</p>
+<p><a href="http://lesca.me/archives/iptables-architecture-commands-extensions.html">iptables入门：iptables构架、基本命令及扩展（功能）简介</a></p>
+<p><a href="http://blog.51yip.com/linux/1404.html">iptables 添加，删除，查看，修改</a></p>
+<p><a href="http://blog.csdn.net/test_me/article/details/5572195">iptables</a></p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'fixed-linode-error.html';
+        var disqus_url = './fixed-linode-error.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

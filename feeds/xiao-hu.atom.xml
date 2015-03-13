@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-03-11T00:00:00+08:00</updated><entry><title>Fixed SVN did not show histoy Error</title><link href="http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html" rel="alternate"></link><updated>2015-03-11T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-11:fixed-svn-did-not-show-histoy-error.html</id><summary type="html">&lt;h1&gt;修复SVN 不显示Timeline的bug&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-03-13T00:00:00+08:00</updated><entry><title>Fixed Linode Error</title><link href="http://blog.chenghu.me/fixed-linode-error.html" rel="alternate"></link><updated>2015-03-13T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-13:fixed-linode-error.html</id><summary type="html">&lt;h1&gt;修复Linode error&lt;/h1&gt;
+&lt;p&gt;今天ss老是报错误&lt;code&gt;ERROR: remote_recv_cb_recv: Connection reset by peer&lt;/code&gt;，ssh上不去。&lt;/p&gt;
+&lt;p&gt;就重启了一下Linode，结果就ssh过不去了，ss也没有好。悲剧了&lt;/p&gt;
+&lt;p&gt;登录Linode后台，发现CPU老100%，不知道哪里的事情，关键ssh进不去，着急。&lt;/p&gt;
+&lt;p&gt;没办法，只好写Ticket找技术人员帮忙。&lt;/p&gt;
+&lt;p&gt;用蹩脚的英文描述了半天，对方实在不理解，总是几句标准客服回复，估计那边的技术还没上班，客服在扛着。&lt;/p&gt;
+&lt;p&gt;看来只能自己动手了&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;Dashboard&lt;/code&gt;中查找有用的东西&lt;/p&gt;
+&lt;p&gt;看到&lt;code&gt;Remote access&lt;/code&gt;中发现了&lt;code&gt;Console Access&lt;/code&gt;点击发现是一个web版的console&lt;/p&gt;
+&lt;p&gt;看到我前两天搭建的&lt;code&gt;ocserv&lt;/code&gt;在处理一个ca证书，然后就没有然后了，输入啥都不行&lt;/p&gt;
+&lt;p&gt;看来是&lt;code&gt;ocserv&lt;/code&gt;出了问题，没办法，再找找吧&lt;/p&gt;
+&lt;p&gt;看到一个&lt;code&gt;Rescue&lt;/code&gt;选项卡，进去还有一个&lt;code&gt;Reboot into Rescue Mode&lt;/code&gt;的按钮，看来是进安全模式&lt;/p&gt;
+&lt;p&gt;那就试试呗&lt;/p&gt;
+&lt;p&gt;进去后还是一个linux系统，但进了&lt;code&gt;/etc&lt;/code&gt;下查看&lt;code&gt;rc.local&lt;/code&gt;发现是一个干净的rc，不是我系统里的那个文件&lt;/p&gt;
+&lt;p&gt;google 一下这个linux系统了&lt;code&gt;Finnix&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;刚好遇到一个10年的帖子，也是用&lt;code&gt;Finnix&lt;/code&gt;这个系统再linode中恢复数据，&lt;a href="http://www.chinaz.com/web/2010/1112/142756.shtml"&gt;帖子&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;看了下，大体了解了，原来这个&lt;code&gt;Finnix&lt;/code&gt;系统，就想Win下的PE系统，可以直接访问硬盘的文件，但是，需要先挂载硬盘&lt;/p&gt;
+&lt;p&gt;那就好说了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linode&lt;/span&gt;
+&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xvda&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后去修改&lt;code&gt;rc.local&lt;/code&gt;把，&lt;code&gt;ocserv&lt;/code&gt;启动行注释掉，保存，重启。&lt;/p&gt;
+&lt;p&gt;在web console 中看到登录框，但在本地还是ssh不上去&lt;/p&gt;
+&lt;p&gt;好吧，先在web console中输出一下iptables &lt;code&gt;sudo iptables -nL&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;＝。＝&lt;/p&gt;
+&lt;p&gt;原来Input链全部&lt;code&gt;DROP&lt;/code&gt;了&lt;/p&gt;
+&lt;p&gt;改改改&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;INPUT&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;ACCEPT&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后再ssh就通了&lt;/p&gt;
+&lt;p&gt;然后去修改了启动默认加载的iptables ruls文件&lt;/p&gt;
+&lt;p&gt;附&lt;/p&gt;
+&lt;p&gt;ubuntu 的启动默认iptables导入的文件在&lt;code&gt;/etc/network/if-pre-up.d/iptables&lt;/code&gt;这个目录下，备忘。&lt;/p&gt;
+&lt;p&gt;PS：&lt;/p&gt;
+&lt;p&gt;后来还是启动了&lt;code&gt;ocserv&lt;/code&gt;，原来不是操作卡住了，只是这个程序运行起来只在输出状态，不能做输入操作。&lt;/p&gt;
+&lt;p&gt;附加几个iptable操作的教程&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://lesca.me/archives/iptables-architecture-commands-extensions.html"&gt;iptables入门：iptables构架、基本命令及扩展（功能）简介&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.51yip.com/linux/1404.html"&gt;iptables 添加，删除，查看，修改&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/test_me/article/details/5572195"&gt;iptables&lt;/a&gt;&lt;/p&gt;</summary><category term="Linode"></category><category term="Error"></category></entry><entry><title>Fixed SVN did not show histoy Error</title><link href="http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html" rel="alternate"></link><updated>2015-03-11T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-11:fixed-svn-did-not-show-histoy-error.html</id><summary type="html">&lt;h1&gt;修复SVN 不显示Timeline的bug&lt;/h1&gt;
 &lt;p&gt;之前在Linode上搭建了Svn server&lt;br&gt;
 但总是不能用客户端看到提交的Timeline&lt;br&gt;
 郁闷&lt;br&gt;
