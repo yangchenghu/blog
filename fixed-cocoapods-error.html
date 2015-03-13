@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
+        <title>Fixed Cocoapods Error</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,44 +22,15 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./fixed-cocoapods-error.html" rel="bookmark"
+           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-03-11T00:00:00">
-                Published: Wed 11 March 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
-<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info --><h1>修复SVN 不显示Timeline的bug</h1>
-<p>之前在Linode上搭建了Svn server<br>
-但总是不能用客户端看到提交的Timeline<br>
-郁闷<br>
-今天决定搞掉这个bug<br></p>
-<p>查看<code>Revert to Revision</code>结果现实了 <code>Unreadable path encountered; access denied;</code>这个错误。</p>
-<p>google了一下这个bug，找到一篇文章，<a href="http://haitao.iteye.com/blog/1440066">原文在这里</a></p>
-<p>发现是Server的配置出了问题。</p>
-<p>ssh上去找到SVN的目录下的<code>conf/svnserve.conf</code></p>
-<p>设置<code>anon-access = none</code></p>
-<p>然后重启SVN Server就好了</p><p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
-                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
-                </header>
-
-                <div class="entry-content">
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-02-15T00:00:00">
                 Published: Sun 15 February 2015
@@ -70,7 +41,7 @@
         </address>
 <p>In <a href="./category/tech.html">Tech</a>. </p>
 <p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
+</footer><!-- /.post-info -->      <h1>修复Cocoapods error</h1>
 <p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
 <div class="highlight"><pre><span class="n">Update</span> <span class="n">all</span> <span class="n">pods</span>
 <span class="n">Analyzing</span> <span class="n">dependencies</span>
@@ -84,80 +55,34 @@
 记录一下</p>
 <div class="highlight"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="o">~/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span>
 <span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">cocoapods</span>
-<span class="n">sudo ...</span></pre></div>
-                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
-<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">psych</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">psych</span> <span class="o">-</span><span class="n">v</span> <span class="mf">2.0.0</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">instal</span> <span class="n">cocoapods</span>
+<span class="n">pod</span> <span class="n">setup</span>
+</pre></div>
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./hook-reveal-regiest-alert.html" rel="bookmark"
-                           title="Permalink to Hook Reveal Regiest Alert">Hook Reveal Regiest Alert</a></h1>
-                </header>
 
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-10-21T00:00:00">
-                Published: Tue 21 October 2014
-        </abbr>
+<p>就ok了</p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'fixed-cocoapods-error.html';
+        var disqus_url = './fixed-cocoapods-error.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
-<p>tags: <a href="./tag/hook.html">Hook</a> <a href="./tag/mac.html">Mac</a> <a href="./tag/reveal.html">Reveal</a> </p>
-</footer><!-- /.post-info -->                <p>之前写了  <a href="http://www.yangch.info/?p=1230">“破解Reveal购买提示框”</a></p>
-<p>近期发现 Reveal 更新到了1.0.6版本</p>
-<p>感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。</p>
-<p>在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。</p>
-<p>后来想起来，theos也是用<code>runtime</code>来动态替换了方法。</p>
-<h2>创建工程</h2>
-<p>在Xcode创建工程，选择<code>Library</code>。</p>
-                <a class="readmore" href="./hook-reveal-regiest-alert.html">read more</a>
-<p>There are <a href="./hook-reveal-regiest-alert.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./bo-ke-qian-yi-wp-pelican.html" rel="bookmark"
-                           title="Permalink to 博客迁移(WP->Pelican)">博客迁移(WP->Pelican)</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-09-09T00:00:00">
-                Published: Tue 09 September 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
-<p>tags: <a href="./tag/python.html">Python</a> <a href="./tag/pelican.html">Pelican</a> <a href="./tag/wordpress.html">WordPress</a> </p>
-</footer><!-- /.post-info -->                <p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
-<h2>将博客文章从wordpress导出xml文件</h2>
-<p>进入wordpress后台，选择<code>工具</code> -&gt; <code>导出</code>。</p>
-<p><em>这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。</em></p>
-<h2>将博客里面的图片下载到本地</h2>
-<p>这里使用了<a href="http://zoomquiet.io/">zoomquiet</a>大妈的一个脚本（修改了两个地方：添加了异常处理，由于有些图片的地址已经失效，容易读取失败；添加了网络超时处理）。</p>
-<div class="highlight"><pre><span class="cp">#coding=utf-8</span>
-
-<span class="n">import</span> <span class="n">re</span>
-<span class="n">import</span> <span class="n">codecs</span>
-<span class="n">import</span> <span class="n">urllib2</span>
-
-<span class="cp"># 打开RSS文件读取内容</span>
-<span class="n">file</span> <span class="o">=</span> <span class="n">codecs</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="err">&#39;</span><span class="n">wordpress</span><span class="mf">.2014</span><span class="p">.</span><span class="n">xml</span><span class="err">&#39;</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="err">&#39;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">file</span><span class="p">.</span><span class="n">close ...</span></pre></div>
-                <a class="readmore" href="./bo-ke-qian-yi-wp-pelican.html">read more</a>
-<p>There are <a href="./bo-ke-qian-yi-wp-pelican.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-                </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Hook</title>
+        <title>小虎的博客 - Cocoapods</title>
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
@@ -25,24 +25,40 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></h1>
+                    <h1 class="entry-title"><a href="../fixed-cocoapods-error.html">Fixed Cocoapods Error</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2014-10-21T00:00:00">
-                Published: Tue 21 October 2014
+        <abbr class="published" title="2015-02-15T00:00:00">
+                Published: Sun 15 February 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
 <p>In <a href="../category/tech.html">Tech</a>. </p>
-<p>tags: <a href="../tag/hook.html">Hook</a> <a href="../tag/mac.html">Mac</a> <a href="../tag/reveal.html">Reveal</a> </p>
-</footer><!-- /.post-info --><p>之前写了  <a href="http://www.yangch.info/?p=1230">“破解Reveal购买提示框”</a></p>
-<p>近期发现 Reveal 更新到了1.0.6版本</p>
-<p>感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。</p>
-<p>在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。</p>
-<p>后来想起来，theos也是用<code>runtime</code>来动态替换了方法。</p>
-<h2>创建工程</h2>
-<p>在Xcode创建工程，选择<code>Library</code>。</p><p>There are <a href="../hook-reveal-regiest-alert.html#disqus_thread">comments</a>.</p>                </article>
+<p>tags: <a href="../tag/cocoapods.html">Cocoapods</a> <a href="../tag/error.html">Error</a> </p>
+</footer><!-- /.post-info --><h1>修复Cocoapods error</h1>
+<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
+<div class="highlight"><pre><span class="n">Update</span> <span class="n">all</span> <span class="n">pods</span>
+<span class="n">Analyzing</span> <span class="n">dependencies</span>
+<span class="p">[</span><span class="o">!</span><span class="p">]</span> <span class="n">There</span> <span class="n">was</span> <span class="n">an</span> <span class="n">error</span> <span class="n">reading</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">xxxxx</span><span class="o">/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">CocoaPods</span><span class="o">-</span><span class="n">version</span><span class="p">.</span><span class="n">yml</span><span class="err">&#39;</span><span class="p">.</span>
+<span class="n">Please</span> <span class="n">consult</span> <span class="n">http</span><span class="o">:</span><span class="c1">//blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.</span>
+</pre></div>
+
+
+<p>找了好多方法，也试了好多
+终于找到了原因
+记录一下</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="o">~/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">cocoapods</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">psych</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">psych</span> <span class="o">-</span><span class="n">v</span> <span class="mf">2.0.0</span>
+<span class="n">sudo</span> <span class="n">gem</span> <span class="n">instal</span> <span class="n">cocoapods</span>
+<span class="n">pod</span> <span class="n">setup</span>
+</pre></div>
+
+
+<p>就ok了</p><p>There are <a href="../fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </article>
 <p class="paginator">
     Page 1 / 1
 </p>

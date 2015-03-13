@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2014-11-03T16:40:45-00:00</lastmod>
+<lastmod>2015-03-13T14:48:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2014-11-03T16:40:45-00:00</lastmod>
+<lastmod>2015-03-13T14:48:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2014-11-03T16:40:45-00:00</lastmod>
+<lastmod>2015-03-13T14:48:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2014-11-03T16:40:45-00:00</lastmod>
+<lastmod>2015-03-13T14:48:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -53,10 +53,31 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/pages/tools.html</loc>
+<lastmod>2014-09-10T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/pages/toys.html</loc>
 <lastmod>2014-09-10T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html</loc>
+<lastmod>2015-03-11T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/fixed-cocoapods-error.html</loc>
+<lastmod>2015-02-15T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -75,7 +96,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/category/tech.html</loc>
-<lastmod>2014-10-21T00:00:00:%s</lastmod>
+<lastmod>2015-03-11T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/svn.html</loc>
+<lastmod>2015-03-11T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -123,8 +151,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/tag/error.html</loc>
+<lastmod>2015-03-11T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/cocoapods.html</loc>
+<lastmod>2015-02-15T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/author/xiao-hu.html</loc>
-<lastmod>2014-10-21T00:00:00:%s</lastmod>
+<lastmod>2015-03-11T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

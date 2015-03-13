@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 21 Oct 2014 00:00:00 +0800</lastBuildDate><item><title>Hook Reveal Regiest Alert</title><link>http://blog.chenghu.me/hook-reveal-regiest-alert.html</link><description>&lt;p&gt;之前写了  &lt;a href="http://www.yangch.info/?p=1230"&gt;“破解Reveal购买提示框”&lt;/a&gt;&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 11 Mar 2015 00:00:00 +0800</lastBuildDate><item><title>Fixed SVN did not show histoy Error</title><link>http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html</link><description>&lt;h1&gt;修复SVN 不显示Timeline的bug&lt;/h1&gt;
+&lt;p&gt;之前在Linode上搭建了Svn server&lt;br&gt;
+但总是不能用客户端看到提交的Timeline&lt;br&gt;
+郁闷&lt;br&gt;
+今天决定搞掉这个bug&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;查看&lt;code&gt;Revert to Revision&lt;/code&gt;结果现实了 &lt;code&gt;Unreadable path encountered; access denied;&lt;/code&gt;这个错误。&lt;/p&gt;
+&lt;p&gt;google了一下这个bug，找到一篇文章，&lt;a href="http://haitao.iteye.com/blog/1440066"&gt;原文在这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;发现是Server的配置出了问题。&lt;/p&gt;
+&lt;p&gt;ssh上去找到SVN的目录下的&lt;code&gt;conf/svnserve.conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置&lt;code&gt;anon-access = none&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后重启SVN Server就好了&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 11 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-11:fixed-svn-did-not-show-histoy-error.html</guid><category>SVN</category><category>Error</category></item><item><title>Fixed Cocoapods Error</title><link>http://blog.chenghu.me/fixed-cocoapods-error.html</link><description>&lt;h1&gt;修复Cocoapods error&lt;/h1&gt;
+&lt;p&gt;今天使用&lt;code&gt;pod update&lt;/code&gt;更新所有框架，结果提示&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Update&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;pods&lt;/span&gt;
+&lt;span class="n"&gt;Analyzing&lt;/span&gt; &lt;span class="n"&gt;dependencies&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;There&lt;/span&gt; &lt;span class="n"&gt;was&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="n"&gt;reading&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xxxxx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cocoapods&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;repos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;CocoaPods&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;consult&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;找了好多方法，也试了好多
+终于找到了原因
+记录一下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cocoapods&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;repos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;cocoapods&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;psych&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;psych&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="mf"&gt;2.0.0&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;instal&lt;/span&gt; &lt;span class="n"&gt;cocoapods&lt;/span&gt;
+&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;就ok了&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sun, 15 Feb 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-02-15:fixed-cocoapods-error.html</guid><category>Cocoapods</category><category>Error</category></item><item><title>Hook Reveal Regiest Alert</title><link>http://blog.chenghu.me/hook-reveal-regiest-alert.html</link><description>&lt;p&gt;之前写了  &lt;a href="http://www.yangch.info/?p=1230"&gt;“破解Reveal购买提示框”&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;近期发现 Reveal 更新到了1.0.6版本&lt;/p&gt;
 &lt;p&gt;感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。&lt;/p&gt;
 &lt;p&gt;在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。&lt;/p&gt;

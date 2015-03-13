@@ -17,14 +17,14 @@
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 
  - 期望职位：iOS高级程序员，应用架构师
- - 期望薪资：税前月薪23-25k，特别喜欢的公司可例外
+ - 期望薪资：税前月薪23-25k，特别喜欢的公司可面议
  - 期望城市：北京
 
 ---
 
 # 工作经历
 
-## Sina公司 （ 2013年5月 ~ 2014年今 ）
+## Sina公司 （ 2013年5月 ~ 今 ）
 
 ### 新浪微盾  
 [地址](https://itunes.apple.com/cn/app/xin-lang-wei-dun/id535411936?l=en&mt=8)
@@ -80,7 +80,7 @@
 
 ## 附加技能
 
-- 新浪内训师 
+- 新浪内训师，科学上网
 
 ## 参考技能关键字
 
