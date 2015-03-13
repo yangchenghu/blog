@@ -129,7 +129,8 @@
 &lt;p&gt;附加几个iptable操作的教程&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://lesca.me/archives/iptables-architecture-commands-extensions.html"&gt;iptables入门：iptables构架、基本命令及扩展（功能）简介&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://blog.51yip.com/linux/1404.html"&gt;iptables 添加，删除，查看，修改&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://blog.csdn.net/test_me/article/details/5572195"&gt;iptables&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Fri, 13 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-13:fixed-linode-error.html</guid><category>Linode</category><category>Error</category></item><item><title>Fixed SVN did not show histoy Error</title><link>http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html</link><description>&lt;h1&gt;修复SVN 不显示Timeline的bug&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/test_me/article/details/5572195"&gt;iptables&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://xiaozhuang.blog.51cto.com/4396589/874244"&gt;linux防火墙基础和管理设置iptables规则&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Fri, 13 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-13:fixed-linode-error.html</guid><category>Linode</category><category>Error</category></item><item><title>Fixed SVN did not show histoy Error</title><link>http://blog.chenghu.me/fixed-svn-did-not-show-histoy-error.html</link><description>&lt;h1&gt;修复SVN 不显示Timeline的bug&lt;/h1&gt;
 &lt;p&gt;之前在Linode上搭建了Svn server&lt;br&gt;
 但总是不能用客户端看到提交的Timeline&lt;br&gt;
 郁闷&lt;br&gt;
