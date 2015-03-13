@@ -1,3 +1,4 @@
+Date: 2015-03-15
 Title:Resume
 
 # 杨成虎的简历
@@ -14,8 +15,8 @@ Title:Resume
 
  - 杨成虎/男/1986 
  - 本科：山东聊城大学 / 学士学位
- - 工作年限：4年iOS开发经验
- - 个人博客：[http://chenghu.me](http://chenghu.me)
+ - 工作年限：4.5年iOS开发经验
+ - 个人博客：[http://blog.chenghu.me/](http://blog.chenghu.me)
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 
  - 期望职位：iOS高级程序员，应用架构师
@@ -67,7 +68,7 @@ Title:Resume
 ---
 # 技能清单
 
-以下均为我熟练使用的技能
+以下均为熟练使用的技能
 
 - iOS开发：Xcode，Obj-C，Instruments
 - iOS框架：AFNetworking，SDWebImage，ReactiveCocoa
@@ -78,7 +79,7 @@ Title:Resume
 - 常去的网站：Code4App，CocoaChina，github
 - 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)
 
-- 其他技能：iOS5-8 适配，内存管理
+- 其他技能：iOS5-8 适配，内存管理，程序优化
 
 ## 附加技能
 
