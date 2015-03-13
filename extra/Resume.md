@@ -1,5 +1,3 @@
-Date: 2015-03-15
-Title:Resume
 
 # 杨成虎的简历
 
