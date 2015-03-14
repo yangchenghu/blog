@@ -8,6 +8,7 @@
 &lt;li&gt;项目管理知识可以通用到其他方面&lt;/li&gt;
 &lt;li&gt;项目管理难就难在项目经理要改变自己，要学会跟人打交道&lt;/li&gt;
 &lt;/ol&gt;
+&lt;hr /&gt;
 &lt;h2&gt;从程序员到项目经理（二）&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.cnblogs.com/watsonyin/archive/2012/09/16/2687873.html"&gt;地址&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -71,6 +72,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;hr /&gt;
 &lt;h2&gt;从程序员到项目经理（三）：认识项目经理&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.cnblogs.com/watsonyin/archive/2012/09/25/2701483.html"&gt;地址&lt;/a&gt;&lt;/p&gt;</summary><category term="Programmer"></category><category term="PM"></category></entry><entry><title>Fixed Linode Error</title><link href="http://blog.chenghu.me/fixed-linode-error.html" rel="alternate"></link><updated>2015-03-13T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-13:fixed-linode-error.html</id><summary type="html">&lt;h1&gt;修复Linode error&lt;/h1&gt;
 &lt;p&gt;今天ss老是报错误&lt;code&gt;ERROR: remote_recv_cb_recv: Connection reset by peer&lt;/code&gt;，ssh上不去。&lt;/p&gt;
