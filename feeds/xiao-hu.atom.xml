@@ -19,7 +19,7 @@
 &lt;li&gt;保存文件&lt;/li&gt;
 &lt;li&gt;使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;over&lt;/p&gt;</summary><category term="Shell"></category><category term="Alias"></category></entry><entry><title>iOS</title><link href="http://blog.chenghu.me/ios.html" rel="alternate"></link><updated>2015-03-18T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-18:ios.html</id><summary type="html">&lt;p&gt;Connect Anti Fiddler Captuer
+&lt;p&gt;over&lt;/p&gt;</summary><category term="Shell"></category><category term="Alias"></category></entry><entry><title>iOS Anti Fildder Capture Https Data</title><link href="http://blog.chenghu.me/ios-anti-fildder-capture-https-data.html" rel="alternate"></link><updated>2015-03-18T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-18:ios-anti-fildder-capture-https-data.html</id><summary type="html">&lt;p&gt;Connect Anti Fiddler Captuer
 Tags: iOS,Https,SSL,Fiddler,Capture
 Category: Tech&lt;/p&gt;
 &lt;h1&gt;iOS https内容防止fiddler抓包&lt;/h1&gt;

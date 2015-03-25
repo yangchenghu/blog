@@ -19,7 +19,7 @@
 &lt;li&gt;保存文件&lt;/li&gt;
 &lt;li&gt;使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</guid><category>Shell</category><category>Alias</category></item><item><title>iOS</title><link>http://blog.chenghu.me/ios.html</link><description>&lt;p&gt;Connect Anti Fiddler Captuer
+&lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</guid><category>Shell</category><category>Alias</category></item><item><title>iOS Anti Fildder Capture Https Data</title><link>http://blog.chenghu.me/ios-anti-fildder-capture-https-data.html</link><description>&lt;p&gt;Connect Anti Fiddler Captuer
 Tags: iOS,Https,SSL,Fiddler,Capture
 Category: Tech&lt;/p&gt;
 &lt;h1&gt;iOS https内容防止fiddler抓包&lt;/h1&gt;
@@ -142,7 +142,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;找了下，说可以加openssl的框架来验证x509证书&lt;/p&gt;
 &lt;p&gt;看了几篇文档&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/15836484/how-to-verify-a-x509-certificate-in-c"&gt;How to verify a X509 certificate in C&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;暂时先用内嵌ca证书来解决对服务器x509证书的校验吧。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-18:ios.html</guid></item><item><title>Read From the programmer to project manager</title><link>http://blog.chenghu.me/read-from-the-programmer-to-project-manager.html</link><description>&lt;h1&gt;读《从程序员到项目经理》笔记&lt;/h1&gt;
+&lt;p&gt;暂时先用内嵌ca证书来解决对服务器x509证书的校验吧。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-18:ios-anti-fildder-capture-https-data.html</guid></item><item><title>Read From the programmer to project manager</title><link>http://blog.chenghu.me/read-from-the-programmer-to-project-manager.html</link><description>&lt;h1&gt;读《从程序员到项目经理》笔记&lt;/h1&gt;
 &lt;h2&gt;从程序员到项目经理（一）&lt;/h2&gt;
 &lt;p&gt;&lt;a href="从程序员到项目经理（一）"&gt;地址&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
