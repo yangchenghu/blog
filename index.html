@@ -25,7 +25,90 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></h1>
+                    <h1 class="entry-title"><a href="./add-shell-alias.html">Add Shell Alias</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T00:00:00">
+                Published: Wed 25 March 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>tags: <a href="./tag/shell.html">Shell</a> <a href="./tag/alias.html">Alias</a> </p>
+</footer><!-- /.post-info --><h1>在Mac下使用Shell的Aliax</h1>
+<p>今天使用<code>pod update</code>更新所有框架，好慢好慢</p>
+<p>搜了一下，可以使用</p>
+<div class="highlight"><pre><span class="n">pod</span> <span class="n">install</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
+<span class="n">pod</span> <span class="n">update</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
+</pre></div>
+
+
+<p>来更新工程中的框架，而不更新pod库</p>
+<p>试了一下，好一些了</p>
+<p>但是命令好长，记不住</p>
+<p>想起来在linux中可以设置alias</p>
+<p>就找了一下，如何在Mac中设置alias，找了一篇<a href="http://blog.csdn.net/ithomer/article/details/33339071">文章</a></p>
+<p>试了一下，可以使用，记录如下</p>
+<p>1.编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code>
+ 2.插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行
+ 3.保存文件
+ 4.使用<code>source ~/.bash_profile</code>来让bash重新载入配置，就可以使用<code>podinstallfast</code>或<code>podupdatefast</code>来快速更新</p>
+<p>over</p><p>There are <a href="./add-shell-alias.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./ios.html" rel="bookmark"
+                           title="Permalink to iOS">iOS</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-18T00:00:00">
+                Published: Wed 18 March 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/cat.html">cat</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Connect Anti Fiddler Captuer
+Tags: iOS,Https,SSL,Fiddler,Capture
+Category: Tech</p>
+<h1>iOS https内容防止fiddler抓包</h1>
+<p>昨天老板给提了一个bug</p>
+<p>“你的App虽然走了https来防止抓包，但是通过Fiddler还是可以进行中间人攻击，能不能解决？”</p>
+<p>老板的需求能不解决＝。＝，开玩笑了</p>
+<p>今天开始找资料</p>
+<p>我所有的网络请求都是走的AFNetworking，找到很多AFNetworking使用<code>AFSecurityPolicy</code>来进行证书验证的文档。</p>
+<p><a href="http://ceyang.me/an-quan-lian-jie/">HTTP请求的安全连接</a></p>
+<p>这篇文章主要讲导入证书，然后去比较</p>
+<p><a href="http://www.cnblogs.com/koujiaonuhan/p/ssl-pinning-with-afnetworking-2x.html">AFNetworking 2.x 的SSL身份认证</a></p>
+<p>这篇文章也是走的导入公钥进行比对</p>
+<p><a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/">iOS安全系列之一：HTTPS</a></p>
+<p>这篇文章讲了验证的步骤
+ 1. 验证的信任对象
+ 2. 使用系统默认验证方式验证Trust Object
+ 3. 使用Trust Object生成一份凭证
+ 4. 本地导入证书，验证Trust Object与导入的证书是否匹配
+ 5. 根据结果去continue还是cancel ...</p>
+                <a class="readmore" href="./ios.html">read more</a>
+<p>There are <a href="./ios.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./read-from-the-programmer-to-project-manager.html" rel="bookmark"
+                           title="Permalink to Read From the programmer to project manager">Read From the programmer to project manager</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-03-14T00:00:00">
                 Published: Sat 14 March 2015
@@ -36,7 +119,7 @@
         </address>
 <p>In <a href="./category/book.html">Book</a>. </p>
 <p>tags: <a href="./tag/programmer.html">Programmer</a> <a href="./tag/pm.html">PM</a> </p>
-</footer><!-- /.post-info --><h1>读《从程序员到项目经理》笔记</h1>
+</footer><!-- /.post-info -->                <h1>读《从程序员到项目经理》笔记</h1>
 <h2>从程序员到项目经理（一）</h2>
 <p><a href="从程序员到项目经理（一）">地址</a></p>
 <ol>
@@ -81,42 +164,10 @@
 </tr>
 <tr>
 <td>事物结构</td>
-<td>局部思维</td>
-<td>过于关注细节，对整个项目工作的内容、完成路线没有概念。上来就干，工作缺乏计划性、条理性。</td>
-<td>整体思维</td>
-<td>采用结构化分析方法，自顶向下，先整体后局部。有时亦采用头脑风暴，先将细节展开再归纳。</td>
-</tr>
-<tr>
-<td>逻辑思维</td>
-<td>以机器为中心的思维</td>
-<td>思想单纯，性格直率。在人际问题上过于讲究逻辑。</td>
-<td>以人为中心的思维</td>
-<td>人是执行项目的主体，关注事情本身，更关注人的价值。学会包容，能与各种不同情格的人打交道。</td>
-</tr>
-<tr>
-<td>决策依据</td>
-<td>完美思维</td>
-<td>不关心进度和成本，只关心完美的功能和代码，并视之为艺术。经常对上一任的工作推倒重来。</td>
-<td>平衡思维</td>
-<td>拒绝渡金，项目不需要艺术。在进度和质量之间取得平衡，在员工个性与团队凝聚力之间取得平衡，在员工、项目、公司和客户之间取得平衡。</td>
-</tr>
-<tr>
-<td>人际关系</td>
-<td>个人思维</td>
-<td>以个人为中心，单兵作战，依赖个人能力。个性固执，工作方法简单。</td>
-<td>团队思维</td>
-<td>你不是一个人在战斗，发挥每个成员的作用比个人埋头苦干重要得多。关注团队分工、配合以及士气和凝聚力。</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>从程序员到项目经理（三）：认识项目经理</h2>
-<p><a href="http://www.cnblogs.com/watsonyin/archive/2012/09/25/2701483.html">地址</a></p><p>There are <a href="./read-from-the-programmer-to-project-manager.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<td>局部思维 ...</td></tr></tbody></table>
+                <a class="readmore" href="./read-from-the-programmer-to-project-manager.html">read more</a>
+<p>There are <a href="./read-from-the-programmer-to-project-manager.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -191,74 +242,6 @@
 <p>然后在 ...</p>
                 <a class="readmore" href="./kill-mac-qq-capture-function.html">read more</a>
 <p>There are <a href="./kill-mac-qq-capture-function.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./fixed-svn-did-not-show-histoy-error.html" rel="bookmark"
-                           title="Permalink to Fixed SVN did not show histoy Error">Fixed SVN did not show histoy Error</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-03-11T00:00:00">
-                Published: Wed 11 March 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
-<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复SVN 不显示Timeline的bug</h1>
-<p>之前在Linode上搭建了Svn server<br>
-但总是不能用客户端看到提交的Timeline<br>
-郁闷<br>
-今天决定搞掉这个bug<br></p>
-<p>查看<code>Revert to Revision</code>结果现实了 <code>Unreadable path encountered; access denied;</code>这个错误。</p>
-<p>google了一下这个bug，找到一篇文章，<a href="http://haitao.iteye.com/blog/1440066">原文在这里</a></p>
-<p>发现是Server的配置出了问题。</p>
-<p>ssh上去找到SVN的目录下的<code>conf/svnserve.conf</code></p>
-<p>设置<code>anon-access = none</code></p>
-<p>然后重启SVN Server就好了</p>
-                <a class="readmore" href="./fixed-svn-did-not-show-histoy-error.html">read more</a>
-<p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
-                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-02-15T00:00:00">
-                Published: Sun 15 February 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
-<p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
-<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
-<div class="highlight"><pre><span class="n">Update</span> <span class="n">all</span> <span class="n">pods</span>
-<span class="n">Analyzing</span> <span class="n">dependencies</span>
-<span class="p">[</span><span class="o">!</span><span class="p">]</span> <span class="n">There</span> <span class="n">was</span> <span class="n">an</span> <span class="n">error</span> <span class="n">reading</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">xxxxx</span><span class="o">/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">CocoaPods</span><span class="o">-</span><span class="n">version</span><span class="p">.</span><span class="n">yml</span><span class="err">&#39;</span><span class="p">.</span>
-<span class="n">Please</span> <span class="n">consult</span> <span class="n">http</span><span class="o">:</span><span class="c1">//blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.</span>
-</pre></div>
-
-
-<p>找了好多方法，也试了好多
-终于找到了原因
-记录一下</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="o">~/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">cocoapods</span>
-<span class="n">sudo ...</span></pre></div>
-                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
-<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

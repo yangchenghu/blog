@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>小虎的博客 - cat</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">小虎的博客 </a></h1>
+                <nav><ul>
+                    <li><a href="/">HomePage</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/course.html">Course</a></li>
+                    <li><a href="../pages/favorites.html">Favorites</a></li>
+                    <li><a href="../pages/tools.html">Tools</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../ios.html">iOS</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-03-18T00:00:00">
+                Published: Wed 18 March 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/cat.html">cat</a>. </p>
+
+</footer><!-- /.post-info --><p>Connect Anti Fiddler Captuer
+Tags: iOS,Https,SSL,Fiddler,Capture
+Category: Tech</p>
+<h1>iOS https内容防止fiddler抓包</h1>
+<p>昨天老板给提了一个bug</p>
+<p>“你的App虽然走了https来防止抓包，但是通过Fiddler还是可以进行中间人攻击，能不能解决？”</p>
+<p>老板的需求能不解决＝。＝，开玩笑了</p>
+<p>今天开始找资料</p>
+<p>我所有的网络请求都是走的AFNetworking，找到很多AFNetworking使用<code>AFSecurityPolicy</code>来进行证书验证的文档。</p>
+<p><a href="http://ceyang.me/an-quan-lian-jie/">HTTP请求的安全连接</a></p>
+<p>这篇文章主要讲导入证书，然后去比较</p>
+<p><a href="http://www.cnblogs.com/koujiaonuhan/p/ssl-pinning-with-afnetworking-2x.html">AFNetworking 2.x 的SSL身份认证</a></p>
+<p>这篇文章也是走的导入公钥进行比对</p>
+<p><a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/">iOS安全系列之一：HTTPS</a></p>
+<p>这篇文章讲了验证的步骤
+ 1. 验证的信任对象
+ 2. 使用系统默认验证方式验证Trust Object
+ 3. 使用Trust Object生成一份凭证
+ 4. 本地导入证书，验证Trust Object与导入的证书是否匹配
+ 5. 根据结果去continue还是cancel</p>
+<p>----- 分割线 ------</p>
+<p>看了几篇文章，发现主要是讲证书信息导入到<code>AFSecurityPolicy</code>，然后将设置好的<code>AFSecurityPolicy</code>设置到<code>AFHTTPRequestOperationManager</code>的实例中，然后AFNetworking会自动处理。</p>
+<p>但是我的网络框架中没有使用默认的<code>AFHTTPRequestOperationManager</code>来管理，使用的自己的<code>NSOperationQueue</code>来组织的。</p>
+<p>后来想想<code>AFNetworking</code>底层也是走的<code>NSURLConnicetion</code>，那就研究一下<code>NSURLConnicetion</code>对Https的处理。</p>
+<p>在<code>NSURLConnicetion</code>的<code>- (void)connection:(NSURLConnection *)connection
+willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge</code>这个方法里。</p>
+<p>当然<code>AFNetworking</code>里面的<code>AFHTTPRequestOperation</code>有一个block<code>setWillSendRequestForAuthenticationChallengeBlock:^(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge)</code></p>
+<p>所以，只要<code>NSURLConnicetion</code>里面可以处理https证书就可以了。</p>
+<p>----- 分割线 ------</p>
+<p>先试试网上的方法</p>
+<div class="highlight"><pre><span class="c1">//1)获取trust object</span>
+<span class="n">SecTrustRef</span> <span class="n">trust</span> <span class="o">=</span> <span class="n">challenge</span><span class="p">.</span><span class="n">protectionSpace</span><span class="p">.</span><span class="n">serverTrust</span><span class="p">;</span>
+<span class="n">SecTrustResultType</span> <span class="n">result</span><span class="p">;</span>
+
+<span class="c1">//注意：这里将之前导入的证书设置成下面验证的Trust Object的anchor certificate</span>
+<span class="n">SecTrustSetAnchorCertificates</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">CFArrayRef</span><span class="p">)</span><span class="n">self</span><span class="p">.</span><span class="n">trustedCertificates</span><span class="p">);</span>
+
+<span class="c1">//2)SecTrustEvaluate会查找前面SecTrustSetAnchorCertificates设置的证书或者系统默认提供的证书，对trust进行验证</span>
+<span class="n">OSStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="n">SecTrustEvaluate</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">errSecSuccess</span> <span class="o">&amp;&amp;</span>
+    <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">kSecTrustResultProceed</span> <span class="o">||</span>
+    <span class="n">result</span> <span class="o">==</span> <span class="n">kSecTrustResultUnspecified</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="c1">//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接</span>
+    <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLCredential</span> <span class="n">credentialForTrust</span><span class="o">:</span><span class="n">trust</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">useCredential</span><span class="o">:</span><span class="n">cred</span> <span class="n">forAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+    <span class="c1">//5)验证失败，取消这次验证流程</span>
+    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">cancelAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+</pre></div>
+
+
+<p>}</p>
+<p>结果还是可以用Fiddler来抓包，失败</p>
+<p>看来这种方式还是没有成功 ＝。＝</p>
+<p>继续</p>
+<p>----- 分割线 ------</p>
+<p>再尝试内置https公钥来处理，先想办法拿到公钥</p>
+<p>找了一下，找到一个链接，<a href="http://stackoverflow.com/questions/16694280/ssl-pinning-on-ios">这里</a></p>
+<div class="highlight"><pre>    <span class="n">SecTrustRef</span> <span class="n">serverTrust</span> <span class="o">=</span> <span class="n">challenge</span><span class="p">.</span><span class="n">protectionSpace</span><span class="p">.</span><span class="n">serverTrust</span><span class="p">;</span>
+    <span class="n">SecCertificateRef</span> <span class="n">certificate</span> <span class="o">=</span> <span class="n">SecTrustGetCertificateAtIndex</span><span class="p">(</span><span class="n">serverTrust</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">NSData</span> <span class="o">*</span><span class="n">remoteCertificateData</span> <span class="o">=</span> <span class="n">CFBridgingRelease</span><span class="p">(</span><span class="n">SecCertificateCopyData</span><span class="p">(</span><span class="n">certificate</span><span class="p">));</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Remote Certificate Data Length: %ld&quot;</span><span class="p">,[</span><span class="n">remoteCertificateData</span> <span class="n">length</span><span class="p">]);</span>
+    <span class="n">NSString</span> <span class="o">*</span> <span class="n">strPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%@/cer.cer&quot;</span><span class="p">,</span> <span class="n">DOCUMENTS_PATH</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">remoteCertificateData</span> <span class="n">writeToFile</span><span class="o">:</span><span class="n">strPath</span> <span class="n">atomically</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+</pre></div>
+
+
+<p>这样就将拿到的服务器的公钥写到本地了</p>
+<p>然后将这个证书内置到工程里</p>
+<p>依然在这个block里面做处理</p>
+<p>只要比对这两个证书是否一致就好了</p>
+<p>这次是可以了</p>
+<p>但是。。。。。。。老板说，咱们的https证书8月份就过期了，到时候公钥就变了，需要更新版本才可以，有没有不内置公钥的办法</p>
+<p>好吧，办法总比问题多，继续</p>
+<p>----- 分割线 ------</p>
+<p>尝试比对传过来的公钥的的CA</p>
+<p>找了一下，找到一个链接，<a href="https://gist.github.com/JacksonTian/5855751">这里</a>中的<code>验证证书</code>段落。</p>
+<div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="n">_sslCACertificatieData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 根据二进制内容提取证书信息</span>
+    <span class="n">SecCertificateRef</span> <span class="n">caRef</span> <span class="o">=</span> <span class="n">SecCertificateCreateWithData</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">CFDataRef</span><span class="p">)</span><span class="n">_sslCACertificatieData</span><span class="p">);</span>
+    <span class="c1">// 形成钥匙链</span>
+    <span class="n">NSArray</span> <span class="o">*</span> <span class="n">chain</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObject</span><span class="o">:</span><span class="p">(</span><span class="n">__bridge</span> <span class="kt">id</span><span class="p">)(</span><span class="n">caRef</span><span class="p">)];</span>
+
+    <span class="n">CFTypeRef</span> <span class="n">caChainArrayRef</span> <span class="o">=</span> <span class="n">CFBridgingRetain</span><span class="p">(</span><span class="n">chain</span><span class="p">);</span>
+
+    <span class="c1">// 取出服务器证书</span>
+    <span class="n">SecTrustRef</span> <span class="n">trust</span> <span class="o">=</span> <span class="p">[[</span><span class="n">challenge</span> <span class="n">protectionSpace</span><span class="p">]</span> <span class="n">serverTrust</span><span class="p">];</span>
+
+    <span class="n">SecTrustResultType</span> <span class="n">trustResult</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// 设置为我们自有的CA证书钥匙连</span>
+    <span class="kt">int</span> <span class="n">err</span> <span class="o">=</span> <span class="n">SecTrustSetAnchorCertificates</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="n">caChainArrayRef</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">noErr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 用CA证书验证服务器证书</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">SecTrustEvaluate</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">trustResult</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 检查结果</span>
+    <span class="kt">BOOL</span> <span class="n">trusted</span> <span class="o">=</span> <span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">noErr</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">trustResult</span> <span class="o">==</span> <span class="n">kSecTrustResultProceed</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">trustResult</span> <span class="o">==</span> <span class="n">kSecTrustResultUnspecified</span><span class="p">));</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">trusted</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接</span>
+        <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLCredential</span> <span class="n">credentialForTrust</span><span class="o">:</span><span class="n">trust</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">useCredential</span><span class="o">:</span><span class="n">cred</span> <span class="n">forAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">cancelAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<p>这次试了一下，也可以防止别人使用Fiddler抓包</p>
+<p>但是。。。。。老板说，是比内置公钥好多了，只要到时候不更换https证书的厂家的话，ca的有效期还是比较长的，能不能不内置CA，使用系统内置的CA来判断呢？</p>
+<p>好吧，想着办法总比问题多，继续搞</p>
+<p>加载CA的又一篇文章</p>
+<p><a href="http://robnapier.net/pinning-your-ssl-certs">Pinning Your SSL Certs</a></p>
+<p>----- 分割线 ------</p>
+<p>那只能看看能不能读取出来公钥x509里面的信息来做判断了</p>
+<p>找了下，说可以加openssl的框架来验证x509证书</p>
+<p>看了几篇文档</p>
+<p><a href="http://stackoverflow.com/questions/15836484/how-to-verify-a-x509-certificate-in-c">How to verify a X509 certificate in C</a></p>
+<p>暂时先用内嵌ca证书来解决对服务器x509证书的校验吧。</p><p>There are <a href="../ios.html#disqus_thread">comments</a>.</p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com">Pelican</a></li>
+                            <li><a href="http://python.org">Python.org</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://msching.github.io">码农人生</a></li>
+                            <li><a href="http://blog.cnbang.net">bang's blog</a></li>
+                            <li><a href="http://geeklu.com">Luke's Homepage</a></li>
+                            <li><a href="http://www.hotobear.com">不掏蜂窝的熊</a></li>
+                            <li><a href="http://evilcos.me/">余弦</a></li>
+                            <li><a href="http://blog.csdn.net/yiyaaixuexi">念茜的博客</a></li>
+                            <li><a href="http://blog.csdn.net/guiguzi1110">听鬼哥说故事</a></li>
+                            <li><a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://www.pchou.info">P_Chou Tech Space</a></li>
+                            <li><a href="http://www.jianshu.com/users/c30afb47d730/latest_articles">Feat</a></li>
+                            <li><a href="http://nshipster.cn/">NSHipster</a></li>
+                            <li><a href="http://www.ifun.cc">Haven's Blog</a></li>
+                            <li><a href="http://blog.rpplusplus.me/">txx's blog</a></li>
+                            <li><a href="http://randomk.gitcafe.com/">RandomK's Blog</a></li>
+                            <li><a href="http://swifter.tips/">swifter</a></li>
+                            <li><a href="http://beyondvincent.com/">破船之家</a></li>
+                            <li><a href="http://blog.csdn.net/proteas">Proteas的专栏</a></li>
+                            <li><a href="http://blog.csdn.net/mangosnow">车小松的技术博客</a></li>
+                            <li><a href="http://www.iwangke.me/">iWangKe.me</a></li>
+                            <li><a href="http://blog.sunnyxx.com/">@{blog: sunnyxx};</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://weibo.com/ychv">weibo</a></li>
+                            <li><a href="https://github.com/yangchenghu">github</a></li>
+                            <li><a href="http://about.me/chenghu">about</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-54504433-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'chenghu';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

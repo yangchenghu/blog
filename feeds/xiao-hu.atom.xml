@@ -1,5 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-03-14T00:00:00+08:00</updated><entry><title>Read From the programmer to project manager</title><link href="http://blog.chenghu.me/read-from-the-programmer-to-project-manager.html" rel="alternate"></link><updated>2015-03-14T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-14:read-from-the-programmer-to-project-manager.html</id><summary type="html">&lt;h1&gt;读《从程序员到项目经理》笔记&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-03-25T00:00:00+08:00</updated><entry><title>Add Shell Alias</title><link href="http://blog.chenghu.me/add-shell-alias.html" rel="alternate"></link><updated>2015-03-25T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</id><summary type="html">&lt;h1&gt;在Mac下使用Shell的Aliax&lt;/h1&gt;
+&lt;p&gt;今天使用&lt;code&gt;pod update&lt;/code&gt;更新所有框架，好慢好慢&lt;/p&gt;
+&lt;p&gt;搜了一下，可以使用&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;来更新工程中的框架，而不更新pod库&lt;/p&gt;
+&lt;p&gt;试了一下，好一些了&lt;/p&gt;
+&lt;p&gt;但是命令好长，记不住&lt;/p&gt;
+&lt;p&gt;想起来在linux中可以设置alias&lt;/p&gt;
+&lt;p&gt;就找了一下，如何在Mac中设置alias，找了一篇&lt;a href="http://blog.csdn.net/ithomer/article/details/33339071"&gt;文章&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;试了一下，可以使用，记录如下&lt;/p&gt;
+&lt;p&gt;1.编辑&lt;code&gt;~/.bash_profile&lt;/code&gt;这个文件&lt;code&gt;vim ~/.bash_profile&lt;/code&gt;
+ 2.插入&lt;code&gt;alias podinstallfast="pod install --verbose --no-repo-update"&lt;/code&gt;和&lt;code&gt;alias podupdatefast="pod update --verbose --no-repo-update"&lt;/code&gt;这两行
+ 3.保存文件
+ 4.使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/p&gt;
+&lt;p&gt;over&lt;/p&gt;</summary><category term="Shell"></category><category term="Alias"></category></entry><entry><title>iOS</title><link href="http://blog.chenghu.me/ios.html" rel="alternate"></link><updated>2015-03-18T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-18:ios.html</id><summary type="html">&lt;p&gt;Connect Anti Fiddler Captuer
+Tags: iOS,Https,SSL,Fiddler,Capture
+Category: Tech&lt;/p&gt;
+&lt;h1&gt;iOS https内容防止fiddler抓包&lt;/h1&gt;
+&lt;p&gt;昨天老板给提了一个bug&lt;/p&gt;
+&lt;p&gt;“你的App虽然走了https来防止抓包，但是通过Fiddler还是可以进行中间人攻击，能不能解决？”&lt;/p&gt;
+&lt;p&gt;老板的需求能不解决＝。＝，开玩笑了&lt;/p&gt;
+&lt;p&gt;今天开始找资料&lt;/p&gt;
+&lt;p&gt;我所有的网络请求都是走的AFNetworking，找到很多AFNetworking使用&lt;code&gt;AFSecurityPolicy&lt;/code&gt;来进行证书验证的文档。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://ceyang.me/an-quan-lian-jie/"&gt;HTTP请求的安全连接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这篇文章主要讲导入证书，然后去比较&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/koujiaonuhan/p/ssl-pinning-with-afnetworking-2x.html"&gt;AFNetworking 2.x 的SSL身份认证&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这篇文章也是走的导入公钥进行比对&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/"&gt;iOS安全系列之一：HTTPS&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这篇文章讲了验证的步骤
+ 1. 验证的信任对象
+ 2. 使用系统默认验证方式验证Trust Object
+ 3. 使用Trust Object生成一份凭证
+ 4. 本地导入证书，验证Trust Object与导入的证书是否匹配
+ 5. 根据结果去continue还是cancel&lt;/p&gt;
+&lt;p&gt;----- 分割线 ------&lt;/p&gt;
+&lt;p&gt;看了几篇文章，发现主要是讲证书信息导入到&lt;code&gt;AFSecurityPolicy&lt;/code&gt;，然后将设置好的&lt;code&gt;AFSecurityPolicy&lt;/code&gt;设置到&lt;code&gt;AFHTTPRequestOperationManager&lt;/code&gt;的实例中，然后AFNetworking会自动处理。&lt;/p&gt;
+&lt;p&gt;但是我的网络框架中没有使用默认的&lt;code&gt;AFHTTPRequestOperationManager&lt;/code&gt;来管理，使用的自己的&lt;code&gt;NSOperationQueue&lt;/code&gt;来组织的。&lt;/p&gt;
+&lt;p&gt;后来想想&lt;code&gt;AFNetworking&lt;/code&gt;底层也是走的&lt;code&gt;NSURLConnicetion&lt;/code&gt;，那就研究一下&lt;code&gt;NSURLConnicetion&lt;/code&gt;对Https的处理。&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;NSURLConnicetion&lt;/code&gt;的&lt;code&gt;- (void)connection:(NSURLConnection *)connection
+willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge&lt;/code&gt;这个方法里。&lt;/p&gt;
+&lt;p&gt;当然&lt;code&gt;AFNetworking&lt;/code&gt;里面的&lt;code&gt;AFHTTPRequestOperation&lt;/code&gt;有一个block&lt;code&gt;setWillSendRequestForAuthenticationChallengeBlock:^(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;所以，只要&lt;code&gt;NSURLConnicetion&lt;/code&gt;里面可以处理https证书就可以了。&lt;/p&gt;
+&lt;p&gt;----- 分割线 ------&lt;/p&gt;
+&lt;p&gt;先试试网上的方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;//1)获取trust object&lt;/span&gt;
+&lt;span class="n"&gt;SecTrustRef&lt;/span&gt; &lt;span class="n"&gt;trust&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;protectionSpace&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;SecTrustResultType&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;//注意：这里将之前导入的证书设置成下面验证的Trust Object的anchor certificate&lt;/span&gt;
+&lt;span class="n"&gt;SecTrustSetAnchorCertificates&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFArrayRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;trustedCertificates&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;//2)SecTrustEvaluate会查找前面SecTrustSetAnchorCertificates设置的证书或者系统默认提供的证书，对trust进行验证&lt;/span&gt;
+&lt;span class="n"&gt;OSStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustEvaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;errSecSuccess&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;kSecTrustResultProceed&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;kSecTrustResultUnspecified&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="c1"&gt;//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接&lt;/span&gt;
+    &lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="n"&gt;credentialForTrust&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;useCredential&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="n"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="c1"&gt;//5)验证失败，取消这次验证流程&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;}&lt;/p&gt;
+&lt;p&gt;结果还是可以用Fiddler来抓包，失败&lt;/p&gt;
+&lt;p&gt;看来这种方式还是没有成功 ＝。＝&lt;/p&gt;
+&lt;p&gt;继续&lt;/p&gt;
+&lt;p&gt;----- 分割线 ------&lt;/p&gt;
+&lt;p&gt;再尝试内置https公钥来处理，先想办法拿到公钥&lt;/p&gt;
+&lt;p&gt;找了一下，找到一个链接，&lt;a href="http://stackoverflow.com/questions/16694280/ssl-pinning-on-ios"&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;SecTrustRef&lt;/span&gt; &lt;span class="n"&gt;serverTrust&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;protectionSpace&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;SecCertificateRef&lt;/span&gt; &lt;span class="n"&gt;certificate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustGetCertificateAtIndex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;NSData&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CFBridgingRelease&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SecCertificateCopyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;certificate&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="n"&gt;NSLog&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;Remote Certificate Data Length: %ld&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="n"&gt;NSString&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSString&lt;/span&gt; &lt;span class="n"&gt;stringWithFormat&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;%@/cer.cer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DOCUMENTS_PATH&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="n"&gt;writeToFile&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="n"&gt;atomically&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样就将拿到的服务器的公钥写到本地了&lt;/p&gt;
+&lt;p&gt;然后将这个证书内置到工程里&lt;/p&gt;
+&lt;p&gt;依然在这个block里面做处理&lt;/p&gt;
+&lt;p&gt;只要比对这两个证书是否一致就好了&lt;/p&gt;
+&lt;p&gt;这次是可以了&lt;/p&gt;
+&lt;p&gt;但是。。。。。。。老板说，咱们的https证书8月份就过期了，到时候公钥就变了，需要更新版本才可以，有没有不内置公钥的办法&lt;/p&gt;
+&lt;p&gt;好吧，办法总比问题多，继续&lt;/p&gt;
+&lt;p&gt;----- 分割线 ------&lt;/p&gt;
+&lt;p&gt;尝试比对传过来的公钥的的CA&lt;/p&gt;
+&lt;p&gt;找了一下，找到一个链接，&lt;a href="https://gist.github.com/JacksonTian/5855751"&gt;这里&lt;/a&gt;中的&lt;code&gt;验证证书&lt;/code&gt;段落。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_sslCACertificatieData&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// 根据二进制内容提取证书信息&lt;/span&gt;
+    &lt;span class="n"&gt;SecCertificateRef&lt;/span&gt; &lt;span class="n"&gt;caRef&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecCertificateCreateWithData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFDataRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;_sslCACertificatieData&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="c1"&gt;// 形成钥匙链&lt;/span&gt;
+    &lt;span class="n"&gt;NSArray&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;chain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSArray&lt;/span&gt; &lt;span class="n"&gt;arrayWithObject&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="kt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;caRef&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
+
+    &lt;span class="n"&gt;CFTypeRef&lt;/span&gt; &lt;span class="n"&gt;caChainArrayRef&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CFBridgingRetain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chain&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// 取出服务器证书&lt;/span&gt;
+    &lt;span class="n"&gt;SecTrustRef&lt;/span&gt; &lt;span class="n"&gt;trust&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt; &lt;span class="n"&gt;protectionSpace&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+    &lt;span class="n"&gt;SecTrustResultType&lt;/span&gt; &lt;span class="n"&gt;trustResult&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// 设置为我们自有的CA证书钥匙连&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustSetAnchorCertificates&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;caChainArrayRef&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;err&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;noErr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// 用CA证书验证服务器证书&lt;/span&gt;
+        &lt;span class="n"&gt;err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustEvaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;trustResult&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="c1"&gt;// 检查结果&lt;/span&gt;
+    &lt;span class="kt"&gt;BOOL&lt;/span&gt; &lt;span class="n"&gt;trusted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;err&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;noErr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;trustResult&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;kSecTrustResultProceed&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trustResult&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;kSecTrustResultUnspecified&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trusted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接&lt;/span&gt;
+        &lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="n"&gt;credentialForTrust&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;useCredential&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="n"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这次试了一下，也可以防止别人使用Fiddler抓包&lt;/p&gt;
+&lt;p&gt;但是。。。。。老板说，是比内置公钥好多了，只要到时候不更换https证书的厂家的话，ca的有效期还是比较长的，能不能不内置CA，使用系统内置的CA来判断呢？&lt;/p&gt;
+&lt;p&gt;好吧，想着办法总比问题多，继续搞&lt;/p&gt;
+&lt;p&gt;加载CA的又一篇文章&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://robnapier.net/pinning-your-ssl-certs"&gt;Pinning Your SSL Certs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;----- 分割线 ------&lt;/p&gt;
+&lt;p&gt;那只能看看能不能读取出来公钥x509里面的信息来做判断了&lt;/p&gt;
+&lt;p&gt;找了下，说可以加openssl的框架来验证x509证书&lt;/p&gt;
+&lt;p&gt;看了几篇文档&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/15836484/how-to-verify-a-x509-certificate-in-c"&gt;How to verify a X509 certificate in C&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;暂时先用内嵌ca证书来解决对服务器x509证书的校验吧。&lt;/p&gt;</summary></entry><entry><title>Read From the programmer to project manager</title><link href="http://blog.chenghu.me/read-from-the-programmer-to-project-manager.html" rel="alternate"></link><updated>2015-03-14T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-03-14:read-from-the-programmer-to-project-manager.html</id><summary type="html">&lt;h1&gt;读《从程序员到项目经理》笔记&lt;/h1&gt;
 &lt;h2&gt;从程序员到项目经理（一）&lt;/h2&gt;
 &lt;p&gt;&lt;a href="从程序员到项目经理（一）"&gt;地址&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;

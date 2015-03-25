@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
+        <title>Add Shell Alias</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -23,28 +23,61 @@
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
-<h1>Archives for 小虎的博客</h1>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./add-shell-alias.html" rel="bookmark"
+           title="Permalink to Add Shell Alias">Add Shell Alias</a></h1>
+    </header>
 
-<dl>
-    <dt>Wed 25 March 2015</dt>
-    <dd><a href="./add-shell-alias.html">Add Shell Alias</a></dd>
-    <dt>Wed 18 March 2015</dt>
-    <dd><a href="./ios.html">iOS</a></dd>
-    <dt>Sat 14 March 2015</dt>
-    <dd><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></dd>
-    <dt>Fri 13 March 2015</dt>
-    <dd><a href="./fixed-linode-error.html">Fixed Linode Error</a></dd>
-    <dt>Fri 13 March 2015</dt>
-    <dd><a href="./kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></dd>
-    <dt>Wed 11 March 2015</dt>
-    <dd><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></dd>
-    <dt>Sun 15 February 2015</dt>
-    <dd><a href="./fixed-cocoapods-error.html">Fixed Cocoapods Error</a></dd>
-    <dt>Tue 21 October 2014</dt>
-    <dd><a href="./hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></dd>
-    <dt>Tue 09 September 2014</dt>
-    <dd><a href="./bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></dd>
-</dl>
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T00:00:00">
+                Published: Wed 25 March 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>tags: <a href="./tag/shell.html">Shell</a> <a href="./tag/alias.html">Alias</a> </p>
+</footer><!-- /.post-info -->      <h1>在Mac下使用Shell的Aliax</h1>
+<p>今天使用<code>pod update</code>更新所有框架，好慢好慢</p>
+<p>搜了一下，可以使用</p>
+<div class="highlight"><pre><span class="n">pod</span> <span class="n">install</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
+<span class="n">pod</span> <span class="n">update</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
+</pre></div>
+
+
+<p>来更新工程中的框架，而不更新pod库</p>
+<p>试了一下，好一些了</p>
+<p>但是命令好长，记不住</p>
+<p>想起来在linux中可以设置alias</p>
+<p>就找了一下，如何在Mac中设置alias，找了一篇<a href="http://blog.csdn.net/ithomer/article/details/33339071">文章</a></p>
+<p>试了一下，可以使用，记录如下</p>
+<p>1.编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code>
+ 2.插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行
+ 3.保存文件
+ 4.使用<code>source ~/.bash_profile</code>来让bash重新载入配置，就可以使用<code>podinstallfast</code>或<code>podupdatefast</code>来快速更新</p>
+<p>over</p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'add-shell-alias.html';
+        var disqus_url = './add-shell-alias.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
