@@ -50,10 +50,12 @@
 <p>想起来在linux中可以设置alias</p>
 <p>就找了一下，如何在Mac中设置alias，找了一篇<a href="http://blog.csdn.net/ithomer/article/details/33339071">文章</a></p>
 <p>试了一下，可以使用，记录如下</p>
-<p>1.编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code>
- 2.插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行
- 3.保存文件
- 4.使用<code>source ~/.bash_profile</code>来让bash重新载入配置，就可以使用<code>podinstallfast</code>或<code>podupdatefast</code>来快速更新</p>
+<ol>
+<li>编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code></li>
+<li>插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行</li>
+<li>保存文件</li>
+<li>使用<code>source ~/.bash_profile</code>来让bash重新载入配置，就可以使用<code>podinstallfast</code>或<code>podupdatefast</code>来快速更新</li>
+</ol>
 <p>over</p><p>There are <a href="../add-shell-alias.html#disqus_thread">comments</a>.</p>                </article>
 <p class="paginator">
     Page 1 / 1

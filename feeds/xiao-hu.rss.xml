@@ -13,10 +13,12 @@
 &lt;p&gt;想起来在linux中可以设置alias&lt;/p&gt;
 &lt;p&gt;就找了一下，如何在Mac中设置alias，找了一篇&lt;a href="http://blog.csdn.net/ithomer/article/details/33339071"&gt;文章&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;试了一下，可以使用，记录如下&lt;/p&gt;
-&lt;p&gt;1.编辑&lt;code&gt;~/.bash_profile&lt;/code&gt;这个文件&lt;code&gt;vim ~/.bash_profile&lt;/code&gt;
- 2.插入&lt;code&gt;alias podinstallfast="pod install --verbose --no-repo-update"&lt;/code&gt;和&lt;code&gt;alias podupdatefast="pod update --verbose --no-repo-update"&lt;/code&gt;这两行
- 3.保存文件
- 4.使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编辑&lt;code&gt;~/.bash_profile&lt;/code&gt;这个文件&lt;code&gt;vim ~/.bash_profile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;插入&lt;code&gt;alias podinstallfast="pod install --verbose --no-repo-update"&lt;/code&gt;和&lt;code&gt;alias podupdatefast="pod update --verbose --no-repo-update"&lt;/code&gt;这两行&lt;/li&gt;
+&lt;li&gt;保存文件&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</guid><category>Shell</category><category>Alias</category></item><item><title>iOS</title><link>http://blog.chenghu.me/ios.html</link><description>&lt;p&gt;Connect Anti Fiddler Captuer
 Tags: iOS,Https,SSL,Fiddler,Capture
 Category: Tech&lt;/p&gt;
