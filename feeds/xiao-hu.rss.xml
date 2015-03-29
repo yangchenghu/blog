@@ -19,7 +19,8 @@
 &lt;li&gt;保存文件&lt;/li&gt;
 &lt;li&gt;使用&lt;code&gt;source ~/.bash_profile&lt;/code&gt;来让bash重新载入配置，就可以使用&lt;code&gt;podinstallfast&lt;/code&gt;或&lt;code&gt;podupdatefast&lt;/code&gt;来快速更新&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</guid><category>Shell</category><category>Alias</category></item><item><title>iOS Anti Fildder Capture Https Data</title><link>http://blog.chenghu.me/ios-anti-fildder-capture-https-data.html</link><description>&lt;p&gt;Connect Anti Fiddler Captuer
+&lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias.html</guid><category>Shell</category><category>Alias</category></item><item><title>Add Shell Alias on mac</title><link>http://blog.chenghu.me/add-shell-alias-on-mac.html</link><description>&lt;h1&gt;在Mac下使用Shell的Aliax&lt;/h1&gt;
+&lt;p&gt;over&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 25 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-25:add-shell-alias-on-mac.html</guid><category>Shell</category><category>Alias</category></item><item><title>iOS Anti Fildder Capture Https Data</title><link>http://blog.chenghu.me/ios-anti-fildder-capture-https-data.html</link><description>&lt;p&gt;Connect Anti Fiddler Captuer
 Tags: iOS,Https,SSL,Fiddler,Capture
 Category: Tech&lt;/p&gt;
 &lt;h1&gt;iOS https内容防止fiddler抓包&lt;/h1&gt;
