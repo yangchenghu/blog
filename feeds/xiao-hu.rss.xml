@@ -143,6 +143,10 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;找了下，说可以加openssl的框架来验证x509证书&lt;/p&gt;
 &lt;p&gt;看了几篇文档&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/15836484/how-to-verify-a-x509-certificate-in-c"&gt;How to verify a X509 certificate in C&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/8850524/seccertificateref-how-to-get-the-certificate-information"&gt;SecCertificateRef: How to get the certificate information?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/15438257/ios-verifying-a-file-with-a-certificate-and-signature-public-key-is-wrong-ve"&gt;iOS: Verifying a File With a Certificate and Signature - Public Key is Wrong, Verification Fails&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/6402442/iphone-development-verify-the-certificate-information-from-a-https-url"&gt;iphone development: verify the certificate information from a https url&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/wangsifu2009/article/details/6723267"&gt;Openssl 对x509证书有效性进行验证&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;暂时先用内嵌ca证书来解决对服务器x509证书的校验吧。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-18:ios-anti-fildder-capture-https-data.html</guid></item><item><title>Read From the programmer to project manager</title><link>http://blog.chenghu.me/read-from-the-programmer-to-project-manager.html</link><description>&lt;h1&gt;读《从程序员到项目经理》笔记&lt;/h1&gt;
 &lt;h2&gt;从程序员到项目经理（一）&lt;/h2&gt;
 &lt;p&gt;&lt;a href="从程序员到项目经理（一）"&gt;地址&lt;/a&gt;&lt;/p&gt;
