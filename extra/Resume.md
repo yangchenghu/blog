@@ -13,12 +13,12 @@
 
  - 杨成虎/男/1986 
  - 本科：山东聊城大学 / 学士学位
- - 工作年限：4.5年iOS开发经验
+ - 工作年限：5年iOS开发经验
  - 个人博客：[http://blog.chenghu.me/](http://blog.chenghu.me)
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 
  - 期望职位：iOS高级程序员，应用架构师
- - 期望薪资：税前月薪23-25k，特别喜欢的公司可面议
+ - 期望薪资：税前月薪25k，特别喜欢的公司可面议
  - 期望城市：北京
 
 ---
@@ -26,6 +26,10 @@
 # 工作经历
 
 ## Sina公司 （ 2013年5月 ~ 今 ）
+
+## 新浪内部移动办公系统
+
+
 
 ### 新浪微盾  
 [地址](https://itunes.apple.com/cn/app/xin-lang-wei-dun/id535411936?l=en&mt=8)
@@ -77,7 +81,7 @@
 - 常去的网站：Code4App，CocoaChina，github
 - 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)
 
-- 其他技能：iOS5-8 适配，内存管理，程序优化
+- 其他技能：iOS5-9 适配，内存管理，程序优化
 
 ## 附加技能
 
@@ -101,9 +105,9 @@
 - Python
 - NodeJS
 - Shell
-- iOS 逆向
+- iOS 逆向及安全分析
 - OpenWRT
-
+- XMPP
 
 ---
 
