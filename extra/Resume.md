@@ -80,9 +80,9 @@
 - 版本管理：Svn/Git
 - 云和开放平台：SAE/AVOScloud/Parse/微博开放平台/微信开放平台
 - 常去的网站：Code4App，CocoaChina，github
-- 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)
+- 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/), [里脊串的开发随笔](http://adad184.com/)
 
-- 其他技能：iOS5-9 适配，内存管理，程序优化
+- 其他技能：iOS6-9 适配，内存管理，程序优化
 
 ## 附加技能
 
@@ -106,10 +106,10 @@
 
 - Python
 - Shell
+- Sketch
 - iOS 逆向及安全分析
 - OpenWRT
 - docker
-- 科学上网
 
 
 ---
