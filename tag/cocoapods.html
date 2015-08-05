@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/animation.html">Animation</a></li>
+                    <li><a href="../pages/basic.html">Basic</a></li>
                     <li><a href="../pages/course.html">Course</a></li>
                     <li><a href="../pages/extra.html">Extra</a></li>
                     <li><a href="../pages/favorites.html">Favorites</a></li>
@@ -29,41 +31,38 @@
                 <article>
                     <h1 class="entry-title"><a href="../fixed-cocoapods-error.html">Fixed Cocoapods Error</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2015-02-15T00:00:00">
-                Published: Sun 15 February 2015
+        <abbr class="published" title="2015-02-15T00:00:00+08:00">
+                Published: 日 15 二月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="../category/tech.html">Tech</a>. </p>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/cocoapods.html">Cocoapods</a> <a href="../tag/error.html">Error</a> </p>
 </footer><!-- /.post-info --><h1>修复Cocoapods error</h1>
 <p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
-<div class="highlight"><pre><span class="n">Update</span> <span class="n">all</span> <span class="n">pods</span>
-<span class="n">Analyzing</span> <span class="n">dependencies</span>
-<span class="p">[</span><span class="o">!</span><span class="p">]</span> <span class="n">There</span> <span class="n">was</span> <span class="n">an</span> <span class="n">error</span> <span class="n">reading</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">xxxxx</span><span class="o">/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">CocoaPods</span><span class="o">-</span><span class="n">version</span><span class="p">.</span><span class="n">yml</span><span class="err">&#39;</span><span class="p">.</span>
-<span class="n">Please</span> <span class="n">consult</span> <span class="n">http</span><span class="o">:</span><span class="c1">//blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.</span>
+<div class="highlight"><pre>Update all pods
+Analyzing dependencies
+[!] There was an error reading &#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&#39;.
+Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
 </pre></div>
 
 
 <p>找了好多方法，也试了好多
 终于找到了原因
 记录一下</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="o">~/</span><span class="p">.</span><span class="n">cocoapods</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">master</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">cocoapods</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">uninstall</span> <span class="n">psych</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">psych</span> <span class="o">-</span><span class="n">v</span> <span class="mf">2.0.0</span>
-<span class="n">sudo</span> <span class="n">gem</span> <span class="n">instal</span> <span class="n">cocoapods</span>
-<span class="n">pod</span> <span class="n">setup</span>
+<div class="highlight"><pre>sudo rm -fr ~/.cocoapods/repos/master
+sudo gem uninstall cocoapods
+sudo gem update
+sudo gem uninstall psych
+sudo gem install psych -v 2.0.0
+sudo gem instal cocoapods
+pod setup
 </pre></div>
 
 
 <p>就ok了</p><p>There are <a href="../fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </article>
-<p class="paginator">
-    Page 1 / 1
-</p>
             </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -120,7 +119,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -129,7 +128,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

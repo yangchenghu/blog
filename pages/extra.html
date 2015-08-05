@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/animation.html">Animation</a></li>
+                    <li><a href="../pages/basic.html">Basic</a></li>
                     <li><a href="../pages/course.html">Course</a></li>
                     <li class="active"><a href="../pages/extra.html">Extra</a></li>
                     <li><a href="../pages/favorites.html">Favorites</a></li>
@@ -29,8 +31,55 @@
     
     <p><br></p>
 <h1>课外读物</h1>
+<h2>docker</h2>
+<p><a href="http://tech.uc.cn/?p=2726">利用Docker构建开发环境</a></p>
 <h2>安全</h2>
 <p><a href="http://blog.csdn.net/u011721501/article/details/44982111">浅谈PHP自动化代码审计技术</a></p>
+<p><a href="http://www.jianshu.com/p/97b9dc47b88c">服务器被黑给我上了一课</a></p>
+<h2>网络</h2>
+<p><a href="http://www.qianduan.net/a-simple-performance-comparison-of-https-spdy-and-http2/">HTTPS, SPDY和 HTTP/2性能的简单对比</a></p>
+<p><a href="http://www.infoq.com/cn/articles/how-ctrip-improves-app-networking-performance">携程App的网络性能优化实践</a></p>
+<h2>book</h2>
+<p><a href="https://www.gitbook.com/book/aaaaaashu/mac-dev-setup/details">Mac 开发配置手册</a></p>
+<p><a href="https://www.gitbook.com/book/zsisme/ios-/details">ios核心动画高级技巧</a></p>
+<p><a href="http://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html">GitHub秘籍</a></p>
+<h2>其他</h2>
+<p><a href="http://www.imgeek.org/?/article/63">干货：Nginx/LVS/HAProxy 负载均衡软件的优缺点详解</a></p>
+<p><a href="http://www.cocoachina.com/programmer/20150721/12424.html">从 Yo API 学开发者体验</a></p>
+<p><a href="http://blog.csdn.net/luoshengyang/article/details/46855395">Chromium多线程模型设计和实现分析</a></p>
+<p><a href="http://blog.csdn.net/luoshengyang/article/details/46598223">Chromium和WebKit的智能指针实现原理分析</a></p>
+<p><a href="http://blog.csdn.net/luoshengyang/article/details/46747797">Chromium多线程通信的Closure机制分析</a></p>
+<h2>新鲜</h2>
+<p><a href="http://jsonapi.org.cn/">用 JSON 构建 API 的标准指南</a></p>
+<p><br></p>
+<h2>工具</h2>
+<p><a href="http://blog.csdn.net/wildfireli/article/details/19829479"> Charles(最强大的http调试工具)详细教程</a></p>
+<p><a href="http://blogread.cn/it/article/6413">使用xctool自动打包，测试xcode项目</a></p>
+<hr />
+<p><br></p>
+<h2>互联网</h2>
+<hr />
+<p><a href="http://www.huxiu.com/article/42118/1.html">让开锁师傅告诉你什么是互联网思维和O2O！</a></p>
+<p><a href="http://www.cocoachina.com/design/20140929/9794.html">如何抓住痛点做出让用户尖叫的产品</a></p>
+<p><br></p>
+<h2>职场</h2>
+<p><a href="http://get.jobdeer.com/744.get">如何写好技术简历 —— 实例、模板及工具</a></p>
+<p><a href="http://www.lieyunwang.com/archives/65749">码农的秘密：当“夜猫子”能更好完成工作</a></p>
+<p><a href="http://blog.csdn.net/leezy_2000/article/details/29407747">程序员生存定律</a></p>
+<p><a href="http://www.cocoachina.com/programmer/20140915/9626.html">子龙山人：我从Cocos2d-x团队里学到的</a></p>
+<p><a href="http://www.cocoachina.com/ios/20150120/10946.html">iOS开发者如何提高自己的水平？</a></p>
+<p><br></p>
+<h2>创业</h2>
+<p><a href="http://www.cocoachina.com/programmer/20141026/10044.html">我想创业，但这之前我应该去 Google、Facebook 这种大公司过过水吗？</a></p>
+<p><br></p>
+<h2>管理</h2>
+<hr />
+<p><a href="http://www.cocoachina.com/programmer/20140901/9497.html">如何从技术型创始人转型成企业领导人？</a></p>
+<p><a href="http://chuang.pro/archives/8769">技术创始人如何挑选非技术合伙人？</a></p>
+<p><br></p>
+<h2>!技术</h2>
+<p><a href="http://www.jianshu.com/p/7b7966b21bc6">你爱摄影就要想着怎么用摄影来为你挣钱</a></p>
+<p><br></p>
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -87,7 +136,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -96,7 +145,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

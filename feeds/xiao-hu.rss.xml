@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 25 Mar 2015 00:00:00 +0800</lastBuildDate><item><title>Add Shell Alias</title><link>http://blog.chenghu.me/add-shell-alias.html</link><description>&lt;h1&gt;在Mac下使用Shell的Aliax&lt;/h1&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 26 Apr 2015 00:00:00 +0800</lastBuildDate><item><title>Objective-C Selector Methods</title><link>http://blog.chenghu.me/objective-c-selector-methods.html</link><description>&lt;h1&gt;在Objective-C中对Selector的操作&lt;/h1&gt;
+&lt;p&gt;今天调试程序中的一个bug，iOS6版本系统中使用&lt;code&gt;NSUserDefaults&lt;/code&gt;类的&lt;code&gt;initWithSuiteName&lt;/code&gt;方法会crash&lt;/p&gt;
+&lt;p&gt;想起来可以判断&lt;code&gt;NSUserDefaults&lt;/code&gt;是否响应&lt;code&gt;initWithSuiteName&lt;/code&gt;这个方法来不同调用。&lt;/p&gt;
+&lt;p&gt;使用了&lt;code&gt;respondsToSelector&lt;/code&gt;这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了&lt;/p&gt;
+&lt;p&gt;好吧，那就把关于Selector的所有的方法都整理一下，以免以后再使用错误了。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;+(BOOL)respondsToSelector:(SEL)aSelector;&lt;/p&gt;
+&lt;p&gt;判断该类是否响应类方法。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="bp"&gt;NSUserDefaults&lt;/span&gt; &lt;span class="nl"&gt;respondsToSelector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;@selector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;standardUserDefaults&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;//true&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;-(BOOL)respondsToSelector:(SEL)aSelector;&lt;/p&gt;
+&lt;p&gt;判断实例是否响应该方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="bp"&gt;NSUserDefaults&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;userDefault&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSUserDefaults&lt;/span&gt; &lt;span class="n"&gt;standardUserDefaults&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;userDefault&lt;/span&gt; &lt;span class="nl"&gt;respondsToSelector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;@selector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nl"&gt;objectForKey&lt;/span&gt;&lt;span class="p"&gt;:)]){&lt;/span&gt;
+    &lt;span class="c1"&gt;//true&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;+(BOOL)instancesRespondToSelector:(SEL)aSelector;&lt;/p&gt;
+&lt;p&gt;判断该类的实例是否响应该方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="bp"&gt;NSUserDefaults&lt;/span&gt; &lt;span class="nl"&gt;instancesRespondToSelector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;@selector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nl"&gt;initWithSuiteName&lt;/span&gt;&lt;span class="p"&gt;:)])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;//true&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;+(IMP)instanceMethodForSelector:(SEL)aSelector&lt;/p&gt;
+&lt;p&gt;获取该类的实例方法的IMP实现的地址&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;IMP&lt;/span&gt; &lt;span class="n"&gt;kIMPForUserDefault&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSUserDefaults&lt;/span&gt; &lt;span class="nl"&gt;instanceMethodForSelector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;@selector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nl"&gt;initWithUser&lt;/span&gt;&lt;span class="p"&gt;:)];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;+(BOOL)resolveInstanceMethod:(SEL)aSelector&lt;/p&gt;
+&lt;hr /&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sun, 26 Apr 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-04-26:objective-c-selector-methods.html</guid><category>Objective-C</category><category>Selector</category></item><item><title>Add Shell Alias</title><link>http://blog.chenghu.me/add-shell-alias.html</link><description>&lt;h1&gt;在Mac下使用Shell的Aliax&lt;/h1&gt;
 &lt;p&gt;今天使用&lt;code&gt;pod update&lt;/code&gt;更新所有框架，好慢好慢&lt;/p&gt;
 &lt;p&gt;搜了一下，可以使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;
-&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;verbose&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pod install --verbose --no-repo-update
+pod update --verbose --no-repo-update
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -55,7 +96,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;span class="n"&gt;SecTrustResultType&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="c1"&gt;//注意：这里将之前导入的证书设置成下面验证的Trust Object的anchor certificate&lt;/span&gt;
-&lt;span class="n"&gt;SecTrustSetAnchorCertificates&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFArrayRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;trustedCertificates&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;SecTrustSetAnchorCertificates&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFArrayRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;trustedCertificates&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 &lt;span class="c1"&gt;//2)SecTrustEvaluate会查找前面SecTrustSetAnchorCertificates设置的证书或者系统默认提供的证书，对trust进行验证&lt;/span&gt;
 &lt;span class="n"&gt;OSStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustEvaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -64,13 +105,13 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
     &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;kSecTrustResultUnspecified&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
     &lt;span class="c1"&gt;//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接&lt;/span&gt;
-    &lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="n"&gt;credentialForTrust&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;useCredential&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="n"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="bp"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSURLCredential&lt;/span&gt; &lt;span class="nl"&gt;credentialForTrust&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="nl"&gt;useCredential&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="nl"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 
 &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 
     &lt;span class="c1"&gt;//5)验证失败，取消这次验证流程&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="nl"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -83,10 +124,10 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;找了一下，找到一个链接，&lt;a href="http://stackoverflow.com/questions/16694280/ssl-pinning-on-ios"&gt;这里&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;SecTrustRef&lt;/span&gt; &lt;span class="n"&gt;serverTrust&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;protectionSpace&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;SecCertificateRef&lt;/span&gt; &lt;span class="n"&gt;certificate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecTrustGetCertificateAtIndex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;serverTrust&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-    &lt;span class="n"&gt;NSData&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CFBridgingRelease&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SecCertificateCopyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;certificate&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="bp"&gt;NSData&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CFBridgingRelease&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SecCertificateCopyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;certificate&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
     &lt;span class="n"&gt;NSLog&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;Remote Certificate Data Length: %ld&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
-    &lt;span class="n"&gt;NSString&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSString&lt;/span&gt; &lt;span class="n"&gt;stringWithFormat&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;%@/cer.cer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DOCUMENTS_PATH&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="n"&gt;writeToFile&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="n"&gt;atomically&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="bp"&gt;NSString&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSString&lt;/span&gt; &lt;span class="nl"&gt;stringWithFormat&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;%@/cer.cer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DOCUMENTS_PATH&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;remoteCertificateData&lt;/span&gt; &lt;span class="nl"&gt;writeToFile&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;strPath&lt;/span&gt; &lt;span class="nl"&gt;atomically&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -102,9 +143,9 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;找了一下，找到一个链接，&lt;a href="https://gist.github.com/JacksonTian/5855751"&gt;这里&lt;/a&gt;中的&lt;code&gt;验证证书&lt;/code&gt;段落。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_sslCACertificatieData&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c1"&gt;// 根据二进制内容提取证书信息&lt;/span&gt;
-    &lt;span class="n"&gt;SecCertificateRef&lt;/span&gt; &lt;span class="n"&gt;caRef&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecCertificateCreateWithData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFDataRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;_sslCACertificatieData&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;SecCertificateRef&lt;/span&gt; &lt;span class="n"&gt;caRef&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SecCertificateCreateWithData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;__bridge&lt;/span&gt; &lt;span class="n"&gt;CFDataRef&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;_sslCACertificatieData&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="c1"&gt;// 形成钥匙链&lt;/span&gt;
-    &lt;span class="n"&gt;NSArray&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;chain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSArray&lt;/span&gt; &lt;span class="n"&gt;arrayWithObject&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__bridge&lt;/span&gt; &lt;span class="kt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;caRef&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
+    &lt;span class="bp"&gt;NSArray&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;chain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSArray&lt;/span&gt; &lt;span class="nl"&gt;arrayWithObject&lt;/span&gt;&lt;span class="p"&gt;:(&lt;/span&gt;&lt;span class="k"&gt;__bridge&lt;/span&gt; &lt;span class="kt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;caRef&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
 
     &lt;span class="n"&gt;CFTypeRef&lt;/span&gt; &lt;span class="n"&gt;caChainArrayRef&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CFBridgingRetain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chain&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
@@ -123,12 +164,12 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trusted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="c1"&gt;//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接&lt;/span&gt;
-        &lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;NSURLCredential&lt;/span&gt; &lt;span class="n"&gt;credentialForTrust&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;useCredential&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="n"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="bp"&gt;NSURLCredential&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSURLCredential&lt;/span&gt; &lt;span class="nl"&gt;credentialForTrust&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;trust&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="nl"&gt;useCredential&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;cred&lt;/span&gt; &lt;span class="nl"&gt;forAuthenticationChallenge&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;
     &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="n"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sender&lt;/span&gt; &lt;span class="nl"&gt;cancelAuthenticationChallenge&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -240,8 +281,8 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;刚好遇到一个10年的帖子，也是用&lt;code&gt;Finnix&lt;/code&gt;这个系统再linode中恢复数据，&lt;a href="http://www.chinaz.com/web/2010/1112/142756.shtml"&gt;帖子&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;看了下，大体了解了，原来这个&lt;code&gt;Finnix&lt;/code&gt;系统，就想Win下的PE系统，可以直接访问硬盘的文件，但是，需要先挂载硬盘&lt;/p&gt;
 &lt;p&gt;那就好说了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linode&lt;/span&gt;
-&lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xvda&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;linode&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;mkdir /mnt/linode
+mount /dev/xvda /mnt/linode
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -251,7 +292,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;＝。＝&lt;/p&gt;
 &lt;p&gt;原来Input链全部&lt;code&gt;DROP&lt;/code&gt;了&lt;/p&gt;
 &lt;p&gt;改改改&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;iptables&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;INPUT&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="n"&gt;ACCEPT&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;iptables -A INPUT -j ACCEPT
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -272,21 +313,21 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;最讨厌其他程序抢占系统的快捷键，而且Mac本身的截图就很好用了&lt;/p&gt;
 &lt;p&gt;准备搞掉Mac QQ的截图程序。&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;Activity Monitor&lt;/code&gt;中盲搜了一下&lt;code&gt;Capture&lt;/code&gt;，果然发现两个进程&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ScreenCaptureEIM&lt;/span&gt;
-&lt;span class="n"&gt;Image&lt;/span&gt; &lt;span class="n"&gt;Capture&lt;/span&gt; &lt;span class="n"&gt;Extension&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ScreenCaptureEIM
+Image Capture Extension
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;之前安装企业QQ的时候记得就叫EIM QQ&lt;/p&gt;
 &lt;p&gt;好吧，那估计就是那个&lt;code&gt;ScreenCaptureEIM&lt;/code&gt;进程了，果断&lt;code&gt;kill&lt;/code&gt;掉，居然又启动了&lt;/p&gt;
 &lt;p&gt;好吧，看来是加载了后台自启动，看一下&lt;code&gt;launchctl list&lt;/code&gt;，果然有&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tencent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ScreenCaptureEIM&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;com.tencent.ScreenCaptureEIM
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;先关掉自启动吧&lt;code&gt;launchctl stop com.tencent.ScreenCaptureEIM&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;然后在&lt;code&gt;Activity Monitor&lt;/code&gt;中看一下&lt;code&gt;ScreenCaptureEIM&lt;/code&gt;进程的信息，看到下面一行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Applications&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;EIM&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Contents&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Library&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;LoginItems&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ScreenCaptureEIM&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Contents&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MacOS&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ScreenCaptureEIM&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/Applications/EIM.app/Contents/Library/LoginItems/ScreenCaptureEIM.app/Contents/MacOS/ScreenCaptureEIM
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -302,23 +343,23 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;设置&lt;code&gt;anon-access = none&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;然后重启SVN Server就好了&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 11 Mar 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-03-11:fixed-svn-did-not-show-histoy-error.html</guid><category>SVN</category><category>Error</category></item><item><title>Fixed Cocoapods Error</title><link>http://blog.chenghu.me/fixed-cocoapods-error.html</link><description>&lt;h1&gt;修复Cocoapods error&lt;/h1&gt;
 &lt;p&gt;今天使用&lt;code&gt;pod update&lt;/code&gt;更新所有框架，结果提示&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Update&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;pods&lt;/span&gt;
-&lt;span class="n"&gt;Analyzing&lt;/span&gt; &lt;span class="n"&gt;dependencies&lt;/span&gt;
-&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;There&lt;/span&gt; &lt;span class="n"&gt;was&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="n"&gt;reading&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xxxxx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cocoapods&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;repos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;CocoaPods&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;consult&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Update all pods
+Analyzing dependencies
+[!] There was an error reading &amp;#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&amp;#39;.
+Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;找了好多方法，也试了好多
 终于找到了原因
 记录一下&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fr&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cocoapods&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;repos&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;cocoapods&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;uninstall&lt;/span&gt; &lt;span class="n"&gt;psych&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;psych&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="mf"&gt;2.0.0&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="n"&gt;instal&lt;/span&gt; &lt;span class="n"&gt;cocoapods&lt;/span&gt;
-&lt;span class="n"&gt;pod&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo rm -fr ~/.cocoapods/repos/master
+sudo gem uninstall cocoapods
+sudo gem update
+sudo gem uninstall psych
+sudo gem install psych -v 2.0.0
+sudo gem instal cocoapods
+pod setup
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -334,39 +375,39 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;&lt;em&gt;这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;将博客里面的图片下载到本地&lt;/h2&gt;
 &lt;p&gt;这里使用了&lt;a href="http://zoomquiet.io/"&gt;zoomquiet&lt;/a&gt;大妈的一个脚本（修改了两个地方：添加了异常处理，由于有些图片的地址已经失效，容易读取失败；添加了网络超时处理）。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#coding=utf-8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#coding=utf-8&lt;/span&gt;
 
-&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;
-&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;codecs&lt;/span&gt;
-&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;codecs&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib2&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 打开RSS文件读取内容&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;codecs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;wordpress&lt;/span&gt;&lt;span class="mf"&gt;.2014&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;utf&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="c"&gt;# 打开RSS文件读取内容&lt;/span&gt;
+&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;codecs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;wordpress.2014.xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 用正则从RSS中提取所有图片链接地址&lt;/span&gt;
-&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;([\w\W]+?)&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;# 用正则从RSS中提取所有图片链接地址&lt;/span&gt;
+&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;src=&amp;quot;([\w\W]+?)&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 下载图片文件，并保存到img目录&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
-    &lt;span class="n"&gt;opener&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_opener&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;req&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;utf&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="nl"&gt;try:&lt;/span&gt;
-        &lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-        &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;newname&lt;/span&gt; 
-        &lt;span class="n"&gt;outfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;wb&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;outfile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;outfile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;except&lt;/span&gt; &lt;span class="n"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="n"&gt;download&lt;/span&gt; &lt;span class="n"&gt;fail&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
-    &lt;span class="nl"&gt;else:&lt;/span&gt;
-        &lt;span class="n"&gt;pass&lt;/span&gt;
-    &lt;span class="nl"&gt;finally:&lt;/span&gt;
-        &lt;span class="n"&gt;pass&lt;/span&gt;
+&lt;span class="c"&gt;# 下载图片文件，并保存到img目录&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
+    &lt;span class="n"&gt;opener&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_opener&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;req&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;newname&lt;/span&gt; 
+        &lt;span class="n"&gt;outfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;./img/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;outfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;outfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; image download fail&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+    &lt;span class="k"&gt;finally&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -374,42 +415,42 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;p&gt;参考&lt;a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html"&gt;七牛文档&lt;/a&gt;，配置&lt;code&gt;conf.json&lt;/code&gt;文件&lt;/p&gt;
 &lt;p&gt;然后执行 &lt;code&gt;qrsync /path/to/your-conf.json&lt;/code&gt;，会将图片上传到七牛&lt;/p&gt;
 &lt;h2&gt;替换xml中图片的url&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#coding=utf-8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#coding=utf-8&lt;/span&gt;
 
-&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 这里修改成自己的空间地址&lt;/span&gt;
+&lt;span class="c"&gt;# 这里修改成自己的空间地址&lt;/span&gt;
 &lt;span class="n"&gt;strbucketurl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;http://bucket.qiniudn.com/&amp;quot;&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 打开RSS文件读取内容&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;wordpress.2014.xml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="c"&gt;# 打开RSS文件读取内容&lt;/span&gt;
+&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;wordpress.2014.xml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 用正则从RSS中提取所有图片链接地址&lt;/span&gt;
-&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*?&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;.(&lt;/span&gt;&lt;span class="n"&gt;jpg&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;png&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;# 用正则从RSS中提取所有图片链接地址&lt;/span&gt;
+&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;(http:.*?\.(jpg|png))&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;
 
 &lt;span class="n"&gt;iCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
 
-&lt;span class="cp"&gt;# 替换所有url&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;arrlist&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="c"&gt;# 替换所有url&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;arrlist&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arrlist&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;newname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rfind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
     &lt;span class="n"&gt;newurl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;strbucketurl&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;newname&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;newurl&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;------------&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;newurl&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;------------&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;iCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;iCount&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-    &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;newurl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;newurl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;:%&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;iCount&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;change url count:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;iCount&lt;/span&gt;
 
-&lt;span class="n"&gt;outputfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;new2013&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;outputfile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;outputfile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;outputfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;new2013.xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;outputfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;outputfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -419,21 +460,21 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;安装&lt;code&gt;BeautifulSoup4&lt;/code&gt;和 &lt;code&gt;lxml&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup4&lt;/span&gt;  &lt;span class="n"&gt;lxml&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;pip install BeautifulSoup4  lxml
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装 &lt;code&gt;pandoc&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;brew&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pandoc&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;brew install pandoc
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;进入blog目录，将xml文件装换成markdown格式：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;wpfile&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;new2012&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;wpfile&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;new2012&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

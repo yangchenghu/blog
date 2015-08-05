@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/animation.html">Animation</a></li>
+                    <li><a href="./pages/basic.html">Basic</a></li>
                     <li><a href="./pages/course.html">Course</a></li>
                     <li><a href="./pages/extra.html">Extra</a></li>
                     <li><a href="./pages/favorites.html">Favorites</a></li>
@@ -34,14 +36,14 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-03-13T00:00:00">
-                Published: Fri 13 March 2015
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/linode.html">Linode</a> <a href="./tag/error.html">Error</a> </p>
 </footer><!-- /.post-info -->      <h1>修复Linode error</h1>
 <p>今天ss老是报错误<code>ERROR: remote_recv_cb_recv: Connection reset by peer</code>，ssh上不去。</p>
@@ -61,8 +63,8 @@
 <p>刚好遇到一个10年的帖子，也是用<code>Finnix</code>这个系统再linode中恢复数据，<a href="http://www.chinaz.com/web/2010/1112/142756.shtml">帖子</a></p>
 <p>看了下，大体了解了，原来这个<code>Finnix</code>系统，就想Win下的PE系统，可以直接访问硬盘的文件，但是，需要先挂载硬盘</p>
 <p>那就好说了</p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">linode</span>
-<span class="n">mount</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">xvda</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">linode</span>
+<div class="highlight"><pre>mkdir /mnt/linode
+mount /dev/xvda /mnt/linode
 </pre></div>
 
 
@@ -72,7 +74,7 @@
 <p>＝。＝</p>
 <p>原来Input链全部<code>DROP</code>了</p>
 <p>改改改</p>
-<div class="highlight"><pre><span class="n">iptables</span> <span class="o">-</span><span class="n">A</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+<div class="highlight"><pre>iptables -A INPUT -j ACCEPT
 </pre></div>
 
 
@@ -161,7 +163,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -170,7 +172,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

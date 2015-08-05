@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/animation.html">Animation</a></li>
+                    <li><a href="../pages/basic.html">Basic</a></li>
                     <li><a href="../pages/course.html">Course</a></li>
                     <li><a href="../pages/extra.html">Extra</a></li>
                     <li><a href="../pages/favorites.html">Favorites</a></li>
@@ -29,20 +31,20 @@
                 <article>
                     <h1 class="entry-title"><a href="../add-shell-alias.html">Add Shell Alias</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2015-03-25T00:00:00">
-                Published: Wed 25 March 2015
+        <abbr class="published" title="2015-03-25T00:00:00+08:00">
+                Published: 三 25 三月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="../category/tech.html">Tech</a>. </p>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/shell.html">Shell</a> <a href="../tag/alias.html">Alias</a> </p>
 </footer><!-- /.post-info --><h1>在Mac下使用Shell的Aliax</h1>
 <p>今天使用<code>pod update</code>更新所有框架，好慢好慢</p>
 <p>搜了一下，可以使用</p>
-<div class="highlight"><pre><span class="n">pod</span> <span class="n">install</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
-<span class="n">pod</span> <span class="n">update</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">update</span>
+<div class="highlight"><pre>pod install --verbose --no-repo-update
+pod update --verbose --no-repo-update
 </pre></div>
 
 
@@ -73,14 +75,14 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-03-25T00:00:00">
-                Published: Wed 25 March 2015
+        <abbr class="published" title="2015-03-25T00:00:00+08:00">
+                Published: 三 25 三月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="../category/tech.html">Tech</a>. </p>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/shell.html">Shell</a> <a href="../tag/alias.html">Alias</a> </p>
 </footer><!-- /.post-info -->                <h1>在Mac下使用Shell的Aliax</h1>
 <p>over</p>
@@ -88,9 +90,6 @@
 <p>There are <a href="../add-shell-alias-on-mac.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
                 </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -147,7 +146,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -156,7 +155,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

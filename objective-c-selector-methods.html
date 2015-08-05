@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Tags</title>
+        <title>Objective-C Selector Methods</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -26,31 +26,86 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
 <section id="content" class="body">
-    <h1>Tags for 小虎的博客</h1>
-    <ul>
-        <li><a href="./tag/alias.html">Alias</a> (2)</li>
-        <li><a href="./tag/capture.html">Capture</a> (1)</li>
-        <li><a href="./tag/cocoapods.html">Cocoapods</a> (1)</li>
-        <li><a href="./tag/error.html">Error</a> (3)</li>
-        <li><a href="./tag/hook.html">Hook</a> (1)</li>
-        <li><a href="./tag/linode.html">Linode</a> (1)</li>
-        <li><a href="./tag/mac.html">Mac</a> (2)</li>
-        <li><a href="./tag/objective-c.html">Objective-C</a> (1)</li>
-        <li><a href="./tag/pelican.html">Pelican</a> (1)</li>
-        <li><a href="./tag/pm.html">PM</a> (1)</li>
-        <li><a href="./tag/programmer.html">Programmer</a> (1)</li>
-        <li><a href="./tag/python.html">Python</a> (1)</li>
-        <li><a href="./tag/qq.html">QQ</a> (1)</li>
-        <li><a href="./tag/reveal.html">Reveal</a> (1)</li>
-        <li><a href="./tag/selector.html">Selector</a> (1)</li>
-        <li><a href="./tag/shell.html">Shell</a> (2)</li>
-        <li><a href="./tag/svn.html">SVN</a> (1)</li>
-        <li><a href="./tag/wordpress.html">WordPress</a> (1)</li>
-    </ul>
-</section>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./objective-c-selector-methods.html" rel="bookmark"
+           title="Permalink to Objective-C Selector Methods">Objective-C Selector Methods</a></h1>
+    </header>
 
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-26T00:00:00+08:00">
+                Published: 日 26 四月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/objective-c.html">Objective-C</a> <a href="./tag/selector.html">Selector</a> </p>
+</footer><!-- /.post-info -->      <h1>在Objective-C中对Selector的操作</h1>
+<p>今天调试程序中的一个bug，iOS6版本系统中使用<code>NSUserDefaults</code>类的<code>initWithSuiteName</code>方法会crash</p>
+<p>想起来可以判断<code>NSUserDefaults</code>是否响应<code>initWithSuiteName</code>这个方法来不同调用。</p>
+<p>使用了<code>respondsToSelector</code>这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了</p>
+<p>好吧，那就把关于Selector的所有的方法都整理一下，以免以后再使用错误了。</p>
+<hr />
+<p>+(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断该类是否响应类方法。</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">standardUserDefaults</span><span class="p">)])</span> <span class="p">{</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>-(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断实例是否响应该方法</p>
+<div class="highlight"><pre><span class="bp">NSUserDefaults</span> <span class="o">*</span> <span class="n">userDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
+<span class="k">if</span> <span class="p">([</span><span class="n">userDefault</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectForKey</span><span class="p">:)]){</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>+(BOOL)instancesRespondToSelector:(SEL)aSelector;</p>
+<p>判断该类的实例是否响应该方法</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">instancesRespondToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithSuiteName</span><span class="p">:)])</span> <span class="p">{</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>+(IMP)instanceMethodForSelector:(SEL)aSelector</p>
+<p>获取该类的实例方法的IMP实现的地址</p>
+<div class="highlight"><pre><span class="kt">IMP</span> <span class="n">kIMPForUserDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="nl">instanceMethodForSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithUser</span><span class="p">:)];</span>
+</pre></div>
+
+
+<p>+(BOOL)resolveInstanceMethod:(SEL)aSelector</p>
+<hr />
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'objective-c-selector-methods.html';
+        var disqus_url = './objective-c-selector-methods.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

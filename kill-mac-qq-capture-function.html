@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/animation.html">Animation</a></li>
+                    <li><a href="./pages/basic.html">Basic</a></li>
                     <li><a href="./pages/course.html">Course</a></li>
                     <li><a href="./pages/extra.html">Extra</a></li>
                     <li><a href="./pages/favorites.html">Favorites</a></li>
@@ -34,14 +36,14 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-03-13T00:00:00">
-                Published: Fri 13 March 2015
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="./category/tech.html">Tech</a>. </p>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/mac.html">Mac</a> <a href="./tag/qq.html">QQ</a> <a href="./tag/capture.html">Capture</a> </p>
 </footer><!-- /.post-info -->      <h1>干掉Mac QQ的自动截图程序</h1>
 <p>今天安装了Mac的企业QQ</p>
@@ -50,21 +52,21 @@
 <p>最讨厌其他程序抢占系统的快捷键，而且Mac本身的截图就很好用了</p>
 <p>准备搞掉Mac QQ的截图程序。</p>
 <p>在<code>Activity Monitor</code>中盲搜了一下<code>Capture</code>，果然发现两个进程</p>
-<div class="highlight"><pre><span class="n">ScreenCaptureEIM</span>
-<span class="n">Image</span> <span class="n">Capture</span> <span class="n">Extension</span>
+<div class="highlight"><pre>ScreenCaptureEIM
+Image Capture Extension
 </pre></div>
 
 
 <p>之前安装企业QQ的时候记得就叫EIM QQ</p>
 <p>好吧，那估计就是那个<code>ScreenCaptureEIM</code>进程了，果断<code>kill</code>掉，居然又启动了</p>
 <p>好吧，看来是加载了后台自启动，看一下<code>launchctl list</code>，果然有</p>
-<div class="highlight"><pre><span class="n">com</span><span class="p">.</span><span class="n">tencent</span><span class="p">.</span><span class="n">ScreenCaptureEIM</span>
+<div class="highlight"><pre>com.tencent.ScreenCaptureEIM
 </pre></div>
 
 
 <p>先关掉自启动吧<code>launchctl stop com.tencent.ScreenCaptureEIM</code></p>
 <p>然后在<code>Activity Monitor</code>中看一下<code>ScreenCaptureEIM</code>进程的信息，看到下面一行</p>
-<div class="highlight"><pre><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">EIM</span><span class="p">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">LoginItems</span><span class="o">/</span><span class="n">ScreenCaptureEIM</span><span class="p">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">MacOS</span><span class="o">/</span><span class="n">ScreenCaptureEIM</span>
+<div class="highlight"><pre>/Applications/EIM.app/Contents/Library/LoginItems/ScreenCaptureEIM.app/Contents/MacOS/ScreenCaptureEIM
 </pre></div>
 
 
@@ -143,7 +145,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -152,7 +154,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

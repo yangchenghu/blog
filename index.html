@@ -15,11 +15,424 @@
                 <h1><a href="./">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
+                    <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/animation.html">Animation</a></li>
+                    <li><a href="./pages/basic.html">Basic</a></li>
+                    <li><a href="./pages/course.html">Course</a></li>
+                    <li><a href="./pages/extra.html">Extra</a></li>
+                    <li><a href="./pages/favorites.html">Favorites</a></li>
+                    <li><a href="./pages/read.html">Read</a></li>
+                    <li><a href="./pages/tools.html">Tools</a></li>
+                    <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<section id="content" class="body">
-<h2>Pages</h2>
-</section>
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-04-26T00:00:00+08:00">
+                Published: 日 26 四月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/objective-c.html">Objective-C</a> <a href="./tag/selector.html">Selector</a> </p>
+</footer><!-- /.post-info --><h1>在Objective-C中对Selector的操作</h1>
+<p>今天调试程序中的一个bug，iOS6版本系统中使用<code>NSUserDefaults</code>类的<code>initWithSuiteName</code>方法会crash</p>
+<p>想起来可以判断<code>NSUserDefaults</code>是否响应<code>initWithSuiteName</code>这个方法来不同调用。</p>
+<p>使用了<code>respondsToSelector</code>这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了</p>
+<p>好吧，那就把关于Selector的所有的方法都整理一下，以免以后再使用错误了。</p>
+<hr />
+<p>+(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断该类是否响应类方法。</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">standardUserDefaults</span><span class="p">)])</span> <span class="p">{</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>-(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断实例是否响应该方法</p>
+<div class="highlight"><pre><span class="bp">NSUserDefaults</span> <span class="o">*</span> <span class="n">userDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
+<span class="k">if</span> <span class="p">([</span><span class="n">userDefault</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectForKey</span><span class="p">:)]){</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>+(BOOL)instancesRespondToSelector:(SEL)aSelector;</p>
+<p>判断该类的实例是否响应该方法</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">instancesRespondToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithSuiteName</span><span class="p">:)])</span> <span class="p">{</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>+(IMP)instanceMethodForSelector:(SEL)aSelector</p>
+<p>获取该类的实例方法的IMP实现的地址</p>
+<div class="highlight"><pre><span class="kt">IMP</span> <span class="n">kIMPForUserDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="nl">instanceMethodForSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithUser</span><span class="p">:)];</span>
+</pre></div>
+
+
+<p>+(BOOL)resolveInstanceMethod:(SEL)aSelector</p>
+<hr /><p>There are <a href="./objective-c-selector-methods.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./add-shell-alias.html" rel="bookmark"
+                           title="Permalink to Add Shell Alias">Add Shell Alias</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T00:00:00+08:00">
+                Published: 三 25 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/shell.html">Shell</a> <a href="./tag/alias.html">Alias</a> </p>
+</footer><!-- /.post-info -->                <h1>在Mac下使用Shell的Aliax</h1>
+<p>今天使用<code>pod update</code>更新所有框架，好慢好慢</p>
+<p>搜了一下，可以使用</p>
+<div class="highlight"><pre>pod install --verbose --no-repo-update
+pod update --verbose --no-repo-update
+</pre></div>
+
+
+<p>来更新工程中的框架，而不更新pod库</p>
+<p>试了一下，好一些了</p>
+<p>但是命令好长，记不住</p>
+<p>想起来在linux中可以设置alias</p>
+<p>就找了一下，如何在Mac中设置alias，找了一篇<a href="http://blog.csdn.net/ithomer/article/details/33339071">文章</a></p>
+<p>试了一下，可以使用，记录如下</p>
+<ol>
+<li>编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code></li>
+<li>插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行 ...</li></ol>
+                <a class="readmore" href="./add-shell-alias.html">read more</a>
+<p>There are <a href="./add-shell-alias.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./add-shell-alias-on-mac.html" rel="bookmark"
+                           title="Permalink to Add Shell Alias on mac">Add Shell Alias on mac</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T00:00:00+08:00">
+                Published: 三 25 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/shell.html">Shell</a> <a href="./tag/alias.html">Alias</a> </p>
+</footer><!-- /.post-info -->                <h1>在Mac下使用Shell的Aliax</h1>
+<p>over</p>
+                <a class="readmore" href="./add-shell-alias-on-mac.html">read more</a>
+<p>There are <a href="./add-shell-alias-on-mac.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./ios-anti-fildder-capture-https-data.html" rel="bookmark"
+                           title="Permalink to iOS Anti Fildder Capture Https Data">iOS Anti Fildder Capture Https Data</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-18T00:00:00+08:00">
+                Published: 三 18 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/cat.html">cat</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Connect Anti Fiddler Captuer
+Tags: iOS,Https,SSL,Fiddler,Capture
+Category: Tech</p>
+<h1>iOS https内容防止fiddler抓包</h1>
+<p>昨天老板给提了一个bug</p>
+<p>“你的App虽然走了https来防止抓包，但是通过Fiddler还是可以进行中间人攻击，能不能解决？”</p>
+<p>老板的需求能不解决＝。＝，开玩笑了</p>
+<p>今天开始找资料</p>
+<p>我所有的网络请求都是走的AFNetworking，找到很多AFNetworking使用<code>AFSecurityPolicy</code>来进行证书验证的文档。</p>
+<p><a href="http://ceyang.me/an-quan-lian-jie/">HTTP请求的安全连接</a></p>
+<p>这篇文章主要讲导入证书，然后去比较</p>
+<p><a href="http://www.cnblogs.com/koujiaonuhan/p/ssl-pinning-with-afnetworking-2x.html">AFNetworking 2.x 的SSL身份认证</a></p>
+<p>这篇文章也是走的导入公钥进行比对</p>
+<p><a href="http://oncenote.com/2014/10/21/Security-1-HTTPS/">iOS安全系列之一：HTTPS</a></p>
+<p>这篇文章讲了验证的步骤
+ 1. 验证的信任对象
+ 2. 使用系统默认验证方式验证Trust Object
+ 3. 使用Trust Object生成一份凭证
+ 4. 本地导入证书，验证Trust Object与导入的证书是否匹配
+ 5. 根据结果去continue还是cancel ...</p>
+                <a class="readmore" href="./ios-anti-fildder-capture-https-data.html">read more</a>
+<p>There are <a href="./ios-anti-fildder-capture-https-data.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./read-from-the-programmer-to-project-manager.html" rel="bookmark"
+                           title="Permalink to Read From the programmer to project manager">Read From the programmer to project manager</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-14T00:00:00+08:00">
+                Published: 六 14 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/book.html">Book</a>.</p>
+<p>tags: <a href="./tag/programmer.html">Programmer</a> <a href="./tag/pm.html">PM</a> </p>
+</footer><!-- /.post-info -->                <h1>读《从程序员到项目经理》笔记</h1>
+<h2>从程序员到项目经理（一）</h2>
+<p><a href="从程序员到项目经理（一）">地址</a></p>
+<ol>
+<li>为什么要当项目经理 － 职业晋升的一条渠道</li>
+<li>促进心智成熟</li>
+<li>项目管理知识可以通用到其他方面</li>
+<li>项目管理难就难在项目经理要改变自己，要学会跟人打交道</li>
+</ol>
+<hr />
+<h2>从程序员到项目经理（二）</h2>
+<p><a href="http://www.cnblogs.com/watsonyin/archive/2012/09/16/2687873.html">地址</a></p>
+<ol>
+<li>为什么是我 － 应为我更优秀一点</li>
+<li>光环效应 － 当我们对一个人某个方面有好的印象时，我们会倾向于认为他的其他方面也是好的</li>
+<li>
+<p>角色转换 － 本质上是思维转换</p>
+</li>
+<li>
+<p>暂时的不胜任不要紧，关键是要有进步。如果一个项目下来，除了很疲惫，你没有感觉到自己有一些积极的变化，那你的危机也要来了。</p>
+</li>
+<li>
+<p>项目经理应该学会感恩。要成为优秀的项目经理，应该有好的心态，而感恩是一切好心态的基础。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>比较方面</th>
+<th></th>
+<th>技术思维</th>
+<th></th>
+<th>管理思维</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关注中心</td>
+<td>以过程为中心的思维</td>
+<td>关心每项任务本身，而不是整体目标。不重视计划，对任务缺乏控制。</td>
+<td>以目标为中心的思维</td>
+<td>以终为始。关注整体目标、实现的路线、影响目标实现的因素、各种事件对目标的影响，区分重点。</td>
+</tr>
+<tr>
+<td>事物结构</td>
+<td>局部思维 ...</td></tr></tbody></table>
+                <a class="readmore" href="./read-from-the-programmer-to-project-manager.html">read more</a>
+<p>There are <a href="./read-from-the-programmer-to-project-manager.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./fixed-linode-error.html" rel="bookmark"
+                           title="Permalink to Fixed Linode Error">Fixed Linode Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/linode.html">Linode</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复Linode error</h1>
+<p>今天ss老是报错误<code>ERROR: remote_recv_cb_recv: Connection reset by peer</code>，ssh上不去。</p>
+<p>就重启了一下Linode，结果就ssh过不去了，ss也没有好。悲剧了</p>
+<p>登录Linode后台，发现CPU老100%，不知道哪里的事情，关键ssh进不去，着急。</p>
+<p>没办法，只好写Ticket找技术人员帮忙。</p>
+<p>用蹩脚的英文描述了半天，对方实在不理解，总是几句标准客服回复，估计那边的技术还没上班，客服在扛着。</p>
+<p>看来只能自己动手了</p>
+<p>在<code>Dashboard</code>中查找有用的东西</p>
+<p>看到<code>Remote access</code>中发现了<code>Console Access</code>点击发现是一个web版的console</p>
+<p>看到我前两天搭建的<code>ocserv</code>在处理一个ca证书，然后就没有然后了，输入啥都不行</p>
+<p>看来是<code>ocserv</code>出了问题，没办法，再找找吧</p>
+<p>看到一个<code>Rescue</code>选项卡 ...</p>
+                <a class="readmore" href="./fixed-linode-error.html">read more</a>
+<p>There are <a href="./fixed-linode-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./kill-mac-qq-capture-function.html" rel="bookmark"
+                           title="Permalink to Kill Mac QQ Capture Function">Kill Mac QQ Capture Function</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/mac.html">Mac</a> <a href="./tag/qq.html">QQ</a> <a href="./tag/capture.html">Capture</a> </p>
+</footer><!-- /.post-info -->                <h1>干掉Mac QQ的自动截图程序</h1>
+<p>今天安装了Mac的企业QQ</p>
+<p>但在使用Mail的时候发现同时按<code>commond+control+a</code>进行归档邮件的时候</p>
+<p>居然弹出QQ的截图程序，烦躁</p>
+<p>最讨厌其他程序抢占系统的快捷键，而且Mac本身的截图就很好用了</p>
+<p>准备搞掉Mac QQ的截图程序。</p>
+<p>在<code>Activity Monitor</code>中盲搜了一下<code>Capture</code>，果然发现两个进程</p>
+<div class="highlight"><pre>ScreenCaptureEIM
+Image Capture Extension
+</pre></div>
+
+
+<p>之前安装企业QQ的时候记得就叫EIM QQ</p>
+<p>好吧，那估计就是那个<code>ScreenCaptureEIM</code>进程了，果断<code>kill</code>掉，居然又启动了</p>
+<p>好吧，看来是加载了后台自启动，看一下<code>launchctl list</code>，果然有</p>
+<div class="highlight"><pre>com.tencent.ScreenCaptureEIM
+</pre></div>
+
+
+<p>先关掉自启动吧<code>launchctl stop com.tencent.ScreenCaptureEIM</code></p>
+<p>然后在 ...</p>
+                <a class="readmore" href="./kill-mac-qq-capture-function.html">read more</a>
+<p>There are <a href="./kill-mac-qq-capture-function.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./fixed-svn-did-not-show-histoy-error.html" rel="bookmark"
+                           title="Permalink to Fixed SVN did not show histoy Error">Fixed SVN did not show histoy Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-11T00:00:00+08:00">
+                Published: 三 11 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复SVN 不显示Timeline的bug</h1>
+<p>之前在Linode上搭建了Svn server<br>
+但总是不能用客户端看到提交的Timeline<br>
+郁闷<br>
+今天决定搞掉这个bug<br></p>
+<p>查看<code>Revert to Revision</code>结果现实了 <code>Unreadable path encountered; access denied;</code>这个错误。</p>
+<p>google了一下这个bug，找到一篇文章，<a href="http://haitao.iteye.com/blog/1440066">原文在这里</a></p>
+<p>发现是Server的配置出了问题。</p>
+<p>ssh上去找到SVN的目录下的<code>conf/svnserve.conf</code></p>
+<p>设置<code>anon-access = none</code></p>
+<p>然后重启SVN Server就好了</p>
+                <a class="readmore" href="./fixed-svn-did-not-show-histoy-error.html">read more</a>
+<p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
+                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-02-15T00:00:00+08:00">
+                Published: 日 15 二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
+<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
+<div class="highlight"><pre>Update all pods
+Analyzing dependencies
+[!] There was an error reading &#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&#39;.
+Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
+</pre></div>
+
+
+<p>找了好多方法，也试了好多
+终于找到了原因
+记录一下</p>
+<div class="highlight"><pre>sudo rm -fr ~/.cocoapods/repos/master
+sudo gem uninstall cocoapods
+sudo gem ...</pre></div>
+                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
+<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./hook-reveal-regiest-alert.html" rel="bookmark"
+                           title="Permalink to Hook Reveal Regiest Alert">Hook Reveal Regiest Alert</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-10-21T00:00:00+08:00">
+                Published: 二 21 十月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/hook.html">Hook</a> <a href="./tag/mac.html">Mac</a> <a href="./tag/reveal.html">Reveal</a> </p>
+</footer><!-- /.post-info -->                <p>之前写了  <a href="http://www.yangch.info/?p=1230">“破解Reveal购买提示框”</a></p>
+<p>近期发现 Reveal 更新到了1.0.6版本</p>
+<p>感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。</p>
+<p>在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。</p>
+<p>后来想起来，theos也是用<code>runtime</code>来动态替换了方法。</p>
+<h2>创建工程</h2>
+<p>在Xcode创建工程，选择<code>Library</code>。</p>
+                <a class="readmore" href="./hook-reveal-regiest-alert.html">read more</a>
+<p>There are <a href="./hook-reveal-regiest-alert.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 2
+        <a href="./index2.html">&raquo;</a>
+</p>
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

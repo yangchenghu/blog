@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/animation.html">Animation</a></li>
+                    <li><a href="../pages/basic.html">Basic</a></li>
                     <li><a href="../pages/course.html">Course</a></li>
                     <li><a href="../pages/extra.html">Extra</a></li>
                     <li><a href="../pages/favorites.html">Favorites</a></li>
@@ -29,14 +31,14 @@
                 <article>
                     <h1 class="entry-title"><a href="../hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2014-10-21T00:00:00">
-                Published: Tue 21 October 2014
+        <abbr class="published" title="2014-10-21T00:00:00+08:00">
+                Published: 二 21 十月 2014
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="../category/tech.html">Tech</a>. </p>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/hook.html">Hook</a> <a href="../tag/mac.html">Mac</a> <a href="../tag/reveal.html">Reveal</a> </p>
 </footer><!-- /.post-info --><p>之前写了  <a href="http://www.yangch.info/?p=1230">“破解Reveal购买提示框”</a></p>
 <p>近期发现 Reveal 更新到了1.0.6版本</p>
@@ -45,9 +47,6 @@
 <p>后来想起来，theos也是用<code>runtime</code>来动态替换了方法。</p>
 <h2>创建工程</h2>
 <p>在Xcode创建工程，选择<code>Library</code>。</p><p>There are <a href="../hook-reveal-regiest-alert.html#disqus_thread">comments</a>.</p>                </article>
-<p class="paginator">
-    Page 1 / 1
-</p>
             </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -104,7 +103,7 @@
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -113,7 +112,7 @@
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>

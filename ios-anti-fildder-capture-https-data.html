@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -16,6 +16,8 @@
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
                     <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/animation.html">Animation</a></li>
+                    <li><a href="./pages/basic.html">Basic</a></li>
                     <li><a href="./pages/course.html">Course</a></li>
                     <li><a href="./pages/extra.html">Extra</a></li>
                     <li><a href="./pages/favorites.html">Favorites</a></li>
@@ -34,14 +36,14 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-03-18T00:00:00">
-                Published: Wed 18 March 2015
+        <abbr class="published" title="2015-03-18T00:00:00+08:00">
+                Published: 三 18 三月 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
-<p>In <a href="./category/cat.html">cat</a>. </p>
+<p>In <a href="./category/cat.html">cat</a>.</p>
 
 </footer><!-- /.post-info -->      <p>Connect Anti Fiddler Captuer
 Tags: iOS,Https,SSL,Fiddler,Capture
@@ -78,7 +80,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 <span class="n">SecTrustResultType</span> <span class="n">result</span><span class="p">;</span>
 
 <span class="c1">//注意：这里将之前导入的证书设置成下面验证的Trust Object的anchor certificate</span>
-<span class="n">SecTrustSetAnchorCertificates</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">CFArrayRef</span><span class="p">)</span><span class="n">self</span><span class="p">.</span><span class="n">trustedCertificates</span><span class="p">);</span>
+<span class="n">SecTrustSetAnchorCertificates</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="p">(</span><span class="k">__bridge</span> <span class="n">CFArrayRef</span><span class="p">)</span><span class="nb">self</span><span class="p">.</span><span class="n">trustedCertificates</span><span class="p">);</span>
 
 <span class="c1">//2)SecTrustEvaluate会查找前面SecTrustSetAnchorCertificates设置的证书或者系统默认提供的证书，对trust进行验证</span>
 <span class="n">OSStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="n">SecTrustEvaluate</span><span class="p">(</span><span class="n">trust</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
@@ -87,13 +89,13 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
     <span class="n">result</span> <span class="o">==</span> <span class="n">kSecTrustResultUnspecified</span><span class="p">))</span> <span class="p">{</span>
 
     <span class="c1">//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接</span>
-    <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLCredential</span> <span class="n">credentialForTrust</span><span class="o">:</span><span class="n">trust</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">useCredential</span><span class="o">:</span><span class="n">cred</span> <span class="n">forAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+    <span class="bp">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSURLCredential</span> <span class="nl">credentialForTrust</span><span class="p">:</span><span class="n">trust</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="nl">useCredential</span><span class="p">:</span><span class="n">cred</span> <span class="nl">forAuthenticationChallenge</span><span class="p">:</span><span class="n">challenge</span><span class="p">];</span>
 
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
     <span class="c1">//5)验证失败，取消这次验证流程</span>
-    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">cancelAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="nl">cancelAuthenticationChallenge</span><span class="p">:</span><span class="n">challenge</span><span class="p">];</span>
 </pre></div>
 
 
@@ -106,10 +108,10 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 <p>找了一下，找到一个链接，<a href="http://stackoverflow.com/questions/16694280/ssl-pinning-on-ios">这里</a></p>
 <div class="highlight"><pre>    <span class="n">SecTrustRef</span> <span class="n">serverTrust</span> <span class="o">=</span> <span class="n">challenge</span><span class="p">.</span><span class="n">protectionSpace</span><span class="p">.</span><span class="n">serverTrust</span><span class="p">;</span>
     <span class="n">SecCertificateRef</span> <span class="n">certificate</span> <span class="o">=</span> <span class="n">SecTrustGetCertificateAtIndex</span><span class="p">(</span><span class="n">serverTrust</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">NSData</span> <span class="o">*</span><span class="n">remoteCertificateData</span> <span class="o">=</span> <span class="n">CFBridgingRelease</span><span class="p">(</span><span class="n">SecCertificateCopyData</span><span class="p">(</span><span class="n">certificate</span><span class="p">));</span>
+    <span class="bp">NSData</span> <span class="o">*</span><span class="n">remoteCertificateData</span> <span class="o">=</span> <span class="n">CFBridgingRelease</span><span class="p">(</span><span class="n">SecCertificateCopyData</span><span class="p">(</span><span class="n">certificate</span><span class="p">));</span>
     <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Remote Certificate Data Length: %ld&quot;</span><span class="p">,[</span><span class="n">remoteCertificateData</span> <span class="n">length</span><span class="p">]);</span>
-    <span class="n">NSString</span> <span class="o">*</span> <span class="n">strPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%@/cer.cer&quot;</span><span class="p">,</span> <span class="n">DOCUMENTS_PATH</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">remoteCertificateData</span> <span class="n">writeToFile</span><span class="o">:</span><span class="n">strPath</span> <span class="n">atomically</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+    <span class="bp">NSString</span> <span class="o">*</span> <span class="n">strPath</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithFormat</span><span class="p">:</span><span class="s">@&quot;%@/cer.cer&quot;</span><span class="p">,</span> <span class="n">DOCUMENTS_PATH</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">remoteCertificateData</span> <span class="nl">writeToFile</span><span class="p">:</span><span class="n">strPath</span> <span class="nl">atomically</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
 </pre></div>
 
 
@@ -125,9 +127,9 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 <p>找了一下，找到一个链接，<a href="https://gist.github.com/JacksonTian/5855751">这里</a>中的<code>验证证书</code>段落。</p>
 <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="n">_sslCACertificatieData</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 根据二进制内容提取证书信息</span>
-    <span class="n">SecCertificateRef</span> <span class="n">caRef</span> <span class="o">=</span> <span class="n">SecCertificateCreateWithData</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">CFDataRef</span><span class="p">)</span><span class="n">_sslCACertificatieData</span><span class="p">);</span>
+    <span class="n">SecCertificateRef</span> <span class="n">caRef</span> <span class="o">=</span> <span class="n">SecCertificateCreateWithData</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="k">__bridge</span> <span class="n">CFDataRef</span><span class="p">)</span><span class="n">_sslCACertificatieData</span><span class="p">);</span>
     <span class="c1">// 形成钥匙链</span>
-    <span class="n">NSArray</span> <span class="o">*</span> <span class="n">chain</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObject</span><span class="o">:</span><span class="p">(</span><span class="n">__bridge</span> <span class="kt">id</span><span class="p">)(</span><span class="n">caRef</span><span class="p">)];</span>
+    <span class="bp">NSArray</span> <span class="o">*</span> <span class="n">chain</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSArray</span> <span class="nl">arrayWithObject</span><span class="p">:(</span><span class="k">__bridge</span> <span class="kt">id</span><span class="p">)(</span><span class="n">caRef</span><span class="p">)];</span>
 
     <span class="n">CFTypeRef</span> <span class="n">caChainArrayRef</span> <span class="o">=</span> <span class="n">CFBridgingRetain</span><span class="p">(</span><span class="n">chain</span><span class="p">);</span>
 
@@ -146,12 +148,12 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 
     <span class="k">if</span> <span class="p">(</span><span class="n">trusted</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">//3)验证成功，生成NSURLCredential凭证cred，告知challenge的sender使用这个凭证来继续连接</span>
-        <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLCredential</span> <span class="n">credentialForTrust</span><span class="o">:</span><span class="n">trust</span><span class="p">];</span>
-        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">useCredential</span><span class="o">:</span><span class="n">cred</span> <span class="n">forAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+        <span class="bp">NSURLCredential</span> <span class="o">*</span><span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSURLCredential</span> <span class="nl">credentialForTrust</span><span class="p">:</span><span class="n">trust</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="nl">useCredential</span><span class="p">:</span><span class="n">cred</span> <span class="nl">forAuthenticationChallenge</span><span class="p">:</span><span class="n">challenge</span><span class="p">];</span>
     <span class="p">}</span>
     <span class="k">else</span>
     <span class="p">{</span>
-        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="n">cancelAuthenticationChallenge</span><span class="o">:</span><span class="n">challenge</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">challenge</span><span class="p">.</span><span class="n">sender</span> <span class="nl">cancelAuthenticationChallenge</span><span class="p">:</span><span class="n">challenge</span><span class="p">];</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -245,7 +247,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
     _gaq.push(['_trackPageview']);
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
@@ -254,7 +256,7 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
     (function () {
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
