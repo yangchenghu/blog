@@ -29,6 +29,7 @@
 
 ## 新浪内部移动办公系统
 
+在此项目中设计了一套二维码扫描登录系统，推送登录系统，底层数据加密，原生程序与Html5页面交互，正在使用xmppframework搭建及时通讯系统。
 
 
 ### 新浪微盾  
@@ -99,17 +100,22 @@
 - builder
 - HomeBrew
 - CocoaPod
+- XMPPFramework
 
 ###业余
 
 - Python
-- NodeJS
 - Shell
 - iOS 逆向及安全分析
 - OpenWRT
-- XMPP
+- docker
+- 科学上网
+
 
 ---
 
 # 致谢
 感谢您花时间阅读我的简历，期待能有机会和您共事。
+
+
+最后更新时间：2015-08-05
