@@ -29,7 +29,70 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></h1>
+                    <h1 class="entry-title"><a href="./git-operation.html">Git operation</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-08-08T00:00:00+08:00">
+                Published: 六 08 八月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/git.html">Git</a> </p>
+</footer><!-- /.post-info --><h1>Git 操作</h1>
+<p>最近使用git比较多，记录几个常见点git的相关操作</p>
+<p>1.遇到了一次代码冲突</p>
+<p>error: Your local changes to the following files would be overwritten by merge:
+        projectpath/xxxxx.xcodeproj/project.pbxproj
+Please, commit your changes or stash them before you can merge.</p>
+<p>找了一下，说是代码冲突了，我的修改也不能忽略，那怎么搞</p>
+<p>git stash
+git pull
+git stash pop</p>
+<p>这样就保留了本地的修改，然后去处理冲突了</p>
+<p>2.放弃本地处理</p>
+<p>在当前代码上调bug，加了好多测试代码，如果丢弃本地的这些修改呢？</p>
+<p>git reset --hard
+git pull</p>
+<p>这样就将本地的修改清除了</p>
+<p>3.撤销一次commit</p>
+<p>在提交代码的时候，误将一个图片压缩包提交进去了。赶紧删除掉，再commit一次，结果git push的时候，上一次的commit还是要提交到服务器的，我去100+M的图片压缩包要上到服务器，以后team成员更新的时候都要先拉这个图片包，而且每个人的本地仓库也包含这个压缩包，想想就恐怖。</p>
+<p>怎么撤销commit呢</p>
+<p>可以使用git log 查看commit日志</p>
+<p>commit e84fd9b2c3e027a9f8a95af770fdfef9c99224df
+Merge: 47cd9d1 e57c182
+Author: 
+Date:   Fri Aug 7 18:44:23 2015 +0800</p>
+<p>commit 47cd9d1d42eb9b2fbea6ec06cdfa358b8e5fcded
+Author: 
+Date:   Fri Aug 7 18:43:55 2015 +0800</p>
+<p>commit e57c1822b3d8359500496257a506c9fdf259adb1
+Author: 
+Date:   Fri Aug 7 18:35:24 2015 +0800</p>
+<p>确定要撤销哪一次commit，找到相应的commit ID</p>
+<p>执行 </p>
+<p>git reset --hard commit ID</p>
+<p>git push origin HEAD --force</p>
+<p>就可以了</p>
+<p>当然，更详细的操作可以参见下面的链接</p>
+<p><a href="http://www.bootcss.com/p/git-guide/">git - 简易指南</a></p>
+<p>几个速成教程</p>
+<p><a href="https://github.com/Mark24Code/15minGit">15分钟学会使用Git</a></p>
+<p><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md">iOS开发60分钟入门</a></p><p>There are <a href="./git-operation.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./objective-c-selector-methods.html" rel="bookmark"
+                           title="Permalink to Objective-C Selector Methods">Objective-C Selector Methods</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-04-26T00:00:00+08:00">
                 Published: 日 26 四月 2015
@@ -40,7 +103,7 @@
         </address>
 <p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/objective-c.html">Objective-C</a> <a href="./tag/selector.html">Selector</a> </p>
-</footer><!-- /.post-info --><h1>在Objective-C中对Selector的操作</h1>
+</footer><!-- /.post-info -->                <h1>在Objective-C中对Selector的操作</h1>
 <p>今天调试程序中的一个bug，iOS6版本系统中使用<code>NSUserDefaults</code>类的<code>initWithSuiteName</code>方法会crash</p>
 <p>想起来可以判断<code>NSUserDefaults</code>是否响应<code>initWithSuiteName</code>这个方法来不同调用。</p>
 <p>使用了<code>respondsToSelector</code>这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了</p>
@@ -65,28 +128,10 @@
 
 
 <hr />
-<p>+(BOOL)instancesRespondToSelector:(SEL)aSelector;</p>
-<p>判断该类的实例是否响应该方法</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">instancesRespondToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithSuiteName</span><span class="p">:)])</span> <span class="p">{</span>
-    <span class="c1">//true</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<hr />
-<p>+(IMP)instanceMethodForSelector:(SEL)aSelector</p>
-<p>获取该类的实例方法的IMP实现的地址</p>
-<div class="highlight"><pre><span class="kt">IMP</span> <span class="n">kIMPForUserDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="nl">instanceMethodForSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">initWithUser</span><span class="p">:)];</span>
-</pre></div>
-
-
-<p>+(BOOL)resolveInstanceMethod:(SEL)aSelector</p>
-<hr /><p>There are <a href="./objective-c-selector-methods.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>+(BOOL)instancesRespondToSelector:(SEL ...</p>
+                <a class="readmore" href="./objective-c-selector-methods.html">read more</a>
+<p>There are <a href="./objective-c-selector-methods.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -398,34 +443,6 @@ sudo gem uninstall cocoapods
 sudo gem ...</pre></div>
                 <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
 <p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./hook-reveal-regiest-alert.html" rel="bookmark"
-                           title="Permalink to Hook Reveal Regiest Alert">Hook Reveal Regiest Alert</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-10-21T00:00:00+08:00">
-                Published: 二 21 十月 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/hook.html">Hook</a> <a href="./tag/mac.html">Mac</a> <a href="./tag/reveal.html">Reveal</a> </p>
-</footer><!-- /.post-info -->                <p>之前写了  <a href="http://www.yangch.info/?p=1230">“破解Reveal购买提示框”</a></p>
-<p>近期发现 Reveal 更新到了1.0.6版本</p>
-<p>感觉每次都修改二进制文件，要计算位置，再去修改那个字节 都比较麻烦。</p>
-<p>在想在Mac平台上有没有像iOS下theos框架一样的hook的插件平台。</p>
-<p>后来想起来，theos也是用<code>runtime</code>来动态替换了方法。</p>
-<h2>创建工程</h2>
-<p>在Xcode创建工程，选择<code>Library</code>。</p>
-                <a class="readmore" href="./hook-reveal-regiest-alert.html">read more</a>
-<p>There are <a href="./hook-reveal-regiest-alert.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-04-26T00:00:00+08:00</updated><entry><title>Objective-C Selector Methods</title><link href="http://blog.chenghu.me/objective-c-selector-methods.html" rel="alternate"></link><updated>2015-04-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-04-26:objective-c-selector-methods.html</id><summary type="html">&lt;h1&gt;在Objective-C中对Selector的操作&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-08-08T00:00:00+08:00</updated><entry><title>Git operation</title><link href="http://blog.chenghu.me/git-operation.html" rel="alternate"></link><updated>2015-08-08T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-08-08:git-operation.html</id><summary type="html">&lt;h1&gt;Git 操作&lt;/h1&gt;
+&lt;p&gt;最近使用git比较多，记录几个常见点git的相关操作&lt;/p&gt;
+&lt;p&gt;1.遇到了一次代码冲突&lt;/p&gt;
+&lt;p&gt;error: Your local changes to the following files would be overwritten by merge:
+        projectpath/xxxxx.xcodeproj/project.pbxproj
+Please, commit your changes or stash them before you can merge.&lt;/p&gt;
+&lt;p&gt;找了一下，说是代码冲突了，我的修改也不能忽略，那怎么搞&lt;/p&gt;
+&lt;p&gt;git stash
+git pull
+git stash pop&lt;/p&gt;
+&lt;p&gt;这样就保留了本地的修改，然后去处理冲突了&lt;/p&gt;
+&lt;p&gt;2.放弃本地处理&lt;/p&gt;
+&lt;p&gt;在当前代码上调bug，加了好多测试代码，如果丢弃本地的这些修改呢？&lt;/p&gt;
+&lt;p&gt;git reset --hard
+git pull&lt;/p&gt;
+&lt;p&gt;这样就将本地的修改清除了&lt;/p&gt;
+&lt;p&gt;3.撤销一次commit&lt;/p&gt;
+&lt;p&gt;在提交代码的时候，误将一个图片压缩包提交进去了。赶紧删除掉，再commit一次，结果git push的时候，上一次的commit还是要提交到服务器的，我去100+M的图片压缩包要上到服务器，以后team成员更新的时候都要先拉这个图片包，而且每个人的本地仓库也包含这个压缩包，想想就恐怖。&lt;/p&gt;
+&lt;p&gt;怎么撤销commit呢&lt;/p&gt;
+&lt;p&gt;可以使用git log 查看commit日志&lt;/p&gt;
+&lt;p&gt;commit e84fd9b2c3e027a9f8a95af770fdfef9c99224df
+Merge: 47cd9d1 e57c182
+Author: 
+Date:   Fri Aug 7 18:44:23 2015 +0800&lt;/p&gt;
+&lt;p&gt;commit 47cd9d1d42eb9b2fbea6ec06cdfa358b8e5fcded
+Author: 
+Date:   Fri Aug 7 18:43:55 2015 +0800&lt;/p&gt;
+&lt;p&gt;commit e57c1822b3d8359500496257a506c9fdf259adb1
+Author: 
+Date:   Fri Aug 7 18:35:24 2015 +0800&lt;/p&gt;
+&lt;p&gt;确定要撤销哪一次commit，找到相应的commit ID&lt;/p&gt;
+&lt;p&gt;执行 &lt;/p&gt;
+&lt;p&gt;git reset --hard commit ID&lt;/p&gt;
+&lt;p&gt;git push origin HEAD --force&lt;/p&gt;
+&lt;p&gt;就可以了&lt;/p&gt;
+&lt;p&gt;当然，更详细的操作可以参见下面的链接&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.bootcss.com/p/git-guide/"&gt;git - 简易指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;几个速成教程&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Mark24Code/15minGit"&gt;15分钟学会使用Git&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/qinjx/30min_guides/blob/master/ios.md"&gt;iOS开发60分钟入门&lt;/a&gt;&lt;/p&gt;</summary><category term="Git"></category></entry><entry><title>Objective-C Selector Methods</title><link href="http://blog.chenghu.me/objective-c-selector-methods.html" rel="alternate"></link><updated>2015-04-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-04-26:objective-c-selector-methods.html</id><summary type="html">&lt;h1&gt;在Objective-C中对Selector的操作&lt;/h1&gt;
 &lt;p&gt;今天调试程序中的一个bug，iOS6版本系统中使用&lt;code&gt;NSUserDefaults&lt;/code&gt;类的&lt;code&gt;initWithSuiteName&lt;/code&gt;方法会crash&lt;/p&gt;
 &lt;p&gt;想起来可以判断&lt;code&gt;NSUserDefaults&lt;/code&gt;是否响应&lt;code&gt;initWithSuiteName&lt;/code&gt;这个方法来不同调用。&lt;/p&gt;
 &lt;p&gt;使用了&lt;code&gt;respondsToSelector&lt;/code&gt;这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了&lt;/p&gt;
