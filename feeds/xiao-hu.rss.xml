@@ -56,6 +56,7 @@ sudo service ipsec-assist restart
 &lt;p&gt;回家更新：&lt;/p&gt;
 &lt;p&gt;好吧，在强大的鹏博士面前，所有梯子都是渣，只有局域网，没有互联网&lt;/p&gt;
 &lt;p&gt;L2TP  .........  找不到服务器&lt;/p&gt;
+&lt;p&gt;PPTP  .........  找不到服务器&lt;/p&gt;
 &lt;p&gt;SSH隧道  .........  没反应&lt;/p&gt;
 &lt;p&gt;shadowsocks  ..........  卡到死&lt;/p&gt;
 &lt;p&gt;Anyconnect  ..........  连上就断开&lt;/p&gt;
