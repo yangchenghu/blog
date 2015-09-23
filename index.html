@@ -22,7 +22,80 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./git-operation.html">Git operation</a></h1>
+                    <h1 class="entry-title"><a href="./setup-l2tp-and-ipsec-vpn.html">Setup L2TP And IPSEC VPN</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-09-23T00:00:00+08:00">
+                Published: 三 23 九月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/l2tp.html">l2tp</a> </p>
+</footer><!-- /.post-info --><h1>搭建L2TP和IPSEC的VPN</h1>
+<p>本来家里用的长城宽带，结果通过IP138一看，居然是“鹏博士宽带”</p>
+<p>这个碉堡了的鹏博士屏蔽各种梯子</p>
+<p>之前在东京的一个梯子，只要一ssh过去，梯子就消失了，ping都ping不通</p>
+<p>最后只好把梯子搬到了法国，延时直接翻倍了，悲剧</p>
+<p>最近发现拨公司的L2TP很流畅，就想在梯子上搭建一个L2TP</p>
+<p>搜了一下，找到一个比较便捷的方法</p>
+<p>在github上找到一个<a href="https://github.com/philplckthun/setup-simple-ipsec-l2tp-vpn">脚本</a></p>
+<p>按操作走</p>
+<div class="highlight"><pre>wget https://raw.github.com/philplckthun/setup-simple-ipsec-l2tp-vpn/master/setup.sh
+sudo sh setup.sh
+</pre></div>
+
+
+<p>按提示一步一步的设置PSK,Username,Password。
+结果提示
+<code>/bin/bash: xmlto: commad not found</code></p>
+<p><img alt="image1" src="http://yimagecache.qiniudn.com/67WIP9PO=0/H$PHA{VC2C$7.jpg" /></p>
+<p>好吧，只好<code>apt-get install xmlto</code>
+结果一看</p>
+<p><img alt="image2" src="http://yimagecache.qiniudn.com/afzicouvyofadkhqjhrklnfaldkhafquvopcuyv.png" /></p>
+<p>要占1G多硬盘，有点坑啊，果断点<code>n</code>啊</p>
+<p>那就自己搞了</p>
+<p>自己用<code>apt-get install openwan</code>来安装<code>openwan</code>实现ipsec</p>
+<p>结果还是遇到了自己之前一直卡住的问题</p>
+<p>就是在使用<code>sudo ipsec verify</code>的时候总是有一项过不去检测</p>
+<p><code>Two or more interfaces found, checking IP forwarding [failed]</code></p>
+<p>继续google</p>
+<p>找到豆瓣小组上一个<a href="http://www.douban.com/note/266076883/">帖子</a>，说自己重新编译一下<code>opnwan</code>就好了</p>
+<p>好吧，继续笔记</p>
+<div class="highlight"><pre>cd /usr/src
+wget http://www.openswan.org/download/openswan-2.6.43.1.tar.gz
+tar xf openswan-2.6.43.1.tar.gz
+cd openswan-2.6.43.1
+make programs
+make install
+</pre></div>
+
+
+<p>再<code>ipsec verify</code>，结果。。。。。又有问题</p>
+<p><img alt="image3" src="http://yimagecache.qiniudn.com/openwanerrortip.png" /></p>
+<p>中间搞了iptables好多次，重启了n次</p>
+<p>想想中间两个<code>NOT IMPLEMENTED</code>实在搞不了</p>
+<p>再重启一遍吧</p>
+<p>电脑连接了一下，居然成功了</p>
+<p>去ip138看了一下，也出去了</p>
+<p>回家看看能不能穿越鹏博士</p>
+<hr />
+<p>下期预告：
+之前用<code>docker-ocserv</code>搭建的ocserv服务器这几天老自动断开连接，而且上不了instagram，还是自己重新搭建一下吧。</p><p>There are <a href="./setup-l2tp-and-ipsec-vpn.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./git-operation.html" rel="bookmark"
+                           title="Permalink to Git operation">Git operation</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-08-08T00:00:00+08:00">
                 Published: 六 08 八月 2015
@@ -33,7 +106,7 @@
         </address>
 <p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/git.html">Git</a> </p>
-</footer><!-- /.post-info --><h1>Git 操作</h1>
+</footer><!-- /.post-info -->                <h1>Git 操作</h1>
 <p>最近使用git比较多，记录几个常见点git的相关操作</p>
 <p>1.遇到了一次代码冲突</p>
 <p>error: Your local changes to the following files would be overwritten by merge:
@@ -44,40 +117,10 @@ Please, commit your changes or stash them before you can merge.</p>
 git pull
 git stash pop</p>
 <p>这样就保留了本地的修改，然后去处理冲突了</p>
-<p>2.放弃本地处理</p>
-<p>在当前代码上调bug，加了好多测试代码，如果丢弃本地的这些修改呢？</p>
-<p>git reset --hard
-git pull</p>
-<p>这样就将本地的修改清除了</p>
-<p>3.撤销一次commit</p>
-<p>在提交代码的时候，误将一个图片压缩包提交进去了。赶紧删除掉，再commit一次，结果git push的时候，上一次的commit还是要提交到服务器的，我去100+M的图片压缩包要上到服务器，以后team成员更新的时候都要先拉这个图片包，而且每个人的本地仓库也包含这个压缩包，想想就恐怖。</p>
-<p>怎么撤销commit呢</p>
-<p>可以使用git log 查看commit日志</p>
-<p>commit e84fd9b2c3e027a9f8a95af770fdfef9c99224df
-Merge: 47cd9d1 e57c182
-Author: 
-Date:   Fri Aug 7 18:44:23 2015 +0800</p>
-<p>commit 47cd9d1d42eb9b2fbea6ec06cdfa358b8e5fcded
-Author: 
-Date:   Fri Aug 7 18:43:55 2015 +0800</p>
-<p>commit e57c1822b3d8359500496257a506c9fdf259adb1
-Author: 
-Date:   Fri Aug 7 18:35:24 2015 +0800</p>
-<p>确定要撤销哪一次commit，找到相应的commit ID</p>
-<p>执行 </p>
-<p>git reset --hard commit ID</p>
-<p>git push origin HEAD --force</p>
-<p>就可以了</p>
-<p>当然，更详细的操作可以参见下面的链接</p>
-<p><a href="http://www.bootcss.com/p/git-guide/">git - 简易指南</a></p>
-<p>几个速成教程</p>
-<p><a href="https://github.com/Mark24Code/15minGit">15分钟学会使用Git</a></p>
-<p><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md">iOS开发60分钟入门</a></p><p>There are <a href="./git-operation.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>2.放弃本地处理 ...</p>
+                <a class="readmore" href="./git-operation.html">read more</a>
+<p>There are <a href="./git-operation.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -400,42 +443,6 @@ Image Capture Extension
 <p>然后重启SVN Server就好了</p>
                 <a class="readmore" href="./fixed-svn-did-not-show-histoy-error.html">read more</a>
 <p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
-                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-02-15T00:00:00+08:00">
-                Published: 日 15 二月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
-<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
-<div class="highlight"><pre>Update all pods
-Analyzing dependencies
-[!] There was an error reading &#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&#39;.
-Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
-</pre></div>
-
-
-<p>找了好多方法，也试了好多
-终于找到了原因
-记录一下</p>
-<div class="highlight"><pre>sudo rm -fr ~/.cocoapods/repos/master
-sudo gem uninstall cocoapods
-sudo gem ...</pre></div>
-                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
-<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

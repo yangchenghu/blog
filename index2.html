@@ -24,6 +24,42 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
+                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-02-15T00:00:00+08:00">
+                Published: 日 15 二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
+<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
+<div class="highlight"><pre>Update all pods
+Analyzing dependencies
+[!] There was an error reading &#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&#39;.
+Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
+</pre></div>
+
+
+<p>找了好多方法，也试了好多
+终于找到了原因
+记录一下</p>
+<div class="highlight"><pre>sudo rm -fr ~/.cocoapods/repos/master
+sudo gem uninstall cocoapods
+sudo gem ...</pre></div>
+                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
+<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="./hook-reveal-regiest-alert.html" rel="bookmark"
                            title="Permalink to Hook Reveal Regiest Alert">Hook Reveal Regiest Alert</a></h1>
                 </header>

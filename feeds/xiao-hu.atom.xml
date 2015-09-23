@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-08-08T00:00:00+08:00</updated><entry><title>Git operation</title><link href="http://blog.chenghu.me/git-operation.html" rel="alternate"></link><updated>2015-08-08T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-08-08:git-operation.html</id><summary type="html">&lt;h1&gt;Git 操作&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-09-23T00:00:00+08:00</updated><entry><title>Setup L2TP And IPSEC VPN</title><link href="http://blog.chenghu.me/setup-l2tp-and-ipsec-vpn.html" rel="alternate"></link><updated>2015-09-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-09-23:setup-l2tp-and-ipsec-vpn.html</id><summary type="html">&lt;h1&gt;搭建L2TP和IPSEC的VPN&lt;/h1&gt;
+&lt;p&gt;本来家里用的长城宽带，结果通过IP138一看，居然是“鹏博士宽带”&lt;/p&gt;
+&lt;p&gt;这个碉堡了的鹏博士屏蔽各种梯子&lt;/p&gt;
+&lt;p&gt;之前在东京的一个梯子，只要一ssh过去，梯子就消失了，ping都ping不通&lt;/p&gt;
+&lt;p&gt;最后只好把梯子搬到了法国，延时直接翻倍了，悲剧&lt;/p&gt;
+&lt;p&gt;最近发现拨公司的L2TP很流畅，就想在梯子上搭建一个L2TP&lt;/p&gt;
+&lt;p&gt;搜了一下，找到一个比较便捷的方法&lt;/p&gt;
+&lt;p&gt;在github上找到一个&lt;a href="https://github.com/philplckthun/setup-simple-ipsec-l2tp-vpn"&gt;脚本&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;按操作走&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget https://raw.github.com/philplckthun/setup-simple-ipsec-l2tp-vpn/master/setup.sh
+sudo sh setup.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;按提示一步一步的设置PSK,Username,Password。
+结果提示
+&lt;code&gt;/bin/bash: xmlto: commad not found&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image1" src="http://yimagecache.qiniudn.com/67WIP9PO=0/H$PHA{VC2C$7.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;好吧，只好&lt;code&gt;apt-get install xmlto&lt;/code&gt;
+结果一看&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image2" src="http://yimagecache.qiniudn.com/afzicouvyofadkhqjhrklnfaldkhafquvopcuyv.png" /&gt;&lt;/p&gt;
+&lt;p&gt;要占1G多硬盘，有点坑啊，果断点&lt;code&gt;n&lt;/code&gt;啊&lt;/p&gt;
+&lt;p&gt;那就自己搞了&lt;/p&gt;
+&lt;p&gt;自己用&lt;code&gt;apt-get install openwan&lt;/code&gt;来安装&lt;code&gt;openwan&lt;/code&gt;实现ipsec&lt;/p&gt;
+&lt;p&gt;结果还是遇到了自己之前一直卡住的问题&lt;/p&gt;
+&lt;p&gt;就是在使用&lt;code&gt;sudo ipsec verify&lt;/code&gt;的时候总是有一项过不去检测&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Two or more interfaces found, checking IP forwarding [failed]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;继续google&lt;/p&gt;
+&lt;p&gt;找到豆瓣小组上一个&lt;a href="http://www.douban.com/note/266076883/"&gt;帖子&lt;/a&gt;，说自己重新编译一下&lt;code&gt;opnwan&lt;/code&gt;就好了&lt;/p&gt;
+&lt;p&gt;好吧，继续笔记&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd /usr/src
+wget http://www.openswan.org/download/openswan-2.6.43.1.tar.gz
+tar xf openswan-2.6.43.1.tar.gz
+cd openswan-2.6.43.1
+make programs
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;再&lt;code&gt;ipsec verify&lt;/code&gt;，结果。。。。。又有问题&lt;/p&gt;
+&lt;p&gt;&lt;img alt="image3" src="http://yimagecache.qiniudn.com/openwanerrortip.png" /&gt;&lt;/p&gt;
+&lt;p&gt;中间搞了iptables好多次，重启了n次&lt;/p&gt;
+&lt;p&gt;想想中间两个&lt;code&gt;NOT IMPLEMENTED&lt;/code&gt;实在搞不了&lt;/p&gt;
+&lt;p&gt;再重启一遍吧&lt;/p&gt;
+&lt;p&gt;电脑连接了一下，居然成功了&lt;/p&gt;
+&lt;p&gt;去ip138看了一下，也出去了&lt;/p&gt;
+&lt;p&gt;回家看看能不能穿越鹏博士&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;下期预告：
+之前用&lt;code&gt;docker-ocserv&lt;/code&gt;搭建的ocserv服务器这几天老自动断开连接，而且上不了instagram，还是自己重新搭建一下吧。&lt;/p&gt;</summary><category term="l2tp"></category></entry><entry><title>Git operation</title><link href="http://blog.chenghu.me/git-operation.html" rel="alternate"></link><updated>2015-08-08T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-08-08:git-operation.html</id><summary type="html">&lt;h1&gt;Git 操作&lt;/h1&gt;
 &lt;p&gt;最近使用git比较多，记录几个常见点git的相关操作&lt;/p&gt;
 &lt;p&gt;1.遇到了一次代码冲突&lt;/p&gt;
 &lt;p&gt;error: Your local changes to the following files would be overwritten by merge:
