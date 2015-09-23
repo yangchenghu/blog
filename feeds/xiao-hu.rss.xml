@@ -55,13 +55,13 @@ sudo service ipsec-assist restart
 
 &lt;p&gt;回家更新：&lt;/p&gt;
 &lt;p&gt;好吧，在强大的鹏博士面前，所有梯子都是渣，只有局域网，没有互联网&lt;/p&gt;
-&lt;p&gt;L2TP  .........  找不到服务器
-SSH隧道  .........  没反应
-shadowsocks  ..........  卡到死
-Anyconnect  ..........  连上就断开&lt;/p&gt;
+&lt;p&gt;L2TP  .........  找不到服务器&lt;/p&gt;
+&lt;p&gt;SSH隧道  .........  没反应&lt;/p&gt;
+&lt;p&gt;shadowsocks  ..........  卡到死&lt;/p&gt;
+&lt;p&gt;Anyconnect  ..........  连上就断开&lt;/p&gt;
 &lt;p&gt;刚找了一个手机上的&lt;/p&gt;
-&lt;p&gt;天行vpn  ..........  VPN服务器未响应
-shadowsocks  .........  卡到爆&lt;/p&gt;
+&lt;p&gt;天行vpn  ..........  VPN服务器未响应&lt;/p&gt;
+&lt;p&gt;shadowsocks  .........  卡到爆&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;下期预告：&lt;/p&gt;
 &lt;p&gt;之前用&lt;code&gt;docker-ocserv&lt;/code&gt;搭建的ocserv服务器这几天老自动断开连接，而且上不了instagram，还是自己重新搭建一下吧。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Wed, 23 Sep 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-09-23:setup-l2tp-and-ipsec-vpn.html</guid><category>l2tp</category><category>ipsec</category><category>vpn</category></item><item><title>Git operation</title><link>http://blog.chenghu.me/git-operation.html</link><description>&lt;h1&gt;Git 操作&lt;/h1&gt;
