@@ -53,6 +53,15 @@ sudo service ipsec-assist restart
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;回家更新：&lt;/p&gt;
+&lt;p&gt;好吧，在强大的鹏博士面前，所有梯子都是渣，只有局域网，没有互联网&lt;/p&gt;
+&lt;p&gt;L2TP  .........  找不到服务器
+SSH隧道  .........  没反应
+shadowsocks  ..........  卡到死
+Anyconnect  ..........  连上就断开&lt;/p&gt;
+&lt;p&gt;刚找了一个手机上的&lt;/p&gt;
+&lt;p&gt;天行vpn  ..........  找不到服务器
+shadowsocks  .........  卡到爆&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;下期预告：&lt;/p&gt;
 &lt;p&gt;之前用&lt;code&gt;docker-ocserv&lt;/code&gt;搭建的ocserv服务器这几天老自动断开连接，而且上不了instagram，还是自己重新搭建一下吧。&lt;/p&gt;</summary><category term="l2tp"></category><category term="ipsec"></category><category term="vpn"></category></entry><entry><title>Git operation</title><link href="http://blog.chenghu.me/git-operation.html" rel="alternate"></link><updated>2015-08-08T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-08-08:git-operation.html</id><summary type="html">&lt;h1&gt;Git 操作&lt;/h1&gt;
