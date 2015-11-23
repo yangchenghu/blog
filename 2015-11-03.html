@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>2015-11-03</title>
+        <link rel="stylesheet" href="./theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">小虎的博客 </a></h1>
+                <nav><ul>
+                    <li><a href="/">HomePage</a></li>
+                    <li><a href="./pages/about.html">About</a></li>
+                    <li><a href="./pages/toys.html">Toys</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./2015-11-03.html" rel="bookmark"
+           title="Permalink to 2015-11-03">2015-11-03</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-03T00:00:00+08:00">
+                Published: 二 03 十一月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/note.html">Note</a>.</p>
+<p>tags: <a href="./tag/note.html">Note</a> </p>
+</footer><!-- /.post-info -->      <h1>2015-11-03</h1>
+<p><span id="jump"></span></p>
+<h1>目录</h1>
+<ol>
+<li>
+<p><a href="#1">今天学了什么</a></p>
+<p><a href="#1.1">依赖注入</a></p>
+<p><a href="#1.2">学习如何学习</a></p>
+</li>
+<li>
+<p><a href="#2">精品文章</a></p>
+</li>
+</ol>
+<p><a href="#2.1">不是每个人都 “贪便宜” 的，做好目标客户定位及宣传方向的选择</a></p>
+<p><a href="#2.2">从技术到产品，转型的这一年我明白了很多道理</a></p>
+<p><a href="#2.3">雷军谈未来十年的移动创业机会</a></p>
+<p><a href="#2.4">如果你的竞争对手获得融资了你该怎么办？</a></p>
+<ol>
+<li><a href="#3">游记</a></li>
+</ol>
+<p><a href="#3.1">泰国旅游生活点滴记录 篇二：出发前准备</a></p>
+<p><a href="#3.2">美国东西部风景掠影</a></p>
+<p><a href="#3.3">十一不怕堵自驾狂奔</a></p>
+<ol>
+<li>
+<p><a href="#4">阅读</a></p>
+<p><a href="#4.1">你以为差的只是一个程序员？其实是缺一种跨界沟通能力</a></p>
+<p><a href="#4.2">caoz：让一部分人尖叫，另一部分人离开的才是好产品</a></p>
+<p><a href="#4.3">接住了，这是Twitter、Facebook、LinkedIn产品经理的管理心得</a></p>
+<p><a href="#4.4">你需要远离具有这八种特征的创业伙伴</a></p>
+</li>
+</ol>
+<hr />
+<h2 id="1"> 学习 </h2>
+
+<h3 id="1.1">依赖注入</h3>
+
+<p><a href="http://blog.csdn.net/linshaolie/article/details/47037941">依赖注入——让iOS代码更简洁</a></p>
+<p>两种注入的方式，1.初始化方法注入；2.属性注入</p>
+<p><a href="http://blog.csdn.net/yqj2065/article/details/8510074">1.2 依赖注入（Dependency Injection）模式</a></p>
+<p><a href="https://github.com/atomicobject/objection">objection</a></p>
+<p><a href="http://limboy.me/ios/2014/04/15/use-objection-to-decouple-ios-project.html">使用objection来模块化开发iOS项目</a></p>
+<p>主要就是使用<code>objection</code>这个框架，然后使用<code>protocol</code>来声明需要引入的类的接口，然后使用一个<code>JSObjectionModule</code>来注册那个类，这样就可以只引入这个协议，而不用import整个类文件进来，减少文件之间的耦合性。</p>
+<p><a href="http://wiki.jikexueyuan.com/project/objc/test/15-3.html">依赖注入</a></p>
+<p>这是一篇极客学院的一篇文章，但写的就比较偏向测试方向了。</p>
+<p>但给了我一点其它的启发：就是可以把一些调用拆的更细一些。最近在使用<code>JSPatch</code>这个框架，它可与替换程序中已有的方法和创建新的方法，以前我一个方法里面好多行，如果可以拆的比较细，其中有一个方法有的问题，也比较好修复。特别大的方法修起来也比较麻烦。</p>
+<h3 id="1.2">学习如何学习</h3>
+
+<p><a href="http://limboy.me/essay/2015/08/14/learning-how-to-learn.html">原文</a></p>
+<p>总结：</p>
+<p>值得思考的一篇文章，学习学习学习，重要的事情要说三遍。</p>
+<p>以下摘要，及笔记</p>
+<p>大脑有两种工作模式。一个是<code>专注</code>，另一个是<code>发散</code></p>
+<div class="highlight"><pre>比如，你已经知道了乘法，然后要处理一道乘法运算题。当你处于「专注」模式时，会运用已有的模型，在「乘法」的槽点附近打转，也就是结合以前的学习经验去寻找答案。如果你要解决的问题是基于新的模型，比如你已经知道了乘法运算，但从没有接触过除法运算，如何掌握这个新的模型呢，这时就要用到「发散」了。当处于「发散」状态时，「槽点」之间的距离会变大，你无法通过局限在某一点来解决问题，但至少能找到一种新的思考事物的角度。当你在解决一个非常困难的问题时，不要逼自己长时间处于「专注」状态，这样就会局限在一个狭小的范围。所以需要进入到另一种模式，也就是「发散」模式。简单来说，就是脱离当前的工作环境，出去走走，冲个澡等，总之是让大脑脱离「专注」状态。我们来举一个例子吧。
+</pre></div>
+
+
+<p>拖延症 --- 番茄工作法，以<code>必须完成它</code>的痛苦。</p>
+<p>还有跟学习很相关的一点是<code>睡眠</code>.</p>
+<div class="highlight"><pre>当处于非睡眠状态时，代谢物会在细胞间产生，它们就像垃圾一样在那，而且越积越多，这会影响你的判断。这也是为什么当你长时间工作时，逻辑会越来越乱。当你睡觉时，这些细胞会缩小，然后垃圾就被冲走了，就像重新打扫了房间一样
+
+根据神经学上的发现，将学习分为多个短期学习、睡觉，多个短期学习、睡觉，这样的循环系统，对于构建神经网络非常有帮助，这也是高效学习的秘诀之一
+</pre></div>
+
+
+<p>有两种方式可以让这些神经元存活并成长。一个就是将自己暴露在新的环境中 － 旅游；另一个方法就是锻炼。</p>
+<p><code>工作记忆</code>就是临时记住一些信息。减少打断，减少上下文切换，减少并发。</p>
+<p>那如何把短期记忆变成长期记忆：最好的方法就是练习，练得越多，神经元就会长得越长，扎得越深。最好的方式就是带一定间隙的重复练习。</p>
+<p>关于学习的建议：</p>
+<p>1.测试是必要且重要的。</p>
+<p>2.记得做「家庭作业」，不要只做一次，挑其中的重点多做几次。</p>
+<p>3.最有效的方法还是「回想」。</p>
+<p>4.还有一个简单的技巧是向其他人阐述你所理解的东西。</p>
+<h2 id="2"> 精品文章 </h2>
+
+<h3 id="2.1">不是每个人都 “贪便宜” 的，做好目标客户定位及宣传方向的选择 [精品]</h3>
+
+<p><a href="http://36kr.com/p/5039237.html">原文</a></p>
+<p>tag:营销</p>
+<p>总结：</p>
+<p>关于“营销和市场”</p>
+<p>1.目标用户要明确范围，不要指望能覆盖所有人。</p>
+<p>2.宣传的点，既要提高用户的期待，也要控制用户的期待。正面例子：小米手机，早期价格便宜，用户期望低，但用下来感觉物超所值。反面例子：锤子手机，讲了一通情怀，用户期望上来了，结果拿到手机各种挑刺。</p>
+<p>3.保留惊喜，形成口碑。</p>
+<hr />
+<h3 id="2.2">从技术到产品，转型的这一年我明白了很多道理</h3>
+
+<p><a href="http://36kr.com/p/5039205.html">原文</a></p>
+<p>tag:产品</p>
+<p>总结：</p>
+<p>看到文章后是震惊，之前一直因为技术关注了作者<code>唐韧</code>，没想到在36kr发表了如此干货的文章，然后华丽转行到产品。想想自己也总说自己有产品感觉，却也就止步在感觉了 T_T。</p>
+<p>思维转变</p>
+<p>1.工程思维</p>
+<p>即还是从一个工程师的角度来思考需求，感觉这个功能技术很炫，加上肯定会提高逼格。然后这并没有什么卵用。最大的问题是<code>脱离实际</code>。</p>
+<p><em>我在一开始从技术模式切换到产品模式时，相当一段时间都是在通过技术定义和设计产品，这个时候的产品脱离现实场景，远离用户需求，我开始反思。</em></p>
+<p>2.功能思维</p>
+<p>关注产品的功能和体验，忽略了业务目标和业务价值，忽略了与其它业务的互动。</p>
+<p>3.产品思维</p>
+<p><em>产品思维，也是我目前所处的阶段，这个阶段我关注的更多的是业务价值和业务目标，在充分理解商业战略的前提下来完成产品定义和产品设计，通过充分了解产品所围绕的业务场景去提升产品的可用性和易用性，改善业务体验和产品体验，提升整体的用户体验</em></p>
+<p><em>产品思维还有一个非常重要的环节就是对业务流程的设计，产品经理为最终的产品质量和用户体验负责，在设计前期就需要考虑产品从设计到开发到最终投入使用需要经历哪些环节，需要与哪些人进行合作。</em></p>
+<p>产品方法</p>
+<p>1.定义产品战略</p>
+<p>2.梳理业务流程</p>
+<p>3.产品原型设计</p>
+<p>4.沟通协调资源</p>
+<p>5.验证改进产品</p>
+<p>作者的思维变化是一个从点到线，再到面的变化。后面总结的产品方法又是一个从宏观到微观的总结。</p>
+<hr />
+<h3 id="2.3">雷军谈未来十年的移动创业机会</h3>
+
+<p><a href="http://36kr.com/p/5039202.html">原文</a> </p>
+<p>tag:创业</p>
+<p>总结：</p>
+<p>个人觉得，在各个大佬中的讲话中，雷军算是说的比较实在的，不画饼，不玩虚的，比较接底气。</p>
+<p>前十年，由于爱玩手机，发现了移动互联网这个大趋势，成立了小米公司。</p>
+<p>当前，BAT很强大，移动互联网第一阶段结束，但还是有机会的。</p>
+<p>后十年，智能家居，农村互联网，农村电商，移动互联网的企业管理 这些方向还是很有机会的。</p>
+<hr />
+<h3 id="2.4">如果你的竞争对手获得融资了你该怎么办？</h3>
+
+<p><a href="http://36kr.com/p/5039054.html">原文</a></p>
+<p>tag:创业</p>
+<p>总结：</p>
+<p>之前看到<code>滴滴打车获得30亿的投资</code>，我就在想这个问题，如果我当时也在做打车业务，我该怎么面对如此强大的对手，是换方向；或是把手上现金给大家分一下，各回各家；还是硬扛呢。</p>
+<p>看了一下，主要下面几件事情</p>
+<p>1.安抚员工。</p>
+<p>2.告知投资人，然后拿出后续自己的计划。</p>
+<p>3.不要慌忙应对，比如加快融资，还是要保持自己的节奏。</p>
+<p>4.快速回归自己的日常工作。将注意力放到业务上。</p>
+<hr />
+<h2 id="3"> 游记 </h2>
+
+<h3 id="3.1">泰国旅游生活点滴记录 篇二：出发前准备 </h3>
+
+<p><a href="http://post.smzdm.com/p/363802/">原文</a> </p>
+<p>tag:旅游</p>
+<p>总结：</p>
+<p>主要讲了一些出去玩的时候要注意的地方，比较实用的</p>
+<hr />
+<h3 id="3.2">美国东西部风景掠影</h3>
+
+<p><a href="http://post.smzdm.com/p/347862/">原文</a></p>
+<p>tag:旅游</p>
+<hr />
+<h3 id="3.3">十一不怕堵自驾狂奔</h3>
+
+<p>[十一不怕堵自驾狂奔 篇一：自驾狂奔天津-青海湖-祁连山 4800公里]</p>
+<p><a href="http://post.smzdm.com/p/363694">原文</a></p>
+<p>[十一不怕堵自驾狂奔 篇二：湟源县-青海湖-茶卡盐湖-刚察县热水镇]</p>
+<p><a href="http://post.smzdm.com/p/363956">原文</a></p>
+<p>[十一不怕堵自驾狂奔 篇三：刚察县热水河镇-张掖市-武威市-定边县-天津市]</p>
+<p><a href="http://post.smzdm.com/p/365174/">原文</a></p>
+<p>tag:旅游</p>
+<hr />
+<h2 id="4"> 阅读 </h2>
+
+<hr />
+<h3 id="4.1">你以为差的只是一个程序员？其实是缺一种跨界沟通能力</h3>
+
+<p><a href="http://36kr.com/p/5039141.html">原文</a></p>
+<hr />
+<h3 id="4.2">caoz：让一部分人尖叫，另一部分人离开的才是好产品</h3>
+
+<p><a href="http://36kr.com/p/5039049.html">原文</a></p>
+<p>tag:产品</p>
+<hr />
+<h3 id="4.3">接住了，这是Twitter、Facebook、LinkedIn产品经理的管理心得</h3>
+
+<p><a href="http://www.huxiu.com/article/129783/1.html?f=wangzhan">原文</a></p>
+<p>tag:产品</p>
+<hr />
+<h3 id="4.4">你需要远离具有这八种特征的创业伙伴</h3>
+
+<p><a href="http://36kr.com/p/5039235.html">原文</a></p>
+<p><a href="">原文</a></p>
+<p>tag:创业</p>
+<p>总结：</p>
+<p>1、你不想要一个满嘴跑火车，但却没有良好记录的合作伙伴。</p>
+<p>2、你不希望你的合作伙伴前后不一致。</p>
+<p>3、你不希望你的合作伙伴不擅于与人交往。</p>
+<p>4、你不想要一个你的雇员们都仇恨的合作伙伴。</p>
+<p>5、你不想要你的合作伙伴同时做着很多个额外项目。</p>
+<p>6、你不想要个比你更傲慢的合作伙伴。</p>
+<p>7、你不想要个跟你平起平坐的合作伙伴。</p>
+<p>8、你不想要个只会同意你说的一切的合作伙伴。</p>
+<p><a href="#jump">回到顶端</a></p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = '2015-11-03.html';
+        var disqus_url = './2015-11-03.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com">Pelican</a></li>
+                            <li><a href="http://python.org">Python.org</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://msching.github.io">码农人生</a></li>
+                            <li><a href="http://blog.cnbang.net">bang's blog</a></li>
+                            <li><a href="http://geeklu.com">Luke's Homepage</a></li>
+                            <li><a href="http://www.hotobear.com">不掏蜂窝的熊</a></li>
+                            <li><a href="http://evilcos.me/">余弦</a></li>
+                            <li><a href="http://blog.csdn.net/yiyaaixuexi">念茜的博客</a></li>
+                            <li><a href="http://blog.csdn.net/guiguzi1110">听鬼哥说故事</a></li>
+                            <li><a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://www.pchou.info">P_Chou Tech Space</a></li>
+                            <li><a href="http://www.jianshu.com/users/c30afb47d730/latest_articles">Feat</a></li>
+                            <li><a href="http://nshipster.cn/">NSHipster</a></li>
+                            <li><a href="http://www.ifun.cc">Haven's Blog</a></li>
+                            <li><a href="http://blog.rpplusplus.me/">txx's blog</a></li>
+                            <li><a href="http://randomk.gitcafe.com/">RandomK's Blog</a></li>
+                            <li><a href="http://swifter.tips/">swifter</a></li>
+                            <li><a href="http://beyondvincent.com/">破船之家</a></li>
+                            <li><a href="http://blog.csdn.net/proteas">Proteas的专栏</a></li>
+                            <li><a href="http://blog.csdn.net/mangosnow">车小松的技术博客</a></li>
+                            <li><a href="http://www.iwangke.me/">iWangKe.me</a></li>
+                            <li><a href="http://blog.sunnyxx.com/">@{blog: sunnyxx};</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://weibo.com/ychv">weibo</a></li>
+                            <li><a href="https://github.com/yangchenghu">github</a></li>
+                            <li><a href="http://about.me/chenghu">about</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-54504433-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'chenghu';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

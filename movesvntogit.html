@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Authors</title>
+        <title>MoveSVNToGit</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -19,14 +19,103 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
 <section id="content" class="body">
-    <h1>Authors on 小虎的博客</h1>
-    <ul>
-        <li><a href="./author/xiao-hu.html">小虎</a> (16)</li>
-    </ul>
-</section>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./movesvntogit.html" rel="bookmark"
+           title="Permalink to MoveSVNToGit">MoveSVNToGit</a></h1>
+    </header>
 
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-23T00:00:00+08:00">
+                Published: 一 23 十一月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/git.html">Git</a> </p>
+</footer><!-- /.post-info -->      <h1>迁移SVN到Git</h1>
+<p>1.先检出svn上所有提交过代码的用户名</p>
+<div class="highlight"><pre>svn log --xml | grep author | sort -u | perl -pe &#39;s/.&gt;(.?)&lt;./$1 = /&#39;
+</pre></div>
+
+
+<p>显示</p>
+<div class="highlight"><pre><span class="nt">&lt;author&gt;</span>chenghu<span class="nt">&lt;/author&gt;</span>
+</pre></div>
+
+
+<p>然后将这些用户名复制下来</p>
+<p>修改成以下形式，保存成user.txt</p>
+<div class="highlight"><pre>svn用户名 ＝ git用户名 &lt;git邮箱&gt;
+</pre></div>
+
+
+<p>如</p>
+<div class="highlight"><pre>chenghu ＝ 成虎 &lt;chenghu@chenghu.me&gt;
+</pre></div>
+
+
+<p>2.使用git-svn来拉取svn提交的记录，转换成git</p>
+<div class="highlight"><pre>git svn clone https://SVNserver/serverpatch/trunk --authors-file=users --no-metadata gitDir
+</pre></div>
+
+
+<p>当然，如果svn上面提交记录比较多的情况下，从第一次commit开始拉会比较慢，可以使用<code>-r</code>参数来指定开始拉取的那次svn编号开始。</p>
+<div class="highlight"><pre>git svn clone -r255:HEAD svn_repository_url
+</pre></div>
+
+
+<p>3.给git仓库添加远程仓库</p>
+<div class="highlight"><pre>git remote add origin http://gitserver/apps/myapp.git
+</pre></div>
+
+
+<p>4.推送代码到git仓库</p>
+<div class="highlight"><pre>git push origin master
+</pre></div>
+
+
+<p>这样就完成了从svn到git的迁移</p>
+<p>当然，一般刚迁移完，svn和git会并行一段时间，svn上提交的代码如何同步到git呢？</p>
+<p>1.拉取svn上新的提交</p>
+<div class="highlight"><pre>git svn fetch
+</pre></div>
+
+
+<p>2.合并到master分支</p>
+<p>拉取回来的代码处于一个单独的分支，可以使用 <code>git branch -a</code>来查看，有一个<code>git-svn</code>的分支。</p>
+<div class="highlight"><pre>git merge git-svn
+</pre></div>
+
+
+<p>3.推送代码</p>
+<p>使用<code>git log</code>查看是否已经有了svn上最新的提交记录，好了，可以将这些更新提交到git远程仓库了。</p>
+<div class="highlight"><pre>git push origin master
+</pre></div>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'movesvntogit.html';
+        var disqus_url = './movesvntogit.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

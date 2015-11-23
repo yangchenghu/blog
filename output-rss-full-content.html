@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Authors</title>
+        <title>output Rss Full content</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -19,14 +19,58 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
 <section id="content" class="body">
-    <h1>Authors on 小虎的博客</h1>
-    <ul>
-        <li><a href="./author/xiao-hu.html">小虎</a> (16)</li>
-    </ul>
-</section>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./output-rss-full-content.html" rel="bookmark"
+           title="Permalink to output Rss Full content">output Rss Full content</a></h1>
+    </header>
 
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-10-22T00:00:00+08:00">
+                Published: 四 22 十月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>Rss输出全文</h1>
+<p>自从下载了mac下的<code>reeder</code>，烧了FeedHQ，又开始对Rss开始迷恋了</p>
+<p>但发现有些Rss只能输出摘要，这个比较麻烦，还得去再点击一下，去访问网页的内容</p>
+<p>Reeder自动缓存的优势根本无法发挥。</p>
+<p>想了一个办法，就是用python，解析源Rss的路径，分析出链接，进入该链接，分析出文章的内容，然后将内容插入 <code>&lt;description&gt;</code>这个节点后面，命名为<code>&lt;content:encoded&gt;</code>。这样Rss阅读器就可以识别全文了。</p>
+<p>在搜索 python 解析Rss的时候，发现下面几个链接，分享个大家，可以做参考。</p>
+<p><a href="http://www.freezhongzi.info/?p=118">全文RSS输出程序</a></p>
+<p><a href="https://github.com/lbzhung/full_text_rss">full_text_rss</a></p>
+<p><a href="https://github.com/shoaly/2rss">2rss</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2010/04/the_solution_of_full_text_feed.html">全文Feed的终极解决方案</a></p>
+<p><a href="http://phyng.com/2014-10-01-rss-xml.html">Python 处理 XML/RSS 的一些经验</a></p>
+<p><a href="http://fivefilters.org/content-only/">fivefilters.org</a></p>
+<p><a href="http://developer.51cto.com/art/201002/185399.htm">浅析Python RSS文件功能介绍</a></p>
+<p><a href="http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/">使用 Python 轻松抓取网页</a></p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'output-rss-full-content.html';
+        var disqus_url = './output-rss-full-content.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

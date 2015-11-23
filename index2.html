@@ -24,6 +24,113 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="./fixed-linode-error.html" rel="bookmark"
+                           title="Permalink to Fixed Linode Error">Fixed Linode Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/linode.html">Linode</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复Linode error</h1>
+<p>今天ss老是报错误<code>ERROR: remote_recv_cb_recv: Connection reset by peer</code>，ssh上不去。</p>
+<p>就重启了一下Linode，结果就ssh过不去了，ss也没有好。悲剧了</p>
+<p>登录Linode后台，发现CPU老100%，不知道哪里的事情，关键ssh进不去，着急。</p>
+<p>没办法，只好写Ticket找技术人员帮忙。</p>
+<p>用蹩脚的英文描述了半天，对方实在不理解，总是几句标准客服回复，估计那边的技术还没上班，客服在扛着。</p>
+<p>看来只能自己动手了</p>
+<p>在<code>Dashboard</code>中查找有用的东西</p>
+<p>看到<code>Remote access</code>中发现了<code>Console Access</code>点击发现是一个web版的console</p>
+<p>看到我前两天搭建的<code>ocserv</code>在处理一个ca证书，然后就没有然后了，输入啥都不行</p>
+<p>看来是<code>ocserv</code>出了问题，没办法，再找找吧</p>
+<p>看到一个<code>Rescue</code>选项卡 ...</p>
+                <a class="readmore" href="./fixed-linode-error.html">read more</a>
+<p>There are <a href="./fixed-linode-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./kill-mac-qq-capture-function.html" rel="bookmark"
+                           title="Permalink to Kill Mac QQ Capture Function">Kill Mac QQ Capture Function</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-13T00:00:00+08:00">
+                Published: 五 13 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/mac.html">Mac</a> <a href="./tag/qq.html">QQ</a> <a href="./tag/capture.html">Capture</a> </p>
+</footer><!-- /.post-info -->                <h1>干掉Mac QQ的自动截图程序</h1>
+<p>今天安装了Mac的企业QQ</p>
+<p>但在使用Mail的时候发现同时按<code>commond+control+a</code>进行归档邮件的时候</p>
+<p>居然弹出QQ的截图程序，烦躁</p>
+<p>最讨厌其他程序抢占系统的快捷键，而且Mac本身的截图就很好用了</p>
+<p>准备搞掉Mac QQ的截图程序。</p>
+<p>在<code>Activity Monitor</code>中盲搜了一下<code>Capture</code>，果然发现两个进程</p>
+<div class="highlight"><pre>ScreenCaptureEIM
+Image Capture Extension
+</pre></div>
+
+
+<p>之前安装企业QQ的时候记得就叫EIM QQ</p>
+<p>好吧，那估计就是那个<code>ScreenCaptureEIM</code>进程了，果断<code>kill</code>掉，居然又启动了</p>
+<p>好吧，看来是加载了后台自启动，看一下<code>launchctl list</code>，果然有</p>
+<div class="highlight"><pre>com.tencent.ScreenCaptureEIM
+</pre></div>
+
+
+<p>先关掉自启动吧<code>launchctl stop com.tencent.ScreenCaptureEIM</code></p>
+<p>然后在 ...</p>
+                <a class="readmore" href="./kill-mac-qq-capture-function.html">read more</a>
+<p>There are <a href="./kill-mac-qq-capture-function.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./fixed-svn-did-not-show-histoy-error.html" rel="bookmark"
+                           title="Permalink to Fixed SVN did not show histoy Error">Fixed SVN did not show histoy Error</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-11T00:00:00+08:00">
+                Published: 三 11 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/error.html">Error</a> </p>
+</footer><!-- /.post-info -->                <h1>修复SVN 不显示Timeline的bug</h1>
+<p>之前在Linode上搭建了Svn server<br>
+但总是不能用客户端看到提交的Timeline<br>
+郁闷<br>
+今天决定搞掉这个bug<br></p>
+<p>查看<code>Revert to Revision</code>结果现实了 <code>Unreadable path encountered; access denied;</code>这个错误。</p>
+<p>google了一下这个bug，找到一篇文章，<a href="http://haitao.iteye.com/blog/1440066">原文在这里</a></p>
+<p>发现是Server的配置出了问题。</p>
+<p>ssh上去找到SVN的目录下的<code>conf/svnserve.conf</code></p>
+<p>设置<code>anon-access = none</code></p>
+<p>然后重启SVN Server就好了</p>
+                <a class="readmore" href="./fixed-svn-did-not-show-histoy-error.html">read more</a>
+<p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
                            title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
                 </header>
