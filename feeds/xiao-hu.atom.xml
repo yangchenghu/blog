@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-11-23T00:00:00+08:00</updated><entry><title>MoveSVNToGit</title><link href="http://blog.chenghu.me/movesvntogit.html" rel="alternate"></link><updated>2015-11-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-11-23:movesvntogit.html</id><summary type="html">&lt;h1&gt;迁移SVN到Git&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-11-23T00:00:00+08:00</updated><entry><title>GitCloneSubDirectory</title><link href="http://blog.chenghu.me/gitclonesubdirectory.html" rel="alternate"></link><updated>2015-11-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-11-23:gitclonesubdirectory.html</id><summary type="html">&lt;h1&gt;Git Clone子目录&lt;/h1&gt;
+&lt;p&gt;今天去clone git仓库，发现仓库下包含了iOS的代码文件夹和Android的代码文件夹两个。感觉我也不会去修改Android的代码，clone下来也浪费地方，但是，svn可以只checkout一个目录，git好像只能clone整个仓库。&lt;/p&gt;
+&lt;p&gt;找了一下，可以使用git的Sparse Checkout配置来只checkout单独的子目录。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git clone git@gitlab:apps/myApp.git --no-checkout
+cd myApp
+git config core.sparsecheckout true
+echo &amp;quot;iOS/&amp;quot; &amp;gt; .git/info/sparse-checkout
+git checkout --
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Git"></category></entry><entry><title>MoveSVNToGit</title><link href="http://blog.chenghu.me/movesvntogit.html" rel="alternate"></link><updated>2015-11-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-11-23:movesvntogit.html</id><summary type="html">&lt;h1&gt;迁移SVN到Git&lt;/h1&gt;
 &lt;p&gt;1.先检出svn上所有提交过代码的用户名&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;svn log --xml | grep author | sort -u | perl -pe &amp;#39;s/.&amp;gt;(.?)&amp;lt;./$1 = /&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;

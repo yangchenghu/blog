@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
+        <title>GitCloneSubDirectory</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -20,44 +20,51 @@
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
-<h1>Archives for 小虎的博客</h1>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./gitclonesubdirectory.html" rel="bookmark"
+           title="Permalink to GitCloneSubDirectory">GitCloneSubDirectory</a></h1>
+    </header>
 
-<dl>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./gitclonesubdirectory.html">GitCloneSubDirectory</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./movesvntogit.html">MoveSVNToGit</a></dd>
-    <dt>二 03 十一月 2015</dt>
-    <dd><a href="./2015-11-03.html">2015-11-03</a></dd>
-    <dt>四 22 十月 2015</dt>
-    <dd><a href="./output-rss-full-content.html">output Rss Full content</a></dd>
-    <dt>三 23 九月 2015</dt>
-    <dd><a href="./setup-l2tp-and-ipsec-vpn.html">Setup L2TP And IPSEC VPN</a></dd>
-    <dt>六 08 八月 2015</dt>
-    <dd><a href="./git-operation.html">Git operation</a></dd>
-    <dt>日 26 四月 2015</dt>
-    <dd><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias.html">Add Shell Alias</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias-on-mac.html">Add Shell Alias on mac</a></dd>
-    <dt>三 18 三月 2015</dt>
-    <dd><a href="./ios-anti-fildder-capture-https-data.html">iOS Anti Fildder Capture Https Data</a></dd>
-    <dt>六 14 三月 2015</dt>
-    <dd><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./fixed-linode-error.html">Fixed Linode Error</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></dd>
-    <dt>三 11 三月 2015</dt>
-    <dd><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></dd>
-    <dt>日 15 二月 2015</dt>
-    <dd><a href="./fixed-cocoapods-error.html">Fixed Cocoapods Error</a></dd>
-    <dt>二 21 十月 2014</dt>
-    <dd><a href="./hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></dd>
-    <dt>二 09 九月 2014</dt>
-    <dd><a href="./bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></dd>
-</dl>
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-23T00:00:00+08:00">
+                Published: 一 23 十一月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/git.html">Git</a> </p>
+</footer><!-- /.post-info -->      <h1>Git Clone子目录</h1>
+<p>今天去clone git仓库，发现仓库下包含了iOS的代码文件夹和Android的代码文件夹两个。感觉我也不会去修改Android的代码，clone下来也浪费地方，但是，svn可以只checkout一个目录，git好像只能clone整个仓库。</p>
+<p>找了一下，可以使用git的Sparse Checkout配置来只checkout单独的子目录。</p>
+<div class="highlight"><pre>git clone git@gitlab:apps/myApp.git --no-checkout
+cd myApp
+git config core.sparsecheckout true
+echo &quot;iOS/&quot; &gt; .git/info/sparse-checkout
+git checkout --
+</pre></div>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'gitclonesubdirectory.html';
+        var disqus_url = './gitclonesubdirectory.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
