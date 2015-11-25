@@ -66,7 +66,8 @@ git checkout --
 <p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/svn.html">SVN</a> <a href="../tag/git.html">Git</a> </p>
 </footer><!-- /.post-info -->                <h1>迁移SVN到Git</h1>
-<p>1.先检出svn上所有提交过代码的用户名</p>
+<p>1.创建用户映射</p>
+<p>检出svn上所有提交过代码的用户名</p>
 <div class="highlight"><pre>svn log --xml | grep author | sort -u | perl -pe &#39;s/.&gt;(.?)&lt;./$1 = /&#39;
 </pre></div>
 
@@ -83,16 +84,17 @@ git checkout --
 
 
 <p>如</p>
-<div class="highlight"><pre>chenghu ＝ 成虎 &lt;chenghu@chenghu.me&gt;
+<div class="highlight"><pre>chenghu ＝ 小虎 &lt;chenghu@chenghu.me&gt;
 </pre></div>
 
 
-<p>2.使用git-svn来拉取svn提交的记录，转换成git</p>
-<div class="highlight"><pre>git svn clone https://SVNserver/serverpatch/trunk --authors-file=users --no-metadata gitDir
+<p>2.拉取SVN的commit纪录</p>
+<p>使用git-svn来拉取svn提交的记录，转换成git</p>
+<div class="highlight"><pre>git svn clone https://SVNserver/serverpatch/trunk --authors-file=users.txt --no-metadata gitDir
 </pre></div>
 
 
-<p>当然，如果svn上面提交记录比较多的情况下，从第一次commit开始拉会比较慢，可以使用<code>-r ...</code></p>
+<p>当然，如果svn上面提交记录比较多的情况下 ...</p>
                 <a class="readmore" href="../movesvntogit.html">read more</a>
 <p>There are <a href="../movesvntogit.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>

@@ -8,7 +8,8 @@ git config core.sparsecheckout true
 echo &amp;quot;iOS/&amp;quot; &amp;gt; .git/info/sparse-checkout
 git checkout --
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="Git"></category></entry><entry><title>MoveSVNToGit</title><link href="http://blog.chenghu.me/movesvntogit.html" rel="alternate"></link><updated>2015-11-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-11-23:movesvntogit.html</id><summary type="html">&lt;h1&gt;迁移SVN到Git&lt;/h1&gt;
-&lt;p&gt;1.先检出svn上所有提交过代码的用户名&lt;/p&gt;
+&lt;p&gt;1.创建用户映射&lt;/p&gt;
+&lt;p&gt;检出svn上所有提交过代码的用户名&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;svn log --xml | grep author | sort -u | perl -pe &amp;#39;s/.&amp;gt;(.?)&amp;lt;./$1 = /&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -25,12 +26,13 @@ git checkout --
 
 
 &lt;p&gt;如&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;chenghu ＝ 成虎 &amp;lt;chenghu@chenghu.me&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;chenghu ＝ 小虎 &amp;lt;chenghu@chenghu.me&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;2.使用git-svn来拉取svn提交的记录，转换成git&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;git svn clone https://SVNserver/serverpatch/trunk --authors-file=users --no-metadata gitDir
+&lt;p&gt;2.拉取SVN的commit纪录&lt;/p&gt;
+&lt;p&gt;使用git-svn来拉取svn提交的记录，转换成git&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git svn clone https://SVNserver/serverpatch/trunk --authors-file=users.txt --no-metadata gitDir
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -39,12 +41,12 @@ git checkout --
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;3.给git仓库添加远程仓库&lt;/p&gt;
+&lt;p&gt;3.添加Git远程仓库&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;git remote add origin http://gitserver/apps/myapp.git
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;4.推送代码到git仓库&lt;/p&gt;
+&lt;p&gt;4.推送代码到Git仓库&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;git push origin master
 &lt;/pre&gt;&lt;/div&gt;
 
