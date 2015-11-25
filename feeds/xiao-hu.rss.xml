@@ -67,7 +67,18 @@ git checkout --
 &lt;p&gt;3.推送代码&lt;/p&gt;
 &lt;p&gt;使用&lt;code&gt;git log&lt;/code&gt;查看是否已经有了svn上最新的提交记录，好了，可以将这些更新提交到git远程仓库了。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;git push origin master
-&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Mon, 23 Nov 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-11-23:movesvntogit.html</guid><category>SVN</category><category>Git</category></item><item><title>2015-11-03</title><link>http://blog.chenghu.me/2015-11-03.html</link><description>&lt;h1&gt;2015-11-03&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;相关文章&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/cctt_1/article/details/41317419"&gt;坑死人不偿命，svn 迁移到 git&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.csdn.net/zhangskd/article/details/43452627"&gt;GIT版本控制 — GIT与SVN的相互转换 (三)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://zengrong.net/post/1288.htm"&gt;移动git管理的svn版本库的路径&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.blogjava.net/lishunli/archive/2012/01/15/368562.html"&gt;SVN迁移到Git的过程（+ 一些技巧）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://rubynroll.iteye.com/blog/203133"&gt;SVN+GIT=鱼与熊掌兼得&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.ooso.net/archives/576"&gt;git svn实战&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.aikaiyuan.com/6584.html"&gt;svn 迁移到git下全过程&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Mon, 23 Nov 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-11-23:movesvntogit.html</guid><category>SVN</category><category>Git</category></item><item><title>2015-11-03</title><link>http://blog.chenghu.me/2015-11-03.html</link><description>&lt;h1&gt;2015-11-03&lt;/h1&gt;
 &lt;p&gt;&lt;span id="jump"&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;h1&gt;目录&lt;/h1&gt;
 &lt;ol&gt;
