@@ -18,7 +18,7 @@
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 
  - 期望职位：iOS高级程序员，应用架构师
- - 期望薪资：税前月薪25k，特别喜欢的公司可面议
+ - 期望薪资：税前月薪30k～50k
  - 期望城市：北京
 
 ---
@@ -27,9 +27,14 @@
 
 ## Sina公司 （ 2013年5月 ~ 今 ）
 
+## 新浪汽车试驾 － 我试试
+
+在该项目中作为项目负责人，带iOS和安卓两个team，尝试使用ReactNative框架搭建了个人中心页面。
+
+
 ## 新浪内部移动办公系统
 
-在此项目中设计了一套二维码扫描登录系统，推送登录系统，底层数据加密，原生程序与Html5页面交互，正在使用xmppframework搭建及时通讯系统。
+在此项目中设计了一套二维码扫描登录系统，推送登录系统，底层数据加密，原生程序与Html5页面交互，嵌入jspatch框架，正在使用xmppframework搭建及时通讯系统。
 
 
 ### 新浪微盾  
@@ -101,6 +106,8 @@
 - HomeBrew
 - CocoaPod
 - XMPPFramework
+- JSPatch
+- ReactNative
 
 ###业余
 
