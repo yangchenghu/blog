@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Authors</title>
-        <link rel="stylesheet" href="./theme/css/main.css" />
+        <title>小虎的博客 - RN</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,21 +12,39 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">小虎的博客 </a></h1>
+                <h1><a href="../">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
-                    <li><a href="./pages/about.html">About</a></li>
-                    <li><a href="./pages/toys.html">Toys</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
-<section id="content" class="body">
-    <h1>Authors on 小虎的博客</h1>
-    <ul>
-        <li><a href="./author/xiao-hu.html">小虎</a> (19)</li>
-    </ul>
-</section>
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../reactnative-errors-notes.html">ReactNative Errors notes</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-23T00:00:00+08:00">
+                Published: 三 23 十二月 2015
+        </abbr>
 
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/rn.html">RN</a> </p>
+</footer><!-- /.post-info --><h1>ReactNative错误记录</h1>
+<div class="highlight"><pre>2015-12-23 10:30:27.482 [error][tid:com.facebook.React.RCTExceptionsManagerQueue] Unhandled JS Exception: Requiring unknown module &quot;image!cellicon&quot;. If you are sure the module is there, try restarting the packager.
+If you are sure the module is there, try restarting the packager.
+</pre></div>
+
+
+<p><img alt="image require error" src="http://yimagecache.qiniudn.com/rn_imagerequireerror.png" /></p>
+<p>在引入image，使用require静态图片的时候，require('image!imagename')这样可以
+但是，使用require('image!' + celldata.imagename)这种方式就会报这个错误</p>
+<p><a href="https://github.com/facebook/react-native/issues/2481#issuecomment-160603088">来源</a></p>
+<hr /><p>There are <a href="../reactnative-errors-notes.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
