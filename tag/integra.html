@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+        <title>小虎的博客 - integra</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="../">小虎的博客 </a></h1>
+                <nav><ul>
+                    <li><a href="/">HomePage</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../react-nativeintegrating-with-existing-apps.html">React-Native:Integrating with Existing Apps</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-26T00:00:00+08:00">
+                Published: 六 26 十二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/reactnative.html">ReactNative</a> <a href="../tag/ios.html">iOS</a> <a href="../tag/app.html">App</a> <a href="../tag/integra.html">integra</a> <a href="../tag/ji-cheng.html">集成</a> </p>
+</footer><!-- /.post-info --><h1>React-Native 教程 1 ： 集成React-Native到现有的iOS项目中</h1>
+<p>最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。</p>
+<h1>官方集成方式</h1>
+<p>对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。</p>
+<p><a href="http://facebook.github.io/react-native/docs/embedded-app-ios.html#content">Integrating with Existing Apps</a></p>
+<p><a href="http://reactnative.cn/docs/embedded-app-ios.html#content">中文翻译</a></p>
+<p>1.在工程目录下新建<code>podfile</code>，填入以下内容</p>
+<div class="highlight"><pre>    # 取决于你的工程如何组织，你的node_modules文件夹可能会在别的地方。
+    # 请将:path后面的内容修改为正确的路径。
+
+pod &#39;React&#39;, :path =&gt; &#39;../node_modules/react-native&#39;, :subspecs =&gt; [
+  &#39;Core&#39;,
+  &#39;RCTImage&#39;,
+  &#39;RCTNetwork&#39;,
+  &#39;RCTText&#39;,
+  &#39;RCTWebSocket&#39;,
+  # 添加其他你想在工程中使用的依赖。
+]
+</pre></div>
+
+
+<p>2.使用<code>pod install</code>来安装React-Native.</p>
+<p>3.在项目目录下使用如下命令来启动服务。</p>
+<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
+</pre></div>
+
+
+<p>但这样集成的话，会有一个缺点，就是在pod上的React-Native的版本还在<code>0.13.0-rc</code>版本，但在github上的版本已经到了<code>0.17.0</code>。</p>
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_podrnversion.png" /></p>
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_githubversion.png" /></p>
+<p>还有一个问题就是我们目前的工程没有使用<code>Cocoapod</code>。那该如何手动集成呢？</p>
+<h1>手动集成</h1>
+<p>花了两天的时间，找到一个手动集成React-Native的方式，虽然稍微复杂一点，但可以保持使用官方的最新版本。</p>
+<p>1.由于目前的项目是使用的git管理的，可以将React-Native的仓库作为一个submodule添加到项目的仓库下。</p>
+<div class="highlight"><pre>git submodule add https://github.com/facebook/react-native.git
+</pre></div>
+
+
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_gitsubmodule.png" /></p>
+<p>2.进入<code>react-native</code>目录下，切换到最新发布的版本</p>
+<div class="highlight"><pre>cd react-native
+git checkout -b 017ReleaseVersion v0.17.0
+</pre></div>
+
+
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_017version.png" /></p>
+<p>3.安装组件</p>
+<div class="highlight"><pre>npm install
+</pre></div>
+
+
+<p>4.在工程目录下创建js的文件夹，并创建<code>index.ios.js</code>。</p>
+<div class="highlight"><pre>cd ..
+mkdir ReactComponent
+touch ReactComponent/index.ios.js
+</pre></div>
+
+
+<p>5.打开工程，添加React-Native相关工程。</p>
+<div class="highlight"><pre>添加`react-native/React/React.xcodeproj`到项目中
+添加`react-native/Libraries／ActionSheetIOS/RCTActionSheet.xcodeproj`到项目中
+添加`react-native/Libraries／LinkingIOS/RCTLinking.xcodeproj`到项目中
+添加`react-native/Libraries／Image/RCTImage.xcodeproj`到项目中
+添加`react-native/Libraries／Network/RCTNetwork.xcodeproj`到项目中
+添加`react-native/Libraries／Text/RCTText.xcodeproj`到项目中
+添加`react-native/Libraries／WebSocket/RCTWebSocket.xcodeproj`到项目中
+</pre></div>
+
+
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addproject.png" /></p>
+<p>6.在工程的设置页面添加需要连接到Frameworks</p>
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addframeworks.png" /></p>
+<p>7.添加搜索头文件的地址。在工程的<code>Build Settings</code>找到<code>Header Search Paths</code>，添加一条<code>$(SRCROOT)/react-native/React</code>，选择<code>recursive</code></p>
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addsearchpath.png" /></p>
+<p>这样就将React-Native集成到了现有的iOS工程中了。</p>
+<h1>启动服务</h1>
+<p>使用这种方式我们该如何启动服务呢？</p>
+<p>我们先看一下Cocoapods如何启动的。</p>
+<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
+</pre></div>
+
+
+<p>这里一共执行了三条命令。</p>
+<ol>
+<li><code>JS_DIR=</code>pwd<code>/ReactComponent</code>找到放js的文件夹，保存到<code>JS_DIR</code>这个变量中。</li>
+<li><code>cd Pods/React</code> 进入<code>react</code>目录下。</li>
+<li><code>npm run start -- --root $JS_DIR</code> 将存放js文件的目录作为<code>--root</code>参数，然后使用<code>npm run start</code>启动服务。</li>
+</ol>
+<p>我们主要放React的目录不同，所以只要简单修改一下第二条命令就可以了</p>
+<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd react-native/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_startserver.png" /></p>
+<h1>添加React-Native页面</h1>
+<p>1.在iOS工程中创建<code>ReactView</code>类</p>
+<p>2.在<code>ReactView.m</code>中<code>#import "RCTRootView.h"</code></p>
+<p>3.在<code>- (instancetype)initWithFrame:(CGRect)frame</code>添加如下代码NSString * strUrl = @"http://localhost:8081/index.ios.bundle?platform=ios&amp;dev=true";</p>
+<div class="highlight"><pre><span class="bp">NSURL</span> <span class="o">*</span> <span class="n">jsCodeLocation</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSURL</span> <span class="nl">URLWithString</span><span class="p">:</span><span class="n">strUrl</span><span class="p">];</span>
+
+<span class="n">RCTRootView</span> <span class="o">*</span> <span class="n">rootView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">RCTRootView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBundleURL</span><span class="p">:</span><span class="n">jsCodeLocation</span>
+                                                     <span class="nl">moduleName</span><span class="p">:</span><span class="s">@&quot;SimpleApp&quot;</span>
+                                              <span class="nl">initialProperties</span><span class="p">:</span><span class="nb">nil</span>
+                                                  <span class="nl">launchOptions</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+
+<span class="p">[</span><span class="nb">self</span> <span class="nl">addSubview</span><span class="p">:</span><span class="n">rootView</span><span class="p">];</span>
+
+<span class="n">rootView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">;</span>
+</pre></div>
+
+
+<p>4.在ViewController的<code>- (void)viewDidLoad</code>方法中创建<code>ReactView</code></p>
+<div class="highlight"><pre><span class="n">ReactView</span> <span class="o">*</span> <span class="n">reactView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ReactView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span><span class="p">),</span> <span class="mi">100</span><span class="p">)];</span>
+
+<span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview</span><span class="p">:</span><span class="n">reactView</span><span class="p">];</span>
+</pre></div>
+
+
+<p>5.我们将下面代码添加到<code>ReactComponent\index.ios.js</code>文件中</p>
+<div class="highlight"><pre>&#39;use strict&#39;;
+
+var React = require(&#39;react-native&#39;);
+var {
+  Text,
+  View,
+  Image,
+} = React;
+
+var styles = React.StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: &#39;red&#39;
+  }
+});
+
+class SimpleApp extends React.Component {
+  render() {
+    return (
+      <span class="nt">&lt;View</span> <span class="na">style=</span><span class="s">{styles.container}</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Text&gt;</span>This is a simple application.<span class="nt">&lt;/Text&gt;</span>
+      <span class="nt">&lt;/View&gt;</span>
+    )
+  }
+}
+
+React.AppRegistry.registerComponent(&#39;SimpleApp&#39;, () =&gt; SimpleApp);
+</pre></div>
+
+
+<p>然后我们运行一下程序。</p>
+<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /></p>
+<p>项目在github上面，<a href="https://github.com/yangchenghu/ReactNativeIntegrating">地址</a></p><p>There are <a href="../react-nativeintegrating-with-existing-apps.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com">Pelican</a></li>
+                            <li><a href="http://python.org">Python.org</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://msching.github.io">码农人生</a></li>
+                            <li><a href="http://blog.cnbang.net">bang's blog</a></li>
+                            <li><a href="http://geeklu.com">Luke's Homepage</a></li>
+                            <li><a href="http://www.hotobear.com">不掏蜂窝的熊</a></li>
+                            <li><a href="http://evilcos.me/">余弦</a></li>
+                            <li><a href="http://blog.csdn.net/yiyaaixuexi">念茜的博客</a></li>
+                            <li><a href="http://blog.csdn.net/guiguzi1110">听鬼哥说故事</a></li>
+                            <li><a href="http://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+                            <li><a href="http://www.lizherui.com/">lizherui的程序世界</a></li>
+                            <li><a href="http://www.pchou.info">P_Chou Tech Space</a></li>
+                            <li><a href="http://www.jianshu.com/users/c30afb47d730/latest_articles">Feat</a></li>
+                            <li><a href="http://nshipster.cn/">NSHipster</a></li>
+                            <li><a href="http://www.ifun.cc">Haven's Blog</a></li>
+                            <li><a href="http://blog.rpplusplus.me/">txx's blog</a></li>
+                            <li><a href="http://randomk.gitcafe.com/">RandomK's Blog</a></li>
+                            <li><a href="http://swifter.tips/">swifter</a></li>
+                            <li><a href="http://beyondvincent.com/">破船之家</a></li>
+                            <li><a href="http://blog.csdn.net/proteas">Proteas的专栏</a></li>
+                            <li><a href="http://blog.csdn.net/mangosnow">车小松的技术博客</a></li>
+                            <li><a href="http://www.iwangke.me/">iWangKe.me</a></li>
+                            <li><a href="http://blog.sunnyxx.com/">@{blog: sunnyxx};</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://weibo.com/ychv">weibo</a></li>
+                            <li><a href="https://github.com/yangchenghu">github</a></li>
+                            <li><a href="http://about.me/chenghu">about</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-54504433-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'chenghu';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

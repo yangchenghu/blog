@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-12-23T00:00:00+08:00</updated><entry><title>ReactNative Errors notes</title><link href="http://blog.chenghu.me/reactnative-errors-notes.html" rel="alternate"></link><updated>2015-12-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-23:reactnative-errors-notes.html</id><summary type="html">&lt;h1&gt;ReactNative错误记录&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-12-26T00:00:00+08:00</updated><entry><title>React-Native:Integrating with Existing Apps</title><link href="http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html" rel="alternate"></link><updated>2015-12-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</id><summary type="html">&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
+&lt;p&gt;最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。&lt;/p&gt;
+&lt;h1&gt;官方集成方式&lt;/h1&gt;
+&lt;p&gt;对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://facebook.github.io/react-native/docs/embedded-app-ios.html#content"&gt;Integrating with Existing Apps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://reactnative.cn/docs/embedded-app-ios.html#content"&gt;中文翻译&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.在工程目录下新建&lt;code&gt;podfile&lt;/code&gt;，填入以下内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    # 取决于你的工程如何组织，你的node_modules文件夹可能会在别的地方。
+    # 请将:path后面的内容修改为正确的路径。
+
+pod &amp;#39;React&amp;#39;, :path =&amp;gt; &amp;#39;../node_modules/react-native&amp;#39;, :subspecs =&amp;gt; [
+  &amp;#39;Core&amp;#39;,
+  &amp;#39;RCTImage&amp;#39;,
+  &amp;#39;RCTNetwork&amp;#39;,
+  &amp;#39;RCTText&amp;#39;,
+  &amp;#39;RCTWebSocket&amp;#39;,
+  # 添加其他你想在工程中使用的依赖。
+]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.使用&lt;code&gt;pod install&lt;/code&gt;来安装React-Native.&lt;/p&gt;
+&lt;p&gt;3.在项目目录下使用如下命令来启动服务。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;JS_DIR&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;但这样集成的话，会有一个缺点，就是在pod上的React-Native的版本还在&lt;code&gt;0.13.0-rc&lt;/code&gt;版本，但在github上的版本已经到了&lt;code&gt;0.17.0&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_podrnversion.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_githubversion.png" /&gt;&lt;/p&gt;
+&lt;p&gt;还有一个问题就是我们目前的工程没有使用&lt;code&gt;Cocoapod&lt;/code&gt;。那该如何手动集成呢？&lt;/p&gt;
+&lt;h1&gt;手动集成&lt;/h1&gt;
+&lt;p&gt;花了两天的时间，找到一个手动集成React-Native的方式，虽然稍微复杂一点，但可以保持使用官方的最新版本。&lt;/p&gt;
+&lt;p&gt;1.由于目前的项目是使用的git管理的，可以将React-Native的仓库作为一个submodule添加到项目的仓库下。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git submodule add https://github.com/facebook/react-native.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_gitsubmodule.png" /&gt;&lt;/p&gt;
+&lt;p&gt;2.进入&lt;code&gt;react-native&lt;/code&gt;目录下，切换到最新发布的版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd react-native
+git checkout -b 017ReleaseVersion v0.17.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_017version.png" /&gt;&lt;/p&gt;
+&lt;p&gt;3.安装组件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;npm install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.在工程目录下创建js的文件夹，并创建&lt;code&gt;index.ios.js&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd ..
+mkdir ReactComponent
+touch ReactComponent/index.ios.js
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5.打开工程，添加React-Native相关工程。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;添加`react-native/React/React.xcodeproj`到项目中
+添加`react-native/Libraries／ActionSheetIOS/RCTActionSheet.xcodeproj`到项目中
+添加`react-native/Libraries／LinkingIOS/RCTLinking.xcodeproj`到项目中
+添加`react-native/Libraries／Image/RCTImage.xcodeproj`到项目中
+添加`react-native/Libraries／Network/RCTNetwork.xcodeproj`到项目中
+添加`react-native/Libraries／Text/RCTText.xcodeproj`到项目中
+添加`react-native/Libraries／WebSocket/RCTWebSocket.xcodeproj`到项目中
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_addproject.png" /&gt;&lt;/p&gt;
+&lt;p&gt;6.在工程的设置页面添加需要连接到Frameworks&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_addframeworks.png" /&gt;&lt;/p&gt;
+&lt;p&gt;7.添加搜索头文件的地址。在工程的&lt;code&gt;Build Settings&lt;/code&gt;找到&lt;code&gt;Header Search Paths&lt;/code&gt;，添加一条&lt;code&gt;$(SRCROOT)/react-native/React&lt;/code&gt;，选择&lt;code&gt;recursive&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_addsearchpath.png" /&gt;&lt;/p&gt;
+&lt;p&gt;这样就将React-Native集成到了现有的iOS工程中了。&lt;/p&gt;
+&lt;h1&gt;启动服务&lt;/h1&gt;
+&lt;p&gt;使用这种方式我们该如何启动服务呢？&lt;/p&gt;
+&lt;p&gt;我们先看一下Cocoapods如何启动的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;JS_DIR&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里一共执行了三条命令。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;JS_DIR=&lt;/code&gt;pwd&lt;code&gt;/ReactComponent&lt;/code&gt;找到放js的文件夹，保存到&lt;code&gt;JS_DIR&lt;/code&gt;这个变量中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd Pods/React&lt;/code&gt; 进入&lt;code&gt;react&lt;/code&gt;目录下。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;npm run start -- --root $JS_DIR&lt;/code&gt; 将存放js文件的目录作为&lt;code&gt;--root&lt;/code&gt;参数，然后使用&lt;code&gt;npm run start&lt;/code&gt;启动服务。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们主要放React的目录不同，所以只要简单修改一下第二条命令就可以了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;(JS_DIR=`pwd`/ReactComponent; cd react-native/React; npm run start -- --root &lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;JS_DIR&lt;/span&gt;&lt;span class="x"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_startserver.png" /&gt;&lt;/p&gt;
+&lt;h1&gt;添加React-Native页面&lt;/h1&gt;
+&lt;p&gt;1.在iOS工程中创建&lt;code&gt;ReactView&lt;/code&gt;类&lt;/p&gt;
+&lt;p&gt;2.在&lt;code&gt;ReactView.m&lt;/code&gt;中&lt;code&gt;#import "RCTRootView.h"&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;3.在&lt;code&gt;- (instancetype)initWithFrame:(CGRect)frame&lt;/code&gt;添加如下代码NSString * strUrl = @"http://localhost:8081/index.ios.bundle?platform=ios&amp;amp;dev=true";&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="bp"&gt;NSURL&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;jsCodeLocation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;NSURL&lt;/span&gt; &lt;span class="nl"&gt;URLWithString&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;strUrl&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+&lt;span class="n"&gt;RCTRootView&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;rootView&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;RCTRootView&lt;/span&gt; &lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nl"&gt;initWithBundleURL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;jsCodeLocation&lt;/span&gt;
+                                                     &lt;span class="nl"&gt;moduleName&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;SimpleApp&amp;quot;&lt;/span&gt;
+                                              &lt;span class="nl"&gt;initialProperties&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;nil&lt;/span&gt;
+                                                  &lt;span class="nl"&gt;launchOptions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;self&lt;/span&gt; &lt;span class="nl"&gt;addSubview&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;rootView&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+
+&lt;span class="n"&gt;rootView&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bounds&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.在ViewController的&lt;code&gt;- (void)viewDidLoad&lt;/code&gt;方法中创建&lt;code&gt;ReactView&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ReactView&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;reactView&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;ReactView&lt;/span&gt; &lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nl"&gt;initWithFrame&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;CGRectMake&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;CGRectGetWidth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bounds&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
+
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="nl"&gt;addSubview&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;reactView&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5.我们将下面代码添加到&lt;code&gt;ReactComponent\index.ios.js&lt;/code&gt;文件中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;#39;use strict&amp;#39;;
+
+var React = require(&amp;#39;react-native&amp;#39;);
+var {
+  Text,
+  View,
+  Image,
+} = React;
+
+var styles = React.StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: &amp;#39;red&amp;#39;
+  }
+});
+
+class SimpleApp extends React.Component {
+  render() {
+    return (
+      &lt;span class="nt"&gt;&amp;lt;View&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.container}&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;Text&amp;gt;&lt;/span&gt;This is a simple application.&lt;span class="nt"&gt;&amp;lt;/Text&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/View&amp;gt;&lt;/span&gt;
+    )
+  }
+}
+
+React.AppRegistry.registerComponent(&amp;#39;SimpleApp&amp;#39;, () =&amp;gt; SimpleApp);
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后我们运行一下程序。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /&gt;&lt;/p&gt;
+&lt;p&gt;项目在github上面，&lt;a href="https://github.com/yangchenghu/ReactNativeIntegrating"&gt;地址&lt;/a&gt;&lt;/p&gt;</summary><category term="ReactNative"></category><category term="iOS"></category><category term="App"></category><category term="integra"></category><category term="集成"></category></entry><entry><title>ReactNative Errors notes</title><link href="http://blog.chenghu.me/reactnative-errors-notes.html" rel="alternate"></link><updated>2015-12-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-23:reactnative-errors-notes.html</id><summary type="html">&lt;h1&gt;ReactNative错误记录&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;2015-12-23 10:30:27.482 [error][tid:com.facebook.React.RCTExceptionsManagerQueue] Unhandled JS Exception: Requiring unknown module &amp;quot;image!cellicon&amp;quot;. If you are sure the module is there, try restarting the packager.
 If you are sure the module is there, try restarting the packager.
 &lt;/pre&gt;&lt;/div&gt;
