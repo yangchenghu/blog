@@ -54,7 +54,64 @@
 
 
 &lt;p&gt;&lt;img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_sucess.png" /&gt;&lt;/p&gt;
-&lt;p&gt;ok，成功！&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sun, 03 Jan 2016 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2016-01-03:install-golang-to-ubuntu.html</guid><category>golang</category><category>ubuntu</category></item><item><title>React-Native:Integrating with Existing Apps</title><link>http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html</link><description>&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
+&lt;p&gt;ok，成功！&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sun, 03 Jan 2016 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2016-01-03:install-golang-to-ubuntu.html</guid><category>golang</category><category>ubuntu</category></item><item><title>manage multi ssh keys</title><link>http://blog.chenghu.me/manage-multi-ssh-keys.html</link><description>&lt;h1&gt;管理多个SSh的密钥&lt;/h1&gt;
+&lt;p&gt;大家访问github或者gitlab的时候，还是使用ssh比较方便，使用https方式需要输入用户名密码，但是同时有github和gitlab的时候就比较麻烦了&lt;/p&gt;
+&lt;p&gt;下面分享一下同时管理多个ssh密钥的方法&lt;/p&gt;
+&lt;p&gt;1.大家生成ssh key的时候一般用以下命令&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;~  ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/id_rsa_github
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/yangchenghu/.ssh/id_rsa_github.
+Your public key has been saved in /Users/yangchenghu/.ssh/id_rsa_github.pub.
+The key fingerprint is:
+SHA256:D3ew605ht8b9NMCvadetvF6wcG//JwUrNbdegueAXQY/3n8 username@MBP
+The key&amp;#39;s randomart image is:
++---[RSA 2048]----+
+|                 |
+|                 |
+|          . .    |
+|        .  o o   |
+|        So* = =  |
+|         B+% x o |
+|         .@o&amp;amp; = .|
+|         *.*+B.oE|
+|        .oB*ooo +|
++----[SHA256]-----+
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以看到，在&lt;code&gt;Enter file in which to save the key (/Users/username/.ssh/id_rsa):&lt;/code&gt;这句提示，如果不输入的话，默认生成key就放在了&lt;code&gt;/Users/username/.ssh/id_rsa&lt;/code&gt;这个路径下，我们可以自己输入一个路径，比如：&lt;code&gt;/Users/username/.ssh/id_rsa_github&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;同样生成一个&lt;code&gt;id_rsa_gitlab&lt;/code&gt;密钥&lt;/p&gt;
+&lt;p&gt;2.我们把生成好的私钥添加到ssh-agent中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh-add ~/.ssh/id_rsa_github
+ssh-add ~/.ssh/id_rsa_gitlab
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.将对应的公钥文件&lt;code&gt;id_rsa_github.pub&lt;/code&gt;添加到github，将&lt;code&gt;id_rsa_gitlab.pub&lt;/code&gt;添加到gitlab上。&lt;/p&gt;
+&lt;p&gt;4.在&lt;code&gt;~/.ssh/&lt;/code&gt;目录下添加config文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;touch ~/.ssh/config
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;5.修改config文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;#aaa  (github 配置)
+Host github
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_github
+
+#aaa  (gitlab 配置)
+Host gitlab
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_rsa_gitlab
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以后操作就可以使用ssh方式来访问仓库了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sun, 03 Jan 2016 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2016-01-03:manage-multi-ssh-keys.html</guid><category>ssh</category><category>key</category></item><item><title>React-Native:Integrating with Existing Apps</title><link>http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html</link><description>&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
 &lt;p&gt;最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。&lt;/p&gt;
 &lt;h1&gt;官方集成方式&lt;/h1&gt;
 &lt;p&gt;对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。&lt;/p&gt;

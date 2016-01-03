@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2016-01-03T15:58:37-00:00</lastmod>
+<lastmod>2016-01-03T23:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2016-01-03T15:58:37-00:00</lastmod>
+<lastmod>2016-01-03T23:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2016-01-03T15:58:37-00:00</lastmod>
+<lastmod>2016-01-03T23:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2016-01-03T15:58:37-00:00</lastmod>
+<lastmod>2016-01-03T23:50:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -47,6 +47,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/install-golang-to-ubuntu.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/manage-multi-ssh-keys.html</loc>
 <lastmod>2016-01-03T00:00:00:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
@@ -377,6 +384,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.chenghu.me/tag/git.html</loc>
 <lastmod>2015-11-23T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/ssh.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/key.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
-        <link rel="stylesheet" href="./theme/css/main.css" />
+        <title>小虎的博客 - key</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,63 +12,86 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">小虎的博客 </a></h1>
+                <h1><a href="../">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
-                    <li><a href="./pages/about.html">About</a></li>
-                    <li><a href="./pages/toys.html">Toys</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<section id="content" class="body">
-<h1>Archives for 小虎的博客</h1>
 
-<dl>
-    <dt>日 03 一月 2016</dt>
-    <dd><a href="./install-golang-to-ubuntu.html">install golang to ubuntu</a></dd>
-    <dt>日 03 一月 2016</dt>
-    <dd><a href="./manage-multi-ssh-keys.html">manage multi ssh keys</a></dd>
-    <dt>六 26 十二月 2015</dt>
-    <dd><a href="./react-nativeintegrating-with-existing-apps.html">React-Native:Integrating with Existing Apps</a></dd>
-    <dt>三 23 十二月 2015</dt>
-    <dd><a href="./reactnative-errors-notes.html">ReactNative Errors notes</a></dd>
-    <dt>一 21 十二月 2015</dt>
-    <dd><a href="./change-npm-source-to-taobao.html">change npm source to taobao</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./gitclonesubdirectory.html">GitCloneSubDirectory</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./movesvntogit.html">MoveSVNToGit</a></dd>
-    <dt>二 03 十一月 2015</dt>
-    <dd><a href="./2015-11-03.html">2015-11-03</a></dd>
-    <dt>四 22 十月 2015</dt>
-    <dd><a href="./output-rss-full-content.html">output Rss Full content</a></dd>
-    <dt>三 23 九月 2015</dt>
-    <dd><a href="./setup-l2tp-and-ipsec-vpn.html">Setup L2TP And IPSEC VPN</a></dd>
-    <dt>六 08 八月 2015</dt>
-    <dd><a href="./git-operation.html">Git operation</a></dd>
-    <dt>日 26 四月 2015</dt>
-    <dd><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias.html">Add Shell Alias</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias-on-mac.html">Add Shell Alias on mac</a></dd>
-    <dt>三 18 三月 2015</dt>
-    <dd><a href="./ios-anti-fildder-capture-https-data.html">iOS Anti Fildder Capture Https Data</a></dd>
-    <dt>六 14 三月 2015</dt>
-    <dd><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./fixed-linode-error.html">Fixed Linode Error</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></dd>
-    <dt>三 11 三月 2015</dt>
-    <dd><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></dd>
-    <dt>日 15 二月 2015</dt>
-    <dd><a href="./fixed-cocoapods-error.html">Fixed Cocoapods Error</a></dd>
-    <dt>二 21 十月 2014</dt>
-    <dd><a href="./hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></dd>
-    <dt>二 09 九月 2014</dt>
-    <dd><a href="./bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></dd>
-</dl>
-</section>
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../manage-multi-ssh-keys.html">manage multi ssh keys</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-03T00:00:00+08:00">
+                Published: 日 03 一月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/ssh.html">ssh</a> <a href="../tag/key.html">key</a> </p>
+</footer><!-- /.post-info --><h1>管理多个SSh的密钥</h1>
+<p>大家访问github或者gitlab的时候，还是使用ssh比较方便，使用https方式需要输入用户名密码，但是同时有github和gitlab的时候就比较麻烦了</p>
+<p>下面分享一下同时管理多个ssh密钥的方法</p>
+<p>1.大家生成ssh key的时候一般用以下命令</p>
+<div class="highlight"><pre>~  ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/id_rsa_github
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/yangchenghu/.ssh/id_rsa_github.
+Your public key has been saved in /Users/yangchenghu/.ssh/id_rsa_github.pub.
+The key fingerprint is:
+SHA256:D3ew605ht8b9NMCvadetvF6wcG//JwUrNbdegueAXQY/3n8 username@MBP
+The key&#39;s randomart image is:
++---[RSA 2048]----+
+|                 |
+|                 |
+|          . .    |
+|        .  o o   |
+|        So* = =  |
+|         B+% x o |
+|         .@o&amp; = .|
+|         *.*+B.oE|
+|        .oB*ooo +|
++----[SHA256]-----+
+</pre></div>
+
+
+<p>可以看到，在<code>Enter file in which to save the key (/Users/username/.ssh/id_rsa):</code>这句提示，如果不输入的话，默认生成key就放在了<code>/Users/username/.ssh/id_rsa</code>这个路径下，我们可以自己输入一个路径，比如：<code>/Users/username/.ssh/id_rsa_github</code></p>
+<p>同样生成一个<code>id_rsa_gitlab</code>密钥</p>
+<p>2.我们把生成好的私钥添加到ssh-agent中</p>
+<div class="highlight"><pre>ssh-add ~/.ssh/id_rsa_github
+ssh-add ~/.ssh/id_rsa_gitlab
+</pre></div>
+
+
+<p>3.将对应的公钥文件<code>id_rsa_github.pub</code>添加到github，将<code>id_rsa_gitlab.pub</code>添加到gitlab上。</p>
+<p>4.在<code>~/.ssh/</code>目录下添加config文件</p>
+<div class="highlight"><pre>touch ~/.ssh/config
+</pre></div>
+
+
+<p>5.修改config文件</p>
+<div class="highlight"><pre>#aaa  (github 配置)
+Host github
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_github
+
+#aaa  (gitlab 配置)
+Host gitlab
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_rsa_gitlab
+</pre></div>
+
+
+<p>以后操作就可以使用ssh方式来访问仓库了。</p><p>There are <a href="../manage-multi-ssh-keys.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

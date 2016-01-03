@@ -24,6 +24,53 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="../objective-c-selector-methods.html" rel="bookmark"
+                           title="Permalink to Objective-C Selector Methods">Objective-C Selector Methods</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-26T00:00:00+08:00">
+                Published: 日 26 四月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/objective-c.html">Objective-C</a> <a href="../tag/selector.html">Selector</a> </p>
+</footer><!-- /.post-info -->                <h1>在Objective-C中对Selector的操作</h1>
+<p>今天调试程序中的一个bug，iOS6版本系统中使用<code>NSUserDefaults</code>类的<code>initWithSuiteName</code>方法会crash</p>
+<p>想起来可以判断<code>NSUserDefaults</code>是否响应<code>initWithSuiteName</code>这个方法来不同调用。</p>
+<p>使用了<code>respondsToSelector</code>这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了</p>
+<p>好吧，那就把关于Selector的所有的方法都整理一下，以免以后再使用错误了。</p>
+<hr />
+<p>+(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断该类是否响应类方法。</p>
+<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">standardUserDefaults</span><span class="p">)])</span> <span class="p">{</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>-(BOOL)respondsToSelector:(SEL)aSelector;</p>
+<p>判断实例是否响应该方法</p>
+<div class="highlight"><pre><span class="bp">NSUserDefaults</span> <span class="o">*</span> <span class="n">userDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
+<span class="k">if</span> <span class="p">([</span><span class="n">userDefault</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectForKey</span><span class="p">:)]){</span>
+    <span class="c1">//true</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<hr />
+<p>+(BOOL)instancesRespondToSelector:(SEL ...</p>
+                <a class="readmore" href="../objective-c-selector-methods.html">read more</a>
+<p>There are <a href="../objective-c-selector-methods.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="../add-shell-alias.html" rel="bookmark"
                            title="Permalink to Add Shell Alias">Add Shell Alias</a></h1>
                 </header>
