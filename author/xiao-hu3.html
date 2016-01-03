@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
-        <link rel="stylesheet" href="./theme/css/main.css" />
+        <title>小虎的博客 - 小虎</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,61 +12,60 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">小虎的博客 </a></h1>
+                <h1><a href="../">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
-                    <li><a href="./pages/about.html">About</a></li>
-                    <li><a href="./pages/toys.html">Toys</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<section id="content" class="body">
-<h1>Archives for 小虎的博客</h1>
 
-<dl>
-    <dt>日 03 一月 2016</dt>
-    <dd><a href="./install-golang-to-ubuntu.html">install golang to ubuntu</a></dd>
-    <dt>六 26 十二月 2015</dt>
-    <dd><a href="./react-nativeintegrating-with-existing-apps.html">React-Native:Integrating with Existing Apps</a></dd>
-    <dt>三 23 十二月 2015</dt>
-    <dd><a href="./reactnative-errors-notes.html">ReactNative Errors notes</a></dd>
-    <dt>一 21 十二月 2015</dt>
-    <dd><a href="./change-npm-source-to-taobao.html">change npm source to taobao</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./gitclonesubdirectory.html">GitCloneSubDirectory</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./movesvntogit.html">MoveSVNToGit</a></dd>
-    <dt>二 03 十一月 2015</dt>
-    <dd><a href="./2015-11-03.html">2015-11-03</a></dd>
-    <dt>四 22 十月 2015</dt>
-    <dd><a href="./output-rss-full-content.html">output Rss Full content</a></dd>
-    <dt>三 23 九月 2015</dt>
-    <dd><a href="./setup-l2tp-and-ipsec-vpn.html">Setup L2TP And IPSEC VPN</a></dd>
-    <dt>六 08 八月 2015</dt>
-    <dd><a href="./git-operation.html">Git operation</a></dd>
-    <dt>日 26 四月 2015</dt>
-    <dd><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias.html">Add Shell Alias</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias-on-mac.html">Add Shell Alias on mac</a></dd>
-    <dt>三 18 三月 2015</dt>
-    <dd><a href="./ios-anti-fildder-capture-https-data.html">iOS Anti Fildder Capture Https Data</a></dd>
-    <dt>六 14 三月 2015</dt>
-    <dd><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./fixed-linode-error.html">Fixed Linode Error</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></dd>
-    <dt>三 11 三月 2015</dt>
-    <dd><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></dd>
-    <dt>日 15 二月 2015</dt>
-    <dd><a href="./fixed-cocoapods-error.html">Fixed Cocoapods Error</a></dd>
-    <dt>二 21 十月 2014</dt>
-    <dd><a href="./hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></dd>
-    <dt>二 09 九月 2014</dt>
-    <dd><a href="./bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></dd>
-</dl>
-</section>
+                <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="../bo-ke-qian-yi-wp-pelican.html" rel="bookmark"
+                           title="Permalink to 博客迁移(WP->Pelican)">博客迁移(WP->Pelican)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-09-09T00:00:00+08:00">
+                Published: 二 09 九月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/python.html">Python</a> <a href="../tag/pelican.html">Pelican</a> <a href="../tag/wordpress.html">WordPress</a> </p>
+</footer><!-- /.post-info -->                <p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
+<h2>将博客文章从wordpress导出xml文件</h2>
+<p>进入wordpress后台，选择<code>工具</code> -&gt; <code>导出</code>。</p>
+<p><em>这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。</em></p>
+<h2>将博客里面的图片下载到本地</h2>
+<p>这里使用了<a href="http://zoomquiet.io/">zoomquiet</a>大妈的一个脚本（修改了两个地方：添加了异常处理，由于有些图片的地址已经失效，容易读取失败；添加了网络超时处理）。</p>
+<div class="highlight"><pre><span class="c">#coding=utf-8</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="c"># 打开RSS文件读取内容</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;wordpress.2014.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c"># 用正则从RSS中提取所有图片链接地址 ...</span></pre></div>
+                <a class="readmore" href="../bo-ke-qian-yi-wp-pelican.html">read more</a>
+<p>There are <a href="../bo-ke-qian-yi-wp-pelican.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="../author/xiao-hu2.html">&laquo;</a>
+    Page 3 / 3
+</p>
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

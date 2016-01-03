@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2015-12-26T00:00:00+08:00</updated><entry><title>React-Native:Integrating with Existing Apps</title><link href="http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html" rel="alternate"></link><updated>2015-12-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</id><summary type="html">&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2016-01-03T00:00:00+08:00</updated><entry><title>install golang to ubuntu</title><link href="http://blog.chenghu.me/install-golang-to-ubuntu.html" rel="alternate"></link><updated>2016-01-03T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2016-01-03:install-golang-to-ubuntu.html</id><summary type="html">&lt;h1&gt;在ubuntu上搭建go环境&lt;/h1&gt;
+&lt;p&gt;搜了一下，发现有一个比较全面的&lt;a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md"&gt;教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;当然还有&lt;a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md"&gt;官方的教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;还是比较喜欢使用&lt;code&gt;apt-get&lt;/code&gt;的方式来安装（当然我也是编译了好几次没有成功，T_T）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install golang&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后添加一下环境，&lt;code&gt;sudo vim /etc/profile&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="x"&gt;export GOROOT=~/go&lt;/span&gt;
+&lt;span class="x"&gt;export GOARCH=386&lt;/span&gt;
+&lt;span class="x"&gt;export GOOS=linux&lt;/span&gt;
+&lt;span class="x"&gt;export GOBIN=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;GOROOT&lt;/span&gt;&lt;span class="x"&gt;/bin/&lt;/span&gt;
+&lt;span class="x"&gt;export GOTOOLS=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;GOROOT&lt;/span&gt;&lt;span class="x"&gt;/pkg/tool/&lt;/span&gt;
+&lt;span class="x"&gt;export PATH=&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;GOBIN&lt;/span&gt;&lt;span class="x"&gt;:&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;GOTOOLS&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;刷新一下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;source /etc/profile
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;写个Helloword来试试&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;go print line!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;保存到test.go，跑一下试试&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;go run test.go
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_error.png" /&gt;&lt;/p&gt;
+&lt;p&gt;看这个样子要在home目录下，有go这么个目录，里面还有src文件供运行时查找&lt;/p&gt;
+&lt;p&gt;好吧&lt;/p&gt;
+&lt;p&gt;去&lt;a href="https://golang.org/dl/"&gt;官方下载&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后解压到&lt;code&gt;~/go&lt;/code&gt;目录下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;tar zxvf go1.5.2.linux-amd64.tar.gz ~/go
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们再运行一次呢&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;go run test.go
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_sucess.png" /&gt;&lt;/p&gt;
+&lt;p&gt;ok，成功！&lt;/p&gt;</summary><category term="golang"></category><category term="ubuntu"></category></entry><entry><title>React-Native:Integrating with Existing Apps</title><link href="http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html" rel="alternate"></link><updated>2015-12-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</id><summary type="html">&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
 &lt;p&gt;最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。&lt;/p&gt;
 &lt;h1&gt;官方集成方式&lt;/h1&gt;
 &lt;p&gt;对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。&lt;/p&gt;
@@ -30,6 +85,17 @@ pod &amp;#39;React&amp;#39;, :path =&amp;gt; &amp;#39;../node_modules/react-nati
 &lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_podrnversion.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_githubversion.png" /&gt;&lt;/p&gt;
 &lt;p&gt;还有一个问题就是我们目前的工程没有使用&lt;code&gt;Cocoapod&lt;/code&gt;。那该如何手动集成呢？&lt;/p&gt;
+&lt;p&gt;目前还发现一个问题，在官方有一个&lt;a href="http://facebook.github.io/react-native/docs/upgrading.html"&gt;upgrading&lt;/a&gt;页面中写了这么一段&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Upgrading to new versions of React Native will give you access to more APIs, views, developer tools and other goodies. Because React Native projects are essentially made up of an Android project, an iOS project and a JavaScript project, all combined under an npm package, upgrading can be rather tricky. But we try to make it easy for you.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简单翻译一下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;时刻将React Native更新到最新的版本，可以获得更多API、视图、开发者工具以及其他一些好东西（译注：官方开发任务繁重，人手紧缺，几乎不会对旧版本提供维护支持，所以即便更新可能带来一些兼容上的变更，但建议开发者还是尽一切可能第一时间更新）。由于一个完整的React Native项目是由Android项目、iOS项目和JavaScript项目组成的，且都打包在一个npm包中，所以升级可能会有一些麻烦。我们会尽量简化这一流程。
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;官方也建议使用最新版本，老版本没有人手进行维护。&lt;/p&gt;
 &lt;h1&gt;手动集成&lt;/h1&gt;
 &lt;p&gt;花了两天的时间，找到一个手动集成React-Native的方式，虽然稍微复杂一点，但可以保持使用官方的最新版本。&lt;/p&gt;
 &lt;p&gt;1.由于目前的项目是使用的git管理的，可以将React-Native的仓库作为一个submodule添加到项目的仓库下。&lt;/p&gt;
@@ -150,7 +216,7 @@ React.AppRegistry.registerComponent(&amp;#39;SimpleApp&amp;#39;, () =&amp;gt; Si
 
 &lt;p&gt;然后我们运行一下程序。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /&gt;&lt;/p&gt;
-&lt;p&gt;项目在github上面，&lt;a href="https://github.com/yangchenghu/ReactNativeIntegrating"&gt;地址&lt;/a&gt;&lt;/p&gt;</summary><category term="ReactNative"></category><category term="iOS"></category><category term="App"></category><category term="integra"></category><category term="集成"></category></entry><entry><title>ReactNative Errors notes</title><link href="http://blog.chenghu.me/reactnative-errors-notes.html" rel="alternate"></link><updated>2015-12-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-23:reactnative-errors-notes.html</id><summary type="html">&lt;h1&gt;ReactNative错误记录&lt;/h1&gt;
+&lt;p&gt;项目在github上面，&lt;a href="https://github.com/yangchenghu/react-native-tutorial"&gt;地址&lt;/a&gt;&lt;/p&gt;</summary><category term="react-native"></category><category term="iOS"></category><category term="App"></category><category term="integra"></category><category term="集成"></category></entry><entry><title>ReactNative Errors notes</title><link href="http://blog.chenghu.me/reactnative-errors-notes.html" rel="alternate"></link><updated>2015-12-23T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-23:reactnative-errors-notes.html</id><summary type="html">&lt;h1&gt;ReactNative错误记录&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;2015-12-23 10:30:27.482 [error][tid:com.facebook.React.RCTExceptionsManagerQueue] Unhandled JS Exception: Requiring unknown module &amp;quot;image!cellicon&amp;quot;. If you are sure the module is there, try restarting the packager.
 If you are sure the module is there, try restarting the packager.
 &lt;/pre&gt;&lt;/div&gt;

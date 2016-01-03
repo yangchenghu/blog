@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2015-12-26T19:50:12-00:00</lastmod>
+<lastmod>2016-01-03T15:43:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2015-12-26T19:50:12-00:00</lastmod>
+<lastmod>2016-01-03T15:43:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2015-12-26T19:50:12-00:00</lastmod>
+<lastmod>2016-01-03T15:43:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2015-12-26T19:50:12-00:00</lastmod>
+<lastmod>2016-01-03T15:43:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2014-09-10T00:00:00:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/install-golang-to-ubuntu.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -208,7 +215,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/category/tech.html</loc>
-<lastmod>2015-12-26T00:00:00:%s</lastmod>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -221,8 +228,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/tag/pelican.html</loc>
-<lastmod>2014-09-09T00:00:00:%s</lastmod>
+<loc>http://blog.chenghu.me/tag/react-native.html</loc>
+<lastmod>2015-12-26T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -230,6 +237,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.chenghu.me/tag/app.html</loc>
 <lastmod>2015-12-26T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/golang.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -305,13 +319,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/tag/ipsec.html</loc>
-<lastmod>2015-09-23T00:00:00:%s</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>http://blog.chenghu.me/tag/pm.html</loc>
 <lastmod>2015-03-14T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -375,6 +382,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/tag/ubuntu.html</loc>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/tag/vpn.html</loc>
 <lastmod>2015-09-23T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -389,8 +403,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.chenghu.me/tag/reactnative.html</loc>
-<lastmod>2015-12-26T00:00:00:%s</lastmod>
+<loc>http://blog.chenghu.me/tag/ipsec.html</loc>
+<lastmod>2015-09-23T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -431,6 +445,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/tag/pelican.html</loc>
+<lastmod>2014-09-09T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/tag/integra.html</loc>
 <lastmod>2015-12-26T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -439,7 +460,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/author/xiao-hu.html</loc>
-<lastmod>2015-12-26T00:00:00:%s</lastmod>
+<lastmod>2016-01-03T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

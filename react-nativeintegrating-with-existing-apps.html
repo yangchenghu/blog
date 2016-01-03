@@ -37,7 +37,7 @@
                 By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
 <p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/reactnative.html">ReactNative</a> <a href="./tag/ios.html">iOS</a> <a href="./tag/app.html">App</a> <a href="./tag/integra.html">integra</a> <a href="./tag/ji-cheng.html">集成</a> </p>
+<p>tags: <a href="./tag/react-native.html">react-native</a> <a href="./tag/ios.html">iOS</a> <a href="./tag/app.html">App</a> <a href="./tag/integra.html">integra</a> <a href="./tag/ji-cheng.html">集成</a> </p>
 </footer><!-- /.post-info -->      <h1>React-Native 教程 1 ： 集成React-Native到现有的iOS项目中</h1>
 <p>最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。</p>
 <h1>官方集成方式</h1>
@@ -69,6 +69,17 @@ pod &#39;React&#39;, :path =&gt; &#39;../node_modules/react-native&#39;, :subspe
 <p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_podrnversion.png" /></p>
 <p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_githubversion.png" /></p>
 <p>还有一个问题就是我们目前的工程没有使用<code>Cocoapod</code>。那该如何手动集成呢？</p>
+<p>目前还发现一个问题，在官方有一个<a href="http://facebook.github.io/react-native/docs/upgrading.html">upgrading</a>页面中写了这么一段</p>
+<div class="highlight"><pre>Upgrading to new versions of React Native will give you access to more APIs, views, developer tools and other goodies. Because React Native projects are essentially made up of an Android project, an iOS project and a JavaScript project, all combined under an npm package, upgrading can be rather tricky. But we try to make it easy for you.
+</pre></div>
+
+
+<p>简单翻译一下：</p>
+<div class="highlight"><pre>时刻将React Native更新到最新的版本，可以获得更多API、视图、开发者工具以及其他一些好东西（译注：官方开发任务繁重，人手紧缺，几乎不会对旧版本提供维护支持，所以即便更新可能带来一些兼容上的变更，但建议开发者还是尽一切可能第一时间更新）。由于一个完整的React Native项目是由Android项目、iOS项目和JavaScript项目组成的，且都打包在一个npm包中，所以升级可能会有一些麻烦。我们会尽量简化这一流程。
+</pre></div>
+
+
+<p>官方也建议使用最新版本，老版本没有人手进行维护。</p>
 <h1>手动集成</h1>
 <p>花了两天的时间，找到一个手动集成React-Native的方式，虽然稍微复杂一点，但可以保持使用官方的最新版本。</p>
 <p>1.由于目前的项目是使用的git管理的，可以将React-Native的仓库作为一个submodule添加到项目的仓库下。</p>
@@ -189,7 +200,7 @@ React.AppRegistry.registerComponent(&#39;SimpleApp&#39;, () =&gt; SimpleApp);
 
 <p>然后我们运行一下程序。</p>
 <p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /></p>
-<p>项目在github上面，<a href="https://github.com/yangchenghu/ReactNativeIntegrating">地址</a></p>
+<p>项目在github上面，<a href="https://github.com/yangchenghu/react-native-tutorial">地址</a></p>
     </div><!-- /.entry-content -->
     <div class="comments">
       <h2>Comments !</h2>

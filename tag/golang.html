@@ -2,8 +2,8 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客</title>
-        <link rel="stylesheet" href="./theme/css/main.css" />
+        <title>小虎的博客 - golang</title>
+        <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,61 +12,84 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">小虎的博客 </a></h1>
+                <h1><a href="../">小虎的博客 </a></h1>
                 <nav><ul>
                     <li><a href="/">HomePage</a></li>
-                    <li><a href="./pages/about.html">About</a></li>
-                    <li><a href="./pages/toys.html">Toys</a></li>
+                    <li><a href="../pages/about.html">About</a></li>
+                    <li><a href="../pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-<section id="content" class="body">
-<h1>Archives for 小虎的博客</h1>
 
-<dl>
-    <dt>日 03 一月 2016</dt>
-    <dd><a href="./install-golang-to-ubuntu.html">install golang to ubuntu</a></dd>
-    <dt>六 26 十二月 2015</dt>
-    <dd><a href="./react-nativeintegrating-with-existing-apps.html">React-Native:Integrating with Existing Apps</a></dd>
-    <dt>三 23 十二月 2015</dt>
-    <dd><a href="./reactnative-errors-notes.html">ReactNative Errors notes</a></dd>
-    <dt>一 21 十二月 2015</dt>
-    <dd><a href="./change-npm-source-to-taobao.html">change npm source to taobao</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./gitclonesubdirectory.html">GitCloneSubDirectory</a></dd>
-    <dt>一 23 十一月 2015</dt>
-    <dd><a href="./movesvntogit.html">MoveSVNToGit</a></dd>
-    <dt>二 03 十一月 2015</dt>
-    <dd><a href="./2015-11-03.html">2015-11-03</a></dd>
-    <dt>四 22 十月 2015</dt>
-    <dd><a href="./output-rss-full-content.html">output Rss Full content</a></dd>
-    <dt>三 23 九月 2015</dt>
-    <dd><a href="./setup-l2tp-and-ipsec-vpn.html">Setup L2TP And IPSEC VPN</a></dd>
-    <dt>六 08 八月 2015</dt>
-    <dd><a href="./git-operation.html">Git operation</a></dd>
-    <dt>日 26 四月 2015</dt>
-    <dd><a href="./objective-c-selector-methods.html">Objective-C Selector Methods</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias.html">Add Shell Alias</a></dd>
-    <dt>三 25 三月 2015</dt>
-    <dd><a href="./add-shell-alias-on-mac.html">Add Shell Alias on mac</a></dd>
-    <dt>三 18 三月 2015</dt>
-    <dd><a href="./ios-anti-fildder-capture-https-data.html">iOS Anti Fildder Capture Https Data</a></dd>
-    <dt>六 14 三月 2015</dt>
-    <dd><a href="./read-from-the-programmer-to-project-manager.html">Read From the programmer to project manager</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./fixed-linode-error.html">Fixed Linode Error</a></dd>
-    <dt>五 13 三月 2015</dt>
-    <dd><a href="./kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></dd>
-    <dt>三 11 三月 2015</dt>
-    <dd><a href="./fixed-svn-did-not-show-histoy-error.html">Fixed SVN did not show histoy Error</a></dd>
-    <dt>日 15 二月 2015</dt>
-    <dd><a href="./fixed-cocoapods-error.html">Fixed Cocoapods Error</a></dd>
-    <dt>二 21 十月 2014</dt>
-    <dd><a href="./hook-reveal-regiest-alert.html">Hook Reveal Regiest Alert</a></dd>
-    <dt>二 09 九月 2014</dt>
-    <dd><a href="./bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></dd>
-</dl>
-</section>
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../install-golang-to-ubuntu.html">install golang to ubuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-03T00:00:00+08:00">
+                Published: 日 03 一月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/golang.html">golang</a> <a href="../tag/ubuntu.html">ubuntu</a> </p>
+</footer><!-- /.post-info --><h1>在ubuntu上搭建go环境</h1>
+<p>搜了一下，发现有一个比较全面的<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">教程</a></p>
+<p>当然还有<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">官方的教程</a></p>
+<p>还是比较喜欢使用<code>apt-get</code>的方式来安装（当然我也是编译了好几次没有成功，T_T）</p>
+<p><code>sudo apt-get install golang</code></p>
+<p>然后添加一下环境，<code>sudo vim /etc/profile</code></p>
+<div class="highlight"><pre><span class="x">export GOROOT=~/go</span>
+<span class="x">export GOARCH=386</span>
+<span class="x">export GOOS=linux</span>
+<span class="x">export GOBIN=</span><span class="p">$</span><span class="nv">GOROOT</span><span class="x">/bin/</span>
+<span class="x">export GOTOOLS=</span><span class="p">$</span><span class="nv">GOROOT</span><span class="x">/pkg/tool/</span>
+<span class="x">export PATH=</span><span class="p">$</span><span class="nv">PATH</span><span class="x">:</span><span class="p">$</span><span class="nv">GOBIN</span><span class="x">:</span><span class="p">$</span><span class="nv">GOTOOLS</span><span class="x"></span>
+</pre></div>
+
+
+<p>刷新一下</p>
+<div class="highlight"><pre>source /etc/profile
+</pre></div>
+
+
+<p>写个Helloword来试试</p>
+<div class="highlight"><pre><span class="n">package</span> <span class="n">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;go print line!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>保存到test.go，跑一下试试</p>
+<div class="highlight"><pre>go run test.go
+</pre></div>
+
+
+<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_error.png" /></p>
+<p>看这个样子要在home目录下，有go这么个目录，里面还有src文件供运行时查找</p>
+<p>好吧</p>
+<p>去<a href="https://golang.org/dl/">官方下载</a></p>
+<div class="highlight"><pre>wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+</pre></div>
+
+
+<p>然后解压到<code>~/go</code>目录下</p>
+<div class="highlight"><pre>tar zxvf go1.5.2.linux-amd64.tar.gz ~/go
+</pre></div>
+
+
+<p>我们再运行一次呢</p>
+<div class="highlight"><pre>go run test.go
+</pre></div>
+
+
+<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_sucess.png" /></p>
+<p>ok，成功！</p><p>There are <a href="../install-golang-to-ubuntu.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

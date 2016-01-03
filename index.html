@@ -22,7 +22,86 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./react-nativeintegrating-with-existing-apps.html">React-Native:Integrating with Existing Apps</a></h1>
+                    <h1 class="entry-title"><a href="./install-golang-to-ubuntu.html">install golang to ubuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-03T00:00:00+08:00">
+                Published: 日 03 一月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/golang.html">golang</a> <a href="./tag/ubuntu.html">ubuntu</a> </p>
+</footer><!-- /.post-info --><h1>在ubuntu上搭建go环境</h1>
+<p>搜了一下，发现有一个比较全面的<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">教程</a></p>
+<p>当然还有<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">官方的教程</a></p>
+<p>还是比较喜欢使用<code>apt-get</code>的方式来安装（当然我也是编译了好几次没有成功，T_T）</p>
+<p><code>sudo apt-get install golang</code></p>
+<p>然后添加一下环境，<code>sudo vim /etc/profile</code></p>
+<div class="highlight"><pre><span class="x">export GOROOT=~/go</span>
+<span class="x">export GOARCH=386</span>
+<span class="x">export GOOS=linux</span>
+<span class="x">export GOBIN=</span><span class="p">$</span><span class="nv">GOROOT</span><span class="x">/bin/</span>
+<span class="x">export GOTOOLS=</span><span class="p">$</span><span class="nv">GOROOT</span><span class="x">/pkg/tool/</span>
+<span class="x">export PATH=</span><span class="p">$</span><span class="nv">PATH</span><span class="x">:</span><span class="p">$</span><span class="nv">GOBIN</span><span class="x">:</span><span class="p">$</span><span class="nv">GOTOOLS</span><span class="x"></span>
+</pre></div>
+
+
+<p>刷新一下</p>
+<div class="highlight"><pre>source /etc/profile
+</pre></div>
+
+
+<p>写个Helloword来试试</p>
+<div class="highlight"><pre><span class="n">package</span> <span class="n">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;go print line!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>保存到test.go，跑一下试试</p>
+<div class="highlight"><pre>go run test.go
+</pre></div>
+
+
+<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_error.png" /></p>
+<p>看这个样子要在home目录下，有go这么个目录，里面还有src文件供运行时查找</p>
+<p>好吧</p>
+<p>去<a href="https://golang.org/dl/">官方下载</a></p>
+<div class="highlight"><pre>wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+</pre></div>
+
+
+<p>然后解压到<code>~/go</code>目录下</p>
+<div class="highlight"><pre>tar zxvf go1.5.2.linux-amd64.tar.gz ~/go
+</pre></div>
+
+
+<p>我们再运行一次呢</p>
+<div class="highlight"><pre>go run test.go
+</pre></div>
+
+
+<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_sucess.png" /></p>
+<p>ok，成功！</p><p>There are <a href="./install-golang-to-ubuntu.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./react-nativeintegrating-with-existing-apps.html" rel="bookmark"
+                           title="Permalink to React-Native:Integrating with Existing Apps">React-Native:Integrating with Existing Apps</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-26T00:00:00+08:00">
                 Published: 六 26 十二月 2015
@@ -32,8 +111,8 @@
                 By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
         </address>
 <p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/reactnative.html">ReactNative</a> <a href="./tag/ios.html">iOS</a> <a href="./tag/app.html">App</a> <a href="./tag/integra.html">integra</a> <a href="./tag/ji-cheng.html">集成</a> </p>
-</footer><!-- /.post-info --><h1>React-Native 教程 1 ： 集成React-Native到现有的iOS项目中</h1>
+<p>tags: <a href="./tag/react-native.html">react-native</a> <a href="./tag/ios.html">iOS</a> <a href="./tag/app.html">App</a> <a href="./tag/integra.html">integra</a> <a href="./tag/ji-cheng.html">集成</a> </p>
+</footer><!-- /.post-info -->                <h1>React-Native 教程 1 ： 集成React-Native到现有的iOS项目中</h1>
 <p>最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。</p>
 <h1>官方集成方式</h1>
 <p>对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。</p>
@@ -56,140 +135,10 @@ pod &#39;React&#39;, :path =&gt; &#39;../node_modules/react-native&#39;, :subspe
 
 <p>2.使用<code>pod install</code>来安装React-Native.</p>
 <p>3.在项目目录下使用如下命令来启动服务。</p>
-<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
-</pre></div>
-
-
-<p>但这样集成的话，会有一个缺点，就是在pod上的React-Native的版本还在<code>0.13.0-rc</code>版本，但在github上的版本已经到了<code>0.17.0</code>。</p>
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_podrnversion.png" /></p>
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_githubversion.png" /></p>
-<p>还有一个问题就是我们目前的工程没有使用<code>Cocoapod</code>。那该如何手动集成呢？</p>
-<h1>手动集成</h1>
-<p>花了两天的时间，找到一个手动集成React-Native的方式，虽然稍微复杂一点，但可以保持使用官方的最新版本。</p>
-<p>1.由于目前的项目是使用的git管理的，可以将React-Native的仓库作为一个submodule添加到项目的仓库下。</p>
-<div class="highlight"><pre>git submodule add https://github.com/facebook/react-native.git
-</pre></div>
-
-
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_gitsubmodule.png" /></p>
-<p>2.进入<code>react-native</code>目录下，切换到最新发布的版本</p>
-<div class="highlight"><pre>cd react-native
-git checkout -b 017ReleaseVersion v0.17.0
-</pre></div>
-
-
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_017version.png" /></p>
-<p>3.安装组件</p>
-<div class="highlight"><pre>npm install
-</pre></div>
-
-
-<p>4.在工程目录下创建js的文件夹，并创建<code>index.ios.js</code>。</p>
-<div class="highlight"><pre>cd ..
-mkdir ReactComponent
-touch ReactComponent/index.ios.js
-</pre></div>
-
-
-<p>5.打开工程，添加React-Native相关工程。</p>
-<div class="highlight"><pre>添加`react-native/React/React.xcodeproj`到项目中
-添加`react-native/Libraries／ActionSheetIOS/RCTActionSheet.xcodeproj`到项目中
-添加`react-native/Libraries／LinkingIOS/RCTLinking.xcodeproj`到项目中
-添加`react-native/Libraries／Image/RCTImage.xcodeproj`到项目中
-添加`react-native/Libraries／Network/RCTNetwork.xcodeproj`到项目中
-添加`react-native/Libraries／Text/RCTText.xcodeproj`到项目中
-添加`react-native/Libraries／WebSocket/RCTWebSocket.xcodeproj`到项目中
-</pre></div>
-
-
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addproject.png" /></p>
-<p>6.在工程的设置页面添加需要连接到Frameworks</p>
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addframeworks.png" /></p>
-<p>7.添加搜索头文件的地址。在工程的<code>Build Settings</code>找到<code>Header Search Paths</code>，添加一条<code>$(SRCROOT)/react-native/React</code>，选择<code>recursive</code></p>
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_addsearchpath.png" /></p>
-<p>这样就将React-Native集成到了现有的iOS工程中了。</p>
-<h1>启动服务</h1>
-<p>使用这种方式我们该如何启动服务呢？</p>
-<p>我们先看一下Cocoapods如何启动的。</p>
-<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
-</pre></div>
-
-
-<p>这里一共执行了三条命令。</p>
-<ol>
-<li><code>JS_DIR=</code>pwd<code>/ReactComponent</code>找到放js的文件夹，保存到<code>JS_DIR</code>这个变量中。</li>
-<li><code>cd Pods/React</code> 进入<code>react</code>目录下。</li>
-<li><code>npm run start -- --root $JS_DIR</code> 将存放js文件的目录作为<code>--root</code>参数，然后使用<code>npm run start</code>启动服务。</li>
-</ol>
-<p>我们主要放React的目录不同，所以只要简单修改一下第二条命令就可以了</p>
-<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd react-native/React; npm run start -- --root </span><span class="p">$</span><span class="nv">JS_DIR</span><span class="x">)</span>
-</pre></div>
-
-
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_startserver.png" /></p>
-<h1>添加React-Native页面</h1>
-<p>1.在iOS工程中创建<code>ReactView</code>类</p>
-<p>2.在<code>ReactView.m</code>中<code>#import "RCTRootView.h"</code></p>
-<p>3.在<code>- (instancetype)initWithFrame:(CGRect)frame</code>添加如下代码NSString * strUrl = @"http://localhost:8081/index.ios.bundle?platform=ios&amp;dev=true";</p>
-<div class="highlight"><pre><span class="bp">NSURL</span> <span class="o">*</span> <span class="n">jsCodeLocation</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSURL</span> <span class="nl">URLWithString</span><span class="p">:</span><span class="n">strUrl</span><span class="p">];</span>
-
-<span class="n">RCTRootView</span> <span class="o">*</span> <span class="n">rootView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">RCTRootView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBundleURL</span><span class="p">:</span><span class="n">jsCodeLocation</span>
-                                                     <span class="nl">moduleName</span><span class="p">:</span><span class="s">@&quot;SimpleApp&quot;</span>
-                                              <span class="nl">initialProperties</span><span class="p">:</span><span class="nb">nil</span>
-                                                  <span class="nl">launchOptions</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
-
-<span class="p">[</span><span class="nb">self</span> <span class="nl">addSubview</span><span class="p">:</span><span class="n">rootView</span><span class="p">];</span>
-
-<span class="n">rootView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">;</span>
-</pre></div>
-
-
-<p>4.在ViewController的<code>- (void)viewDidLoad</code>方法中创建<code>ReactView</code></p>
-<div class="highlight"><pre><span class="n">ReactView</span> <span class="o">*</span> <span class="n">reactView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ReactView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span><span class="p">),</span> <span class="mi">100</span><span class="p">)];</span>
-
-<span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addSubview</span><span class="p">:</span><span class="n">reactView</span><span class="p">];</span>
-</pre></div>
-
-
-<p>5.我们将下面代码添加到<code>ReactComponent\index.ios.js</code>文件中</p>
-<div class="highlight"><pre>&#39;use strict&#39;;
-
-var React = require(&#39;react-native&#39;);
-var {
-  Text,
-  View,
-  Image,
-} = React;
-
-var styles = React.StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: &#39;red&#39;
-  }
-});
-
-class SimpleApp extends React.Component {
-  render() {
-    return (
-      <span class="nt">&lt;View</span> <span class="na">style=</span><span class="s">{styles.container}</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Text&gt;</span>This is a simple application.<span class="nt">&lt;/Text&gt;</span>
-      <span class="nt">&lt;/View&gt;</span>
-    )
-  }
-}
-
-React.AppRegistry.registerComponent(&#39;SimpleApp&#39;, () =&gt; SimpleApp);
-</pre></div>
-
-
-<p>然后我们运行一下程序。</p>
-<p><img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /></p>
-<p>项目在github上面，<a href="https://github.com/yangchenghu/ReactNativeIntegrating">地址</a></p><p>There are <a href="./react-nativeintegrating-with-existing-apps.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<div class="highlight"><pre><span class="x">(JS_DIR=`pwd`/ReactComponent; cd Pods/React; npm ...</span></pre></div>
+                <a class="readmore" href="./react-nativeintegrating-with-existing-apps.html">read more</a>
+<p>There are <a href="./react-nativeintegrating-with-existing-apps.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -514,56 +463,9 @@ git stash pop</p>
                 <a class="readmore" href="./git-operation.html">read more</a>
 <p>There are <a href="./git-operation.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./objective-c-selector-methods.html" rel="bookmark"
-                           title="Permalink to Objective-C Selector Methods">Objective-C Selector Methods</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-04-26T00:00:00+08:00">
-                Published: 日 26 四月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/objective-c.html">Objective-C</a> <a href="./tag/selector.html">Selector</a> </p>
-</footer><!-- /.post-info -->                <h1>在Objective-C中对Selector的操作</h1>
-<p>今天调试程序中的一个bug，iOS6版本系统中使用<code>NSUserDefaults</code>类的<code>initWithSuiteName</code>方法会crash</p>
-<p>想起来可以判断<code>NSUserDefaults</code>是否响应<code>initWithSuiteName</code>这个方法来不同调用。</p>
-<p>使用了<code>respondsToSelector</code>这个类方法，以为没有问题，结果没有进入这个if里面，居然判断失败了</p>
-<p>好吧，那就把关于Selector的所有的方法都整理一下，以免以后再使用错误了。</p>
-<hr />
-<p>+(BOOL)respondsToSelector:(SEL)aSelector;</p>
-<p>判断该类是否响应类方法。</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">([</span><span class="bp">NSUserDefaults</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">standardUserDefaults</span><span class="p">)])</span> <span class="p">{</span>
-    <span class="c1">//true</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<hr />
-<p>-(BOOL)respondsToSelector:(SEL)aSelector;</p>
-<p>判断实例是否响应该方法</p>
-<div class="highlight"><pre><span class="bp">NSUserDefaults</span> <span class="o">*</span> <span class="n">userDefault</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">];</span>
-<span class="k">if</span> <span class="p">([</span><span class="n">userDefault</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">objectForKey</span><span class="p">:)]){</span>
-    <span class="c1">//true</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<hr />
-<p>+(BOOL)instancesRespondToSelector:(SEL ...</p>
-                <a class="readmore" href="./objective-c-selector-methods.html">read more</a>
-<p>There are <a href="./objective-c-selector-methods.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 2
+    Page 1 / 3
         <a href="./index2.html">&raquo;</a>
 </p>
                 </section><!-- /#content -->

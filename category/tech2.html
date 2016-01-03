@@ -24,6 +24,44 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="../add-shell-alias.html" rel="bookmark"
+                           title="Permalink to Add Shell Alias">Add Shell Alias</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-03-25T00:00:00+08:00">
+                Published: 三 25 三月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/shell.html">Shell</a> <a href="../tag/alias.html">Alias</a> </p>
+</footer><!-- /.post-info -->                <h1>在Mac下使用Shell的Aliax</h1>
+<p>今天使用<code>pod update</code>更新所有框架，好慢好慢</p>
+<p>搜了一下，可以使用</p>
+<div class="highlight"><pre>pod install --verbose --no-repo-update
+pod update --verbose --no-repo-update
+</pre></div>
+
+
+<p>来更新工程中的框架，而不更新pod库</p>
+<p>试了一下，好一些了</p>
+<p>但是命令好长，记不住</p>
+<p>想起来在linux中可以设置alias</p>
+<p>就找了一下，如何在Mac中设置alias，找了一篇<a href="http://blog.csdn.net/ithomer/article/details/33339071">文章</a></p>
+<p>试了一下，可以使用，记录如下</p>
+<ol>
+<li>编辑<code>~/.bash_profile</code>这个文件<code>vim ~/.bash_profile</code></li>
+<li>插入<code>alias podinstallfast="pod install --verbose --no-repo-update"</code>和<code>alias podupdatefast="pod update --verbose --no-repo-update"</code>这两行 ...</li></ol>
+                <a class="readmore" href="../add-shell-alias.html">read more</a>
+<p>There are <a href="../add-shell-alias.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="../add-shell-alias-on-mac.html" rel="bookmark"
                            title="Permalink to Add Shell Alias on mac">Add Shell Alias on mac</a></h1>
                 </header>
