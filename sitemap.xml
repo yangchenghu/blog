@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2016-01-03T23:53:16-00:00</lastmod>
+<lastmod>2016-01-06T00:57:54-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2016-01-03T23:53:16-00:00</lastmod>
+<lastmod>2016-01-06T00:57:54-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2016-01-03T23:53:16-00:00</lastmod>
+<lastmod>2016-01-06T00:57:54-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2016-01-03T23:53:16-00:00</lastmod>
+<lastmod>2016-01-06T00:57:54-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -55,6 +55,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.chenghu.me/manage-multi-ssh-keys.html</loc>
 <lastmod>2016-01-03T00:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/react-nativeuse-static-image-resources.html</loc>
+<lastmod>2015-12-27T00:00:00:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
@@ -236,7 +243,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/tag/react-native.html</loc>
-<lastmod>2015-12-26T00:00:00:%s</lastmod>
+<lastmod>2015-12-27T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

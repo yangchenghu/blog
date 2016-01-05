@@ -37,7 +37,7 @@
 <p>大家访问github或者gitlab的时候，还是使用ssh比较方便，使用https方式需要输入用户名密码，但是同时有github和gitlab的时候就比较麻烦了</p>
 <p>下面分享一下同时管理多个ssh密钥的方法</p>
 <p>1.大家生成ssh key的时候一般用以下命令</p>
-<div class="highlight"><pre>~  ssh-keygen -t rsa
+<div class="highlight"><pre>~  ssh-keygen -t rsa -C &quot;mail@mail.com&quot;
 Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/id_rsa_github
 Enter passphrase (empty for no passphrase):
@@ -90,6 +90,12 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 </pre></div>
 
 
+<p>6.测试一下</p>
+<div class="highlight"><pre>ssh -T git@github.com
+</pre></div>
+
+
+<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/ssh_key_test_ok.png" /></p>
 <p>以后操作就可以使用ssh方式来访问仓库了。</p><p>There are <a href="../manage-multi-ssh-keys.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
         <section id="extras" class="body">

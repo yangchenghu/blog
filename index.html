@@ -116,14 +116,59 @@
 <p>大家访问github或者gitlab的时候，还是使用ssh比较方便，使用https方式需要输入用户名密码，但是同时有github和gitlab的时候就比较麻烦了</p>
 <p>下面分享一下同时管理多个ssh密钥的方法</p>
 <p>1.大家生成ssh key的时候一般用以下命令</p>
-<div class="highlight"><pre>~  ssh-keygen -t rsa
+<div class="highlight"><pre>~  ssh-keygen -t rsa -C &quot;mail@mail.com&quot;
 Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/id_rsa_github
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
-Your identification has been saved in ...</pre></div>
+Your identification ...</pre></div>
                 <a class="readmore" href="./manage-multi-ssh-keys.html">read more</a>
 <p>There are <a href="./manage-multi-ssh-keys.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./react-nativeuse-static-image-resources.html" rel="bookmark"
+                           title="Permalink to React-Native:Use Static Image Resources">React-Native:Use Static Image Resources</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-12-27T00:00:00+08:00">
+                Published: 日 27 十二月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/react-native.html">react-native</a> </p>
+</footer><!-- /.post-info -->                <h1>React-Native 教程 2 ：在React-Native项目中使用静态图片资源</h1>
+<p>看过<a href="https://facebook.github.io/react-native/docs/image.html#content">官方教程</a>同学都知道如果我们想显示一个图片的话肯定会使用<code>Image</code>这个组件</p>
+<p>使用方式如下</p>
+<div class="highlight"><pre>renderImages: function() {
+  return (
+    <span class="nt">&lt;View&gt;</span>
+      <span class="nt">&lt;Image</span>
+        <span class="na">style=</span><span class="s">{styles.icon}</span>
+        <span class="na">source=</span><span class="s">{require(&#39;image!myIcon&#39;)}</span>  
+      <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Image</span>
+        <span class="na">style=</span><span class="s">{styles.logo}</span>
+        <span class="na">source=</span><span class="cp">{{</span><span class="nv">uri</span><span class="o">:</span> <span class="s1">&#39;http://facebook.github.io/react/img/logo_og.png&#39;</span><span class="cp">}}</span>
+      <span class="s">/</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/View&gt;</span>
+  );
+},
+</pre></div>
+
+
+<p>这里显示本地图片的话会使用<code>source={require('image!图片名称')}</code></p>
+<p>显示网络图片的时候会使用<code>source={{uri: '图片地址'}}</code></p>
+<p>一般显示网络图片的话，只要图片的地址没有问题，图片就能显示。</p>
+<p>但是显示本地图片的时候，</p>
+                <a class="readmore" href="./react-nativeuse-static-image-resources.html">read more</a>
+<p>There are <a href="./react-nativeuse-static-image-resources.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
 
             <li><article class="hentry">
@@ -419,47 +464,6 @@ git checkout --
 <p><a href="http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/">使用 Python 轻松抓取网页</a></p>
                 <a class="readmore" href="./output-rss-full-content.html">read more</a>
 <p>There are <a href="./output-rss-full-content.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./setup-l2tp-and-ipsec-vpn.html" rel="bookmark"
-                           title="Permalink to Setup L2TP And IPSEC VPN">Setup L2TP And IPSEC VPN</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-09-23T00:00:00+08:00">
-                Published: 三 23 九月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/l2tp.html">l2tp</a> <a href="./tag/ipsec.html">ipsec</a> <a href="./tag/vpn.html">vpn</a> </p>
-</footer><!-- /.post-info -->                <h1>搭建L2TP和IPSEC的VPN</h1>
-<p>本来家里用的长城宽带，结果通过IP138一看，居然是“鹏博士宽带”</p>
-<p>这个碉堡了的鹏博士屏蔽各种梯子</p>
-<p>之前在东京的一个梯子，只要一ssh过去，梯子就消失了，ping都ping不通</p>
-<p>最后只好把梯子搬到了法国，延时直接翻倍了，悲剧</p>
-<p>最近发现拨公司的L2TP很流畅，就想在梯子上搭建一个L2TP</p>
-<p>搜了一下，找到一个比较便捷的方法</p>
-<p>在github上找到一个<a href="https://github.com/philplckthun/setup-simple-ipsec-l2tp-vpn">脚本</a></p>
-<p>按操作走</p>
-<div class="highlight"><pre>wget https://raw.github.com/philplckthun/setup-simple-ipsec-l2tp-vpn/master/setup.sh
-sudo sh setup.sh
-</pre></div>
-
-
-<p>按提示一步一步的设置PSK,Username,Password。</p>
-<p>结果提示</p>
-<p><code>/bin/bash: xmlto: commad not found</code></p>
-<p><img alt="image1" src="http://yimagecache.qiniudn.com/67WIP9PO=0/H$PHA{VC2C$7.jpg" /></p>
-<p>好吧，只好<code>apt-get install xmlto</code></p>
-<p>结果一看 ...</p>
-                <a class="readmore" href="./setup-l2tp-and-ipsec-vpn.html">read more</a>
-<p>There are <a href="./setup-l2tp-and-ipsec-vpn.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

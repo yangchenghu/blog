@@ -24,6 +24,47 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="./setup-l2tp-and-ipsec-vpn.html" rel="bookmark"
+                           title="Permalink to Setup L2TP And IPSEC VPN">Setup L2TP And IPSEC VPN</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-09-23T00:00:00+08:00">
+                Published: 三 23 九月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/l2tp.html">l2tp</a> <a href="./tag/ipsec.html">ipsec</a> <a href="./tag/vpn.html">vpn</a> </p>
+</footer><!-- /.post-info -->                <h1>搭建L2TP和IPSEC的VPN</h1>
+<p>本来家里用的长城宽带，结果通过IP138一看，居然是“鹏博士宽带”</p>
+<p>这个碉堡了的鹏博士屏蔽各种梯子</p>
+<p>之前在东京的一个梯子，只要一ssh过去，梯子就消失了，ping都ping不通</p>
+<p>最后只好把梯子搬到了法国，延时直接翻倍了，悲剧</p>
+<p>最近发现拨公司的L2TP很流畅，就想在梯子上搭建一个L2TP</p>
+<p>搜了一下，找到一个比较便捷的方法</p>
+<p>在github上找到一个<a href="https://github.com/philplckthun/setup-simple-ipsec-l2tp-vpn">脚本</a></p>
+<p>按操作走</p>
+<div class="highlight"><pre>wget https://raw.github.com/philplckthun/setup-simple-ipsec-l2tp-vpn/master/setup.sh
+sudo sh setup.sh
+</pre></div>
+
+
+<p>按提示一步一步的设置PSK,Username,Password。</p>
+<p>结果提示</p>
+<p><code>/bin/bash: xmlto: commad not found</code></p>
+<p><img alt="image1" src="http://yimagecache.qiniudn.com/67WIP9PO=0/H$PHA{VC2C$7.jpg" /></p>
+<p>好吧，只好<code>apt-get install xmlto</code></p>
+<p>结果一看 ...</p>
+                <a class="readmore" href="./setup-l2tp-and-ipsec-vpn.html">read more</a>
+<p>There are <a href="./setup-l2tp-and-ipsec-vpn.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="./git-operation.html" rel="bookmark"
                            title="Permalink to Git operation">Git operation</a></h1>
                 </header>
@@ -376,42 +417,6 @@ Image Capture Extension
 <p>然后重启SVN Server就好了</p>
                 <a class="readmore" href="./fixed-svn-did-not-show-histoy-error.html">read more</a>
 <p>There are <a href="./fixed-svn-did-not-show-histoy-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./fixed-cocoapods-error.html" rel="bookmark"
-                           title="Permalink to Fixed Cocoapods Error">Fixed Cocoapods Error</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-02-15T00:00:00+08:00">
-                Published: 日 15 二月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/cocoapods.html">Cocoapods</a> <a href="./tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复Cocoapods error</h1>
-<p>今天使用<code>pod update</code>更新所有框架，结果提示</p>
-<div class="highlight"><pre>Update all pods
-Analyzing dependencies
-[!] There was an error reading &#39;/Users/xxxxx/.cocoapods/repos/master/CocoaPods-version.yml&#39;.
-Please consult http://blog.cocoapods.org/Repairing-Our-Broken-Specs-Repository/ for more information.
-</pre></div>
-
-
-<p>找了好多方法，也试了好多
-终于找到了原因
-记录一下</p>
-<div class="highlight"><pre>sudo rm -fr ~/.cocoapods/repos/master
-sudo gem uninstall cocoapods
-sudo gem ...</pre></div>
-                <a class="readmore" href="./fixed-cocoapods-error.html">read more</a>
-<p>There are <a href="./fixed-cocoapods-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

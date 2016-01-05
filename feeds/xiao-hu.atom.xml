@@ -58,7 +58,7 @@
 &lt;p&gt;大家访问github或者gitlab的时候，还是使用ssh比较方便，使用https方式需要输入用户名密码，但是同时有github和gitlab的时候就比较麻烦了&lt;/p&gt;
 &lt;p&gt;下面分享一下同时管理多个ssh密钥的方法&lt;/p&gt;
 &lt;p&gt;1.大家生成ssh key的时候一般用以下命令&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;~  ssh-keygen -t rsa
+&lt;div class="highlight"&gt;&lt;pre&gt;~  ssh-keygen -t rsa -C &amp;quot;mail@mail.com&amp;quot;
 Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/username/.ssh/id_rsa): /Users/username/.ssh/id_rsa_github
 Enter passphrase (empty for no passphrase):
@@ -111,7 +111,36 @@ IdentityFile ~/.ssh/id_rsa_gitlab
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;以后操作就可以使用ssh方式来访问仓库了。&lt;/p&gt;</summary><category term="ssh"></category><category term="key"></category></entry><entry><title>React-Native:Integrating with Existing Apps</title><link href="http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html" rel="alternate"></link><updated>2015-12-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</id><summary type="html">&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
+&lt;p&gt;6.测试一下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh -T git@github.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/ssh_key_test_ok.png" /&gt;&lt;/p&gt;
+&lt;p&gt;以后操作就可以使用ssh方式来访问仓库了。&lt;/p&gt;</summary><category term="ssh"></category><category term="key"></category></entry><entry><title>React-Native:Use Static Image Resources</title><link href="http://blog.chenghu.me/react-nativeuse-static-image-resources.html" rel="alternate"></link><updated>2015-12-27T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-27:react-nativeuse-static-image-resources.html</id><summary type="html">&lt;h1&gt;React-Native 教程 2 ：在React-Native项目中使用静态图片资源&lt;/h1&gt;
+&lt;p&gt;看过&lt;a href="https://facebook.github.io/react-native/docs/image.html#content"&gt;官方教程&lt;/a&gt;同学都知道如果我们想显示一个图片的话肯定会使用&lt;code&gt;Image&lt;/code&gt;这个组件&lt;/p&gt;
+&lt;p&gt;使用方式如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;renderImages: function() {
+  return (
+    &lt;span class="nt"&gt;&amp;lt;View&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;Image&lt;/span&gt;
+        &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.icon}&lt;/span&gt;
+        &lt;span class="na"&gt;source=&lt;/span&gt;&lt;span class="s"&gt;{require(&amp;#39;image!myIcon&amp;#39;)}&lt;/span&gt;  
+      &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;Image&lt;/span&gt;
+        &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.logo}&lt;/span&gt;
+        &lt;span class="na"&gt;source=&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;uri&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://facebook.github.io/react/img/logo_og.png&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;
+      &lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/View&amp;gt;&lt;/span&gt;
+  );
+},
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里显示本地图片的话会使用&lt;code&gt;source={require('image!图片名称')}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;显示网络图片的时候会使用&lt;code&gt;source={{uri: '图片地址'}}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一般显示网络图片的话，只要图片的地址没有问题，图片就能显示。&lt;/p&gt;
+&lt;p&gt;但是显示本地图片的时候，&lt;/p&gt;</summary><category term="react-native"></category></entry><entry><title>React-Native:Integrating with Existing Apps</title><link href="http://blog.chenghu.me/react-nativeintegrating-with-existing-apps.html" rel="alternate"></link><updated>2015-12-26T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</id><summary type="html">&lt;h1&gt;React-Native 教程 1 ： 集成React-Native到现有的iOS项目中&lt;/h1&gt;
 &lt;p&gt;最近在学习React-Natvie，昨天刚刚集成到了已有的项目里面，记录一下填过的坑。&lt;/p&gt;
 &lt;h1&gt;官方集成方式&lt;/h1&gt;
 &lt;p&gt;对已有的项目，如果集成React-Native的话，最方便的形式是使用官方推荐的Cocoapods来集成。&lt;/p&gt;
