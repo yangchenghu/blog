@@ -234,13 +234,30 @@ pod &#39;React&#39;, :path =&gt; &#39;../node_modules/react-native&#39;, :subspe
 <p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/rn.html">RN</a> </p>
 </footer><!-- /.post-info -->                <h1>ReactNative错误记录</h1>
-<div class="highlight"><pre>2015-12-23 10:30:27.482 [error][tid:com.facebook.React.RCTExceptionsManagerQueue] Unhandled JS Exception: Requiring unknown module &quot;image!cellicon&quot;. If you are sure the module is there, try restarting the packager.
-If you are sure the module is there, try restarting the packager.
+<h2>View背景透明，显示出后面的image</h2>
+<p><em>2016-01-07</em></p>
+<p>from:<a href="http://www.28im.com/ios/a3393211.html">here</a></p>
+<div class="highlight"><pre>headline: {
+    fontSize: 20,
+    textAlign: &#39;center&#39;,
+    backgroundColor: &#39;rgba(0,0,0,0)&#39;,
+    color: &#39;white&#39;
+}
+
+
+<span class="nt">&lt;View</span> <span class="na">style=</span><span class="s">{styles.container}</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;Image</span> 
+    <span class="na">style=</span><span class="s">{styles.backdrop}</span> 
+    <span class="na">source=</span><span class="cp">{{</span><span class="nv">uri</span><span class="o">:</span> <span class="s1">&#39;https://unsplash.com/photos/JWiMShWiF14/download&#39;</span><span class="cp">}}</span><span class="err">&gt;</span>
+      <span class="s">&lt;View</span> <span class="na">style=</span><span class="s">{styles.backdropView}</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Text</span> <span class="na">style=</span><span class="s">{styles.welcome}</span><span class="nt">&gt;</span>Headline<span class="nt">&lt;/Text&gt;</span>
+      <span class="nt">&lt;/View&gt;</span>
+  <span class="nt">&lt;/Image&gt;</span>
+<span class="nt">&lt;/View&gt;</span>
 </pre></div>
 
 
-<p><img alt="image require error" src="http://yimagecache.qiniudn.com/rn_imagerequireerror.png" /></p>
-<p>在引入image，使用require静态图片的时候，require('image!imagename')这样可以 ...</p>
+<h2>image error ...</h2>
                 <a class="readmore" href="./reactnative-errors-notes.html">read more</a>
 <p>There are <a href="./reactnative-errors-notes.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>

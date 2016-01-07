@@ -303,6 +303,30 @@ React.AppRegistry.registerComponent(&amp;#39;SimpleApp&amp;#39;, () =&amp;gt; Si
 &lt;p&gt;然后我们运行一下程序。&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://yimagecache.qiniudn.com/rn_install_runcode.png" /&gt;&lt;/p&gt;
 &lt;p&gt;项目在github上面，&lt;a href="https://github.com/yangchenghu/react-native-tutorial"&gt;地址&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Sat, 26 Dec 2015 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2015-12-26:react-nativeintegrating-with-existing-apps.html</guid><category>react-native</category><category>iOS</category><category>App</category><category>integra</category><category>集成</category></item><item><title>ReactNative Errors notes</title><link>http://blog.chenghu.me/reactnative-errors-notes.html</link><description>&lt;h1&gt;ReactNative错误记录&lt;/h1&gt;
+&lt;h2&gt;View背景透明，显示出后面的image&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;2016-01-07&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;from:&lt;a href="http://www.28im.com/ios/a3393211.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;headline: {
+    fontSize: 20,
+    textAlign: &amp;#39;center&amp;#39;,
+    backgroundColor: &amp;#39;rgba(0,0,0,0)&amp;#39;,
+    color: &amp;#39;white&amp;#39;
+}
+
+
+&lt;span class="nt"&gt;&amp;lt;View&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.container}&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;Image&lt;/span&gt; 
+    &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.backdrop}&lt;/span&gt; 
+    &lt;span class="na"&gt;source=&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;uri&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://unsplash.com/photos/JWiMShWiF14/download&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="s"&gt;&amp;lt;View&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.backdropView}&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;Text&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;{styles.welcome}&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Headline&lt;span class="nt"&gt;&amp;lt;/Text&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/View&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/Image&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/View&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;image error&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;2015-12-23 10:30:27.482 [error][tid:com.facebook.React.RCTExceptionsManagerQueue] Unhandled JS Exception: Requiring unknown module &amp;quot;image!cellicon&amp;quot;. If you are sure the module is there, try restarting the packager.
 If you are sure the module is there, try restarting the packager.
 &lt;/pre&gt;&lt;/div&gt;

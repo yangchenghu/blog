@@ -29,12 +29,11 @@
 
 ## 新浪汽车试驾 － 我试试
 
-在该项目中作为项目负责人，带iOS和安卓两个team，尝试使用ReactNative框架搭建了个人中心页面。
-
+在该项目中作为项目负责人，带iOS和安卓两个team开发了新浪汽车旗下试驾App，完全使用ReactNative框架开发了个人中心的所有功能。
 
 ## 新浪内部移动办公系统
 
-在此项目中设计了一套二维码扫描登录系统，推送登录系统，底层数据加密，原生程序与Html5页面交互，嵌入jspatch框架，正在使用xmppframework搭建及时通讯系统。
+作为该项目的项目经理，在此项目中开发了所有的客户端功能，并设计了一套二维码扫描登录系统，推送登录系统，底层数据加密，原生程序与Html5页面交互，集成jspatch框架，使用xmppframework搭建即时通讯系统。
 
 
 ### 新浪微盾  
@@ -79,13 +78,13 @@
 以下均为熟练使用的技能
 
 - iOS开发：Xcode，Obj-C，Instruments
-- iOS框架：AFNetworking，SDWebImage，ReactiveCocoa
+- iOS框架：AFNetworking，SDWebImage，ReactiveCocoa，ReactNative
 - iOS框架管理：CocoaPod
 - iOS构建：Jinkens
 - 版本管理：Svn/Git
-- 云和开放平台：SAE/AVOScloud/Parse/微博开放平台/微信开放平台
-- 常去的网站：Code4App，CocoaChina，github
-- 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/), [里脊串的开发随笔](http://adad184.com/)
+- 云和开放平台：SAE/AVOScloud/Parse/微博开放平台/微信开放平台/
+- 常去的网站：Code4App，CocoaChina，github，stackoverflow.com
+- 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)，[里脊串的开发随笔](http://adad184.com/)，[王魏的博客](http://onevcat.com/)，[雷纯锋的技术博客](http://blog.leichunfeng.com/)，[blog : sunnyxx](http://blog.sunnyxx.com/)
 
 - 其他技能：iOS6-9 适配，内存管理，程序优化
 
@@ -112,8 +111,8 @@
 ###业余
 
 - Python
+- Nodejs
 - Shell
-- Sketch
 - iOS 逆向及安全分析
 - OpenWRT
 - docker
@@ -125,4 +124,4 @@
 感谢您花时间阅读我的简历，期待能有机会和您共事。
 
 
-最后更新时间：2015-12-05
+最后更新时间：2016-01-07
