@@ -108,7 +108,7 @@
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
 <span class="n">bottle</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">app</span><span class="o">=</span><span class="n">StripPathMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">),</span>
+<span class="n">app</span><span class="o">=</span><span class="n">StripPathMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">),</span>
     <span class="n">reloader</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span>
     <span class="n">port</span><span class="o">=</span><span class="mi">10059</span><span class="p">)</span>
