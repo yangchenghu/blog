@@ -22,7 +22,239 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../install-golang-to-ubuntu.html">install golang to ubuntu</a></h1>
+                    <h1 class="entry-title"><a href="../arrange-uwsgi-with-bottle-in-ubuntu.html">arrange uwsgi with bottle in ubuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-06-02T00:00:00+08:00">
+                Published: 四 02 六月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/tech.html">tech</a> <a href="../tag/nginx.html">nginx</a> <a href="../tag/uwsgi.html">uwsgi</a> <a href="../tag/bottle.html">bottle</a> <a href="../tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><h1>Nginx 快速部署Bottle＋Uwsgi</h1>
+<h2>1. 安装</h2>
+<p>安装 uwsgi 和 Bottle 框架</p>
+<div class="highlight"><pre>sudo apt-get install uwsgi uwsgi-plugin-python python-bottle nginx
+</pre></div>
+
+
+<h2>2. Bottle程序结构</h2>
+<div class="highlight"><pre>/var/www/webapp/
+    plugins/
+        __init__.py
+    static/
+        css/
+        files/
+        images/
+        js/
+    views/
+        base.tpl
+        page.tpl
+    app.py
+</pre></div>
+
+
+<p>app.py</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">bottle</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">application</span> <span class="o">=</span> <span class="n">bottle</span><span class="o">.</span><span class="n">Bottle</span><span class="p">()</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_index</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The front &quot;index&quot; page</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="s">&#39;Hello world!&#39;</span>
+
+<span class="k">class</span> <span class="nc">StripPathMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Get that slash out of the request</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="n">e</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="n">bottle</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">app</span><span class="o">=</span><span class="n">StripPathMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">),</span>
+    <span class="n">reloader</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">10059</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p><code>reloader=True</code> 有代码变化的时候，自动加载。</p>
+<h2>3. 启动服务</h2>
+<div class="highlight"><pre>python app.py
+</pre></div>
+
+
+<p>在浏览器里访问<code>http://127.0.0.1:10059</code>就能看到返回</p>
+<h2>4. 配置uwsgi</h2>
+<p>编辑uwsgi配置文件，
+<code>sudo vim /etc/uwsgi/apps-available/bottle.ini</code></p>
+<div class="highlight"><pre><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/run/uwsgi/app/bottle/socket</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/var/www/bottle</span>
+<span class="na">master</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">plugins</span> <span class="o">=</span> <span class="s">python</span>
+<span class="na">file</span> <span class="o">=</span> <span class="s">app.py</span>
+<span class="na">uid</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">gid</span> <span class="o">=</span> <span class="s">www-data</span>
+</pre></div>
+
+
+<p>同nginx一样的操作，做一个软连接
+<code>ln -s /etc/uwsgi/apps-available/bottle.ini /etc/uwsgi/apps-enabled/bottle.ini</code></p>
+<p>启动uwsgi，<code>sudo service uwsgi restart</code></p>
+<p>由于使用的是socket的方式，不能通过浏览器来访问，所以需要nginx来代理一下。</p>
+<h2>5. 配置nginx</h2>
+<p>编辑配置文件，<code>sudo vim /etc/nginx/sites-available/bottle.conf</code></p>
+<div class="highlight"><pre><span class="nt">upstream</span> <span class="nt">_bottle</span> <span class="p">{</span>
+    <span class="n">server</span> <span class="n">unix</span><span class="o">:/</span><span class="n">run</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">bottle</span><span class="o">/</span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="cp">[</span><span class="p">::</span><span class="cp">]</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
+    <span class="n">listen</span> <span class="m">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">app</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">bottle</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+        <span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">@</span><span class="n">uwsgi</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">location</span> <span class="k">@uwsgi</span> <span class="p">{</span>
+        <span class="nt">include</span> <span class="nt">uwsgi_params</span><span class="o">;</span>
+        <span class="nt">uwsgi_pass</span> <span class="nt">_bottle</span><span class="o">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>同样做一个软连接到<code>sites-enabled</code>目录下，
+<code>sudo ln -s /etc/nginx/sites-available/bottle.conf /etc/nginx/sites-enabled/bottle.conf</code></p>
+<p>测试并生效配置文件，<code>sudo nginx -t &amp; sudo service nginx reload</code></p>
+<p>现在就可以在浏览器里来直接访问了<code>http://127.0.0.1</code></p>
+<h2>6.配置git hooks</h2>
+<p>这样服务就可以跑起来了，然后在配置git，来随时可以提交代码更新。</p>
+<p>在本地文件夹生成仓库<code>git init</code></p>
+<p>添加远程仓库<code>git remote add origin http://xx.xx.xx/bottle.git</code></p>
+<p>添加文件到仓库 <code>git add .</code></p>
+<p>提交到仓库<code>git push origin master</code></p>
+<p>配置一个git 的 hooks来在提交到仓库的时候，自动去拉取新的代码。</p>
+<p>找了一下，需要配置<code>post-receive</code>这个hooks，在提交完成后会自动调用。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">unset</span> <span class="k">$(</span>git rev-parse --local-env-vars<span class="k">)</span>
+
+<span class="nb">cd</span> /xxx/bottle
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<p>都配置好了，随便修改一点试试，然后提交，结果，并页面并没有刷新，登上服务器看一下，代码是有更新，重启一下uwsgi，结果就出来了，看来是uwsgi没有自动更新，继续找。</p>
+<h2>7.uwsgi自动加载</h2>
+<p><a href="https://www.zhihu.com/question/21016845">使用uwsgi和nginx做服务器和django框架，为什么每次修改代码都需要重启uwsgi呢？</a></p>
+<p>遇到一个一样的问题</p>
+<p>还有一种方法配置“py-autoreload = 1”，每次修改代码会自动reload，不再需要手动重启。</p>
+<p>修改一下uwsgi的配置</p>
+<div class="highlight"><pre><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/run/uwsgi/app/bottle/socket</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/home/yangch/www/bottle</span>
+<span class="na">master</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">py-autoreload</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">plugins</span> <span class="o">=</span> <span class="s">python</span>
+<span class="na">file</span> <span class="o">=</span> <span class="s">app.py</span>
+<span class="na">uid</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">gid</span> <span class="o">=</span> <span class="s">www-data</span>
+</pre></div>
+
+
+<p>然后重启一下uwsgi，<code>sudo service uwsgi restart</code></p>
+<p>再次提交代码，就可以看到更新了</p>
+<h2>遇到的问题</h2>
+<h3>hook的问题</h3>
+<p><a href="http://www.cnblogs.com/jouny/p/4682444.html">git 系统中 post-receive 钩子不能正常执行 git pull 解决方法</a></p>
+<p>有一个需求是本地git在push到远程 git repo 之后，在远程服务器上自动在/dir/foo下执行 git pull 的操作。想来是一个很简单的需求，不就是在远程的 foo.git 仓库中的 hook 里加一个 post-receive 的钩子，然后在钩子里加入一个 git pull 的操作。但是实际操作的时候发现有问题的，因为这样忽略了一个小细节的问题。</p>
+<p>操作之前，头脑里想的代码如下：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">cd</span> /var/git/web3/etc/puppet
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<p>用这个代码在 git push ssh://git@ownlinux.org:/opt/foo.git 之后，发现远程服务器上的 /dir/foo 目录下并没有成功 pull 到最新的数据，并且终端上也有报错（remote: fatal: Not a git repository: ‘.’）。 后面发现 git 的钩子在运行的时候会调用 GIT_DIR 这个环境变量，而不是PWD 这个。所以在 git pull 的时候提示 Not a git repository: ‘.’ ，其中 “.” 正是 GIT_DIR 这个环境变量的值。</p>
+<p>钩子的代码改成下面的之后，运行正常了：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">unset</span> <span class="k">$(</span>git rev-parse --local-env-vars<span class="k">)</span>
+<span class="nb">cd</span> /var/git/web3/etc/puppet
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<hr />
+<p>参考文章：</p>
+<p><a href="https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart">Bottle + UWSGI + Nginx Quickstart</a></p>
+<p><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Customizing Git - Git Hooks</a></p>
+<p><a href="http://gitbook.liuhui998.com/5_8.html">Git Hooks</a></p>
+<p><a href="http://www.cnblogs.com/jouny/p/4682444.html">git 系统中 post-receive 钩子不能正常执行 git pull 解决方法</a></p>
+<p><a href="http://alfred-long.iteye.com/blog/1836347">git钩子 自动更新服务器上版本库</a></p>
+<p><a href="http://www.cnblogs.com/zhouej/archive/2012/03/25/2379646.html">uWSGI参考资料（1.0版本的配置选项列表）</a></p>
+<p><a href="http://www.cnblogs.com/Xjng/archive/2014/05/27/3754635.html">Nginx+uWSGI+bottle 在Linux上部署</a></p><p>There are <a href="../arrange-uwsgi-with-bottle-in-ubuntu.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="../install-golang-to-ubuntu.html" rel="bookmark"
+                           title="Permalink to install golang to ubuntu">install golang to ubuntu</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-01-03T00:00:00+08:00">
                 Published: 日 03 一月 2016
@@ -33,7 +265,7 @@
         </address>
 <p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/golang.html">golang</a> <a href="../tag/ubuntu.html">ubuntu</a> </p>
-</footer><!-- /.post-info --><h1>在ubuntu上搭建go环境</h1>
+</footer><!-- /.post-info -->                <h1>在ubuntu上搭建go环境</h1>
 <p>搜了一下，发现有一个比较全面的<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">教程</a></p>
 <p>当然还有<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md">官方的教程</a></p>
 <p>还是比较喜欢使用<code>apt-get</code>的方式来安装（当然我也是编译了好几次没有成功，T_T）</p>
@@ -54,46 +286,10 @@
 
 
 <p>写个Helloword来试试</p>
-<div class="highlight"><pre><span class="n">package</span> <span class="n">main</span>
-
-<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
-
-<span class="n">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;go print line!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>保存到test.go，跑一下试试</p>
-<div class="highlight"><pre>go run test.go
-</pre></div>
-
-
-<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_error.png" /></p>
-<p>看这个样子要在home目录下，有go这么个目录，里面还有src文件供运行时查找</p>
-<p>好吧</p>
-<p>去<a href="https://golang.org/dl/">官方下载</a></p>
-<div class="highlight"><pre>wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
-</pre></div>
-
-
-<p>然后解压到<code>~/go</code>目录下</p>
-<div class="highlight"><pre>tar zxvf go1.5.2.linux-amd64.tar.gz ~/go
-</pre></div>
-
-
-<p>我们再运行一次呢</p>
-<div class="highlight"><pre>go run test.go
-</pre></div>
-
-
-<p><img alt="" src="http://77fyf6.com1.z0.glb.clouddn.com/go_install_run_sucess.png" /></p>
-<p>ok，成功！</p><p>There are <a href="../install-golang-to-ubuntu.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<div class="highlight"><pre><span class="n">package</span> <span class="n">main ...</span></pre></div>
+                <a class="readmore" href="../install-golang-to-ubuntu.html">read more</a>
+<p>There are <a href="../install-golang-to-ubuntu.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -446,41 +642,6 @@ git checkout --
 <p>主要就是使用<code>objection ...</code></p>
                 <a class="readmore" href="../2015-11-03.html">read more</a>
 <p>There are <a href="../2015-11-03.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="../output-rss-full-content.html" rel="bookmark"
-                           title="Permalink to output Rss Full content">output Rss Full content</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-10-22T00:00:00+08:00">
-                Published: 四 22 十月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="../category/tech.html">Tech</a>.</p>
-
-</footer><!-- /.post-info -->                <h1>Rss输出全文</h1>
-<p>自从下载了mac下的<code>reeder</code>，烧了FeedHQ，又开始对Rss开始迷恋了</p>
-<p>但发现有些Rss只能输出摘要，这个比较麻烦，还得去再点击一下，去访问网页的内容</p>
-<p>Reeder自动缓存的优势根本无法发挥。</p>
-<p>想了一个办法，就是用python，解析源Rss的路径，分析出链接，进入该链接，分析出文章的内容，然后将内容插入 <code>&lt;description&gt;</code>这个节点后面，命名为<code>&lt;content:encoded&gt;</code>。这样Rss阅读器就可以识别全文了。</p>
-<p>在搜索 python 解析Rss的时候，发现下面几个链接，分享个大家，可以做参考。</p>
-<p><a href="http://www.freezhongzi.info/?p=118">全文RSS输出程序</a></p>
-<p><a href="https://github.com/lbzhung/full_text_rss">full_text_rss</a></p>
-<p><a href="https://github.com/shoaly/2rss">2rss</a></p>
-<p><a href="http://www.ruanyifeng.com/blog/2010/04/the_solution_of_full_text_feed.html">全文Feed的终极解决方案</a></p>
-<p><a href="http://phyng.com/2014-10-01-rss-xml.html">Python 处理 XML/RSS 的一些经验</a></p>
-<p><a href="http://fivefilters.org/content-only/">fivefilters.org</a></p>
-<p><a href="http://developer.51cto.com/art/201002/185399.htm">浅析Python RSS文件功能介绍</a></p>
-<p><a href="http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/">使用 Python 轻松抓取网页</a></p>
-                <a class="readmore" href="../output-rss-full-content.html">read more</a>
-<p>There are <a href="../output-rss-full-content.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

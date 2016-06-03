@@ -1,5 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 03 Jan 2016 00:00:00 +0800</lastBuildDate><item><title>install golang to ubuntu</title><link>http://blog.chenghu.me/install-golang-to-ubuntu.html</link><description>&lt;h1&gt;在ubuntu上搭建go环境&lt;/h1&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 02 Jun 2016 00:00:00 +0800</lastBuildDate><item><title>arrange uwsgi with bottle in ubuntu</title><link>http://blog.chenghu.me/arrange-uwsgi-with-bottle-in-ubuntu.html</link><description>&lt;h1&gt;Nginx 快速部署Bottle＋Uwsgi&lt;/h1&gt;
+&lt;h2&gt;1. 安装&lt;/h2&gt;
+&lt;p&gt;安装 uwsgi 和 Bottle 框架&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get install uwsgi uwsgi-plugin-python python-bottle nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2. Bottle程序结构&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/var/www/webapp/
+    plugins/
+        __init__.py
+    static/
+        css/
+        files/
+        images/
+        js/
+    views/
+        base.tpl
+        page.tpl
+    app.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;app.py&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bottle&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bottle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bottle&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;show_index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    The front &amp;quot;index&amp;quot; page&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hello world!&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StripPathMiddleware&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    Get that slash out of the request&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PATH_INFO&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PATH_INFO&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rstrip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;bottle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;StripPathMiddleware&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;reloader&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;0.0.0.0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10059&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;code&gt;reloader=True&lt;/code&gt; 有代码变化的时候，自动加载。&lt;/p&gt;
+&lt;h2&gt;3. 启动服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python app.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在浏览器里访问&lt;code&gt;http://127.0.0.1:10059&lt;/code&gt;就能看到返回&lt;/p&gt;
+&lt;h2&gt;4. 配置uwsgi&lt;/h2&gt;
+&lt;p&gt;编辑uwsgi配置文件，
+&lt;code&gt;sudo vim /etc/uwsgi/apps-available/bottle.ini&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/run/uwsgi/app/bottle/socket&lt;/span&gt;
+&lt;span class="na"&gt;chdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/var/www/bottle&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;plugins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;python&lt;/span&gt;
+&lt;span class="na"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;app.py&lt;/span&gt;
+&lt;span class="na"&gt;uid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;www-data&lt;/span&gt;
+&lt;span class="na"&gt;gid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;www-data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;同nginx一样的操作，做一个软连接
+&lt;code&gt;ln -s /etc/uwsgi/apps-available/bottle.ini /etc/uwsgi/apps-enabled/bottle.ini&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;启动uwsgi，&lt;code&gt;sudo service uwsgi restart&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;由于使用的是socket的方式，不能通过浏览器来访问，所以需要nginx来代理一下。&lt;/p&gt;
+&lt;h2&gt;5. 配置nginx&lt;/h2&gt;
+&lt;p&gt;编辑配置文件，&lt;code&gt;sudo vim /etc/nginx/sites-available/bottle.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;_bottle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bottle&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bottle&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;try_files&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="k"&gt;@uwsgi&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nt"&gt;include&lt;/span&gt; &lt;span class="nt"&gt;uwsgi_params&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="nt"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="nt"&gt;_bottle&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;同样做一个软连接到&lt;code&gt;sites-enabled&lt;/code&gt;目录下，
+&lt;code&gt;sudo ln -s /etc/nginx/sites-available/bottle.conf /etc/nginx/sites-enabled/bottle.conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;测试并生效配置文件，&lt;code&gt;sudo nginx -t &amp;amp; sudo service nginx reload&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在就可以在浏览器里来直接访问了&lt;code&gt;http://127.0.0.1&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;6.配置git hooks&lt;/h2&gt;
+&lt;p&gt;这样服务就可以跑起来了，然后在配置git，来随时可以提交代码更新。&lt;/p&gt;
+&lt;p&gt;在本地文件夹生成仓库&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;添加远程仓库&lt;code&gt;git remote add origin http://xx.xx.xx/bottle.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;添加文件到仓库 &lt;code&gt;git add .&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;提交到仓库&lt;code&gt;git push origin master&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;配置一个git 的 hooks来在提交到仓库的时候，自动去拉取新的代码。&lt;/p&gt;
+&lt;p&gt;找了一下，需要配置&lt;code&gt;post-receive&lt;/code&gt;这个hooks，在提交完成后会自动调用。&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nb"&gt;unset&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;git rev-parse --local-env-vars&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;cd&lt;/span&gt; /xxx/bottle
+/usr/bin/git pull
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;都配置好了，随便修改一点试试，然后提交，结果，并页面并没有刷新，登上服务器看一下，代码是有更新，重启一下uwsgi，结果就出来了，看来是uwsgi没有自动更新，继续找。&lt;/p&gt;
+&lt;h2&gt;7.uwsgi自动加载&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/21016845"&gt;使用uwsgi和nginx做服务器和django框架，为什么每次修改代码都需要重启uwsgi呢？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;遇到一个一样的问题&lt;/p&gt;
+&lt;p&gt;还有一种方法配置“py-autoreload = 1”，每次修改代码会自动reload，不再需要手动重启。&lt;/p&gt;
+&lt;p&gt;修改一下uwsgi的配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/run/uwsgi/app/bottle/socket&lt;/span&gt;
+&lt;span class="na"&gt;chdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/yangch/www/bottle&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;py-autoreload&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;plugins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;python&lt;/span&gt;
+&lt;span class="na"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;app.py&lt;/span&gt;
+&lt;span class="na"&gt;uid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;www-data&lt;/span&gt;
+&lt;span class="na"&gt;gid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;www-data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后重启一下uwsgi，&lt;code&gt;sudo service uwsgi restart&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;再次提交代码，就可以看到更新了&lt;/p&gt;
+&lt;h2&gt;遇到的问题&lt;/h2&gt;
+&lt;h3&gt;hook的问题&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/jouny/p/4682444.html"&gt;git 系统中 post-receive 钩子不能正常执行 git pull 解决方法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;有一个需求是本地git在push到远程 git repo 之后，在远程服务器上自动在/dir/foo下执行 git pull 的操作。想来是一个很简单的需求，不就是在远程的 foo.git 仓库中的 hook 里加一个 post-receive 的钩子，然后在钩子里加入一个 git pull 的操作。但是实际操作的时候发现有问题的，因为这样忽略了一个小细节的问题。&lt;/p&gt;
+&lt;p&gt;操作之前，头脑里想的代码如下：&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; /var/git/web3/etc/puppet
+/usr/bin/git pull
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;用这个代码在 git push ssh://git@ownlinux.org:/opt/foo.git 之后，发现远程服务器上的 /dir/foo 目录下并没有成功 pull 到最新的数据，并且终端上也有报错（remote: fatal: Not a git repository: ‘.’）。 后面发现 git 的钩子在运行的时候会调用 GIT_DIR 这个环境变量，而不是PWD 这个。所以在 git pull 的时候提示 Not a git repository: ‘.’ ，其中 “.” 正是 GIT_DIR 这个环境变量的值。&lt;/p&gt;
+&lt;p&gt;钩子的代码改成下面的之后，运行正常了：&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nb"&gt;unset&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;git rev-parse --local-env-vars&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; /var/git/web3/etc/puppet
+/usr/bin/git pull
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart"&gt;Bottle + UWSGI + Nginx Quickstart&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks"&gt;Customizing Git - Git Hooks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://gitbook.liuhui998.com/5_8.html"&gt;Git Hooks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/jouny/p/4682444.html"&gt;git 系统中 post-receive 钩子不能正常执行 git pull 解决方法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://alfred-long.iteye.com/blog/1836347"&gt;git钩子 自动更新服务器上版本库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/zhouej/archive/2012/03/25/2379646.html"&gt;uWSGI参考资料（1.0版本的配置选项列表）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cnblogs.com/Xjng/archive/2014/05/27/3754635.html"&gt;Nginx+uWSGI+bottle 在Linux上部署&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Thu, 02 Jun 2016 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2016-06-02:arrange-uwsgi-with-bottle-in-ubuntu.html</guid><category>tech</category><category>nginx</category><category>uwsgi</category><category>bottle</category><category>python</category></item><item><title>install golang to ubuntu</title><link>http://blog.chenghu.me/install-golang-to-ubuntu.html</link><description>&lt;h1&gt;在ubuntu上搭建go环境&lt;/h1&gt;
 &lt;p&gt;搜了一下，发现有一个比较全面的&lt;a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md"&gt;教程&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;当然还有&lt;a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.1.md"&gt;官方的教程&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;还是比较喜欢使用&lt;code&gt;apt-get&lt;/code&gt;的方式来安装（当然我也是编译了好几次没有成功，T_T）&lt;/p&gt;

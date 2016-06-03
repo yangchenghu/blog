@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/index.html</loc>
-<lastmod>2016-01-19T13:16:47-00:00</lastmod>
+<lastmod>2016-06-03T13:43:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/archives.html</loc>
-<lastmod>2016-01-19T13:16:47-00:00</lastmod>
+<lastmod>2016-06-03T13:43:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/tags.html</loc>
-<lastmod>2016-01-19T13:16:47-00:00</lastmod>
+<lastmod>2016-06-03T13:43:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.chenghu.me/categories.html</loc>
-<lastmod>2016-01-19T13:16:47-00:00</lastmod>
+<lastmod>2016-06-03T13:43:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2014-09-10T00:00:00:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/arrange-uwsgi-with-bottle-in-ubuntu.html</loc>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -229,7 +236,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/category/tech.html</loc>
-<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -333,6 +340,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.chenghu.me/tag/uwsgi.html</loc>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.chenghu.me/tag/pm.html</loc>
 <lastmod>2015-03-14T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -362,7 +376,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/tag/python.html</loc>
-<lastmod>2014-09-09T00:00:00:%s</lastmod>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -377,6 +391,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.chenghu.me/tag/selector.html</loc>
 <lastmod>2015-04-26T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/nginx.html</loc>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -460,7 +481,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/tag/tech.html</loc>
-<lastmod>2015-12-21T00:00:00:%s</lastmod>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.chenghu.me/tag/bottle.html</loc>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -488,7 +516,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.chenghu.me/author/xiao-hu.html</loc>
-<lastmod>2016-01-03T00:00:00:%s</lastmod>
+<lastmod>2016-06-02T00:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

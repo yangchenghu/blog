@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Python</title>
+        <title>小虎的博客 - python</title>
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,130 +22,41 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../bo-ke-qian-yi-wp-pelican.html">博客迁移(WP->Pelican)</a></h1>
+                    <h1 class="entry-title"><a href="../arrange-uwsgi-with-bottle-in-ubuntu.html">arrange uwsgi with bottle in ubuntu</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2014-09-09T00:00:00+08:00">
-                Published: 二 09 九月 2014
+        <abbr class="published" title="2016-06-02T00:00:00+08:00">
+                Published: 四 02 六月 2016
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
         </address>
 <p>In <a href="../category/tech.html">Tech</a>.</p>
-<p>tags: <a href="../tag/python.html">Python</a> <a href="../tag/pelican.html">Pelican</a> <a href="../tag/wordpress.html">WordPress</a> </p>
-</footer><!-- /.post-info --><p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
-<h2>将博客文章从wordpress导出xml文件</h2>
-<p>进入wordpress后台，选择<code>工具</code> -&gt; <code>导出</code>。</p>
-<p><em>这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。</em></p>
-<h2>将博客里面的图片下载到本地</h2>
-<p>这里使用了<a href="http://zoomquiet.io/">zoomquiet</a>大妈的一个脚本（修改了两个地方：添加了异常处理，由于有些图片的地址已经失效，容易读取失败；添加了网络超时处理）。</p>
-<div class="highlight"><pre><span class="c">#coding=utf-8</span>
-
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">codecs</span>
-<span class="kn">import</span> <span class="nn">urllib2</span>
-
-<span class="c"># 打开RSS文件读取内容</span>
-<span class="nb">file</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;wordpress.2014.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="c"># 用正则从RSS中提取所有图片链接地址</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;src=&quot;([\w\W]+?)&quot;&#39;</span><span class="p">)</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-
-<span class="c"># 下载图片文件，并保存到img目录</span>
-<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">url</span>
-    <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>
-    <span class="n">req</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">resp</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">newname</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="k">print</span> <span class="n">newname</span> 
-        <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;./img/&#39;</span> <span class="o">+</span> <span class="n">newname</span> <span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
-        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-        <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> image download fail&#39;</span> <span class="o">%</span> <span class="n">url</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="k">pass</span>
+<p>tags: <a href="../tag/tech.html">tech</a> <a href="../tag/nginx.html">nginx</a> <a href="../tag/uwsgi.html">uwsgi</a> <a href="../tag/bottle.html">bottle</a> <a href="../tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><h1>Nginx 快速部署Bottle＋Uwsgi</h1>
+<h2>1. 安装</h2>
+<p>安装 uwsgi 和 Bottle 框架</p>
+<div class="highlight"><pre>sudo apt-get install uwsgi uwsgi-plugin-python python-bottle nginx
 </pre></div>
 
 
-<h2>将图片上传到七牛</h2>
-<p>参考<a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html">七牛文档</a>，配置<code>conf.json</code>文件</p>
-<p>然后执行 <code>qrsync /path/to/your-conf.json</code>，会将图片上传到七牛</p>
-<h2>替换xml中图片的url</h2>
-<div class="highlight"><pre><span class="c">#coding=utf-8</span>
-
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="c"># 这里修改成自己的空间地址</span>
-<span class="n">strbucketurl</span> <span class="o">=</span> <span class="s">&quot;http://bucket.qiniudn.com/&quot;</span>
-
-<span class="c"># 打开RSS文件读取内容</span>
-<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;wordpress.2014.xml&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="c"># 用正则从RSS中提取所有图片链接地址</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&#39;(http:.*?\.(jpg|png))&#39;</span><span class="p">)</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="n">urls</span>
-
-<span class="n">iCount</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c"># 替换所有url</span>
-<span class="k">for</span> <span class="n">arrlist</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">arrlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">newname</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="n">newurl</span> <span class="o">=</span> <span class="n">strbucketurl</span> <span class="o">+</span> <span class="n">newname</span>
-    <span class="k">print</span> <span class="n">url</span>
-    <span class="k">print</span> <span class="n">newurl</span>
-    <span class="k">print</span> <span class="s">&#39;------------&#39;</span>
-    <span class="n">iCount</span> <span class="o">=</span> <span class="n">iCount</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">newurl</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="s">&#39;change url count:</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">iCount</span>
-
-<span class="n">outputfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;new2013.xml&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">outputfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-<span class="n">outputfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<h2>2. Bottle程序结构</h2>
+<div class="highlight"><pre>/var/www/webapp/
+    plugins/
+        __init__.py
+    static/
+        css/
+        files/
+        images/
+        js/
+    views/
+        base.tpl
+        page.tpl
+    app.py
 </pre></div>
 
 
-<p>注意：执行上面脚本记得修改成自己的bucket地址！！！</p>
-<h2>将xml转换成markdown格式</h2>
-<p>这一步比较复杂，自己也折腾了好久，踩了好多坑，参考了<a href="http://xdays.info/Pelican%E5%92%8CGithub%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html">xdays</a> 的文章</p>
-<ol>
-<li>
-<p>安装<code>BeautifulSoup4</code>和 <code>lxml</code></p>
-<div class="highlight"><pre>pip install BeautifulSoup4  lxml
-</pre></div>
-
-
-</li>
-<li>
-<p>安装 <code>pandoc</code></p>
-<div class="highlight"><pre>brew install pandoc
-</pre></div>
-
-
-</li>
-<li>
-<p>进入blog目录，将xml文件装换成markdown格式：</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="kn">import</span> <span class="o">--</span><span class="n">wpfile</span> <span class="o">./</span><span class="n">xml</span><span class="o">/</span><span class="n">new2012</span><span class="o">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">m</span> <span class="n">markdown</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">tmp</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>运行以下脚本，将markdown的文件名unquote成字符串：</p>
-<p><code>python changeMDname.py ./tmp ./content/cat/</code></p>
+<p>app.py</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -172,44 +83,211 @@
 24
 25
 26
-27</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">bottle</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">application</span> <span class="o">=</span> <span class="n">bottle</span><span class="o">.</span><span class="n">Bottle</span><span class="p">()</span>
 
-<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">unquote</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_index</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The front &quot;index&quot; page</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="s">&#39;Hello world!&#39;</span>
 
-<span class="n">top</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">out</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">flist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="nb">file</span><span class="p">)</span> <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span> <span class="k">for</span> <span class="n">base</span><span class="p">,</span><span class="n">dirs</span><span class="p">,</span><span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">top</span><span class="p">)],[])</span>
+<span class="k">class</span> <span class="nc">StripPathMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Get that slash out of the request</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="n">e</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
 
-<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">flist</span><span class="p">:</span>
-    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;Slug&#39;</span><span class="p">):</span>
-                <span class="n">index</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-                <span class="n">p</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">unquote</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-                <span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.md&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
-                        <span class="n">g</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-                <span class="k">break</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="n">bottle</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">app</span><span class="o">=</span><span class="n">StripPathMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">),</span>
+    <span class="n">reloader</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">10059</span><span class="p">)</span>
 </pre></div>
 </td></tr></table>
 
-</li>
-</ol>
-<h2>然后就可以发布blog了</h2>
-<p>所用到的脚本可以在<a href="https://github.com/yangchenghu/convertWP2Pelican">这里</a>下载</p>
-<h2>参考：</h2>
-<p><a href="floss.zoomquiet.io/data/20121221103448/index.html">迁移SAE wordpress的图片到jekyll</a>  - 注：已经打不开了，参考的<a href="http://webcache.googleusercontent.com/search?q=cache:Cdd-FI1a50oJ:floss.zoomquiet.io/data/20121221103448/index.html+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=jp">google快照</a></p>
-<p><a href="http://xdays.info/Pelican%E5%92%8CGithub%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html">Pelican和Github构建静态博客</a></p><p>There are <a href="../bo-ke-qian-yi-wp-pelican.html#disqus_thread">comments</a>.</p>                </article>
+<p><code>reloader=True</code> 有代码变化的时候，自动加载。</p>
+<h2>3. 启动服务</h2>
+<div class="highlight"><pre>python app.py
+</pre></div>
+
+
+<p>在浏览器里访问<code>http://127.0.0.1:10059</code>就能看到返回</p>
+<h2>4. 配置uwsgi</h2>
+<p>编辑uwsgi配置文件，
+<code>sudo vim /etc/uwsgi/apps-available/bottle.ini</code></p>
+<div class="highlight"><pre><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/run/uwsgi/app/bottle/socket</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/var/www/bottle</span>
+<span class="na">master</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">plugins</span> <span class="o">=</span> <span class="s">python</span>
+<span class="na">file</span> <span class="o">=</span> <span class="s">app.py</span>
+<span class="na">uid</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">gid</span> <span class="o">=</span> <span class="s">www-data</span>
+</pre></div>
+
+
+<p>同nginx一样的操作，做一个软连接
+<code>ln -s /etc/uwsgi/apps-available/bottle.ini /etc/uwsgi/apps-enabled/bottle.ini</code></p>
+<p>启动uwsgi，<code>sudo service uwsgi restart</code></p>
+<p>由于使用的是socket的方式，不能通过浏览器来访问，所以需要nginx来代理一下。</p>
+<h2>5. 配置nginx</h2>
+<p>编辑配置文件，<code>sudo vim /etc/nginx/sites-available/bottle.conf</code></p>
+<div class="highlight"><pre><span class="nt">upstream</span> <span class="nt">_bottle</span> <span class="p">{</span>
+    <span class="n">server</span> <span class="n">unix</span><span class="o">:/</span><span class="n">run</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">bottle</span><span class="o">/</span><span class="n">socket</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="cp">[</span><span class="p">::</span><span class="cp">]</span><span class="o">:</span><span class="m">80</span><span class="p">;</span>
+    <span class="n">listen</span> <span class="m">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">app</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">com</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">bottle</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+        <span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">@</span><span class="n">uwsgi</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nt">location</span> <span class="k">@uwsgi</span> <span class="p">{</span>
+        <span class="nt">include</span> <span class="nt">uwsgi_params</span><span class="o">;</span>
+        <span class="nt">uwsgi_pass</span> <span class="nt">_bottle</span><span class="o">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>同样做一个软连接到<code>sites-enabled</code>目录下，
+<code>sudo ln -s /etc/nginx/sites-available/bottle.conf /etc/nginx/sites-enabled/bottle.conf</code></p>
+<p>测试并生效配置文件，<code>sudo nginx -t &amp; sudo service nginx reload</code></p>
+<p>现在就可以在浏览器里来直接访问了<code>http://127.0.0.1</code></p>
+<h2>6.配置git hooks</h2>
+<p>这样服务就可以跑起来了，然后在配置git，来随时可以提交代码更新。</p>
+<p>在本地文件夹生成仓库<code>git init</code></p>
+<p>添加远程仓库<code>git remote add origin http://xx.xx.xx/bottle.git</code></p>
+<p>添加文件到仓库 <code>git add .</code></p>
+<p>提交到仓库<code>git push origin master</code></p>
+<p>配置一个git 的 hooks来在提交到仓库的时候，自动去拉取新的代码。</p>
+<p>找了一下，需要配置<code>post-receive</code>这个hooks，在提交完成后会自动调用。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">unset</span> <span class="k">$(</span>git rev-parse --local-env-vars<span class="k">)</span>
+
+<span class="nb">cd</span> /xxx/bottle
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<p>都配置好了，随便修改一点试试，然后提交，结果，并页面并没有刷新，登上服务器看一下，代码是有更新，重启一下uwsgi，结果就出来了，看来是uwsgi没有自动更新，继续找。</p>
+<h2>7.uwsgi自动加载</h2>
+<p><a href="https://www.zhihu.com/question/21016845">使用uwsgi和nginx做服务器和django框架，为什么每次修改代码都需要重启uwsgi呢？</a></p>
+<p>遇到一个一样的问题</p>
+<p>还有一种方法配置“py-autoreload = 1”，每次修改代码会自动reload，不再需要手动重启。</p>
+<p>修改一下uwsgi的配置</p>
+<div class="highlight"><pre><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/run/uwsgi/app/bottle/socket</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/home/yangch/www/bottle</span>
+<span class="na">master</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">py-autoreload</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">plugins</span> <span class="o">=</span> <span class="s">python</span>
+<span class="na">file</span> <span class="o">=</span> <span class="s">app.py</span>
+<span class="na">uid</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">gid</span> <span class="o">=</span> <span class="s">www-data</span>
+</pre></div>
+
+
+<p>然后重启一下uwsgi，<code>sudo service uwsgi restart</code></p>
+<p>再次提交代码，就可以看到更新了</p>
+<h2>遇到的问题</h2>
+<h3>hook的问题</h3>
+<p><a href="http://www.cnblogs.com/jouny/p/4682444.html">git 系统中 post-receive 钩子不能正常执行 git pull 解决方法</a></p>
+<p>有一个需求是本地git在push到远程 git repo 之后，在远程服务器上自动在/dir/foo下执行 git pull 的操作。想来是一个很简单的需求，不就是在远程的 foo.git 仓库中的 hook 里加一个 post-receive 的钩子，然后在钩子里加入一个 git pull 的操作。但是实际操作的时候发现有问题的，因为这样忽略了一个小细节的问题。</p>
+<p>操作之前，头脑里想的代码如下：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">cd</span> /var/git/web3/etc/puppet
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<p>用这个代码在 git push ssh://git@ownlinux.org:/opt/foo.git 之后，发现远程服务器上的 /dir/foo 目录下并没有成功 pull 到最新的数据，并且终端上也有报错（remote: fatal: Not a git repository: ‘.’）。 后面发现 git 的钩子在运行的时候会调用 GIT_DIR 这个环境变量，而不是PWD 这个。所以在 git pull 的时候提示 Not a git repository: ‘.’ ，其中 “.” 正是 GIT_DIR 这个环境变量的值。</p>
+<p>钩子的代码改成下面的之后，运行正常了：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">unset</span> <span class="k">$(</span>git rev-parse --local-env-vars<span class="k">)</span>
+<span class="nb">cd</span> /var/git/web3/etc/puppet
+/usr/bin/git pull
+</pre></div>
+</td></tr></table>
+
+<hr />
+<p>参考文章：</p>
+<p><a href="https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart">Bottle + UWSGI + Nginx Quickstart</a></p>
+<p><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Customizing Git - Git Hooks</a></p>
+<p><a href="http://gitbook.liuhui998.com/5_8.html">Git Hooks</a></p>
+<p><a href="http://www.cnblogs.com/jouny/p/4682444.html">git 系统中 post-receive 钩子不能正常执行 git pull 解决方法</a></p>
+<p><a href="http://alfred-long.iteye.com/blog/1836347">git钩子 自动更新服务器上版本库</a></p>
+<p><a href="http://www.cnblogs.com/zhouej/archive/2012/03/25/2379646.html">uWSGI参考资料（1.0版本的配置选项列表）</a></p>
+<p><a href="http://www.cnblogs.com/Xjng/archive/2014/05/27/3754635.html">Nginx+uWSGI+bottle 在Linux上部署</a></p><p>There are <a href="../arrange-uwsgi-with-bottle-in-ubuntu.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="../bo-ke-qian-yi-wp-pelican.html" rel="bookmark"
+                           title="Permalink to 博客迁移(WP->Pelican)">博客迁移(WP->Pelican)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-09-09T00:00:00+08:00">
+                Published: 二 09 九月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/python.html">Python</a> <a href="../tag/pelican.html">Pelican</a> <a href="../tag/wordpress.html">WordPress</a> </p>
+</footer><!-- /.post-info -->                <p>今天心血来潮，想把自己在wordpress上的<a href="http://www.yangch.info">博客</a>迁移到刚刚用pelican在github上搭建好<a href="http://blog.chenghu.me">新博客</a>，折腾了一下午，记录了一下过程。</p>
+<h2>将博客文章从wordpress导出xml文件</h2>
+<p>进入wordpress后台，选择<code>工具</code> -&gt; <code>导出</code>。</p>
+<p><em>这里要注意的是，如果文章多，或者评论多的话，最好根据年份或者根据分类来导出文章，这样文件较小，后面各种处理都比较方便。</em></p>
+<h2>将博客里面的图片下载到本地</h2>
+<p>这里使用了<a href="http://zoomquiet.io/">zoomquiet</a>大妈的一个脚本（修改了两个地方：添加了异常处理，由于有些图片的地址已经失效，容易读取失败；添加了网络超时处理）。</p>
+<div class="highlight"><pre><span class="c">#coding=utf-8</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="c"># 打开RSS文件读取内容</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;wordpress.2014.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c"># 用正则从RSS中提取所有图片链接地址 ...</span></pre></div>
+                <a class="readmore" href="../bo-ke-qian-yi-wp-pelican.html">read more</a>
+<p>There are <a href="../bo-ke-qian-yi-wp-pelican.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
