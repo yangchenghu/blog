@@ -1,5 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 02 Jun 2016 00:00:00 +0800</lastBuildDate><item><title>arrange uwsgi with bottle in ubuntu</title><link>http://blog.chenghu.me/arrange-uwsgi-with-bottle-in-ubuntu.html</link><description>&lt;h1&gt;Nginx 快速部署Bottle＋Uwsgi&lt;/h1&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>小虎的博客</title><link>http://blog.chenghu.me/</link><description></description><atom:link href="http://blog.chenghu.me/feeds/xiao-hu.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 24 Jun 2016 00:00:00 +0800</lastBuildDate><item><title>DNS,dnsmasq,dnscrypt,</title><link>http://blog.chenghu.me/dnsdnsmasqdnscrypt.html</link><description>&lt;h1&gt;在Mac OSX 上配置 DNSCrypt＋dnsmasq 防止污染&lt;/h1&gt;
+&lt;p&gt;今天无意间看到一个防治DNS 污染的文章&lt;a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html"&gt;原文地址&lt;/a&gt;，想试试，没想到折腾了三天，记录一下操作过程。&lt;/p&gt;
+&lt;p&gt;中间还折腾了一下&lt;code&gt;unbound&lt;/code&gt;，结果在Mac上启动不起来，一启动就退出了，没有找到原因，如果有大神知道原因，还请指教。&lt;/p&gt;
+&lt;h2&gt;1. 安装&lt;/h2&gt;
+&lt;p&gt;在Mac上安装DNSCrypt和dnsmasq还是比较容易的，直接用Homebrew安装就可以。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;brew install dnsmasq
+&lt;span class="nv"&gt;$ &lt;/span&gt;brew install dnscrypt-proxy
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;2.启动DNSCrypt&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;DNSCrypt-proxy&lt;/code&gt;主要通过加密的隧道来解析一些被污染的dns地址。直接贴过来上面文章里的启动参数&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;➜  ~ sudo /usr/local/sbin/dnscrypt-proxy --local-address=127.0.0.1:40 --edns-payload-size=4096 --user=nobody --resolver-address=77.66.84.233:443 --provider-name=2.dnscrypt-cert.resolver2.dnscrypt.eu --provider-key=3748:5585:E3B9:D088:FD25:AD36:B037:01F5:520C:D648:9E9A:DD52:1457:4955:9F0A:9955
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;--local-address&lt;/code&gt; 这个字段是表示本地提供加密dns解析的地址
+&lt;code&gt;--edns-payload-size&lt;/code&gt; 这个字断指定edns的payload size大小
+&lt;code&gt;--user&lt;/code&gt; 指定用户身份运行
+&lt;code&gt;--resolver-address&lt;/code&gt; 指定加密的DNS地址
+&lt;code&gt;--provider-name&lt;/code&gt; 指定DNS提供商的名字
+&lt;code&gt;--provider-key&lt;/code&gt; 指定DNS服务器的密钥&lt;/p&gt;
+&lt;p&gt;正常启动之后会显示如下内容&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;[NOTICE] Starting dnscrypt-proxy 1.6.1
+[INFO] Generating a new session key pair
+[INFO] Done
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们用&lt;code&gt;dig&lt;/code&gt;命令来试一下，结果失败了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;➜&lt;/span&gt;  &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="n"&gt;dig&lt;/span&gt; &lt;span class="mf"&gt;@127.0.0.1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt; &lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+
+&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;DiG&lt;/span&gt; &lt;span class="mf"&gt;9.8.3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;P1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;@127.0.0.1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;9999&lt;/span&gt; &lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;global&lt;/span&gt; &lt;span class="nl"&gt;options&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="n"&gt;timed&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;servers&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;reached&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在DNSCrypt页面频繁出现&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;查了一下，好像是被干扰了，当然，如果有时候运气好的话，也会连接上&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[INFO] Chosen certificate #808464433 is valid from [2015-09-11] to [2016-09-10]&lt;/span&gt;
+&lt;span class="err"&gt;[INFO]&lt;/span&gt; &lt;span class="err"&gt;Server&lt;/span&gt; &lt;span class="err"&gt;key&lt;/span&gt; &lt;span class="err"&gt;fingerprint&lt;/span&gt; &lt;span class="err"&gt;is&lt;/span&gt; &lt;span class="err"&gt;164E:1AD6:4356:777D:2019:F2F9:D389:2DDB:BC75:8AF0:9172:8E0C:A874:10C7:3BE8:423B&lt;/span&gt;
+&lt;span class="err"&gt;[NOTICE]&lt;/span&gt; &lt;span class="err"&gt;Proxying&lt;/span&gt; &lt;span class="err"&gt;from&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:40&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;77.66.84.233:443&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后再次使用&lt;code&gt;dig&lt;/code&gt;命令查一下google的ip地址，就可以查询到结果了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;➜&lt;/span&gt;  &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="n"&gt;dig&lt;/span&gt; &lt;span class="mf"&gt;@127.0.0.1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt; &lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+
+&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;DiG&lt;/span&gt; &lt;span class="mf"&gt;9.8.3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;P1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;@127.0.0.1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;9999&lt;/span&gt; &lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;global&lt;/span&gt; &lt;span class="nl"&gt;options&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;Got&lt;/span&gt; &lt;span class="nl"&gt;answer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;HEADER&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt; &lt;span class="nl"&gt;opcode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;QUERY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nl"&gt;status&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;NOERROR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;id&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;26326&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="nl"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;qr&lt;/span&gt; &lt;span class="n"&gt;rd&lt;/span&gt; &lt;span class="n"&gt;ra&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;QUERY&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nl"&gt;ANSWER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nl"&gt;AUTHORITY&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nl"&gt;ADDITIONAL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;OPT&lt;/span&gt; &lt;span class="nl"&gt;PSEUDOSECTION&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;EDNS&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nl"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nl"&gt;flags&lt;/span&gt;&lt;span class="p"&gt;:;&lt;/span&gt; &lt;span class="nl"&gt;udp&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;4096&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;QUESTION&lt;/span&gt; &lt;span class="nl"&gt;SECTION&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;            &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;ANSWER&lt;/span&gt; &lt;span class="nl"&gt;SECTION&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;235&lt;/span&gt; &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;   &lt;span class="mf"&gt;172.217.18.78&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;AUTHORITY&lt;/span&gt; &lt;span class="nl"&gt;SECTION&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;41354&lt;/span&gt;   &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;NS&lt;/span&gt;  &lt;span class="n"&gt;ns2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;41354&lt;/span&gt;   &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;NS&lt;/span&gt;  &lt;span class="n"&gt;ns1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;41354&lt;/span&gt;   &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;NS&lt;/span&gt;  &lt;span class="n"&gt;ns4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;41354&lt;/span&gt;   &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;NS&lt;/span&gt;  &lt;span class="n"&gt;ns3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;ADDITIONAL&lt;/span&gt; &lt;span class="nl"&gt;SECTION&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;ns1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;281999&lt;/span&gt;  &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;   &lt;span class="mf"&gt;216.239.32.10&lt;/span&gt;
+&lt;span class="n"&gt;ns2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;335276&lt;/span&gt;  &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;   &lt;span class="mf"&gt;216.239.34.10&lt;/span&gt;
+&lt;span class="n"&gt;ns3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;331344&lt;/span&gt;  &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;   &lt;span class="mf"&gt;216.239.36.10&lt;/span&gt;
+&lt;span class="n"&gt;ns4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;     &lt;span class="mi"&gt;171246&lt;/span&gt;  &lt;span class="n"&gt;IN&lt;/span&gt;  &lt;span class="n"&gt;A&lt;/span&gt;   &lt;span class="mf"&gt;216.239.38.10&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;Query&lt;/span&gt; &lt;span class="nl"&gt;time&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;362&lt;/span&gt; &lt;span class="n"&gt;msec&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="nl"&gt;SERVER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="nl"&gt;WHEN&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Fri&lt;/span&gt; &lt;span class="n"&gt;Jun&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;35&lt;/span&gt; &lt;span class="mi"&gt;2016&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;MSG&lt;/span&gt; &lt;span class="n"&gt;SIZE&lt;/span&gt;  &lt;span class="nl"&gt;rcvd&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;191&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我想说的是，如果频繁的运气不好的话可以添加下面字段&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;--ephemeral-keys&lt;/code&gt;混淆密钥，&lt;a href="https://www.v2ex.com/t/286777"&gt;from here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;另&lt;/p&gt;
+&lt;p&gt;肯定有人问这些服务器从哪里得到的，我是从&lt;code&gt;/usr/local/Cellar/dnscrypt-proxy/1.6.1/share/dnscrypt-proxy/dnscrypt-resolvers.csv&lt;/code&gt;里面找的，也可以从这个&lt;a href="https://github.com/jedisct1/dnscrypt-proxy/blob/master/dnscrypt-resolvers.csv"&gt;git仓库&lt;/a&gt;找一下。&lt;/p&gt;
+&lt;h2&gt;3.配置dnsmasq&lt;/h2&gt;
+&lt;p&gt;配置DNSMasq，修改 /usr/local/etc/dnsmasq.conf&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# 不读取有关解析的配置文件，默认使用/etc/revolve.conf中的上游服务器地址进行解析
+# 这里我们把地址直接写在配置文件里，所以不需要这个了
+no-resolv
+# 不检查有关解析的配置文件更新（原因同上）
+no-poll
+# 配置文件路径，加载dnsmasq-china-list的那两个配置文件
+conf-dir=/usr/local/etc/dnsmasq.d
+# 附加Hosts文件，可有可无，我觉得以后可能还是需要用到Hosts，就加入了这一行
+addn-hosts=/usr/local/etc/dnsmasq.hosts
+# 上游服务器设置成DNSCrypt
+server=127.0.0.1#40
+# 缓存大小，默认是150，调大点应该没坏处
+cache-size=2000
+# 启用DNSSEC代理，应该能增强安全性吧
+proxy-dnssec
+# 可以自行参照man dnsmasq里的内容继续添加别的参数
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a href="https://github.com/felixonmars/dnsmasq-china-list"&gt;这个项目&lt;/a&gt;维护了一份中国地区大部分网站的地址。这个列表来可以帮助DNSMasq判断应该把DNS请求发向哪里。我们先要把里面的两个配置文件下载下来，创建 /usr/local/etc/dnsmasq.d 文件夹，下载项目的文件放到这个目录下。当然自己也可以根据配置文件来添加自己的配置文件。&lt;/p&gt;
+&lt;p&gt;几个配置文件的说明&lt;/p&gt;
+&lt;p&gt;#指定baidu.com的域名到114来解析。&lt;/p&gt;
+&lt;p&gt;server=/baidu.com/114.114.114.114     &lt;/p&gt;
+&lt;p&gt;#指定baidu.com的域名解析到 127.0.0.1 的ip地址上，类似hosts文件&lt;/p&gt;
+&lt;p&gt;address=/baidu.com/127.0.0.1    &lt;/p&gt;
+&lt;p&gt;#指定202这个ip不响应，当ISP进行DNS劫持时，会将域名解析到指定的ip地址，我们可以把这个地址写在这里，当遇到域名解析到这个地址的时候，则不响应。&lt;/p&gt;
+&lt;p&gt;bogus-nxdomain=202.202.202.202       &lt;/p&gt;
+&lt;h1&gt;4.启动dnsmasq&lt;/h1&gt;
+&lt;p&gt;直接使用下面的命令启动 dnsmasq&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo /usr/local/opt/dnsmasq/sbin/dnsmasq -C /usr/local/etc/dnsmasq.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后将系统的dns设置成127.0.0.1，在使用&lt;code&gt;dig&lt;/code&gt;来测试一下google.com的解析&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;➜&lt;/span&gt;  &lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="nt"&gt;dig&lt;/span&gt; &lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;
+
+&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;DiG&lt;/span&gt; &lt;span class="nt"&gt;9&lt;/span&gt;&lt;span class="nc"&gt;.8.3-P1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;global&lt;/span&gt; &lt;span class="nt"&gt;options&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nt"&gt;cmd&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;Got&lt;/span&gt; &lt;span class="nt"&gt;answer&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;HEADER&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;opcode&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;QUERY&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;status&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;NOERROR&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;id&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;59153&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;qr&lt;/span&gt; &lt;span class="nt"&gt;rd&lt;/span&gt; &lt;span class="nt"&gt;ra&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="nt"&gt;QUERY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;ANSWER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;AUTHORITY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;4&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;ADDITIONAL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;5&lt;/span&gt;
+
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;OPT&lt;/span&gt; &lt;span class="nt"&gt;PSEUDOSECTION&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="nt"&gt;EDNS&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;flags&lt;/span&gt;&lt;span class="o"&gt;:;&lt;/span&gt; &lt;span class="nt"&gt;udp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;4096&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;QUESTION&lt;/span&gt; &lt;span class="nt"&gt;SECTION&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;;&lt;/span&gt;&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;            &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;
+
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;ANSWER&lt;/span&gt; &lt;span class="nt"&gt;SECTION&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;150&lt;/span&gt; &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;   &lt;span class="nt"&gt;216&lt;/span&gt;&lt;span class="nc"&gt;.58.209.206&lt;/span&gt;
+
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;AUTHORITY&lt;/span&gt; &lt;span class="nt"&gt;SECTION&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;39469&lt;/span&gt;   &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;NS&lt;/span&gt;  &lt;span class="nt"&gt;ns4&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;39469&lt;/span&gt;   &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;NS&lt;/span&gt;  &lt;span class="nt"&gt;ns1&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;39469&lt;/span&gt;   &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;NS&lt;/span&gt;  &lt;span class="nt"&gt;ns2&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="nt"&gt;google&lt;/span&gt;&lt;span class="nc"&gt;.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;39469&lt;/span&gt;   &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;NS&lt;/span&gt;  &lt;span class="nt"&gt;ns3&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;ADDITIONAL&lt;/span&gt; &lt;span class="nt"&gt;SECTION&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nt"&gt;ns1&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;280114&lt;/span&gt;  &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;   &lt;span class="nt"&gt;216&lt;/span&gt;&lt;span class="nc"&gt;.239.32.10&lt;/span&gt;
+&lt;span class="nt"&gt;ns2&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;333391&lt;/span&gt;  &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;   &lt;span class="nt"&gt;216&lt;/span&gt;&lt;span class="nc"&gt;.239.34.10&lt;/span&gt;
+&lt;span class="nt"&gt;ns3&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;329459&lt;/span&gt;  &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;   &lt;span class="nt"&gt;216&lt;/span&gt;&lt;span class="nc"&gt;.239.36.10&lt;/span&gt;
+&lt;span class="nt"&gt;ns4&lt;/span&gt;&lt;span class="nc"&gt;.google.com&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;     &lt;span class="nt"&gt;169361&lt;/span&gt;  &lt;span class="nt"&gt;IN&lt;/span&gt;  &lt;span class="nt"&gt;A&lt;/span&gt;   &lt;span class="nt"&gt;216&lt;/span&gt;&lt;span class="nc"&gt;.239.38.10&lt;/span&gt;
+
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;Query&lt;/span&gt; &lt;span class="nt"&gt;time&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;517&lt;/span&gt; &lt;span class="nt"&gt;msec&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;SERVER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;127&lt;/span&gt;&lt;span class="nc"&gt;.0.0.1&lt;/span&gt;&lt;span class="nf"&gt;#53&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;127&lt;/span&gt;&lt;span class="nc"&gt;.0.0.1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;WHEN&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;Fri&lt;/span&gt; &lt;span class="nt"&gt;Jun&lt;/span&gt; &lt;span class="nt"&gt;24&lt;/span&gt; &lt;span class="nt"&gt;14&lt;/span&gt;&lt;span class="nd"&gt;:44:00&lt;/span&gt; &lt;span class="nt"&gt;2016&lt;/span&gt;
+&lt;span class="o"&gt;;;&lt;/span&gt; &lt;span class="nt"&gt;MSG&lt;/span&gt; &lt;span class="nt"&gt;SIZE&lt;/span&gt;  &lt;span class="nt"&gt;rcvd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;191&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;5.结论&lt;/h1&gt;
+&lt;p&gt;测试了一下，发现原来twitter和instragram是被污染后导致不能访问，google还是不能直接访问。不过dns干净了很多，因为有了缓存，访问起来也快一些，配合ss使用还是很爽的。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html"&gt;我(以前)的DNS解决方案&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://03k.org/dnscrypt-proxy-read.html"&gt;dnscrypt-proxy参数详解&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://gist.github.com/ahmozkya/8456503"&gt;Homebrew with DNSMasq + DNSCrypt-proxy (OpenDNS)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://dnscrypt.org"&gt;dnscrypt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blog.phoenixlzx.com/2016/04/27/better-dns-with-unbound/"&gt;使用 Unbound 搭建更好用的 DNS 服务器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://codeplayer.org/2014/02/587"&gt;翻墙教程之DNSCrypt+unbound&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;/h3&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">小虎</dc:creator><pubDate>Fri, 24 Jun 2016 00:00:00 +0800</pubDate><guid>tag:blog.chenghu.me,2016-06-24:dnsdnsmasqdnscrypt.html</guid><category>tech</category><category>mac</category><category>dns</category></item><item><title>arrange uwsgi with bottle in ubuntu</title><link>http://blog.chenghu.me/arrange-uwsgi-with-bottle-in-ubuntu.html</link><description>&lt;h1&gt;Nginx 快速部署Bottle＋Uwsgi&lt;/h1&gt;
 &lt;h2&gt;1. 安装&lt;/h2&gt;
 &lt;p&gt;安装 uwsgi 和 Bottle 框架&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get install uwsgi uwsgi-plugin-python python-bottle nginx

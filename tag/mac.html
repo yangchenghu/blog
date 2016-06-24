@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Mac</title>
+        <title>小虎的博客 - mac</title>
         <link rel="stylesheet" href="../theme/css/main.css" />
 
         <!--[if IE]>
@@ -22,7 +22,213 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../kill-mac-qq-capture-function.html">Kill Mac QQ Capture Function</a></h1>
+                    <h1 class="entry-title"><a href="../dnsdnsmasqdnscrypt.html">DNS,dnsmasq,dnscrypt,</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-06-24T00:00:00+08:00">
+                Published: 五 24 六月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/tech.html">tech</a> <a href="../tag/mac.html">mac</a> <a href="../tag/dns.html">dns</a> </p>
+</footer><!-- /.post-info --><h1>在Mac OSX 上配置 DNSCrypt＋dnsmasq 防止污染</h1>
+<p>今天无意间看到一个防治DNS 污染的文章<a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html">原文地址</a>，想试试，没想到折腾了三天，记录一下操作过程。</p>
+<p>中间还折腾了一下<code>unbound</code>，结果在Mac上启动不起来，一启动就退出了，没有找到原因，如果有大神知道原因，还请指教。</p>
+<h2>1. 安装</h2>
+<p>在Mac上安装DNSCrypt和dnsmasq还是比较容易的，直接用Homebrew安装就可以。</p>
+<div class="highlight"><pre><span class="nv">$ </span>brew install dnsmasq
+<span class="nv">$ </span>brew install dnscrypt-proxy
+</pre></div>
+
+
+<h2>2.启动DNSCrypt</h2>
+<p><code>DNSCrypt-proxy</code>主要通过加密的隧道来解析一些被污染的dns地址。直接贴过来上面文章里的启动参数</p>
+<div class="highlight"><pre>➜  ~ sudo /usr/local/sbin/dnscrypt-proxy --local-address=127.0.0.1:40 --edns-payload-size=4096 --user=nobody --resolver-address=77.66.84.233:443 --provider-name=2.dnscrypt-cert.resolver2.dnscrypt.eu --provider-key=3748:5585:E3B9:D088:FD25:AD36:B037:01F5:520C:D648:9E9A:DD52:1457:4955:9F0A:9955
+</pre></div>
+
+
+<p><code>--local-address</code> 这个字段是表示本地提供加密dns解析的地址
+<code>--edns-payload-size</code> 这个字断指定edns的payload size大小
+<code>--user</code> 指定用户身份运行
+<code>--resolver-address</code> 指定加密的DNS地址
+<code>--provider-name</code> 指定DNS提供商的名字
+<code>--provider-key</code> 指定DNS服务器的密钥</p>
+<p>正常启动之后会显示如下内容</p>
+<div class="highlight"><pre>[NOTICE] Starting dnscrypt-proxy 1.6.1
+[INFO] Generating a new session key pair
+[INFO] Done
+</pre></div>
+
+
+<p>我们用<code>dig</code>命令来试一下，结果失败了。</p>
+<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="n">dig</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">40</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
+
+<span class="p">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="n">DiG</span> <span class="mf">9.8.3</span><span class="o">-</span><span class="n">P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9999</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
+<span class="p">;</span> <span class="p">(</span><span class="mi">1</span> <span class="n">server</span> <span class="n">found</span><span class="p">)</span>
+<span class="p">;;</span> <span class="n">global</span> <span class="nl">options</span><span class="p">:</span> <span class="o">+</span><span class="n">cmd</span>
+<span class="p">;;</span> <span class="n">connection</span> <span class="n">timed</span> <span class="k">out</span><span class="p">;</span> <span class="n">no</span> <span class="n">servers</span> <span class="n">could</span> <span class="n">be</span> <span class="n">reached</span>
+</pre></div>
+
+
+<p>在DNSCrypt页面频繁出现</p>
+<div class="highlight"><pre>[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+[ERROR] Unable to retrieve server certificates
+[INFO] Refetching server certificates
+</pre></div>
+
+
+<p>查了一下，好像是被干扰了，当然，如果有时候运气好的话，也会连接上</p>
+<div class="highlight"><pre><span class="k">[INFO] Chosen certificate #808464433 is valid from [2015-09-11] to [2016-09-10]</span>
+<span class="err">[INFO]</span> <span class="err">Server</span> <span class="err">key</span> <span class="err">fingerprint</span> <span class="err">is</span> <span class="err">164E:1AD6:4356:777D:2019:F2F9:D389:2DDB:BC75:8AF0:9172:8E0C:A874:10C7:3BE8:423B</span>
+<span class="err">[NOTICE]</span> <span class="err">Proxying</span> <span class="err">from</span> <span class="err">127.0.0.1:40</span> <span class="err">to</span> <span class="err">77.66.84.233:443</span>
+</pre></div>
+
+
+<p>然后再次使用<code>dig</code>命令查一下google的ip地址，就可以查询到结果了。</p>
+<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="n">dig</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">40</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
+
+<span class="p">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="n">DiG</span> <span class="mf">9.8.3</span><span class="o">-</span><span class="n">P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9999</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
+<span class="p">;</span> <span class="p">(</span><span class="mi">1</span> <span class="n">server</span> <span class="n">found</span><span class="p">)</span>
+<span class="p">;;</span> <span class="n">global</span> <span class="nl">options</span><span class="p">:</span> <span class="o">+</span><span class="n">cmd</span>
+<span class="p">;;</span> <span class="n">Got</span> <span class="nl">answer</span><span class="p">:</span>
+<span class="p">;;</span> <span class="o">-&gt;&gt;</span><span class="n">HEADER</span><span class="o">&lt;&lt;-</span> <span class="nl">opcode</span><span class="p">:</span> <span class="n">QUERY</span><span class="p">,</span> <span class="nl">status</span><span class="p">:</span> <span class="n">NOERROR</span><span class="p">,</span> <span class="kt">id</span><span class="o">:</span> <span class="mi">26326</span>
+<span class="p">;;</span> <span class="nl">flags</span><span class="p">:</span> <span class="n">qr</span> <span class="n">rd</span> <span class="n">ra</span><span class="p">;</span> <span class="nl">QUERY</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">ANSWER</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">AUTHORITY</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nl">ADDITIONAL</span><span class="p">:</span> <span class="mi">5</span>
+
+<span class="p">;;</span> <span class="n">OPT</span> <span class="nl">PSEUDOSECTION</span><span class="p">:</span>
+<span class="p">;</span> <span class="nl">EDNS</span><span class="p">:</span> <span class="nl">version</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nl">flags</span><span class="p">:;</span> <span class="nl">udp</span><span class="p">:</span> <span class="mi">4096</span>
+<span class="p">;;</span> <span class="n">QUESTION</span> <span class="nl">SECTION</span><span class="p">:</span>
+<span class="p">;</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>            <span class="n">IN</span>  <span class="n">A</span>
+
+<span class="p">;;</span> <span class="n">ANSWER</span> <span class="nl">SECTION</span><span class="p">:</span>
+<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">235</span> <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">172.217.18.78</span>
+
+<span class="p">;;</span> <span class="n">AUTHORITY</span> <span class="nl">SECTION</span><span class="p">:</span>
+<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns2</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
+<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns1</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
+<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns4</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
+<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns3</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
+
+<span class="p">;;</span> <span class="n">ADDITIONAL</span> <span class="nl">SECTION</span><span class="p">:</span>
+<span class="n">ns1</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">281999</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.32.10</span>
+<span class="n">ns2</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">335276</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.34.10</span>
+<span class="n">ns3</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">331344</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.36.10</span>
+<span class="n">ns4</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">171246</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.38.10</span>
+
+<span class="p">;;</span> <span class="n">Query</span> <span class="nl">time</span><span class="p">:</span> <span class="mi">362</span> <span class="n">msec</span>
+<span class="p">;;</span> <span class="nl">SERVER</span><span class="p">:</span> <span class="mf">127.0.0.1</span><span class="err">#</span><span class="mi">40</span><span class="p">(</span><span class="mf">127.0.0.1</span><span class="p">)</span>
+<span class="p">;;</span> <span class="nl">WHEN</span><span class="p">:</span> <span class="n">Fri</span> <span class="n">Jun</span> <span class="mi">24</span> <span class="mi">14</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mi">35</span> <span class="mi">2016</span>
+<span class="p">;;</span> <span class="n">MSG</span> <span class="n">SIZE</span>  <span class="nl">rcvd</span><span class="p">:</span> <span class="mi">191</span>
+</pre></div>
+
+
+<p>我想说的是，如果频繁的运气不好的话可以添加下面字段</p>
+<p><code>--ephemeral-keys</code>混淆密钥，<a href="https://www.v2ex.com/t/286777">from here</a></p>
+<p>另</p>
+<p>肯定有人问这些服务器从哪里得到的，我是从<code>/usr/local/Cellar/dnscrypt-proxy/1.6.1/share/dnscrypt-proxy/dnscrypt-resolvers.csv</code>里面找的，也可以从这个<a href="https://github.com/jedisct1/dnscrypt-proxy/blob/master/dnscrypt-resolvers.csv">git仓库</a>找一下。</p>
+<h2>3.配置dnsmasq</h2>
+<p>配置DNSMasq，修改 /usr/local/etc/dnsmasq.conf</p>
+<div class="highlight"><pre># 不读取有关解析的配置文件，默认使用/etc/revolve.conf中的上游服务器地址进行解析
+# 这里我们把地址直接写在配置文件里，所以不需要这个了
+no-resolv
+# 不检查有关解析的配置文件更新（原因同上）
+no-poll
+# 配置文件路径，加载dnsmasq-china-list的那两个配置文件
+conf-dir=/usr/local/etc/dnsmasq.d
+# 附加Hosts文件，可有可无，我觉得以后可能还是需要用到Hosts，就加入了这一行
+addn-hosts=/usr/local/etc/dnsmasq.hosts
+# 上游服务器设置成DNSCrypt
+server=127.0.0.1#40
+# 缓存大小，默认是150，调大点应该没坏处
+cache-size=2000
+# 启用DNSSEC代理，应该能增强安全性吧
+proxy-dnssec
+# 可以自行参照man dnsmasq里的内容继续添加别的参数
+</pre></div>
+
+
+<p><a href="https://github.com/felixonmars/dnsmasq-china-list">这个项目</a>维护了一份中国地区大部分网站的地址。这个列表来可以帮助DNSMasq判断应该把DNS请求发向哪里。我们先要把里面的两个配置文件下载下来，创建 /usr/local/etc/dnsmasq.d 文件夹，下载项目的文件放到这个目录下。当然自己也可以根据配置文件来添加自己的配置文件。</p>
+<p>几个配置文件的说明</p>
+<p>#指定baidu.com的域名到114来解析。</p>
+<p>server=/baidu.com/114.114.114.114     </p>
+<p>#指定baidu.com的域名解析到 127.0.0.1 的ip地址上，类似hosts文件</p>
+<p>address=/baidu.com/127.0.0.1    </p>
+<p>#指定202这个ip不响应，当ISP进行DNS劫持时，会将域名解析到指定的ip地址，我们可以把这个地址写在这里，当遇到域名解析到这个地址的时候，则不响应。</p>
+<p>bogus-nxdomain=202.202.202.202       </p>
+<h1>4.启动dnsmasq</h1>
+<p>直接使用下面的命令启动 dnsmasq</p>
+<div class="highlight"><pre>sudo /usr/local/opt/dnsmasq/sbin/dnsmasq -C /usr/local/etc/dnsmasq.conf
+</pre></div>
+
+
+<p>然后将系统的dns设置成127.0.0.1，在使用<code>dig</code>来测试一下google.com的解析</p>
+<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="nt">dig</span> <span class="nt">google</span><span class="nc">.com</span>
+
+<span class="o">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="nt">DiG</span> <span class="nt">9</span><span class="nc">.8.3-P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="nt">google</span><span class="nc">.com</span>
+<span class="o">;;</span> <span class="nt">global</span> <span class="nt">options</span><span class="o">:</span> <span class="o">+</span><span class="nt">cmd</span>
+<span class="o">;;</span> <span class="nt">Got</span> <span class="nt">answer</span><span class="o">:</span>
+<span class="o">;;</span> <span class="nt">-</span><span class="o">&gt;&gt;</span><span class="nt">HEADER</span><span class="o">&lt;&lt;</span><span class="nt">-</span> <span class="nt">opcode</span><span class="o">:</span> <span class="nt">QUERY</span><span class="o">,</span> <span class="nt">status</span><span class="o">:</span> <span class="nt">NOERROR</span><span class="o">,</span> <span class="nt">id</span><span class="o">:</span> <span class="nt">59153</span>
+<span class="o">;;</span> <span class="nt">flags</span><span class="o">:</span> <span class="nt">qr</span> <span class="nt">rd</span> <span class="nt">ra</span><span class="o">;</span> <span class="nt">QUERY</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span> <span class="nt">ANSWER</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span> <span class="nt">AUTHORITY</span><span class="o">:</span> <span class="nt">4</span><span class="o">,</span> <span class="nt">ADDITIONAL</span><span class="o">:</span> <span class="nt">5</span>
+
+<span class="o">;;</span> <span class="nt">OPT</span> <span class="nt">PSEUDOSECTION</span><span class="o">:</span>
+<span class="o">;</span> <span class="nt">EDNS</span><span class="o">:</span> <span class="nt">version</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span> <span class="nt">flags</span><span class="o">:;</span> <span class="nt">udp</span><span class="o">:</span> <span class="nt">4096</span>
+<span class="o">;;</span> <span class="nt">QUESTION</span> <span class="nt">SECTION</span><span class="o">:</span>
+<span class="o">;</span><span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>            <span class="nt">IN</span>  <span class="nt">A</span>
+
+<span class="o">;;</span> <span class="nt">ANSWER</span> <span class="nt">SECTION</span><span class="o">:</span>
+<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">150</span> <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.58.209.206</span>
+
+<span class="o">;;</span> <span class="nt">AUTHORITY</span> <span class="nt">SECTION</span><span class="o">:</span>
+<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns4</span><span class="nc">.google.com</span><span class="o">.</span>
+<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns1</span><span class="nc">.google.com</span><span class="o">.</span>
+<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns2</span><span class="nc">.google.com</span><span class="o">.</span>
+<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns3</span><span class="nc">.google.com</span><span class="o">.</span>
+
+<span class="o">;;</span> <span class="nt">ADDITIONAL</span> <span class="nt">SECTION</span><span class="o">:</span>
+<span class="nt">ns1</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">280114</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.32.10</span>
+<span class="nt">ns2</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">333391</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.34.10</span>
+<span class="nt">ns3</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">329459</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.36.10</span>
+<span class="nt">ns4</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">169361</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.38.10</span>
+
+<span class="o">;;</span> <span class="nt">Query</span> <span class="nt">time</span><span class="o">:</span> <span class="nt">517</span> <span class="nt">msec</span>
+<span class="o">;;</span> <span class="nt">SERVER</span><span class="o">:</span> <span class="nt">127</span><span class="nc">.0.0.1</span><span class="nf">#53</span><span class="o">(</span><span class="nt">127</span><span class="nc">.0.0.1</span><span class="o">)</span>
+<span class="o">;;</span> <span class="nt">WHEN</span><span class="o">:</span> <span class="nt">Fri</span> <span class="nt">Jun</span> <span class="nt">24</span> <span class="nt">14</span><span class="nd">:44:00</span> <span class="nt">2016</span>
+<span class="o">;;</span> <span class="nt">MSG</span> <span class="nt">SIZE</span>  <span class="nt">rcvd</span><span class="o">:</span> <span class="nt">191</span>
+</pre></div>
+
+
+<h1>5.结论</h1>
+<p>测试了一下，发现原来twitter和instragram是被污染后导致不能访问，google还是不能直接访问。不过dns干净了很多，因为有了缓存，访问起来也快一些，配合ss使用还是很爽的。</p>
+<hr />
+<p>参考文章：</p>
+<p><a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html">我(以前)的DNS解决方案</a></p>
+<p><a href="http://03k.org/dnscrypt-proxy-read.html">dnscrypt-proxy参数详解</a></p>
+<p><a href="https://gist.github.com/ahmozkya/8456503">Homebrew with DNSMasq + DNSCrypt-proxy (OpenDNS)</a></p>
+<p><a href="https://dnscrypt.org">dnscrypt</a></p>
+<p><a href="https://blog.phoenixlzx.com/2016/04/27/better-dns-with-unbound/">使用 Unbound 搭建更好用的 DNS 服务器</a></p>
+<p><a href="http://codeplayer.org/2014/02/587">翻墙教程之DNSCrypt+unbound</a></p>
+<h3></h3><p>There are <a href="../dnsdnsmasqdnscrypt.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="../kill-mac-qq-capture-function.html" rel="bookmark"
+                           title="Permalink to Kill Mac QQ Capture Function">Kill Mac QQ Capture Function</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-03-13T00:00:00+08:00">
                 Published: 五 13 三月 2015
@@ -33,7 +239,7 @@
         </address>
 <p>In <a href="../category/tech.html">Tech</a>.</p>
 <p>tags: <a href="../tag/mac.html">Mac</a> <a href="../tag/qq.html">QQ</a> <a href="../tag/capture.html">Capture</a> </p>
-</footer><!-- /.post-info --><h1>干掉Mac QQ的自动截图程序</h1>
+</footer><!-- /.post-info -->                <h1>干掉Mac QQ的自动截图程序</h1>
 <p>今天安装了Mac的企业QQ</p>
 <p>但在使用Mail的时候发现同时按<code>commond+control+a</code>进行归档邮件的时候</p>
 <p>居然弹出QQ的截图程序，烦躁</p>
@@ -53,17 +259,10 @@ Image Capture Extension
 
 
 <p>先关掉自启动吧<code>launchctl stop com.tencent.ScreenCaptureEIM</code></p>
-<p>然后在<code>Activity Monitor</code>中看一下<code>ScreenCaptureEIM</code>进程的信息，看到下面一行</p>
-<div class="highlight"><pre>/Applications/EIM.app/Contents/Library/LoginItems/ScreenCaptureEIM.app/Contents/MacOS/ScreenCaptureEIM
-</pre></div>
-
-
-<p>看来程序本体在<code>/Applications/EIM.app/Contents/Library/LoginItems/</code>，进去删掉，然后kill掉进程，哈哈，一切都清净了。</p><p>There are <a href="../kill-mac-qq-capture-function.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>然后在 ...</p>
+                <a class="readmore" href="../kill-mac-qq-capture-function.html">read more</a>
+<p>There are <a href="../kill-mac-qq-capture-function.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
