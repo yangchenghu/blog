@@ -34,11 +34,11 @@
 <p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/linux.html">linux</a> <a href="./tag/ubuntu.html">ubuntu</a> <a href="./tag/mongodb.html">mongodb</a> <a href="./tag/leanote.html">leanote</a> </p>
 </footer><!-- /.post-info --><h1>在Ubuntu上搭建Leanote系统</h1>
-<p>&emsp;&emsp;&emsp;&emsp;今天看到一个新闻<a href="http://www.iplaysoft.com/news/3132">（创收压力大？印象笔记 Evernote 将对免费用户进行限制）</a>，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。</p>
-<p>&emsp;&emsp;&emsp;&emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。</p>
-<p>&emsp;&emsp;&emsp;&emsp;中间使用了一段时间微软的<code>OneNote</code>，确实格式好看多了，但是实在太笨重了。</p>
-<p>&emsp;&emsp;&emsp;&emsp;后来又使用了一阵<code>Simplenote</code>，支持markdown语法，但实在有点太简陋。</p>
-<p>&emsp;&emsp;&emsp;&emsp;看到文章后面有介绍<code>leanote</code>，开源，小巧，自带代码高亮，支持markdown语法，有mac和iOS的客户端，还自己搭建服务器，自己的服务器还不受流量限制，实在太爽了。</p>
+<p>&emsp;&emsp;今天看到一个新闻<a href="http://www.iplaysoft.com/news/3132">（创收压力大？印象笔记 Evernote 将对免费用户进行限制）</a>，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。</p>
+<p>&emsp;&emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。</p>
+<p>&emsp;&emsp;中间使用了一段时间微软的<code>OneNote</code>，确实格式好看多了，但是实在太笨重了。</p>
+<p>&emsp;&emsp;后来又使用了一阵<code>Simplenote</code>，支持markdown语法，但实在有点太简陋。</p>
+<p>&emsp;&emsp;看到文章后面有介绍<code>leanote</code>，开源，小巧，自带代码高亮，支持markdown语法，有mac和iOS的客户端，还自己搭建服务器，自己的服务器还不受流量限制，实在太爽了。</p>
 <h2>1.安装Leanote</h2>
 <p>在<a href="http://leanote.org/#download">leanote官网</a>来下载二进制文件直接解压即可</p>
 <div class="highlight"><pre>wget https://sourceforge.net/projects/leanote-bin/files/2.0/leanote-linux-amd64-v2.0.bin.tar.gz/download
@@ -129,7 +129,7 @@ mv mongodb-linux-x86_64-2.6.4.tgz ~/tools/mongodb-linux-x86_64-2.6.4/
 <h2>7.最后</h2>
 <p>最后就是加域名，配ssl证书，配nginx，重启nginx。</p>
 <h1>结论</h1>
-<p>&emsp;&emsp;&emsp;&emsp;搭建还是比较简单的，简单使用了一下，感觉<code>leanote</code>还不错，目前可能还不太完美，比如，目前管理后台还不能删除用户(目前使用的是<code>v2.0</code>版本，后续应该会有的)，但已经很好很好了，赞一个。</p>
+<p>&emsp;&emsp;搭建还是比较简单的，简单使用了一下，感觉<code>leanote</code>还不错，目前可能还不太完美，比如，目前管理后台还不能删除用户(目前使用的是<code>v2.0</code>版本，后续应该会有的)，但已经很好很好了，赞一个。</p>
 <h2>遇到的问题</h2>
 <h3>1.在启动mongodb的时候提示“exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating”</h3>
 <p>根据<a href="http://stackoverflow.com/questions/19668570/mongodb-localefacet-s-create-c-locale-name-not-valid">stackoverflow</a>上方法，需要先设置<code>LC_ALL</code>才可以。</p>
