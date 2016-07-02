@@ -92,6 +92,10 @@ mv mongodb-linux-x86_64-2.6.4.tgz ~/tools/mongodb-linux-x86_64-2.6.4/
 
 
 &lt;p&gt;这样就可以使用&lt;code&gt;http://localhost:9000&lt;/code&gt;来访问了&lt;/p&gt;
+&lt;h2&gt;7.最后&lt;/h2&gt;
+&lt;p&gt;最后就是加域名，配ssl证书，配nginx，重启nginx。&lt;/p&gt;
+&lt;h1&gt;结论&lt;/h1&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;搭建还是比较简单的，简单使用了一下，感觉&lt;code&gt;leanote&lt;/code&gt;还不错，目前可能还不太完美，比如，目前管理后台还不能删除用户(目前使用的是&lt;code&gt;v2.0&lt;/code&gt;版本，后续应该会有的)，但已经很好很好了，赞一个。&lt;/p&gt;
 &lt;h2&gt;遇到的问题&lt;/h2&gt;
 &lt;h3&gt;1.在启动mongodb的时候提示“exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating”&lt;/h3&gt;
 &lt;p&gt;根据&lt;a href="http://stackoverflow.com/questions/19668570/mongodb-localefacet-s-create-c-locale-name-not-valid"&gt;stackoverflow&lt;/a&gt;上方法，需要先设置&lt;code&gt;LC_ALL&lt;/code&gt;才可以。&lt;/p&gt;
