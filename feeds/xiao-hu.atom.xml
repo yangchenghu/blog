@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2016-07-01T00:00:00+08:00</updated><entry><title>BuildLeanoteInUbuntu</title><link href="http://blog.chenghu.me/buildleanoteinubuntu.html" rel="alternate"></link><updated>2016-07-01T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2016-07-01:buildleanoteinubuntu.html</id><summary type="html">&lt;h1&gt;在Ubuntu上搭建Leanote系统&lt;/h1&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;今天看到一个新闻&lt;a href="http://www.iplaysoft.com/news/3132"&gt;（创收压力大？印象笔记 Evernote 将对免费用户进行限制）&lt;/a&gt;，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;中间使用了一段时间微软的&lt;code&gt;OneNote&lt;/code&gt;，确实格式好看多了，但是实在太笨重了。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;后来又使用了一阵&lt;code&gt;Simplenote&lt;/code&gt;，支持markdown语法，但实在有点太简陋。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;看到文章后面有介绍&lt;code&gt;leanote&lt;/code&gt;，开源，小巧，自带代码高亮，支持markdown语法，有mac和iOS的客户端，还自己搭建服务器，自己的服务器还不受流量限制，实在太爽了。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;今天看到一个新闻&lt;a href="http://www.iplaysoft.com/news/3132"&gt;（创收压力大？印象笔记 Evernote 将对免费用户进行限制）&lt;/a&gt;，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;中间使用了一段时间微软的&lt;code&gt;OneNote&lt;/code&gt;，确实格式好看多了，但是实在太笨重了。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;后来又使用了一阵&lt;code&gt;Simplenote&lt;/code&gt;，支持markdown语法，但实在有点太简陋。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;看到文章后面有介绍&lt;code&gt;leanote&lt;/code&gt;，开源，小巧，自带代码高亮，支持markdown语法，有mac和iOS的客户端，还自己搭建服务器，自己的服务器还不受流量限制，实在太爽了。&lt;/p&gt;
 &lt;h2&gt;1.安装Leanote&lt;/h2&gt;
 &lt;p&gt;在&lt;a href="http://leanote.org/#download"&gt;leanote官网&lt;/a&gt;来下载二进制文件直接解压即可&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;wget https://sourceforge.net/projects/leanote-bin/files/2.0/leanote-linux-amd64-v2.0.bin.tar.gz/download
@@ -95,7 +95,7 @@ mv mongodb-linux-x86_64-2.6.4.tgz ~/tools/mongodb-linux-x86_64-2.6.4/
 &lt;h2&gt;7.最后&lt;/h2&gt;
 &lt;p&gt;最后就是加域名，配ssl证书，配nginx，重启nginx。&lt;/p&gt;
 &lt;h1&gt;结论&lt;/h1&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;搭建还是比较简单的，简单使用了一下，感觉&lt;code&gt;leanote&lt;/code&gt;还不错，目前可能还不太完美，比如，目前管理后台还不能删除用户(目前使用的是&lt;code&gt;v2.0&lt;/code&gt;版本，后续应该会有的)，但已经很好很好了，赞一个。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;搭建还是比较简单的，简单使用了一下，感觉&lt;code&gt;leanote&lt;/code&gt;还不错，目前可能还不太完美，比如，目前管理后台还不能删除用户(目前使用的是&lt;code&gt;v2.0&lt;/code&gt;版本，后续应该会有的)，但已经很好很好了，赞一个。&lt;/p&gt;
 &lt;h2&gt;遇到的问题&lt;/h2&gt;
 &lt;h3&gt;1.在启动mongodb的时候提示“exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating”&lt;/h3&gt;
 &lt;p&gt;根据&lt;a href="http://stackoverflow.com/questions/19668570/mongodb-localefacet-s-create-c-locale-name-not-valid"&gt;stackoverflow&lt;/a&gt;上方法，需要先设置&lt;code&gt;LC_ALL&lt;/code&gt;才可以。&lt;/p&gt;
