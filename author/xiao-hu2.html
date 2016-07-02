@@ -24,6 +24,57 @@
                     <ol id="posts-list" class="hfeed" start="9">
             <li><article class="hentry">
                 <header>
+                    <h1><a href="../movesvntogit.html" rel="bookmark"
+                           title="Permalink to MoveSVNToGit">MoveSVNToGit</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-11-23T00:00:00+08:00">
+                Published: 一 23 十一月 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="../category/tech.html">Tech</a>.</p>
+<p>tags: <a href="../tag/svn.html">SVN</a> <a href="../tag/git.html">Git</a> </p>
+</footer><!-- /.post-info -->                <h1>迁移SVN到Git</h1>
+<p>1.创建用户映射</p>
+<p>检出svn上所有提交过代码的用户名</p>
+<div class="highlight"><pre>svn log --xml | grep author | sort -u | perl -pe &#39;s/.&gt;(.?)&lt;./$1 = /&#39;
+</pre></div>
+
+
+<p>显示</p>
+<div class="highlight"><pre><span class="nt">&lt;author&gt;</span>chenghu<span class="nt">&lt;/author&gt;</span>
+</pre></div>
+
+
+<p>然后将这些用户名复制下来</p>
+<p>修改成以下形式，保存成user.txt</p>
+<div class="highlight"><pre>svn用户名 ＝ git用户名 &lt;git邮箱&gt;
+</pre></div>
+
+
+<p>如</p>
+<div class="highlight"><pre>chenghu ＝ 小虎 &lt;chenghu@chenghu.me&gt;
+</pre></div>
+
+
+<p>2.拉取SVN的commit纪录</p>
+<p>使用git-svn来拉取svn提交的记录，转换成git</p>
+<div class="highlight"><pre>git svn clone https://SVNserver/serverpatch/trunk --authors-file=users.txt --no-metadata gitDir
+</pre></div>
+
+
+<p>当然，如果svn上面提交记录比较多的情况下 ...</p>
+                <a class="readmore" href="../movesvntogit.html">read more</a>
+<p>There are <a href="../movesvntogit.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="../2015-11-03.html" rel="bookmark"
                            title="Permalink to 2015-11-03">2015-11-03</a></h1>
                 </header>
@@ -409,39 +460,6 @@ Category: Tech</p>
 <td>局部思维 ...</td></tr></tbody></table>
                 <a class="readmore" href="../read-from-the-programmer-to-project-manager.html">read more</a>
 <p>There are <a href="../read-from-the-programmer-to-project-manager.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="../fixed-linode-error.html" rel="bookmark"
-                           title="Permalink to Fixed Linode Error">Fixed Linode Error</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-03-13T00:00:00+08:00">
-                Published: 五 13 三月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="../author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="../category/tech.html">Tech</a>.</p>
-<p>tags: <a href="../tag/linode.html">Linode</a> <a href="../tag/error.html">Error</a> </p>
-</footer><!-- /.post-info -->                <h1>修复Linode error</h1>
-<p>今天ss老是报错误<code>ERROR: remote_recv_cb_recv: Connection reset by peer</code>，ssh上不去。</p>
-<p>就重启了一下Linode，结果就ssh过不去了，ss也没有好。悲剧了</p>
-<p>登录Linode后台，发现CPU老100%，不知道哪里的事情，关键ssh进不去，着急。</p>
-<p>没办法，只好写Ticket找技术人员帮忙。</p>
-<p>用蹩脚的英文描述了半天，对方实在不理解，总是几句标准客服回复，估计那边的技术还没上班，客服在扛着。</p>
-<p>看来只能自己动手了</p>
-<p>在<code>Dashboard</code>中查找有用的东西</p>
-<p>看到<code>Remote access</code>中发现了<code>Console Access</code>点击发现是一个web版的console</p>
-<p>看到我前两天搭建的<code>ocserv</code>在处理一个ca证书，然后就没有然后了，输入啥都不行</p>
-<p>看来是<code>ocserv</code>出了问题，没办法，再找找吧</p>
-<p>看到一个<code>Rescue</code>选项卡 ...</p>
-                <a class="readmore" href="../fixed-linode-error.html">read more</a>
-<p>There are <a href="../fixed-linode-error.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">

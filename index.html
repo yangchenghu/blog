@@ -22,7 +22,137 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./dnsdnsmasqdnscrypt.html">DNS,dnsmasq,dnscrypt,</a></h1>
+                    <h1 class="entry-title"><a href="./buildleanoteinubuntu.html">BuildLeanoteInUbuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-07-01T00:00:00+08:00">
+                Published: 五 01 七月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+<p>tags: <a href="./tag/linux.html">linux</a> <a href="./tag/ubuntu.html">ubuntu</a> <a href="./tag/mongodb.html">mongodb</a> <a href="./tag/leanote.html">leanote</a> </p>
+</footer><!-- /.post-info --><h1>在Ubuntu上搭建Leanote系统</h1>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;今天看到一个新闻<a href="http://www.iplaysoft.com/news/3132">（创收压力大？印象笔记 Evernote 将对免费用户进行限制）</a>，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;中间使用了一段时间微软的<code>OneNote</code>，确实格式好看多了，但是实在太笨重了。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;后来又使用了一阵<code>Simplenote</code>，支持markdown语法，但实在有点太简陋。</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;看到文章后面有介绍<code>leanote</code>，开源，小巧，自带代码高亮，支持markdown语法，有mac和iOS的客户端，还自己搭建服务器，自己的服务器还不受流量限制，实在太爽了。</p>
+<h2>1.安装Leanote</h2>
+<p>在<a href="http://leanote.org/#download">leanote官网</a>来下载二进制文件直接解压即可</p>
+<div class="highlight"><pre>wget https://sourceforge.net/projects/leanote-bin/files/2.0/leanote-linux-amd64-v2.0.bin.tar.gz/download
+tar -xzvf leanote-linux-amd64.v2.0.bin.tar.gz
+mv leanote  ~/www/leanote
+</pre></div>
+
+
+<h2>2.安装MongoDB</h2>
+<p>依然是下载，解压的步骤，太简单了，爽</p>
+<div class="highlight"><pre>wget  https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.4.tgz
+tar -xzvf mongodb-linux-x86_64-2.6.4.tgz/
+mv mongodb-linux-x86_64-2.6.4.tgz ~/tools/mongodb-linux-x86_64-2.6.4/
+</pre></div>
+
+
+<p>添加一下环境变量，方便全局使用</p>
+<div class="highlight"><pre><span class="x">sudo vim /etc/profile</span>
+<span class="x">export PATH=</span><span class="p">$</span><span class="nv">PATH</span><span class="x">:/home/user1/tools/mongodb-linux-x86_64-2.6.4/bin</span>
+</pre></div>
+
+
+<p>使配置生效</p>
+<div class="highlight"><pre>source /etc/profile
+</pre></div>
+
+
+<h2>3.启动mongoDB数据库</h2>
+<p>创建一个放数据库的文件夹</p>
+<div class="highlight"><pre>mkdir ~/data
+</pre></div>
+
+
+<p>启动mongodb</p>
+<div class="highlight"><pre>mongod --dbpath ~/data
+</pre></div>
+
+
+<p>显示如下内容则表示启动成功</p>
+<div class="highlight"><pre><span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] MongoDB starting : pid=5073 port=27017 dbpath=/home/user/data 64-bit host=localhost</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten]</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] ** WARNING: You are running in OpenVZ which can cause issues on versions of RHEL older than RHEL6.</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] db version v2.6.4</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] git version: 3a830be0eb92d772aa855ebb711ac91d658ee910</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] build info: Linux build7.nj1.10gen.cc 2.6.32-431.3.1.el6.x86_64 </span><span class="err">#</span><span class="x">1 SMP Fri Jan 3 21:39:27 UTC 2014 x86_64 BOOST_LIB_VERSION=1_49</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] allocator: tcmalloc</span>
+<span class="x">2016-07-02T02:14:19.474-0400 [initandlisten] options: </span><span class="err">{</span><span class="x"> storage: </span><span class="err">{</span><span class="x"> dbPath: &quot;/home/user/data&quot; } }</span>
+<span class="x">2016-07-02T02:14:19.477-0400 [initandlisten] journal dir=/home/user/data/journal</span>
+<span class="x">2016-07-02T02:14:19.477-0400 [initandlisten] recover : no journal files present, no recovery needed</span>
+<span class="x">2016-07-02T02:14:19.481-0400 [FileAllocator] allocating new datafile /home/user/data/local.ns, filling with zeroes...</span>
+<span class="x">2016-07-02T02:14:19.481-0400 [FileAllocator] creating directory /home/user/data/_tmp</span>
+<span class="x">2016-07-02T02:14:19.481-0400 [FileAllocator] done allocating datafile /home/user/data/local.ns, size: 16MB,  took 0 secs</span>
+<span class="x">2016-07-02T02:14:19.516-0400 [FileAllocator] allocating new datafile /home/user/data/local.0, filling with zeroes...</span>
+<span class="x">2016-07-02T02:14:19.532-0400 [FileAllocator] done allocating datafile /home/user/data/local.0, size: 64MB,  took 0.011 secs</span>
+<span class="x">2016-07-02T02:14:19.597-0400 [initandlisten] build index on: local.startup_log properties: </span><span class="err">{</span><span class="x"> v: 1, key: </span><span class="err">{</span><span class="x"> _id: 1 }, name: &quot;_id_&quot;, ns: &quot;local.startup_log&quot; }</span>
+<span class="x">2016-07-02T02:14:19.597-0400 [initandlisten]     added index to empty collection</span>
+<span class="x">2016-07-02T02:14:19.597-0400 [initandlisten] command local.</span><span class="p">$</span><span class="nv">cmd</span><span class="x"> command: create </span><span class="err">{</span><span class="x"> create: &quot;startup_log&quot;, size: 10485760, capped: true } ntoreturn:1 keyUpdates:0 numYields:0  reslen:37 115ms</span>
+<span class="x">2016-07-02T02:14:19.599-0400 [initandlisten] waiting for connections on port 27017</span>
+</pre></div>
+
+
+<h2>4.导入数据到数据库</h2>
+<p>可以使用<code>leanote/mongodb_backup/leanote_install_data</code>来导入数据</p>
+<p>因为刚刚启动mongodb占用了一个终端，所以这里要再开启一个终端，来导入数据。</p>
+<p>mongodb v2 与 v3 版本导入数据会有些区别.</p>
+<p>v2版本：</p>
+<div class="highlight"><pre> mongorestore -h localhost -d leanote --directoryperdb ~/www/leanote/mongodb_backup/leanote_install_data/
+</pre></div>
+
+
+<p>v3版本：</p>
+<div class="highlight"><pre>mongorestore -h localhost -d leanote --dir ~/www/leanote/mongodb_backup/leanote_install_data/
+</pre></div>
+
+
+<h2>5.配置leanote</h2>
+<p>主要是修改<code>leanote/conf/app.conf</code>这个文件</p>
+<p><code>app.secret</code> 密钥，一定要修改，一定要修改，一定要修改。重要的事情说三遍。
+<code>http.port</code> 本地端口，默认是9000，可以改为自己喜欢的。
+<code>site.url</code> 如果由外网访问的话，这里可以改成外网访问的网址。</p>
+<h2>6.启动leanote</h2>
+<p>直接调用<code>leanote/bin/run.sh</code>来启动</p>
+<div class="highlight"><pre>bash ~/www/leanote/bin/run.sh
+</pre></div>
+
+
+<p>这样就可以使用<code>http://localhost:9000</code>来访问了</p>
+<h2>遇到的问题</h2>
+<h3>1.在启动mongodb的时候提示“exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating”</h3>
+<p>根据<a href="http://stackoverflow.com/questions/19668570/mongodb-localefacet-s-create-c-locale-name-not-valid">stackoverflow</a>上方法，需要先设置<code>LC_ALL</code>才可以。</p>
+<div class="highlight"><pre>export LC_ALL=C
+mongod --dbpath ~/data
+</pre></div>
+
+
+<hr />
+<p>参考文章：</p>
+<p><a href="http://leanote.org/">leanote.org</a></p>
+<p><a href="https://leanote.com/">leanote.com</a></p>
+<p><a href="https://github.com/leanote/leanote">leanote in github</a></p>
+<p><a href="https://github.com/leanote/leanote/wiki/leanote%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%89%88%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B">Leanote二进制版详细安装教程</a></p><p>There are <a href="./buildleanoteinubuntu.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="./dnsdnsmasqdnscrypt.html" rel="bookmark"
+                           title="Permalink to DNS,dnsmasq,dnscrypt,">DNS,dnsmasq,dnscrypt,</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-06-24T00:00:00+08:00">
                 Published: 五 24 六月 2016
@@ -33,7 +163,7 @@
         </address>
 <p>In <a href="./category/tech.html">Tech</a>.</p>
 <p>tags: <a href="./tag/tech.html">tech</a> <a href="./tag/mac.html">mac</a> <a href="./tag/dns.html">dns</a> </p>
-</footer><!-- /.post-info --><h1>在Mac OSX 上配置 DNSCrypt＋dnsmasq 防止污染</h1>
+</footer><!-- /.post-info -->                <h1>在Mac OSX 上配置 DNSCrypt＋dnsmasq 防止污染</h1>
 <p>今天无意间看到一个防治DNS 污染的文章<a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html">原文地址</a>，想试试，没想到折腾了三天，记录一下操作过程。</p>
 <p>中间还折腾了一下<code>unbound</code>，结果在Mac上启动不起来，一启动就退出了，没有找到原因，如果有大神知道原因，还请指教。</p>
 <h2>1. 安装</h2>
@@ -45,182 +175,10 @@
 
 <h2>2.启动DNSCrypt</h2>
 <p><code>DNSCrypt-proxy</code>主要通过加密的隧道来解析一些被污染的dns地址。直接贴过来上面文章里的启动参数</p>
-<div class="highlight"><pre>➜  ~ sudo /usr/local/sbin/dnscrypt-proxy --local-address=127.0.0.1:40 --edns-payload-size=4096 --user=nobody --resolver-address=77.66.84.233:443 --provider-name=2.dnscrypt-cert.resolver2.dnscrypt.eu --provider-key=3748:5585:E3B9:D088:FD25:AD36:B037:01F5:520C:D648:9E9A:DD52:1457:4955:9F0A:9955
-</pre></div>
-
-
-<p><code>--local-address</code> 这个字段是表示本地提供加密dns解析的地址
-<code>--edns-payload-size</code> 这个字断指定edns的payload size大小
-<code>--user</code> 指定用户身份运行
-<code>--resolver-address</code> 指定加密的DNS地址
-<code>--provider-name</code> 指定DNS提供商的名字
-<code>--provider-key</code> 指定DNS服务器的密钥</p>
-<p>正常启动之后会显示如下内容</p>
-<div class="highlight"><pre>[NOTICE] Starting dnscrypt-proxy 1.6.1
-[INFO] Generating a new session key pair
-[INFO] Done
-</pre></div>
-
-
-<p>我们用<code>dig</code>命令来试一下，结果失败了。</p>
-<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="n">dig</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">40</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
-
-<span class="p">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="n">DiG</span> <span class="mf">9.8.3</span><span class="o">-</span><span class="n">P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9999</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
-<span class="p">;</span> <span class="p">(</span><span class="mi">1</span> <span class="n">server</span> <span class="n">found</span><span class="p">)</span>
-<span class="p">;;</span> <span class="n">global</span> <span class="nl">options</span><span class="p">:</span> <span class="o">+</span><span class="n">cmd</span>
-<span class="p">;;</span> <span class="n">connection</span> <span class="n">timed</span> <span class="k">out</span><span class="p">;</span> <span class="n">no</span> <span class="n">servers</span> <span class="n">could</span> <span class="n">be</span> <span class="n">reached</span>
-</pre></div>
-
-
-<p>在DNSCrypt页面频繁出现</p>
-<div class="highlight"><pre>[ERROR] Unable to retrieve server certificates
-[INFO] Refetching server certificates
-[ERROR] Unable to retrieve server certificates
-[INFO] Refetching server certificates
-[ERROR] Unable to retrieve server certificates
-[INFO] Refetching server certificates
-[ERROR] Unable to retrieve server certificates
-[INFO] Refetching server certificates
-[ERROR] Unable to retrieve server certificates
-[INFO] Refetching server certificates
-</pre></div>
-
-
-<p>查了一下，好像是被干扰了，当然，如果有时候运气好的话，也会连接上</p>
-<div class="highlight"><pre><span class="k">[INFO] Chosen certificate #808464433 is valid from [2015-09-11] to [2016-09-10]</span>
-<span class="err">[INFO]</span> <span class="err">Server</span> <span class="err">key</span> <span class="err">fingerprint</span> <span class="err">is</span> <span class="err">164E:1AD6:4356:777D:2019:F2F9:D389:2DDB:BC75:8AF0:9172:8E0C:A874:10C7:3BE8:423B</span>
-<span class="err">[NOTICE]</span> <span class="err">Proxying</span> <span class="err">from</span> <span class="err">127.0.0.1:40</span> <span class="err">to</span> <span class="err">77.66.84.233:443</span>
-</pre></div>
-
-
-<p>然后再次使用<code>dig</code>命令查一下google的ip地址，就可以查询到结果了。</p>
-<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="n">dig</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">40</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
-
-<span class="p">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="n">DiG</span> <span class="mf">9.8.3</span><span class="o">-</span><span class="n">P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="mf">@127.0.0.1</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9999</span> <span class="n">google</span><span class="p">.</span><span class="n">com</span>
-<span class="p">;</span> <span class="p">(</span><span class="mi">1</span> <span class="n">server</span> <span class="n">found</span><span class="p">)</span>
-<span class="p">;;</span> <span class="n">global</span> <span class="nl">options</span><span class="p">:</span> <span class="o">+</span><span class="n">cmd</span>
-<span class="p">;;</span> <span class="n">Got</span> <span class="nl">answer</span><span class="p">:</span>
-<span class="p">;;</span> <span class="o">-&gt;&gt;</span><span class="n">HEADER</span><span class="o">&lt;&lt;-</span> <span class="nl">opcode</span><span class="p">:</span> <span class="n">QUERY</span><span class="p">,</span> <span class="nl">status</span><span class="p">:</span> <span class="n">NOERROR</span><span class="p">,</span> <span class="kt">id</span><span class="o">:</span> <span class="mi">26326</span>
-<span class="p">;;</span> <span class="nl">flags</span><span class="p">:</span> <span class="n">qr</span> <span class="n">rd</span> <span class="n">ra</span><span class="p">;</span> <span class="nl">QUERY</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">ANSWER</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">AUTHORITY</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nl">ADDITIONAL</span><span class="p">:</span> <span class="mi">5</span>
-
-<span class="p">;;</span> <span class="n">OPT</span> <span class="nl">PSEUDOSECTION</span><span class="p">:</span>
-<span class="p">;</span> <span class="nl">EDNS</span><span class="p">:</span> <span class="nl">version</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nl">flags</span><span class="p">:;</span> <span class="nl">udp</span><span class="p">:</span> <span class="mi">4096</span>
-<span class="p">;;</span> <span class="n">QUESTION</span> <span class="nl">SECTION</span><span class="p">:</span>
-<span class="p">;</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>            <span class="n">IN</span>  <span class="n">A</span>
-
-<span class="p">;;</span> <span class="n">ANSWER</span> <span class="nl">SECTION</span><span class="p">:</span>
-<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">235</span> <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">172.217.18.78</span>
-
-<span class="p">;;</span> <span class="n">AUTHORITY</span> <span class="nl">SECTION</span><span class="p">:</span>
-<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns2</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
-<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns1</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
-<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns4</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
-<span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">41354</span>   <span class="n">IN</span>  <span class="n">NS</span>  <span class="n">ns3</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>
-
-<span class="p">;;</span> <span class="n">ADDITIONAL</span> <span class="nl">SECTION</span><span class="p">:</span>
-<span class="n">ns1</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">281999</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.32.10</span>
-<span class="n">ns2</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">335276</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.34.10</span>
-<span class="n">ns3</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">331344</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.36.10</span>
-<span class="n">ns4</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="p">.</span>     <span class="mi">171246</span>  <span class="n">IN</span>  <span class="n">A</span>   <span class="mf">216.239.38.10</span>
-
-<span class="p">;;</span> <span class="n">Query</span> <span class="nl">time</span><span class="p">:</span> <span class="mi">362</span> <span class="n">msec</span>
-<span class="p">;;</span> <span class="nl">SERVER</span><span class="p">:</span> <span class="mf">127.0.0.1</span><span class="err">#</span><span class="mi">40</span><span class="p">(</span><span class="mf">127.0.0.1</span><span class="p">)</span>
-<span class="p">;;</span> <span class="nl">WHEN</span><span class="p">:</span> <span class="n">Fri</span> <span class="n">Jun</span> <span class="mi">24</span> <span class="mi">14</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mi">35</span> <span class="mi">2016</span>
-<span class="p">;;</span> <span class="n">MSG</span> <span class="n">SIZE</span>  <span class="nl">rcvd</span><span class="p">:</span> <span class="mi">191</span>
-</pre></div>
-
-
-<p>我想说的是，如果频繁的运气不好的话可以添加下面字段</p>
-<p><code>--ephemeral-keys</code>混淆密钥，<a href="https://www.v2ex.com/t/286777">from here</a></p>
-<p>另</p>
-<p>肯定有人问这些服务器从哪里得到的，我是从<code>/usr/local/Cellar/dnscrypt-proxy/1.6.1/share/dnscrypt-proxy/dnscrypt-resolvers.csv</code>里面找的，也可以从这个<a href="https://github.com/jedisct1/dnscrypt-proxy/blob/master/dnscrypt-resolvers.csv">git仓库</a>找一下。</p>
-<h2>3.配置dnsmasq</h2>
-<p>配置DNSMasq，修改 /usr/local/etc/dnsmasq.conf</p>
-<div class="highlight"><pre># 不读取有关解析的配置文件，默认使用/etc/revolve.conf中的上游服务器地址进行解析
-# 这里我们把地址直接写在配置文件里，所以不需要这个了
-no-resolv
-# 不检查有关解析的配置文件更新（原因同上）
-no-poll
-# 配置文件路径，加载dnsmasq-china-list的那两个配置文件
-conf-dir=/usr/local/etc/dnsmasq.d
-# 附加Hosts文件，可有可无，我觉得以后可能还是需要用到Hosts，就加入了这一行
-addn-hosts=/usr/local/etc/dnsmasq.hosts
-# 上游服务器设置成DNSCrypt
-server=127.0.0.1#40
-# 缓存大小，默认是150，调大点应该没坏处
-cache-size=2000
-# 启用DNSSEC代理，应该能增强安全性吧
-proxy-dnssec
-# 可以自行参照man dnsmasq里的内容继续添加别的参数
-</pre></div>
-
-
-<p><a href="https://github.com/felixonmars/dnsmasq-china-list">这个项目</a>维护了一份中国地区大部分网站的地址。这个列表来可以帮助DNSMasq判断应该把DNS请求发向哪里。我们先要把里面的两个配置文件下载下来，创建 /usr/local/etc/dnsmasq.d 文件夹，下载项目的文件放到这个目录下。当然自己也可以根据配置文件来添加自己的配置文件。</p>
-<p>几个配置文件的说明</p>
-<p>#指定baidu.com的域名到114来解析。</p>
-<p>server=/baidu.com/114.114.114.114     </p>
-<p>#指定baidu.com的域名解析到 127.0.0.1 的ip地址上，类似hosts文件</p>
-<p>address=/baidu.com/127.0.0.1    </p>
-<p>#指定202这个ip不响应，当ISP进行DNS劫持时，会将域名解析到指定的ip地址，我们可以把这个地址写在这里，当遇到域名解析到这个地址的时候，则不响应。</p>
-<p>bogus-nxdomain=202.202.202.202       </p>
-<h1>4.启动dnsmasq</h1>
-<p>直接使用下面的命令启动 dnsmasq</p>
-<div class="highlight"><pre>sudo /usr/local/opt/dnsmasq/sbin/dnsmasq -C /usr/local/etc/dnsmasq.conf
-</pre></div>
-
-
-<p>然后将系统的dns设置成127.0.0.1，在使用<code>dig</code>来测试一下google.com的解析</p>
-<div class="highlight"><pre><span class="err">➜</span>  <span class="o">~</span> <span class="nt">dig</span> <span class="nt">google</span><span class="nc">.com</span>
-
-<span class="o">;</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="nt">DiG</span> <span class="nt">9</span><span class="nc">.8.3-P1</span> <span class="o">&lt;&lt;&gt;&gt;</span> <span class="nt">google</span><span class="nc">.com</span>
-<span class="o">;;</span> <span class="nt">global</span> <span class="nt">options</span><span class="o">:</span> <span class="o">+</span><span class="nt">cmd</span>
-<span class="o">;;</span> <span class="nt">Got</span> <span class="nt">answer</span><span class="o">:</span>
-<span class="o">;;</span> <span class="nt">-</span><span class="o">&gt;&gt;</span><span class="nt">HEADER</span><span class="o">&lt;&lt;</span><span class="nt">-</span> <span class="nt">opcode</span><span class="o">:</span> <span class="nt">QUERY</span><span class="o">,</span> <span class="nt">status</span><span class="o">:</span> <span class="nt">NOERROR</span><span class="o">,</span> <span class="nt">id</span><span class="o">:</span> <span class="nt">59153</span>
-<span class="o">;;</span> <span class="nt">flags</span><span class="o">:</span> <span class="nt">qr</span> <span class="nt">rd</span> <span class="nt">ra</span><span class="o">;</span> <span class="nt">QUERY</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span> <span class="nt">ANSWER</span><span class="o">:</span> <span class="nt">1</span><span class="o">,</span> <span class="nt">AUTHORITY</span><span class="o">:</span> <span class="nt">4</span><span class="o">,</span> <span class="nt">ADDITIONAL</span><span class="o">:</span> <span class="nt">5</span>
-
-<span class="o">;;</span> <span class="nt">OPT</span> <span class="nt">PSEUDOSECTION</span><span class="o">:</span>
-<span class="o">;</span> <span class="nt">EDNS</span><span class="o">:</span> <span class="nt">version</span><span class="o">:</span> <span class="nt">0</span><span class="o">,</span> <span class="nt">flags</span><span class="o">:;</span> <span class="nt">udp</span><span class="o">:</span> <span class="nt">4096</span>
-<span class="o">;;</span> <span class="nt">QUESTION</span> <span class="nt">SECTION</span><span class="o">:</span>
-<span class="o">;</span><span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>            <span class="nt">IN</span>  <span class="nt">A</span>
-
-<span class="o">;;</span> <span class="nt">ANSWER</span> <span class="nt">SECTION</span><span class="o">:</span>
-<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">150</span> <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.58.209.206</span>
-
-<span class="o">;;</span> <span class="nt">AUTHORITY</span> <span class="nt">SECTION</span><span class="o">:</span>
-<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns4</span><span class="nc">.google.com</span><span class="o">.</span>
-<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns1</span><span class="nc">.google.com</span><span class="o">.</span>
-<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns2</span><span class="nc">.google.com</span><span class="o">.</span>
-<span class="nt">google</span><span class="nc">.com</span><span class="o">.</span>     <span class="nt">39469</span>   <span class="nt">IN</span>  <span class="nt">NS</span>  <span class="nt">ns3</span><span class="nc">.google.com</span><span class="o">.</span>
-
-<span class="o">;;</span> <span class="nt">ADDITIONAL</span> <span class="nt">SECTION</span><span class="o">:</span>
-<span class="nt">ns1</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">280114</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.32.10</span>
-<span class="nt">ns2</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">333391</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.34.10</span>
-<span class="nt">ns3</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">329459</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.36.10</span>
-<span class="nt">ns4</span><span class="nc">.google.com</span><span class="o">.</span>     <span class="nt">169361</span>  <span class="nt">IN</span>  <span class="nt">A</span>   <span class="nt">216</span><span class="nc">.239.38.10</span>
-
-<span class="o">;;</span> <span class="nt">Query</span> <span class="nt">time</span><span class="o">:</span> <span class="nt">517</span> <span class="nt">msec</span>
-<span class="o">;;</span> <span class="nt">SERVER</span><span class="o">:</span> <span class="nt">127</span><span class="nc">.0.0.1</span><span class="nf">#53</span><span class="o">(</span><span class="nt">127</span><span class="nc">.0.0.1</span><span class="o">)</span>
-<span class="o">;;</span> <span class="nt">WHEN</span><span class="o">:</span> <span class="nt">Fri</span> <span class="nt">Jun</span> <span class="nt">24</span> <span class="nt">14</span><span class="nd">:44:00</span> <span class="nt">2016</span>
-<span class="o">;;</span> <span class="nt">MSG</span> <span class="nt">SIZE</span>  <span class="nt">rcvd</span><span class="o">:</span> <span class="nt">191</span>
-</pre></div>
-
-
-<h1>5.结论</h1>
-<p>测试了一下，发现原来twitter和instragram是被污染后导致不能访问，google还是不能直接访问。不过dns干净了很多，因为有了缓存，访问起来也快一些，配合ss使用还是很爽的。</p>
-<hr />
-<p>参考文章：</p>
-<p><a href="https://skyline75489.github.io/post/2014-8-1_my-china-dns.html">我(以前)的DNS解决方案</a></p>
-<p><a href="http://03k.org/dnscrypt-proxy-read.html">dnscrypt-proxy参数详解</a></p>
-<p><a href="https://gist.github.com/ahmozkya/8456503">Homebrew with DNSMasq + DNSCrypt-proxy (OpenDNS)</a></p>
-<p><a href="https://dnscrypt.org">dnscrypt</a></p>
-<p><a href="https://blog.phoenixlzx.com/2016/04/27/better-dns-with-unbound/">使用 Unbound 搭建更好用的 DNS 服务器</a></p>
-<p><a href="http://codeplayer.org/2014/02/587">翻墙教程之DNSCrypt+unbound</a></p>
-<h3></h3><p>There are <a href="./dnsdnsmasqdnscrypt.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<div class="highlight"><pre>➜  ~ sudo /usr/local/sbin/dnscrypt-proxy --local-address=127.0.0.1:40 --edns-payload-size=4096 --user=nobody --resolver-address ...</pre></div>
+                <a class="readmore" href="./dnsdnsmasqdnscrypt.html">read more</a>
+<p>There are <a href="./dnsdnsmasqdnscrypt.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -557,57 +515,6 @@ git checkout --
 </pre></div>
                 <a class="readmore" href="./gitclonesubdirectory.html">read more</a>
 <p>There are <a href="./gitclonesubdirectory.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="./movesvntogit.html" rel="bookmark"
-                           title="Permalink to MoveSVNToGit">MoveSVNToGit</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-11-23T00:00:00+08:00">
-                Published: 一 23 十一月 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
-        </address>
-<p>In <a href="./category/tech.html">Tech</a>.</p>
-<p>tags: <a href="./tag/svn.html">SVN</a> <a href="./tag/git.html">Git</a> </p>
-</footer><!-- /.post-info -->                <h1>迁移SVN到Git</h1>
-<p>1.创建用户映射</p>
-<p>检出svn上所有提交过代码的用户名</p>
-<div class="highlight"><pre>svn log --xml | grep author | sort -u | perl -pe &#39;s/.&gt;(.?)&lt;./$1 = /&#39;
-</pre></div>
-
-
-<p>显示</p>
-<div class="highlight"><pre><span class="nt">&lt;author&gt;</span>chenghu<span class="nt">&lt;/author&gt;</span>
-</pre></div>
-
-
-<p>然后将这些用户名复制下来</p>
-<p>修改成以下形式，保存成user.txt</p>
-<div class="highlight"><pre>svn用户名 ＝ git用户名 &lt;git邮箱&gt;
-</pre></div>
-
-
-<p>如</p>
-<div class="highlight"><pre>chenghu ＝ 小虎 &lt;chenghu@chenghu.me&gt;
-</pre></div>
-
-
-<p>2.拉取SVN的commit纪录</p>
-<p>使用git-svn来拉取svn提交的记录，转换成git</p>
-<div class="highlight"><pre>git svn clone https://SVNserver/serverpatch/trunk --authors-file=users.txt --no-metadata gitDir
-</pre></div>
-
-
-<p>当然，如果svn上面提交记录比较多的情况下 ...</p>
-                <a class="readmore" href="./movesvntogit.html">read more</a>
-<p>There are <a href="./movesvntogit.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
 <p class="paginator">
