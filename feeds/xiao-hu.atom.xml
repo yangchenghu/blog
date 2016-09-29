@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2016-07-01T00:00:00+08:00</updated><entry><title>BuildLeanoteInUbuntu</title><link href="http://blog.chenghu.me/buildleanoteinubuntu.html" rel="alternate"></link><updated>2016-07-01T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2016-07-01:buildleanoteinubuntu.html</id><summary type="html">&lt;h1&gt;在Ubuntu上搭建Leanote系统&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>小虎的博客</title><link href="http://blog.chenghu.me/" rel="alternate"></link><link href="http://blog.chenghu.me/feeds/xiao-hu.atom.xml" rel="self"></link><id>http://blog.chenghu.me/</id><updated>2016-08-12T00:00:00+08:00</updated><entry><title>renew letsencrypt certificates</title><link href="http://blog.chenghu.me/renew-letsencrypt-certificates.html" rel="alternate"></link><updated>2016-08-12T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2016-08-12:renew-letsencrypt-certificates.html</id><summary type="html">&lt;h1&gt;更新 letsencrypt 的证书&lt;/h1&gt;
+&lt;p&gt;今天收到邮件，说我的&lt;code&gt;letsencrypt&lt;/code&gt;证书快要过期了，好吧，那登录上去renew一下。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo letsencrypt renew
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;结果报错了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;2016-08-12 02:47:26,054:WARNING:letsencrypt.cli:Attempting to renew cert from /etc/letsencrypt/renewal/www.chenghu.me.conf produced an unexpected error: &amp;#39;server&amp;#39;. Skipping.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;悲剧，好吧，找一下了。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://community.letsencrypt.org/t/solved-keyerror-server-on-ubuntu-16-04-lts/15696"&gt;这里&lt;/a&gt; 有人说是0.4.1创建的证书的配置文件少一些字段。新版本的就可以。&lt;/p&gt;
+&lt;p&gt;这不就so easy了。&lt;/p&gt;
+&lt;p&gt;创建一个新的证书，复制里面的&lt;code&gt;renewalparams&lt;/code&gt;字段覆盖原配置中的&lt;code&gt;renewalparams&lt;/code&gt;字段，然后再&lt;code&gt;renew&lt;/code&gt;就好了&lt;/p&gt;
+&lt;p&gt;对比一下老版本&lt;code&gt;renewalparams&lt;/code&gt;字段&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[renewalparams]&lt;/span&gt;
+&lt;span class="na"&gt;authenticator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;standalone&lt;/span&gt;
+&lt;span class="na"&gt;installer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;account&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;xxxxxxxxxxx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;新版本的&lt;code&gt;renewalparams&lt;/code&gt;字段&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[renewalparams]&lt;/span&gt;
+&lt;span class="na"&gt;no_self_upgrade&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;no_verify_ssl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;ifaces&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;register_unsafely_without_email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;uir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;installer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;none&lt;/span&gt;
+&lt;span class="na"&gt;config_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/etc/letsencrypt&lt;/span&gt;
+&lt;span class="na"&gt;text_mode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;staging&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;dry_run&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;work_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/var/lib/letsencrypt&lt;/span&gt;
+&lt;span class="na"&gt;tos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;duplicate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;http01_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;80&lt;/span&gt;
+&lt;span class="na"&gt;init&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;noninteractive_mode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;key_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;fullchain_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;csr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;agree_dev_preview&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;redirect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;verbose_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-3&lt;/span&gt;
+&lt;span class="na"&gt;config_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;renew_by_default&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;hsts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;authenticator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;standalone&lt;/span&gt;
+&lt;span class="na"&gt;nginx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;rsa_key_size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;2048&lt;/span&gt;
+&lt;span class="na"&gt;verb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;renew&lt;/span&gt;
+&lt;span class="na"&gt;checkpoints&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;manual_test_mode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;apache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;cert_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;webroot_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;,&lt;/span&gt;
+&lt;span class="na"&gt;reinstall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;expand&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;strict_permissions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;account&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;xxxxxxxxxxxxxxxxx&lt;/span&gt;
+&lt;span class="na"&gt;prepare&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;manual_public_ip_logging_ok&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;chain_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;break_my_certs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;domains&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;ftp.chenghu.me,&lt;/span&gt;
+&lt;span class="na"&gt;standalone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;manual&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;https://acme-v01.api.letsencrypt.org/directory&lt;/span&gt;
+&lt;span class="na"&gt;standalone_supported_challenges&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;tls-sni-01,http-01&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;webroot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;os_packages_only&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;func&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;function renew at 0x7f655c98e2a8&amp;gt;&lt;/span&gt;
+&lt;span class="na"&gt;user_agent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="na"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;False&lt;/span&gt;
+&lt;span class="na"&gt;tls_sni_01_port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;443&lt;/span&gt;
+&lt;span class="na"&gt;logs_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/var/log/letsencrypt&lt;/span&gt;
+&lt;span class="na"&gt;configurator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;None&lt;/span&gt;
+&lt;span class="k"&gt;[[webroot_map]]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;需要的同学可以直接复制，记得替换自己的&lt;code&gt;account&lt;/code&gt;字段和&lt;code&gt;domains&lt;/code&gt;字段。&lt;/p&gt;</summary><category term="tech"></category></entry><entry><title>BuildLeanoteInUbuntu</title><link href="http://blog.chenghu.me/buildleanoteinubuntu.html" rel="alternate"></link><updated>2016-07-01T00:00:00+08:00</updated><author><name>小虎</name></author><id>tag:blog.chenghu.me,2016-07-01:buildleanoteinubuntu.html</id><summary type="html">&lt;h1&gt;在Ubuntu上搭建Leanote系统&lt;/h1&gt;
 &lt;p&gt;&amp;emsp;&amp;emsp;今天看到一个新闻&lt;a href="http://www.iplaysoft.com/news/3132"&gt;（创收压力大？印象笔记 Evernote 将对免费用户进行限制）&lt;/a&gt;，虽然自己也就是手机和电脑登录，可以继续使用免费版，不过真的很不舒服。&lt;/p&gt;
 &lt;p&gt;&amp;emsp;&amp;emsp;像以前说免费的只有60M的每个月的流量，那好吧，我就只同步纯文本；不支持Markdown，那好吧，我就简单改改字体大小，改改背景颜色；代码贴进去，各种不好看，那好吧，我只放些简单代码片段，现在又限制两台设备登录，好吧，我换别的了。&lt;/p&gt;
 &lt;p&gt;&amp;emsp;&amp;emsp;中间使用了一段时间微软的&lt;code&gt;OneNote&lt;/code&gt;，确实格式好看多了，但是实在太笨重了。&lt;/p&gt;
