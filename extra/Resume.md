@@ -14,7 +14,7 @@
  - 杨成虎/男/1986 
  - 本科：山东聊城大学 / 学士学位
  - 工作年限：5年iOS开发经验
- - 个人博客：[http://blog.chenghu.me/](http://blog.chenghu.me)
+ - 个人博客：[https://www.chenghu.me/](https://www.chenghu.me)
  - Github: [https://github.com/yangchenghu](https://github.com/yangchenghu)
 
  - 期望职位：iOS高级程序员，应用架构师
@@ -23,13 +23,25 @@
 
 ---
 
+# 自我评价
+
+1.技术极客，喜欢研究各种新鲜技术，重度代码洁癖。
+2.对移动和互联网技术有强烈兴趣，具有钻研和探索精神；
+3.较强的逻辑思维能力和沟通能力。
+
+---
+
 # 工作经历
 
 ## Sina公司 （ 2013年5月 ~ 今 ）
 
-## 新浪汽车试驾 － 我试试
+## 新浪汽车 - 新浪买车
+[地址](https://itunes.apple.com/cn/app/xin-lang-mai-che-qi-che4s/id1088208655?mt=8)
 
-在该项目中作为项目负责人，带iOS和安卓两个team开发了新浪汽车旗下试驾App，完全使用ReactNative框架开发了个人中心的所有功能。
+在该项目中作为项目技术Leader，带iOS和安卓两个team开发了新浪汽车旗下新浪买车App，16年5月份完全使用ReactNative框架重写的App中大部分功能。
+
+技能：React-Native,Redux
+
 
 ## 新浪内部移动办公系统
 
@@ -43,7 +55,7 @@
 
 
 ### 黑客马拉松
-[地址](http://www.yangch.info/?p=968)
+[地址](https://www.chenghu.me/?p=968)
 
 和两个同事参加了公司组织的黑客马拉松，使用iBeacons技术做了一个活动报名以及会场自动签到的小系统。
 
@@ -77,16 +89,16 @@
 
 以下均为熟练使用的技能
 
-- iOS开发：Xcode，Obj-C，Instruments
+- iOS开发：Xcode，Objective-C，Instruments
 - iOS框架：AFNetworking，SDWebImage，ReactiveCocoa，ReactNative
 - iOS框架管理：CocoaPod
 - iOS构建：Jinkens
 - 版本管理：Svn/Git
-- 云和开放平台：SAE/AVOScloud/Parse/微博开放平台/微信开放平台/
-- 常去的网站：Code4App，CocoaChina，github，stackoverflow.com
+- 云和开放平台：LeanCloud/Parse/微博开放平台/微信开放平台/
+- 常去的网站：github,stackoverflow,Code4App,CocoaChina
 - 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)，[里脊串的开发随笔](http://adad184.com/)，[王魏的博客](http://onevcat.com/)，[雷纯锋的技术博客](http://blog.leichunfeng.com/)，[blog : sunnyxx](http://blog.sunnyxx.com/)
 
-- 其他技能：iOS6-9 适配，内存管理，程序优化
+- 其他技能：iOS6-10 适配，内存管理，程序优化
 
 ## 附加技能
 
@@ -97,16 +109,17 @@
 ###熟练
 
 - iOS
-- objective-c
-- xcode
+- Objective-C
+- Xcode
 - runtime
-- instruments
-- builder
+- Instruments
 - HomeBrew
 - CocoaPod
 - XMPPFramework
 - JSPatch
 - ReactNative
+- Redux
+- JS
 
 ###业余
 
@@ -115,7 +128,9 @@
 - Shell
 - iOS 逆向及安全分析
 - OpenWRT
-- docker
+- Docker
+- Ubuntu
+- Nginx
 
 
 ---
@@ -124,4 +139,4 @@
 感谢您花时间阅读我的简历，期待能有机会和您共事。
 
 
-最后更新时间：2016-01-07
+最后更新时间：2016-09-29
