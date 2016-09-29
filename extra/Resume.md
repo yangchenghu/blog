@@ -42,7 +42,7 @@
 
 在该项目中作为项目技术Leader，带iOS和安卓两个team开发了新浪汽车旗下新浪买车App，16年5月份完全使用ReactNative框架重写的App中大部分功能。
 
-技能：React-Native,Redux
+技能：React-Native,Redux,第三方登录，微信/支付宝支付
 
 
 ## 新浪内部移动办公系统
@@ -100,7 +100,7 @@
 - 常去的网站：github,stackoverflow,Code4App,CocoaChina
 - 关注的技术博客：[唐巧的技术博客](http://www.devtang.com/) , [破船之家](http://beyondvincent.com/)， [念茜的博客](http://blog.csdn.net/yiyaaixuexi)，[Ted's Homepage](http://wufawei.com/)，[里脊串的开发随笔](http://adad184.com/)，[王魏的博客](http://onevcat.com/)，[雷纯锋的技术博客](http://blog.leichunfeng.com/)，[blog : sunnyxx](http://blog.sunnyxx.com/)
 
-- 其他技能：iOS6-10 适配，内存管理，程序优化
+- 其他技能：iOS6-10 适配，内存管理，程序优化，第三方登录，支付，
 
 ## 附加技能
 
