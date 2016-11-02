@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
         <meta charset="utf-8" />
-        <title>小虎的博客 - Tags</title>
+        <title>RN Error:Super expression must either be null or a function, not undefined</title>
         <link rel="stylesheet" href="./theme/css/main.css" />
 
         <!--[if IE]>
@@ -19,59 +19,55 @@
                     <li><a href="./pages/toys.html">Toys</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
 <section id="content" class="body">
-    <h1>Tags for 小虎的博客</h1>
-    <ul>
-        <li><a href="./tag/alias.html">Alias</a> (2)</li>
-        <li><a href="./tag/app.html">App</a> (1)</li>
-        <li><a href="./tag/bottle.html">bottle</a> (1)</li>
-        <li><a href="./tag/capture.html">Capture</a> (1)</li>
-        <li><a href="./tag/cocoapods.html">Cocoapods</a> (1)</li>
-        <li><a href="./tag/dns.html">dns</a> (1)</li>
-        <li><a href="./tag/error.html">Error</a> (3)</li>
-        <li><a href="./tag/git.html">Git</a> (3)</li>
-        <li><a href="./tag/golang.html">golang</a> (1)</li>
-        <li><a href="./tag/hook.html">Hook</a> (1)</li>
-        <li><a href="./tag/integra.html">integra</a> (1)</li>
-        <li><a href="./tag/ios.html">iOS</a> (1)</li>
-        <li><a href="./tag/ipsec.html">ipsec</a> (1)</li>
-        <li><a href="./tag/ji-cheng.html">集成</a> (1)</li>
-        <li><a href="./tag/key.html">key</a> (1)</li>
-        <li><a href="./tag/l2tp.html">l2tp</a> (1)</li>
-        <li><a href="./tag/leanote.html">leanote</a> (1)</li>
-        <li><a href="./tag/linode.html">Linode</a> (1)</li>
-        <li><a href="./tag/linux.html">linux</a> (1)</li>
-        <li><a href="./tag/mac.html">mac</a> (3)</li>
-        <li><a href="./tag/mongodb.html">mongodb</a> (1)</li>
-        <li><a href="./tag/native.html">Native</a> (1)</li>
-        <li><a href="./tag/nginx.html">nginx</a> (1)</li>
-        <li><a href="./tag/node.html">node</a> (1)</li>
-        <li><a href="./tag/note.html">Note</a> (1)</li>
-        <li><a href="./tag/npm.html">npm</a> (1)</li>
-        <li><a href="./tag/objective-c.html">Objective-C</a> (1)</li>
-        <li><a href="./tag/pelican.html">Pelican</a> (1)</li>
-        <li><a href="./tag/pm.html">PM</a> (1)</li>
-        <li><a href="./tag/programmer.html">Programmer</a> (1)</li>
-        <li><a href="./tag/python.html">python</a> (2)</li>
-        <li><a href="./tag/qq.html">QQ</a> (1)</li>
-        <li><a href="./tag/react.html">React</a> (1)</li>
-        <li><a href="./tag/react-native.html">react-native</a> (2)</li>
-        <li><a href="./tag/reveal.html">Reveal</a> (1)</li>
-        <li><a href="./tag/rn.html">RN</a> (1)</li>
-        <li><a href="./tag/selector.html">Selector</a> (1)</li>
-        <li><a href="./tag/shell.html">Shell</a> (2)</li>
-        <li><a href="./tag/ssh.html">ssh</a> (1)</li>
-        <li><a href="./tag/svn.html">SVN</a> (2)</li>
-        <li><a href="./tag/tech.html">tech</a> (4)</li>
-        <li><a href="./tag/tip.html">Tip</a> (1)</li>
-        <li><a href="./tag/ubuntu.html">ubuntu</a> (2)</li>
-        <li><a href="./tag/uwsgi.html">uwsgi</a> (1)</li>
-        <li><a href="./tag/vpn.html">vpn</a> (1)</li>
-        <li><a href="./tag/wordpress.html">WordPress</a> (1)</li>
-    </ul>
-</section>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./rn-errorsuper-expression-must-either-be-null-or-a-function-not-undefined.html" rel="bookmark"
+           title="Permalink to RN Error:Super expression must either be null or a function, not undefined">RN Error:Super expression must either be null or a function, not undefined</a></h1>
+    </header>
 
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-10-13T00:00:00+08:00">
+                Published: 四 13 十月 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="./author/xiao-hu.html">小虎</a>
+        </address>
+<p>In <a href="./category/tech.html">Tech</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>RN 错误：Super expression must either be null or a function, not undefined</h1>
+<p><img alt="" src="https://o7u7aqxu9.qnssl.com/Simulator%20Screen%20Shot%202016%E5%B9%B410%E6%9C%8813%E6%97%A5%2017.58.57.png" /></p>
+<p>今天整理代码结构，把很多方法抽象到了一个基类里，然后就出现了这个问题了，郁闷了，找了一下，发现原来是<code>循环继承</code>了。</p>
+<p><a href="http://stackoverflow.com/a/35445031/3355261">地址</a></p>
+<div class="highlight"><pre><span class="k">class</span> <span class="n">A</span> <span class="n">extends</span> <span class="n">B</span> {}
+<span class="k">class</span> <span class="n">B</span> <span class="n">extends</span> <span class="n">C</span> {}
+<span class="k">class</span> <span class="n">C</span> <span class="n">extends</span> <span class="n">A</span> {}
+</pre></div>
+
+
+<p>目前还没有什么好的办法，只好单独复制了一套代码到c中，不知道大家有什么好的办法，不吝赐教！</p>
+    </div><!-- /.entry-content -->
+    <div class="comments">
+      <h2>Comments !</h2>
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'chenghu';
+        var disqus_identifier = 'rn-errorsuper-expression-must-either-be-null-or-a-function-not-undefined.html';
+        var disqus_url = './rn-errorsuper-expression-must-either-be-null-or-a-function-not-undefined.html';
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//chenghu.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the comments.</noscript>
+    </div>
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
